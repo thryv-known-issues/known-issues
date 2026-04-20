@@ -312,6 +312,11 @@ body {
       <div class="pub-issue"><div class="pub-issue-top"><span class="pub-issue-title">EV charging listings — false processing</span><span class="pub-type-badge type-recent">Recent issue</span></div><div class="pub-issue-meta"><span>Affected: EVs only</span><span>Updated: December 2025</span></div><div class="pub-issue-detail">Google listings for EV charging stations may display a live status or 'entity not found' but be in 'Pending Review' state within GBP. Unique to EV charging clients. Escalation path available — submit a ticket to support.</div></div>
       <div class="pub-issue"><div class="pub-issue-top"><span class="pub-issue-title">Missing food menu clicks since 3/14</span><span class="pub-type-badge type-recent">Recent issue</span></div><div class="pub-issue-meta"><span>Affected: All</span><span>Updated: March 2026</span></div><div class="pub-issue-detail">Google Food Menu Clicks data in Yext Analytics stopped reporting for all locations as of March 14, 2026. Historical data prior to March 14 remains intact.</div></div>
     </div>
+    <!-- Apple -->
+    <div class="pub-group" data-publisher="other">
+      <div class="pub-group-header"><div class="pub-logo pub-logo-other" style="background:#000;">&#63743;</div><span class="pub-group-name">Apple</span><span class="pub-group-count">1 issue</span></div>
+      <div class="pub-issue"><div class="pub-issue-top"><span class="pub-issue-title">Listings stuck in processing</span><span class="pub-type-badge type-recent">Recent issue</span></div><div class="pub-issue-meta"><span>Affected: Listings</span><span>Updated: April 2026</span></div><div class="pub-issue-detail">Upticks in listings stuck in Processing on Apple since April 12. Working with Apple on this bug. Significant number of listings still in this state.</div></div>
+    </div>
     <!-- Facebook -->
     <div class="pub-group" data-publisher="facebook">
       <div class="pub-group-header"><div class="pub-logo pub-logo-fb">f</div><span class="pub-group-name">Facebook</span><span class="pub-group-count">6 issues</span></div>
@@ -333,13 +338,12 @@ body {
     </div>
     <!-- Other -->
     <div class="pub-group" data-publisher="other">
-      <div class="pub-group-header"><div class="pub-logo pub-logo-other">+</div><span class="pub-group-name">Other publishers</span><span class="pub-group-count">6 issues</span></div>
+      <div class="pub-group-header"><div class="pub-logo pub-logo-other">+</div><span class="pub-group-name">Other publishers</span><span class="pub-group-count">5 issues</span></div>
       <div class="pub-issue"><div class="pub-issue-top"><span class="pub-issue-title">BBB Reviews — duplicate review monitoring</span><span class="pub-type-badge type-recent">Recent issue</span></div><div class="pub-issue-meta"><span>Affected: All or almost all</span><span>Updated: September 2025</span></div><div class="pub-issue-detail">Identical BBB reviews pulled into multiple locations. Cleared duplicate reviews; will re-pull correct ones once resolved.</div></div>
       <div class="pub-issue"><div class="pub-issue-top"><span class="pub-issue-title">AllMenus — integration temporarily down</span><span class="pub-type-badge type-outage">Outage</span></div><div class="pub-issue-meta"><span>Affected: All</span><span>Updated: September 2025</span></div><div class="pub-issue-detail">AllMenus integration temporarily down. All services unavailable.</div></div>
       <div class="pub-issue"><div class="pub-issue-top"><span class="pub-issue-title">MapQuest — suppression outage</span><span class="pub-type-badge type-outage">Outage</span></div><div class="pub-issue-meta"><span>Affected: All</span><span>Updated: September 2025</span></div><div class="pub-issue-detail">Duplicate Suppression unavailable due to API infrastructure changes.</div></div>
       <div class="pub-issue"><div class="pub-issue-top"><span class="pub-issue-title">MenuPix — search API disabled</span><span class="pub-type-badge type-outage">Outage</span></div><div class="pub-issue-meta"><span>Affected: New entities</span><span>Updated: September 2025</span></div><div class="pub-issue-detail">Search API disabled due to high error rates. New listings stuck in Processing. Synced listing updates publish normally.</div></div>
       <div class="pub-issue"><div class="pub-issue-top"><span class="pub-issue-title">Navmii — integration unavailable</span><span class="pub-type-badge type-outage">Outage</span></div><div class="pub-issue-meta"><span>Affected: All entities</span><span>Updated: March 2026</span></div><div class="pub-issue-detail">Navmii integration unavailable due to publisher-side bug.</div></div>
-      <div class="pub-issue"><div class="pub-issue-top"><span class="pub-issue-title">OpenTable — integration unavailable</span><span class="pub-type-badge type-outage">Outage</span></div><div class="pub-issue-meta"><span>Affected: All entities</span><span>Updated: March 2026</span></div><div class="pub-issue-detail">OpenTable integration unavailable due to publisher-side bug.</div></div>
     </div>
   </div>
 </template>
@@ -356,27 +360,27 @@ body {
 </div>
 
 <div class="page-wrapper">
-  <div class="mockup-badge">&#10022; MONDAY PREVIEW — Jira-confirmed status updates · April 17, 2026</div>
+  <div class="mockup-badge">&#10022; Mockup — proposed Compass page · Data through April 20, 2026</div>
 
   <!-- Alert Banner -->
   <div class="alert-banner">
     <div class="alert-icon">!</div>
-    <span><strong>Active alert:</strong> Enhanced profile and GP installation issues in dev backlog. Website analytics/visitor tagging trending up this week. See details below.</span>
+    <span><strong>Active alert:</strong> Website analytics/visitor tagging now in dev. Thryv Leads moved to Dev In Progress. Social tab (BC-1068) resolution marked Done in Jira. Stripe queue cleared.</span>
   </div>
 
   <!-- Weekly Summary -->
   <div style="display:flex;gap:12px;margin:16px 0 0;flex-wrap:wrap;width:100%;">
     <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-low);">
       <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-low);font-weight:600;margin-bottom:4px;">Improving</div>
-      <div style="font-size:13px;color:var(--thryv-night);">EP/GP issues now in sprint, tickets declining. Cloud Campaign queue down significantly. ThryvPay Stripe queue nearly cleared.</div>
+      <div style="font-size:13px;color:var(--thryv-night);">EP/GP tickets down to 13 (from 21). Missing GP down to 12 (from 26). Stripe queue fully cleared. Cloud Campaign continuing to decline. Auth0/Staff delete errors dropping.</div>
     </div>
-    <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-critical);">
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-critical);font-weight:600;margin-bottom:4px;">Trending up</div>
-      <div style="font-size:13px;color:var(--thryv-night);">Website analytics/visitor tagging issues rising across US, AU, NZ. New Thryv Leads button issue surfaced this week.</div>
+    <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-low);">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-low);font-weight:600;margin-bottom:4px;">Dev movement</div>
+      <div style="font-size:13px;color:var(--thryv-night);">MCB-265 (visitor tagging V7) moved to Dev In Progress. MCB-232 (Thryv Leads) moved to Dev In Progress. MCB-220 (visitor tagging V6) Released. BC-1068 (Social tab) resolution Done.</div>
     </div>
     <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--thryv-steel);">
       <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--thryv-steel);font-weight:600;margin-bottom:4px;">Newly resolved</div>
-      <div style="font-size:13px;color:var(--thryv-night);">Thryv Leads reporting link, Listings 404 errors, and missing GP add-on subset all closed this week.</div>
+      <div style="font-size:13px;color:var(--thryv-night);">MCB-220 (visitor tagging V6) Released. Stripe/ThryvPay queue cleared to 0. BC-1068 (Social tab) resolution marked Done.</div>
     </div>
   </div>
 
@@ -389,7 +393,7 @@ body {
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#121212;">69</span>
+          <span style="font-size:22px;font-weight:700;color:#121212;">54</span>
           <span style="font-size:12px;color:var(--thryv-steel);"> open tickets</span>
         </div>
         <span style="font-size:11px;font-weight:600;color:var(--sev-low);">↓ improving</span>
@@ -413,10 +417,10 @@ body {
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#4CAF50;">10</span>
+          <span style="font-size:22px;font-weight:700;color:#4CAF50;">16</span>
           <span style="font-size:12px;color:var(--thryv-steel);"> known issues</span>
         </div>
-        <span style="font-size:11px;font-weight:600;color:var(--sev-high);">→ steady</span>
+        <span style="font-size:11px;font-weight:600;color:var(--sev-critical);">↑ from 10</span>
       </div>
       <svg width="100%" height="36" viewBox="0 0 200 36" preserveAspectRatio="none" style="margin-top:6px;">
         <defs><linearGradient id="keapGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4CAF50" stop-opacity="0.2"/><stop offset="100%" stop-color="#4CAF50" stop-opacity="0"/></linearGradient></defs>
@@ -437,7 +441,7 @@ body {
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#3C3489;">69</span>
+          <span style="font-size:22px;font-weight:700;color:#3C3489;">62</span>
           <span style="font-size:12px;color:var(--thryv-steel);"> open tickets</span>
         </div>
         <span style="font-size:11px;font-weight:600;color:var(--sev-low);">↓ trending down</span>
@@ -461,10 +465,10 @@ body {
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#121212;">71</span>
+          <span style="font-size:22px;font-weight:700;color:#121212;">37</span>
           <span style="font-size:12px;color:var(--thryv-steel);"> open tickets</span>
         </div>
-        <span style="font-size:11px;font-weight:600;color:var(--sev-high);">→ mostly system alerts</span>
+        <span style="font-size:11px;font-weight:600;color:var(--sev-low);">↓ improving</span>
       </div>
       <svg width="100%" height="36" viewBox="0 0 200 36" preserveAspectRatio="none" style="margin-top:6px;">
         <defs><linearGradient id="maGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF5000" stop-opacity="0.15"/><stop offset="100%" stop-color="#FF5000" stop-opacity="0"/></linearGradient></defs>
@@ -481,7 +485,7 @@ body {
 
   <!-- ═══ ACTIVE ISSUES ═══ -->
   <div class="section-header">
-    <div class="section-title">Known Issues <span class="count-badge">23</span></div>
+    <div class="section-title">Known Issues <span class="count-badge">29</span></div>
     <div class="search-box">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="var(--thryv-steel)" stroke-width="1.5"/><path d="M10.5 10.5L14.5 14.5" stroke="var(--thryv-steel)" stroke-width="1.5" stroke-linecap="round"/></svg>
       <input type="text" id="issueSearch" placeholder="Search by ticket #, Thryv ID, or keyword..." />
@@ -541,7 +545,7 @@ body {
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
-        <td data-label="Tickets"><span class="ticket-count">21 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 40</span></td>
+        <td data-label="Tickets"><span class="ticket-count">13 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 21</span></td>
         <td data-label="Status / ETA"><div class="status-text">Dev Backlog</div><div class="eta-text">ETA: TBD</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Mar 20, 2026</td>
@@ -555,7 +559,7 @@ body {
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
-        <td data-label="Tickets"><span class="ticket-count">26 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 32</span></td>
+        <td data-label="Tickets"><span class="ticket-count">12 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 26</span></td>
         <td data-label="Status / ETA"><div class="status-text">Dev In Progress</div><div class="eta-text">ETA: TBD</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Mar 31, 2026</td>
@@ -563,28 +567,28 @@ body {
       <tr data-product="mc">
         <td>
           <div class="issue-title">Website analytics / visitor tagging not tracking</div>
-          <div class="issue-desc"><span class="kw">Website analytics</span> not loading in MC. Non-Thryv sites with <span class="kw">visitor tagging</span> code not syncing. <span class="kw">CORS</span> errors. Trending up — US, AU, NZ.</div>
-          <div class="issue-meta"><span class="jira-tag">MCB-265</span> <span class="jira-tag">MCB-220</span></div>
+          <div class="issue-desc"><span class="kw">Website analytics</span> not loading in MC. Non-Thryv sites with <span class="kw">visitor tagging</span> code not syncing. <span class="kw">CORS</span> errors. MCB-220 (V6) released. MCB-265 (V7) now in dev.</div>
+          <div class="issue-meta"><span class="jira-tag">MCB-265</span></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
-        <td data-label="Tickets"><span class="ticket-count">16 open</span><br><span style="font-size:11px;color:var(--sev-critical)">↑ from 10</span></td>
-        <td data-label="Status / ETA"><div class="status-text">Dev Backlog (MCB-265) · Dev In Progress (MCB-220)</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Tickets"><span class="ticket-count">15 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 16</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Dev In Progress</div><div class="eta-text">ETA: TBD</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Apr 1, 2026</td>
       </tr>
       <tr data-product="mc">
         <td>
           <div class="issue-title">Thryv Leads button grayed out / report unavailable</div>
-          <div class="issue-desc"><span class="kw">Thryv Leads</span> button visible but <span class="kw">grayed out</span>. TL report does not generate under <span class="kw">Analytics</span>. New this week.</div>
+          <div class="issue-desc"><span class="kw">Thryv Leads</span> button visible but <span class="kw">grayed out</span>. TL report does not generate under <span class="kw">Analytics</span>.</div>
           <div class="issue-meta"><span class="jira-tag">MCB-232</span> <span class="jira-tag">MCB-248</span></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
-        <td data-label="Tickets"><span class="ticket-count">7 open</span><br><span style="font-size:11px;color:var(--thryv-steel)">new this week</span></td>
-        <td data-label="Status / ETA"><div class="status-text">Dev Backlog</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Tickets"><span class="ticket-count">3 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 7</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Dev In Progress</div><div class="eta-text">ETA: TBD</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
         <td data-label="Date Reported" class="date-text">Apr 6, 2026</td>
       </tr>
@@ -593,12 +597,12 @@ body {
         <td>
           <div class="issue-title">Listing sync issues — publisher related</div>
           <div class="issue-desc">Active <span class="kw">Yext</span>-routed listing issues across multiple <span class="kw">publishers</span>. Includes <span class="kw">stuck processing</span>, <span class="kw">update failures</span>, and enhanced profile sync errors.</div>
-          <div class="issue-meta"><span class="pub-tag">Bing</span> <span class="pub-tag">Google</span> <span class="pub-tag">Facebook</span> <span class="pub-tag">YP</span></div>
+          <div class="issue-meta"><span class="pub-tag">Bing</span> <span class="pub-tag">Google</span> <span class="pub-tag">Facebook</span> <span class="pub-tag">Apple</span> <span class="pub-tag">YP</span></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
-        <td data-label="Tickets"><span class="ticket-count">15 open</span><br><span style="font-size:11px;color:var(--thryv-steel)">Yext-routed</span></td>
+        <td data-label="Tickets"><span class="ticket-count">27 open</span><br><span style="font-size:11px;color:var(--sev-critical)">↑ from 15</span></td>
         <td data-label="Status / ETA"><div class="status-text">With publishers</div><div class="eta-text">See publisher panel</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026</td>
@@ -613,7 +617,7 @@ body {
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
-        <td data-label="Tickets"><span class="ticket-count">35 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 306</span></td>
+        <td data-label="Tickets"><span class="ticket-count">30 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 35</span></td>
         <td data-label="Status / ETA"><div class="status-text">Queue processing</div><div class="eta-text">Improving</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026</td>
@@ -621,14 +625,14 @@ body {
       <tr data-product="bc">
         <td>
           <div class="issue-title">Social tab authentication / login errors</div>
-          <div class="issue-desc">Users getting <span class="kw">misconfiguration</span> error on <span class="kw">Social tab</span>. Connection failures and <span class="kw">404</span>s.</div>
+          <div class="issue-desc">Users getting <span class="kw">misconfiguration</span> error on <span class="kw">Social tab</span>. Connection failures and <span class="kw">404</span>s. Jira resolution marked <span class="kw">Done</span>.</div>
           <div class="issue-meta"><span class="jira-tag">BC-1068</span></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-high">High</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p1">P1</span></td>
-        <td data-label="Tickets"><span class="ticket-count">10 open</span><br><span style="font-size:11px;color:var(--sev-low)">resolution: Done</span></td>
-        <td data-label="Status / ETA"><div class="status-text">Dev In Progress</div><div class="eta-text">Resolution: Done — confirm to move to Resolved</div></td>
+        <td data-label="Tickets"><span class="ticket-count">11 open</span><br><span style="font-size:11px;color:var(--sev-low)">resolution: Done</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Dev In Progress</div><div class="eta-text">Resolution: Done</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
         <td data-label="Date Reported" class="date-text">Apr 6, 2026</td>
       </tr>
@@ -640,7 +644,7 @@ body {
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
-        <td data-label="Tickets"><span class="ticket-count">21 open</span><br><span style="font-size:11px;color:var(--thryv-steel)">156 total this wk</span></td>
+        <td data-label="Tickets"><span class="ticket-count">20 open</span><br><span style="font-size:11px;color:var(--sev-low)">94 total this wk</span></td>
         <td data-label="Status / ETA"><div class="status-text">Ongoing — migration related</div><div class="eta-text">Clears as migrations complete</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026</td>
@@ -669,7 +673,7 @@ body {
         <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
-        <td data-label="Tickets"><span class="ticket-count">19 open</span><br><span style="font-size:11px;color:var(--thryv-steel)">system-generated</span></td>
+        <td data-label="Tickets"><span class="ticket-count">14 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 19</span></td>
         <td data-label="Status / ETA"><div class="status-text">Investigating</div><div class="eta-text">ETA: TBD</div></td>
         <td data-label="Region"><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 10, 2026</td>
@@ -682,7 +686,7 @@ body {
         <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
-        <td data-label="Tickets"><span class="ticket-count">22 open</span><br><span style="font-size:11px;color:var(--thryv-steel)">system-generated</span></td>
+        <td data-label="Tickets"><span class="ticket-count">11 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 22</span></td>
         <td data-label="Status / ETA"><div class="status-text">Investigating</div><div class="eta-text">ETA: TBD</div></td>
         <td data-label="Region"><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 8, 2026</td>
@@ -771,20 +775,6 @@ body {
       </tr>
       <tr data-product="keap">
         <td>
-          <div class="issue-title">Automation email sends blank with deleted link</div>
-          <div class="issue-desc">Emails referencing a <span class="kw">deleted automation link</span> send <span class="kw">blank</span>.</div>
-          <div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Workaround: remove link &amp; republish</span></div>
-        </td>
-        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p2">P2</span></td>
-        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3551902</span></td>
-        <td data-label="Status / ETA"><div class="status-text">Researching</div><div class="eta-text">ETA: May 1, 2026</div></td>
-                <td data-label="Region"><span class="region-tag">ALL</span></td>
-        <td data-label="Date Reported" class="date-text">Jan 14, 2026</td>
-      </tr>
-      <tr data-product="keap">
-        <td>
           <div class="issue-title">Merge fields show raw tags in automated deals</div>
           <div class="issue-desc">Deals show <span class="kw">[[contact.first_name]]</span> instead of actual data.</div>
           <div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Workaround: use ~~ format</span></div>
@@ -836,18 +826,96 @@ body {
         <td data-label="Region"><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 17, 2026</td>
       </tr>
+      <tr data-product="keap">
+        <td>
+          <div class="issue-title">Pipeline deal activity history missing invoices</div>
+          <div class="issue-desc"><span class="kw">Pipeline</span> deal activity history not displaying converted, created, and sent <span class="kw">invoices</span> related to the deal.</div>
+        </td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Reported</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 20, 2026</td>
+      </tr>
+      <tr data-product="keap">
+        <td>
+          <div class="issue-title">Landing Page Editor shows no content</div>
+          <div class="issue-desc"><span class="kw">Landing Page</span> editor shows no content while the <span class="kw">live page</span> still renders correctly.</div>
+        </td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Reported</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 20, 2026</td>
+      </tr>
+      <tr data-product="keap">
+        <td>
+          <div class="issue-title">Pro/Max — State fields show incorrectly after save</div>
+          <div class="issue-desc">Some countries' <span class="kw">State</span> contact address fields may show incorrectly after certain selections are saved.</div>
+        </td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Reported</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 20, 2026</td>
+      </tr>
+      <tr data-product="keap">
+        <td>
+          <div class="issue-title">Merge fields in "Create a deal" not working</div>
+          <div class="issue-desc"><span class="kw">Merge fields</span> added using picker in <span class="kw">Create a deal</span> process do not work as intended in some apps.</div>
+        </td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Reported</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 20, 2026</td>
+      </tr>
+      <tr data-product="keap">
+        <td>
+          <div class="issue-title">Unable to logout in Ultimate interface</div>
+          <div class="issue-desc">Users unable to <span class="kw">logout</span> of application in <span class="kw">Ultimate</span> interface.</div>
+        </td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Reported</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 20, 2026</td>
+      </tr>
+      <tr data-product="keap">
+        <td>
+          <div class="issue-title">Large duplicate checking throws error</div>
+          <div class="issue-desc">Large <span class="kw">duplicate checking</span> operations throw "ERROR: Didn't process enough" error.</div>
+        </td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Reported</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 20, 2026</td>
+      </tr>
 
       <tr data-product="bc">
         <td>
           <div class="issue-title">Stripe integration — residual queue</div>
-          <div class="issue-desc"><span class="kw">Stripe</span> tickets largely cleared. Remaining items are account-specific <span class="kw">risk inquiries</span> and <span class="kw">fee adjustments</span>.</div>
+          <div class="issue-desc"><span class="kw">Stripe</span> queue fully cleared. All tickets resolved.</div>
           <div class="issue-meta"><span class="thryvpay-tag">ThryvPay</span></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
-        <td data-label="Tickets"><span class="ticket-count">3 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 111</span></td>
-        <td data-label="Status / ETA"><div class="status-text">Clearing</div><div class="eta-text">Near resolution</div></td>
+        <td data-label="Tickets"><span class="ticket-count">0 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 3</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Resolved</div><div class="eta-text">Queue cleared</div></td>
                 <td data-label="Region"><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026</td>
       </tr>
@@ -896,7 +964,7 @@ body {
       <div style="font-size:13px;font-weight:600;color:var(--thryv-midnight);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;">Priority &amp; expected resolution</div>
       <div style="display:flex;flex-direction:column;gap:8px;">
         <div style="display:flex;align-items:center;gap:10px;white-space:nowrap;">
-          <span class="pri-badge pri-p3" style="font-size:11px;min-width:80px;justify-content:center;">P3 Low</span>
+          <span class="pri-badge pri-p0" style="font-size:11px;min-width:80px;justify-content:center;">P0 Critical</span>
           <span style="font-size:12px;color:var(--thryv-night);flex:1;">Active outage — fix in progress now</span>
           <span style="font-size:12px;font-weight:600;color:#791F1F;background:#FCEBEB;padding:2px 10px;border-radius:8px;">&#9201; within 4 hours</span>
         </div>
@@ -936,6 +1004,20 @@ body {
     </thead>
     <tbody>
       <tr class="resolved-row">
+        <td><div class="issue-title">Visitor tagging V6 — website analytics not tracking</div><div class="issue-desc">MCB-220 Released. Visitor tagging and heatmap fixes deployed for V6 accounts.</div></td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Date Reported" class="date-text">Released</td>
+        <td class="resolved-text">Released</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~3 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
+      </tr>
+      <tr class="resolved-row">
+        <td><div class="issue-title">Stripe integration — queue fully cleared</div><div class="issue-desc">ThryvPay Stripe queue dropped from 111 to 0. All tickets resolved.</div></td>
+        <td><span class="product-pill prod-pay">ThryvPay</span></td>
+        <td data-label="Date Reported" class="date-text">111 → 0 active</td>
+        <td class="resolved-text">Resolved</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~4 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
+      </tr>
+      <tr class="resolved-row">
         <td><div class="issue-title">External ID already in use — publish failures</div><div class="issue-desc">Listings publish failures due to external ID conflicts. Released in Jira.</div></td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Date Reported" class="date-text">4 → 0 active</td>
@@ -964,11 +1046,11 @@ body {
         <td><span style="font-size:13px;font-weight:600;color:var(--sev-high);">~4 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">merged into active P0</span></td>
       </tr>
       <tr class="resolved-row">
-        <td><div class="issue-title">Stripe bulk open queue</div><div class="issue-desc">Stripe queue dropped from 111 to 3 active. Largely cleared.</div></td>
+        <td><div class="issue-title">Stripe bulk open queue</div><div class="issue-desc">Stripe queue dropped from 111 to 0 active. Fully cleared.</div></td>
         <td><span class="product-pill prod-pay">ThryvPay</span></td>
-        <td data-label="Date Reported" class="date-text">111 → 3 active</td>
-        <td class="resolved-text">Substantially resolved</td>
-        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~3 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
+        <td data-label="Date Reported" class="date-text">111 → 0 active</td>
+        <td class="resolved-text">Resolved</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~4 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
       </tr>
       <tr class="resolved-row">
         <td><div class="issue-title">Update listings failed</div><div class="issue-desc">Listings management unable to save. Bulk update failures.</div></td>
@@ -989,7 +1071,7 @@ body {
 
   <!-- Footer -->
   <div class="page-footer">
-    <span>Updated weekly · Every Monday by 9:00 AM CT · Last refreshed: April 17, 2026</span>
+    <span>Updated weekly · Every Monday by 9:00 AM CT · Last refreshed: April 20, 2026</span>
     <span>Maintained by Thryv Technical Support Team</span>
   </div>
 </div>
@@ -1129,7 +1211,7 @@ function checkTicketLookup(query){
     titleEl.textContent = icon + ' This ticket is linked to: ' + match[0] + statusText;
     productEl.innerHTML = '<strong>Product:</strong> ' + match[1];
     var jiraHtml = match[2] ? '<strong>Jira:</strong> ' + match[2] : '';
-    var statusHtml = isResolved ? '<span style="color:#1D9E75;font-weight:600;margin-left:12px;">\u2714 Resolved</span>' : '<span style="color:#E24B4A;font-weight:600;margin-left:12px;">\u26AA Active — see Known Issues above</span>';
+    var statusHtml = isResolved ? '<span style="color:#1D9E75;font-weight:600;margin-left:12px;">\u2714 Resolved</span>' : '<span style="color:#E24B4A;font-weight:600;margin-left:12px;">\u26AA Active \u2014 see Known Issues above</span>';
     jiraEl.innerHTML = jiraHtml + statusHtml;
     result.style.borderColor = isResolved ? '#1D9E75' : 'var(--thryv-sapphire)';
     result.style.borderLeftColor = isResolved ? '#1D9E75' : 'var(--thryv-sapphire)';
