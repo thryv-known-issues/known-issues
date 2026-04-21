@@ -154,7 +154,9 @@ body {
 .prod-bc { background: #121212; color: #FFFFFF; border: 2px solid #888888; }
 .prod-keap { background: #4CAF50; color: #FFFFFF; border: 2px solid #90EE90; }
 .prod-ma { background: #E6F1FB; color: #0C447C; }
-.prod-pay { background: #5378FC; color: #FFFFFF; border: 2px solid #A8C0FF; }
+.prod-pay { background: #5B7FFF; color: #FFFFFF; border: 2px solid #A8C0FF; }
+.prod-thryvpay { background: #5B7FFF; color: #FFFFFF; border: 2px solid #A8C0FF; }
+.prod-olm { background: #0E7C6B; color: #FFFFFF; border: 2px solid #5CC4B3; }
 .prod-myaccount { background: #121212; color: #FFFFFF; border: 2px solid #888888; border-left: 2px solid #FF5000; border-right: 2px solid #5378FC; border-top: 2px solid #FF5000; border-bottom: 2px solid #5378FC; }
 .thryvpay-tag { display:inline-block; font-size:11px; color:#5378FC; font-weight:600; padding:2px 8px; border:2px solid #5378FC; border-radius:6px; background:rgba(83,120,252,0.06); }
 
@@ -410,28 +412,28 @@ body {
       <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">99.99% uptime · 5 active issues</div>
     </div>
 
-    <div class="status-card" style="border-top:3px solid #4CAF50;padding-bottom:10px;">
+    <div class="status-card" style="border-top:3px solid #0E7C6B;padding-bottom:10px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;">
-        <div class="status-card-label" style="margin-bottom:0;">Keap</div>
+        <div class="status-card-label" style="margin-bottom:0;line-height:1.3;">Online<br>Listings</div>
         <span style="font-size:10px;font-weight:600;color:#633806;background:#FAEEDA;padding:3px 8px;border-radius:10px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;"><span style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0;display:inline-block;"></span>Monitoring</span>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#4CAF50;">16</span>
-          <span style="font-size:12px;color:var(--thryv-steel);"> known issues</span>
+          <span style="font-size:22px;font-weight:700;color:#0E7C6B;">27</span>
+          <span style="font-size:12px;color:var(--thryv-steel);"> open tickets</span>
         </div>
-        <span style="font-size:11px;font-weight:600;color:var(--sev-critical);">↑ from 10</span>
+        <span style="font-size:11px;font-weight:600;color:var(--sev-critical);">↑ from 15</span>
       </div>
       <svg width="100%" height="36" viewBox="0 0 200 36" preserveAspectRatio="none" style="margin-top:6px;">
-        <defs><linearGradient id="keapGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4CAF50" stop-opacity="0.2"/><stop offset="100%" stop-color="#4CAF50" stop-opacity="0"/></linearGradient></defs>
-        <path d="M0,20 L50,18 L100,16 L150,18 L200,16" fill="none" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M0,20 L50,18 L100,16 L150,18 L200,16 L200,36 L0,36Z" fill="url(#keapGrad)"/>
-        <circle cx="200" cy="16" r="3.5" fill="#4CAF50"/>
+        <defs><linearGradient id="olmGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E7C6B" stop-opacity="0.2"/><stop offset="100%" stop-color="#0E7C6B" stop-opacity="0"/></linearGradient></defs>
+        <path d="M0,28 L50,24 L100,20 L150,18 L200,10" fill="none" stroke="#0E7C6B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M0,28 L50,24 L100,20 L150,18 L200,10 L200,36 L0,36Z" fill="url(#olmGrad)"/>
+        <circle cx="200" cy="10" r="3.5" fill="#0E7C6B"/>
       </svg>
       <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--thryv-steel);margin-top:2px;">
         <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Now</span>
       </div>
-      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">100.0% uptime · tracked via Keap portal</div>
+      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Publisher-routed · 1 active issue</div>
     </div>
 
     <div class="status-card" style="border-top:3px solid #3C3489;padding-bottom:10px;">
@@ -504,9 +506,11 @@ body {
   <div class="filters" id="issueFilters">
     <button class="filter-btn active" data-filter="all">All Products</button>
     <button class="filter-btn" data-filter="bc">Business Center</button>
-    <button class="filter-btn" data-filter="keap">Keap</button>
     <button class="filter-btn" data-filter="mc">Marketing Center</button>
+    <button class="filter-btn" data-filter="olm">Online Listings</button>
     <button class="filter-btn" data-filter="myaccount">My Account</button>
+    <button class="filter-btn" data-filter="thryvpay">ThryvPay</button>
+    <button class="filter-btn" data-filter="keap">Keap</button>
     <span style="flex:1"></span>
     <button class="publisher-btn" onclick="togglePublisherPanel()">
       <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="1" y="3" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M1 7h16" stroke="currentColor" stroke-width="1.4"/><path d="M6 7v8" stroke="currentColor" stroke-width="1.4"/></svg>
@@ -593,13 +597,13 @@ body {
         <td data-label="Date Reported" class="date-text">Apr 6, 2026</td>
       </tr>
       
-      <tr data-product="mc">
+      <tr data-product="olm">
         <td>
           <div class="issue-title">Listing sync issues — publisher related</div>
           <div class="issue-desc">Active <span class="kw">Yext</span>-routed listing issues across multiple <span class="kw">publishers</span>. Includes <span class="kw">stuck processing</span>, <span class="kw">update failures</span>, and enhanced profile sync errors.</div>
           <div class="issue-meta"><span class="pub-tag">Bing</span> <span class="pub-tag">Google</span> <span class="pub-tag">Facebook</span> <span class="pub-tag">Apple</span> <span class="pub-tag">YP</span></div>
         </td>
-        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count">27 open</span><br><span style="font-size:11px;color:var(--sev-critical)">↑ from 15</span></td>
@@ -905,13 +909,13 @@ body {
         <td data-label="Date Reported" class="date-text">Apr 20, 2026</td>
       </tr>
 
-      <tr data-product="bc">
+      <tr data-product="thryvpay">
         <td>
           <div class="issue-title">Stripe integration — residual queue</div>
           <div class="issue-desc"><span class="kw">Stripe</span> queue fully cleared. All tickets resolved.</div>
           <div class="issue-meta"><span class="thryvpay-tag">ThryvPay</span></div>
         </td>
-        <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
+        <td data-label="Product"><span class="product-pill prod-thryvpay">ThryvPay</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
         <td data-label="Priority"><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count">0 open</span><br><span style="font-size:11px;color:var(--sev-low)">↓ from 3</span></td>
@@ -922,32 +926,8 @@ body {
     </tbody>
   </table>
 
-  <!-- Incident Communications -->
-  <div class="talking-points" style="margin-top:24px;">
-    <div class="talking-points-header">
-      <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
-      <div class="talking-points-title">Incident Communication — EP / Growth Package Issues</div>
-    </div>
-    <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">
-      <span style="font-weight:600;">Priority:</span><span>P3 Low</span>
-      <span style="font-weight:600;">Severity:</span><span>High — Major function not working for a subset of users</span>
-      <span style="font-weight:600;">Status:</span><span style="color:var(--sev-low);font-weight:600;">In active engineering sprint — ticket count declining</span>
-      <span style="font-weight:600;">Update cadence:</span><span>Per SOP cadence during active work</span>
-      <span style="font-weight:600;">Workaround:</span><span style="color:var(--sev-low);">Yes — submit a Zendesk ticket for manual activation. Include the Thryv ID and Growth Package tier.</span>
-    </div>
-    <div class="tp-section">
-      <div class="tp-label">Impact Summary</div>
-      <div class="tp-text">Enhanced Profiles and Growth Package features are not activating automatically after purchase for some clients. This is caused by a product installation issue in the backend. Client impact is declining week over week. Subscriptions and data are intact — features are simply not surfacing in the UI.</div>
-    </div>
-    <div class="tp-section">
-      <div class="tp-label">Client-Facing Message</div>
-      <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">"We're aware of a technical issue preventing some Growth Package features from appearing in your Marketing Center. Your subscription is active and no data has been lost. Our engineering team has prioritized this issue and a fix is currently in development. We expect resolution soon and will follow up as soon as the fix is deployed."</div>
-    </div>
-    <div class="tp-section">
-      <div class="tp-label">Internal Notes</div>
-      <div class="tp-text">Escalated by Support Ops leadership — engineering confirmed and added to the current sprint. If a client needs immediate activation, submit a Zendesk ticket with the Thryv ID and package tier for manual resolution.</div>
-    </div>
-  </div>
+  <!-- Incident Communications - Dynamic per queue -->
+  <div id="incidentCommsContainer" style="margin-top:24px;"></div>
 
   <!-- Legend -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0 10px;">
@@ -1274,7 +1254,160 @@ function applyFilters(){
 
   var badge = document.querySelector('.count-badge');
   if(badge) badge.textContent = visible;
+
+  // Update incident communications based on visible rows
+  updateIncidentComms(rows, filter, query, matchTitles);
 }
+
+// Incident communication data per queue - top issue for each
+var incidentData = {
+  bc: {
+    title: 'Cloud Campaign \u2014 Service Portal Queue',
+    priority: 'P3 Low',
+    severity: 'Low \u2014 Ongoing service portal processing',
+    status: 'Queue processing \u2014 volume declining',
+    cadence: 'Weekly monitoring',
+    workaround: 'None required \u2014 tickets processing normally, queue clearing over time.',
+    summary: 'Cloud Campaign tickets flowing through the Service Portal queue remain the highest-volume BC issue. Volume has dropped from 306 to 30 and continues to decline. No client-facing impact beyond normal processing times.',
+    clientMsg: 'Your Cloud Campaign request is being processed through our service portal. Processing times are currently normal and we expect continued improvement. No action is needed on your end.',
+    internal: 'Queue is self-resolving. Monitor weekly for any volume spikes. No engineering escalation needed at this time.'
+  },
+  mc: {
+    title: 'EP / Growth Package Installation Issues',
+    priority: 'P3 Low',
+    severity: 'High \u2014 Major function not working for a subset of users',
+    status: 'Dev In Progress \u2014 ticket count declining',
+    cadence: 'Per SOP cadence during active work',
+    workaround: 'Yes \u2014 submit a Zendesk ticket for manual activation. Include the Thryv ID and Growth Package tier.',
+    summary: 'Enhanced Profiles and Growth Package features are not activating automatically after purchase for some clients. This is caused by a product installation issue in the backend. Client impact is declining week over week. Subscriptions and data are intact \u2014 features are simply not surfacing in the UI.',
+    clientMsg: 'We are aware of a technical issue preventing some Growth Package features from appearing in your Marketing Center. Your subscription is active and no data has been lost. Our engineering team has prioritized this issue and a fix is currently in development. We expect resolution soon and will follow up as soon as the fix is deployed.',
+    internal: 'Escalated by Support Ops leadership \u2014 engineering confirmed and added to the current sprint. MCB-168 now in Dev In Progress. If a client needs immediate activation, submit a Zendesk ticket with the Thryv ID and package tier for manual resolution.'
+  },
+  olm: {
+    title: 'Listing Sync Issues \u2014 Publisher Related',
+    priority: 'P3 Low',
+    severity: 'Medium \u2014 Publisher-side issues affecting listing distribution',
+    status: 'With publishers \u2014 ticket count rising',
+    cadence: 'Weekly monitoring via publisher status pages',
+    workaround: 'Individual escalations can be submitted per publisher. See Publisher Integration Status panel for details.',
+    summary: 'Active Yext-routed listing issues across multiple publishers including Bing, Google, Facebook, Apple, and YP. Issues include listings stuck in processing, update failures, and sync errors. Volume has increased from 15 to 27 this week, primarily driven by Apple listings stuck in processing since April 12.',
+    clientMsg: 'We are aware of intermittent issues with some listing publishers that may affect the sync status of your business listings. Our team is actively working with the affected publishers to resolve these issues. Your listing data is intact and will sync once the publisher-side issues are resolved.',
+    internal: 'Publisher-routed issues \u2014 no Thryv engineering fix. Monitor publisher status pages weekly. Apple is the primary driver of increased volume. Bing infrastructure upgrade ongoing. See Publisher Integration Status panel for per-publisher details.'
+  },
+  myaccount: {
+    title: 'Staff Delete Errors \u2014 Recurring System Failures',
+    priority: 'P3 Low',
+    severity: 'Low \u2014 System-generated errors, minimal client impact',
+    status: 'Investigating \u2014 ticket count declining',
+    cadence: 'Weekly monitoring',
+    workaround: 'None required \u2014 system-generated alerts, not client-facing.',
+    summary: 'Staff deletion process generating recurring system errors and automated alerts in the Command Center queue. Volume has declined from 19 to 14. Auth0 signup service errors also declining (22 to 11). These are largely system-generated and not directly client-impacting.',
+    clientMsg: 'No client-facing impact at this time. Our team is monitoring internal system alerts and working to resolve the underlying cause.',
+    internal: 'System-generated alerts \u2014 not client-facing. Monitor for volume changes. If a client reports staff deletion issues directly, treat as individual account case.'
+  },
+  thryvpay: {
+    title: 'No Active Known Issues',
+    priority: '',
+    severity: '',
+    status: 'All clear',
+    cadence: '',
+    workaround: '',
+    summary: 'The ThryvPay queue is currently in good standing. The Stripe integration queue has been fully cleared (111 to 0 active tickets). No active known issues at this time.',
+    clientMsg: '',
+    internal: 'Stripe queue fully resolved. TPS board shows individual account issues only \u2014 no systemic patterns. Watch items: TPS-220 (Card on File franchise), TPS-214 (ACH checkout), TPS-197 (wrong error message).',
+    goodStanding: true
+  },
+  keap: {
+    title: 'Automation & Email Broadcast Actions Not Processing',
+    priority: 'P3 Low',
+    severity: 'Medium \u2014 Affecting some automation workflows',
+    status: 'Reported \u2014 tracked via Keap portal',
+    cadence: 'Weekly via Keap known issues page',
+    workaround: 'Check Keap known issues page for latest workarounds per issue.',
+    summary: 'Some applications are not triggering Automation and Email Broadcast actions. This is the most impactful of the 16 active Keap known issues. Additional issues include mobile app crashes, login failures post-Thryv migration, Landing Page Editor blank content, and V2 REST API parity gaps.',
+    clientMsg: 'We are aware of an issue affecting some automation and email broadcast actions in Keap. Our team is investigating and working on a resolution. Please check the Keap known issues page for the latest updates and any available workarounds.',
+    internal: 'Tracked via Keap known issues portal. 16 active issues. No Thryv engineering involvement \u2014 these are Keap platform issues. Escalate to Keap support if clients report urgent impact.'
+  }
+};
+
+function updateIncidentComms(rows, filter, query, matchTitles){
+  var container = document.getElementById('incidentCommsContainer');
+  container.innerHTML = '';
+
+  // Determine which queues to show comms for
+  var queuesToShow = [];
+
+  if(query && (matchTitles.length > 0 || query)){
+    // Search mode: show comms for queues of visible rows, pick top issue per queue
+    var visibleQueues = {};
+    rows.forEach(function(row){
+      if(row.style.display !== 'none'){
+        var prod = row.getAttribute('data-product');
+        if(!visibleQueues[prod]) visibleQueues[prod] = [];
+        visibleQueues[prod].push(row);
+      }
+    });
+    // For each queue with visible rows, pick the top issue (first visible = highest severity since table is sorted)
+    for(var q in visibleQueues){
+      if(incidentData[q]){
+        var topRow = visibleQueues[q][0];
+        var topTitle = (topRow.querySelector('.issue-title') || {}).textContent || '';
+        queuesToShow.push({queue: q, title: topTitle});
+      }
+    }
+  } else if(filter !== 'all'){
+    // Filter mode: show comm for the selected queue
+    if(incidentData[filter]) queuesToShow.push({queue: filter});
+  } else {
+    // Default: show all queue comms
+    ['bc','mc','olm','myaccount','thryvpay','keap'].forEach(function(q){
+      queuesToShow.push({queue: q});
+    });
+  }
+
+  queuesToShow.forEach(function(item){
+    var d = incidentData[item.queue];
+    if(!d) return;
+
+    var queueLabels = {bc:'Business Center',mc:'Marketing Center',olm:'Online Listings',myaccount:'My Account',thryvpay:'ThryvPay',keap:'Keap'};
+    var queueColors = {bc:'#121212',mc:'#3C3489',olm:'#0E7C6B',myaccount:'#FF5000',thryvpay:'#5B7FFF',keap:'#4CAF50'};
+    var borderColor = queueColors[item.queue] || 'var(--thryv-sapphire)';
+
+    var html = '<div class="talking-points" style="margin-bottom:16px;border-left:4px solid ' + borderColor + ';">';
+    html += '<div class="talking-points-header">';
+    html += '<div class="talking-points-icon" style="font-size:14px;background:' + borderColor + ';">' + (d.goodStanding ? '\u2705' : '\u26A0\uFE0F') + '</div>';
+    html += '<div class="talking-points-title">Incident Communication \u2014 ' + queueLabels[item.queue] + ': ' + d.title + '</div>';
+    html += '</div>';
+
+    if(!d.goodStanding){
+      html += '<div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">';
+      html += '<span style="font-weight:600;">Priority:</span><span>' + d.priority + '</span>';
+      html += '<span style="font-weight:600;">Severity:</span><span>' + d.severity + '</span>';
+      html += '<span style="font-weight:600;">Status:</span><span style="font-weight:600;">' + d.status + '</span>';
+      html += '<span style="font-weight:600;">Update cadence:</span><span>' + d.cadence + '</span>';
+      html += '<span style="font-weight:600;">Workaround:</span><span style="color:var(--sev-low);">' + d.workaround + '</span>';
+      html += '</div>';
+    }
+
+    html += '<div class="tp-section"><div class="tp-label">Impact Summary</div><div class="tp-text">' + d.summary + '</div></div>';
+
+    if(d.clientMsg){
+      html += '<div class="tp-section"><div class="tp-label">Client-Facing Message</div>';
+      html += '<div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">' + d.clientMsg + '</div></div>';
+    }
+
+    html += '<div class="tp-section"><div class="tp-label">Internal Notes</div><div class="tp-text">' + d.internal + '</div></div>';
+    html += '</div>';
+
+    container.innerHTML += html;
+  });
+}
+
+// Initialize incident comms on page load
+(function(){
+  var rows = document.querySelectorAll('.issue-table tbody tr[data-product]');
+  updateIncidentComms(rows, 'all', '', []);
+})();
 </script>
 </body>
 </html>
