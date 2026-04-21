@@ -926,8 +926,15 @@ body {
     </tbody>
   </table>
 
-  <!-- Incident Communications - Dynamic per queue -->
-  <div id="incidentCommsContainer" style="margin-top:24px;"></div>
+  <!-- Incident Communications - Carousel Deck -->
+  <div id="incidentCommsContainer" style="margin-top:24px;position:relative;">
+    <div id="incidentDeck" style="position:relative;"></div>
+    <div id="incidentNav" style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;">
+      <button id="incPrev" onclick="navigateIncident(-1)" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--thryv-cloud);background:var(--thryv-white);cursor:pointer;font-size:16px;color:var(--thryv-midnight);display:flex;align-items:center;justify-content:center;transition:all 0.2s;">&larr;</button>
+      <span id="incIndicator" style="font-size:12px;font-weight:600;color:var(--thryv-steel);min-width:80px;text-align:center;"></span>
+      <button id="incNext" onclick="navigateIncident(1)" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--thryv-cloud);background:var(--thryv-white);cursor:pointer;font-size:16px;color:var(--thryv-midnight);display:flex;align-items:center;justify-content:center;transition:all 0.2s;">&rarr;</button>
+    </div>
+  </div>
 
   <!-- Legend -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0 10px;">
@@ -1330,15 +1337,71 @@ var incidentData = {
   }
 };
 
-function updateIncidentComms(rows, filter, query, matchTitles){
-  var container = document.getElementById('incidentCommsContainer');
-  container.innerHTML = '';
+var currentIncidentIndex = 0;
+var currentIncidentSlides = [];
 
-  // Determine which queues to show comms for
+function buildIncidentCard(queue, d){
+  var queueLabels = {bc:'Business Center',mc:'Marketing Center',olm:'Online Listings',myaccount:'My Account',thryvpay:'ThryvPay',keap:'Keap'};
+  var queueColors = {bc:'#121212',mc:'#3C3489',olm:'#0E7C6B',myaccount:'#FF5000',thryvpay:'#5B7FFF',keap:'#4CAF50'};
+  var borderColor = queueColors[queue] || 'var(--thryv-sapphire)';
+
+  var html = '<div class="talking-points" style="border-left:4px solid ' + borderColor + ';">';
+  html += '<div class="talking-points-header">';
+  html += '<div class="talking-points-icon" style="font-size:14px;background:' + borderColor + ';">' + (d.goodStanding ? '\u2705' : '\u26A0\uFE0F') + '</div>';
+  html += '<div class="talking-points-title">Incident Communication \u2014 ' + queueLabels[queue] + ': ' + d.title + '</div>';
+  html += '</div>';
+
+  if(!d.goodStanding){
+    html += '<div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">';
+    html += '<span style="font-weight:600;">Priority:</span><span>' + d.priority + '</span>';
+    html += '<span style="font-weight:600;">Severity:</span><span>' + d.severity + '</span>';
+    html += '<span style="font-weight:600;">Status:</span><span style="font-weight:600;">' + d.status + '</span>';
+    html += '<span style="font-weight:600;">Update cadence:</span><span>' + d.cadence + '</span>';
+    html += '<span style="font-weight:600;">Workaround:</span><span style="color:var(--sev-low);">' + d.workaround + '</span>';
+    html += '</div>';
+  }
+
+  html += '<div class="tp-section"><div class="tp-label">Impact Summary</div><div class="tp-text">' + d.summary + '</div></div>';
+
+  if(d.clientMsg){
+    html += '<div class="tp-section"><div class="tp-label">Client-Facing Message</div>';
+    html += '<div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">' + d.clientMsg + '</div></div>';
+  }
+
+  html += '<div class="tp-section"><div class="tp-label">Internal Notes</div><div class="tp-text">' + d.internal + '</div></div>';
+  html += '</div>';
+  return html;
+}
+
+function navigateIncident(dir){
+  if(currentIncidentSlides.length === 0) return;
+  currentIncidentIndex += dir;
+  if(currentIncidentIndex < 0) currentIncidentIndex = currentIncidentSlides.length - 1;
+  if(currentIncidentIndex >= currentIncidentSlides.length) currentIncidentIndex = 0;
+  renderCurrentSlide();
+}
+
+function renderCurrentSlide(){
+  var deck = document.getElementById('incidentDeck');
+  var indicator = document.getElementById('incIndicator');
+  var nav = document.getElementById('incidentNav');
+
+  if(currentIncidentSlides.length === 0){
+    deck.innerHTML = '';
+    nav.style.display = 'none';
+    return;
+  }
+
+  deck.innerHTML = currentIncidentSlides[currentIncidentIndex].html;
+  indicator.textContent = (currentIncidentIndex + 1) + ' of ' + currentIncidentSlides.length + ' \u2014 ' + currentIncidentSlides[currentIncidentIndex].label;
+  nav.style.display = currentIncidentSlides.length > 1 ? 'flex' : 'none';
+}
+
+function updateIncidentComms(rows, filter, query, matchTitles){
+  var queueLabels = {bc:'Business Center',mc:'Marketing Center',olm:'Online Listings',myaccount:'My Account',thryvpay:'ThryvPay',keap:'Keap'};
   var queuesToShow = [];
 
   if(query && (matchTitles.length > 0 || query)){
-    // Search mode: show comms for queues of visible rows, pick top issue per queue
     var visibleQueues = {};
     rows.forEach(function(row){
       if(row.style.display !== 'none'){
@@ -1347,60 +1410,29 @@ function updateIncidentComms(rows, filter, query, matchTitles){
         visibleQueues[prod].push(row);
       }
     });
-    // For each queue with visible rows, pick the top issue (first visible = highest severity since table is sorted)
     for(var q in visibleQueues){
-      if(incidentData[q]){
-        var topRow = visibleQueues[q][0];
-        var topTitle = (topRow.querySelector('.issue-title') || {}).textContent || '';
-        queuesToShow.push({queue: q, title: topTitle});
-      }
+      if(incidentData[q]) queuesToShow.push(q);
     }
   } else if(filter !== 'all'){
-    // Filter mode: show comm for the selected queue
-    if(incidentData[filter]) queuesToShow.push({queue: filter});
+    if(incidentData[filter]) queuesToShow.push(filter);
   } else {
-    // Default: show all queue comms
-    ['bc','mc','olm','myaccount','thryvpay','keap'].forEach(function(q){
-      queuesToShow.push({queue: q});
-    });
+    queuesToShow = ['bc','mc','olm','myaccount','thryvpay','keap'];
   }
 
-  queuesToShow.forEach(function(item){
-    var d = incidentData[item.queue];
+  currentIncidentSlides = [];
+  currentIncidentIndex = 0;
+
+  queuesToShow.forEach(function(q){
+    var d = incidentData[q];
     if(!d) return;
-
-    var queueLabels = {bc:'Business Center',mc:'Marketing Center',olm:'Online Listings',myaccount:'My Account',thryvpay:'ThryvPay',keap:'Keap'};
-    var queueColors = {bc:'#121212',mc:'#3C3489',olm:'#0E7C6B',myaccount:'#FF5000',thryvpay:'#5B7FFF',keap:'#4CAF50'};
-    var borderColor = queueColors[item.queue] || 'var(--thryv-sapphire)';
-
-    var html = '<div class="talking-points" style="margin-bottom:16px;border-left:4px solid ' + borderColor + ';">';
-    html += '<div class="talking-points-header">';
-    html += '<div class="talking-points-icon" style="font-size:14px;background:' + borderColor + ';">' + (d.goodStanding ? '\u2705' : '\u26A0\uFE0F') + '</div>';
-    html += '<div class="talking-points-title">Incident Communication \u2014 ' + queueLabels[item.queue] + ': ' + d.title + '</div>';
-    html += '</div>';
-
-    if(!d.goodStanding){
-      html += '<div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">';
-      html += '<span style="font-weight:600;">Priority:</span><span>' + d.priority + '</span>';
-      html += '<span style="font-weight:600;">Severity:</span><span>' + d.severity + '</span>';
-      html += '<span style="font-weight:600;">Status:</span><span style="font-weight:600;">' + d.status + '</span>';
-      html += '<span style="font-weight:600;">Update cadence:</span><span>' + d.cadence + '</span>';
-      html += '<span style="font-weight:600;">Workaround:</span><span style="color:var(--sev-low);">' + d.workaround + '</span>';
-      html += '</div>';
-    }
-
-    html += '<div class="tp-section"><div class="tp-label">Impact Summary</div><div class="tp-text">' + d.summary + '</div></div>';
-
-    if(d.clientMsg){
-      html += '<div class="tp-section"><div class="tp-label">Client-Facing Message</div>';
-      html += '<div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">' + d.clientMsg + '</div></div>';
-    }
-
-    html += '<div class="tp-section"><div class="tp-label">Internal Notes</div><div class="tp-text">' + d.internal + '</div></div>';
-    html += '</div>';
-
-    container.innerHTML += html;
+    currentIncidentSlides.push({
+      queue: q,
+      label: queueLabels[q],
+      html: buildIncidentCard(q, d)
+    });
   });
+
+  renderCurrentSlide();
 }
 
 // Initialize incident comms on page load
