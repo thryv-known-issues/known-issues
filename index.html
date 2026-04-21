@@ -1223,7 +1223,7 @@ function checkTicketLookup(query){
   titleEl.textContent = (matches.length === 1 ? 'This ticket is linked to: ' : 'This ticket is linked to ' + matches.length + ' known issues:');
   productEl.innerHTML = lines.join('<br>');
   var anyActive = matches.some(function(m){ return m[3] !== 'Resolved'; });
-  jiraEl.innerHTML = anyActive ? '<span style="color:#E24B4A;font-weight:600;">\u26AA Active \u2014 see Known Issues above</span>' : '<span style="color:#1D9E75;font-weight:600;">\u2714 All Resolved</span>';
+  jiraEl.innerHTML = anyActive ? '<span style="color:#E24B4A;font-weight:600;">\u26AA Active \u2014 see Known Issues below</span>' : '<span style="color:#1D9E75;font-weight:600;">\u2714 All Resolved</span>';
   result.style.borderColor = anyActive ? 'var(--thryv-sapphire)' : '#1D9E75';
   result.style.borderLeftColor = anyActive ? 'var(--thryv-sapphire)' : '#1D9E75';
   result.classList.add('visible');
