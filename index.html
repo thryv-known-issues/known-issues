@@ -287,19 +287,6 @@ body {
   .section-title { font-size: 16px; }
   .mockup-badge { font-size: 10px; padding: 4px 10px; }
 }
-
-/* ── Simplified Mode ── */
-body.simplified .jira-tag { display: none; }
-body.simplified .thryvpay-tag { display: none; }
-body.simplified .issue-meta { display: none; }
-body.simplified .tp-internal { display: none; }
-body.simplified .tp-meta-grid { display: none; }
-body.simplified .adv-only { display: none; }
-body.simplified .simp-only { display: inline; }
-body:not(.simplified) .simp-only { display: none; }
-body.simplified .weekly-summary-cards { display: none; }
-body.simplified .alert-banner span { font-size: 13px; }
-body.simplified .resolved-row .resolved-detail { display: none; }
 </style>
 </head>
 <body>
@@ -366,19 +353,11 @@ body.simplified .resolved-row .resolved-detail { display: none; }
 <!-- ═══ MAIN PAGE ═══ -->
 <div class="topbar">
   <div class="topbar-logo">thryv<span class="arrow">&#9656;</span><span class="compass">Compass</span></div>
-  <div style="display:flex;align-items:center;gap:24px;">
-    <div class="topbar-nav">
-      <a href="#">Home</a>
-      <a href="#">Software stats</a>
-      <a class="active" href="#">System status</a>
-      <a href="#">Resources</a>
-    </div>
-    <div id="viewToggle" style="display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;" onclick="toggleViewMode()">
-      <span id="toggleLabel" style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.5px;">Simplified</span>
-      <div id="toggleTrack" style="width:40px;height:22px;border-radius:11px;background:rgba(255,255,255,0.2);position:relative;transition:background 0.3s;">
-        <div id="toggleKnob" style="width:18px;height:18px;border-radius:50%;background:white;position:absolute;top:2px;left:2px;transition:left 0.3s;box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>
-      </div>
-    </div>
+  <div class="topbar-nav">
+    <a href="#">Home</a>
+    <a href="#">Software stats</a>
+    <a class="active" href="#">System status</a>
+    <a href="#">Resources</a>
   </div>
 </div>
 
@@ -392,7 +371,7 @@ body.simplified .resolved-row .resolved-detail { display: none; }
   </div>
 
   <!-- Weekly Summary -->
-  <div class="weekly-summary-cards" style="display:flex;gap:12px;margin:16px 0 0;flex-wrap:wrap;width:100%;">
+  <div style="display:flex;gap:12px;margin:16px 0 0;flex-wrap:wrap;width:100%;">
     <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-low);">
       <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-low);font-weight:600;margin-bottom:4px;">Improving</div>
       <div style="font-size:13px;color:var(--thryv-night);">EP/GP tickets down to 13 (from 21). Missing GP down to 12 (from 26). Stripe queue fully cleared. Cloud Campaign continuing to decline. Auth0/Staff delete errors dropping.</div>
@@ -1085,152 +1064,6 @@ body.simplified .resolved-row .resolved-detail { display: none; }
 </div>
 
 <script>
-// View mode toggle - Simplified (default) / Advanced
-var isAdvanced = false;
-
-// Status translation map for simplified mode
-var simplifiedStatus = {
-  'Dev In Progress': 'Engineering is working on a fix',
-  'Dev Backlog': 'Identified \u2014 fix is being planned',
-  'Dev Complete': 'Fix developed \u2014 testing in progress',
-  'Investigating': 'Our team is looking into this',
-  'In Review': 'Under review by the engineering team',
-  'Released': 'Fix has been deployed',
-  'Deployed': 'Fix has been deployed',
-  'Resolved': 'Resolved',
-  'Queue processing': 'Being processed \u2014 volume declining',
-  'Clearing': 'Nearly resolved',
-  'With publishers': 'With third-party partners \u2014 awaiting resolution',
-  'Ongoing \u2014 migration related': 'Related to ongoing system migration',
-  'Reported': 'Reported to the team',
-  'Support researching': 'Support team is researching'
-};
-
-// Priority to timeframe map for simplified mode
-var simplifiedPriority = {
-  'P0': 'Urgent \u2014 fix in progress now',
-  'P1': 'Fix expected within 24 hours',
-  'P2': 'Fix expected within 14 days',
-  'P3': 'Fix expected within 28 days'
-};
-
-function toggleViewMode(){
-  isAdvanced = !isAdvanced;
-  document.body.classList.toggle('simplified', !isAdvanced);
-
-  var label = document.getElementById('toggleLabel');
-  var knob = document.getElementById('toggleKnob');
-  var track = document.getElementById('toggleTrack');
-
-  if(isAdvanced){
-    label.textContent = 'Advanced';
-    knob.style.left = '20px';
-    track.style.background = 'var(--thryv-orange)';
-  } else {
-    label.textContent = 'Simplified';
-    knob.style.left = '2px';
-    track.style.background = 'rgba(255,255,255,0.2)';
-  }
-
-  applyViewMode();
-}
-
-function applyViewMode(){
-  // Translate status text
-  document.querySelectorAll('.status-text').forEach(function(el){
-    if(!el.getAttribute('data-original')) el.setAttribute('data-original', el.textContent);
-    if(!isAdvanced){
-      var orig = el.getAttribute('data-original');
-      el.textContent = simplifiedStatus[orig] || orig;
-    } else {
-      el.textContent = el.getAttribute('data-original');
-    }
-  });
-
-  // Translate priority badges
-  document.querySelectorAll('.pri-badge').forEach(function(el){
-    if(!el.getAttribute('data-original')) el.setAttribute('data-original', el.textContent);
-    if(!isAdvanced){
-      var orig = el.getAttribute('data-original').trim();
-      var code = orig.split(' ')[0]; // "P3" from "P3"
-      el.textContent = simplifiedPriority[code] || orig;
-    } else {
-      el.textContent = el.getAttribute('data-original');
-    }
-  });
-
-  // Translate "open tickets" to "reported cases" in status cards
-  document.querySelectorAll('.status-card').forEach(function(card){
-    card.querySelectorAll('span').forEach(function(span){
-      if(!span.getAttribute('data-original-text') && span.textContent.indexOf('open tickets') !== -1){
-        span.setAttribute('data-original-text', span.textContent);
-      }
-      if(span.getAttribute('data-original-text')){
-        if(!isAdvanced){
-          span.textContent = span.getAttribute('data-original-text').replace('open tickets', 'reported cases');
-        } else {
-          span.textContent = span.getAttribute('data-original-text');
-        }
-      }
-    });
-  });
-
-  // Translate table headers
-  var headerMap = {
-    'Issue': 'Issue',
-    'Product': 'Product Area',
-    'Severity': 'Impact Level',
-    'Priority': 'Expected Resolution',
-    'Tickets': 'Reports',
-    'Status / ETA': 'Current Status',
-    'Region': 'Regions Affected',
-    'Date Reported': 'First Reported'
-  };
-  document.querySelectorAll('.issue-table th').forEach(function(th){
-    var sortArrow = th.querySelector('.sort-arrow');
-    if(!th.getAttribute('data-original-header')){
-      var text = th.textContent.trim();
-      if(sortArrow) text = text.replace(sortArrow.textContent, '').trim();
-      th.setAttribute('data-original-header', text);
-    }
-    var orig = th.getAttribute('data-original-header');
-    if(!isAdvanced && headerMap[orig]){
-      if(sortArrow){
-        th.innerHTML = headerMap[orig] + ' ' + sortArrow.outerHTML;
-      } else {
-        th.textContent = headerMap[orig];
-      }
-    } else if(isAdvanced){
-      if(sortArrow){
-        th.innerHTML = orig + ' ' + sortArrow.outerHTML;
-      } else {
-        th.textContent = orig;
-      }
-    }
-  });
-
-  // Translate alert banner
-  var alertSpan = document.querySelector('.alert-banner span');
-  if(alertSpan){
-    if(!alertSpan.getAttribute('data-original-alert')) alertSpan.setAttribute('data-original-alert', alertSpan.innerHTML);
-    if(!isAdvanced){
-      alertSpan.innerHTML = '<strong>Current status:</strong> Our engineering team is actively working on fixes for several known issues across Marketing Center, Business Center, and Online Listings. Most issue volumes are declining. See details below.';
-    } else {
-      alertSpan.innerHTML = alertSpan.getAttribute('data-original-alert');
-    }
-  }
-
-  // Re-render incident comms
-  var rows = document.querySelectorAll('.issue-table tbody tr[data-product]');
-  var activeFilter = document.querySelector('#issueFilters .filter-btn.active');
-  var filter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
-  var query = document.getElementById('issueSearch').value.toLowerCase().trim();
-  updateIncidentComms(rows, filter, query, lookupMatches.length > 0 ? lookupMatches.map(function(m){ return m[0].toLowerCase(); }) : []);
-}
-
-// Initialize simplified mode on load
-document.body.classList.add('simplified');
-
 // Column sorting
 var sortState = {};
 var sevOrder = {'High':0,'Medium':1,'Low':2};
@@ -1369,46 +1202,15 @@ function checkTicketLookup(query){
   matches.forEach(function(match){
     var isResolved = match[3] === 'Resolved';
     var icon = isResolved ? '\u2705' : '\u26A0\uFE0F';
-
-    if(!isAdvanced){
-      // Simplified: plain English status, no Jira number
-      var simpleStatus = isResolved ? 'Resolved' : (simplifiedStatus[match[3]] || 'Being investigated');
-      lines.push(icon + ' ' + match[0] + ' \u2014 ' + simpleStatus);
-    } else {
-      // Advanced: full details with Jira
-      var statusLabel = isResolved ? 'Resolved' : 'Active';
-      var jiraStr = match[2] ? ' \u2014 ' + match[2] : '';
-      lines.push(icon + ' ' + match[0] + jiraStr + ' (' + statusLabel + ')');
-    }
+    var statusLabel = isResolved ? 'Resolved' : 'Active';
+    var jiraStr = match[2] ? ' \u2014 ' + match[2] : '';
+    lines.push(icon + ' ' + match[0] + jiraStr + ' (' + statusLabel + ')');
   });
 
-  if(!isAdvanced){
-    titleEl.textContent = (matches.length === 1 ? 'Known issue found:' : matches.length + ' known issues found:');
-  } else {
-    titleEl.textContent = (matches.length === 1 ? 'This ticket is linked to: ' : 'This ticket is linked to ' + matches.length + ' known issues:');
-  }
+  titleEl.textContent = (matches.length === 1 ? 'This ticket is linked to: ' : 'This ticket is linked to ' + matches.length + ' known issues:');
   productEl.innerHTML = lines.join('<br>');
   var anyActive = matches.some(function(m){ return m[3] !== 'Resolved'; });
-
-  if(!isAdvanced){
-    // Simplified: show client-facing message from incident data if available
-    var matchQueue = null;
-    if(matches[0][1] === 'Marketing Center') matchQueue = 'mc';
-    else if(matches[0][1] === 'Business Center') matchQueue = 'bc';
-    else if(matches[0][1] === 'Online Listings') matchQueue = 'olm';
-    else if(matches[0][1] === 'My Account') matchQueue = 'myaccount';
-    else if(matches[0][1] === 'ThryvPay') matchQueue = 'thryvpay';
-    else if(matches[0][1] === 'Keap') matchQueue = 'keap';
-
-    if(matchQueue && incidentData[matchQueue] && incidentData[matchQueue].clientMsg){
-      jiraEl.innerHTML = '<div style="margin-top:8px;padding:10px 14px;background:var(--thryv-mist);border-radius:8px;border-left:3px solid var(--thryv-orange);font-style:italic;font-size:12px;color:var(--thryv-night);">' + incidentData[matchQueue].clientMsg + '</div>';
-    } else {
-      jiraEl.innerHTML = anyActive ? '<span style="color:#E24B4A;font-weight:600;">This is a known issue our team is working on</span>' : '<span style="color:#1D9E75;font-weight:600;">\u2714 This issue has been resolved</span>';
-    }
-  } else {
-    jiraEl.innerHTML = anyActive ? '<span style="color:#E24B4A;font-weight:600;">\u26AA Active \u2014 see Known Issues below</span>' : '<span style="color:#1D9E75;font-weight:600;">\u2714 All Resolved</span>';
-  }
-
+  jiraEl.innerHTML = anyActive ? '<span style="color:#E24B4A;font-weight:600;">\u26AA Active \u2014 see Known Issues below</span>' : '<span style="color:#1D9E75;font-weight:600;">\u2714 All Resolved</span>';
   result.style.borderColor = anyActive ? 'var(--thryv-sapphire)' : '#1D9E75';
   result.style.borderLeftColor = anyActive ? 'var(--thryv-sapphire)' : '#1D9E75';
   result.classList.add('visible');
@@ -1546,16 +1348,11 @@ function buildIncidentCard(queue, d){
   var html = '<div class="talking-points" style="border-left:4px solid ' + borderColor + ';">';
   html += '<div class="talking-points-header">';
   html += '<div class="talking-points-icon" style="font-size:14px;background:' + borderColor + ';">' + (d.goodStanding ? '\u2705' : '\u26A0\uFE0F') + '</div>';
-
-  if(!isAdvanced){
-    html += '<div class="talking-points-title">' + queueLabels[queue] + ': ' + d.title + '</div>';
-  } else {
-    html += '<div class="talking-points-title">Incident Communication \u2014 ' + queueLabels[queue] + ': ' + d.title + '</div>';
-  }
+  html += '<div class="talking-points-title">Incident Communication \u2014 ' + queueLabels[queue] + ': ' + d.title + '</div>';
   html += '</div>';
 
-  if(!d.goodStanding && isAdvanced){
-    html += '<div class="tp-meta-grid" style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">';
+  if(!d.goodStanding){
+    html += '<div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">';
     html += '<span style="font-weight:600;">Priority:</span><span>' + d.priority + '</span>';
     html += '<span style="font-weight:600;">Severity:</span><span>' + d.severity + '</span>';
     html += '<span style="font-weight:600;">Status:</span><span style="font-weight:600;">' + d.status + '</span>';
@@ -1571,10 +1368,7 @@ function buildIncidentCard(queue, d){
     html += '<div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">' + d.clientMsg + '</div></div>';
   }
 
-  if(isAdvanced){
-    html += '<div class="tp-section tp-internal"><div class="tp-label">Internal Notes</div><div class="tp-text">' + d.internal + '</div></div>';
-  }
-
+  html += '<div class="tp-section"><div class="tp-label">Internal Notes</div><div class="tp-text">' + d.internal + '</div></div>';
   html += '</div>';
   return html;
 }
