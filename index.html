@@ -143,7 +143,7 @@ body {
 .sev-medium { background: #E6F1FB; color: #0C447C; border: 1.5px solid #A0C4E8; }
 .sev-low { background: #EAF3DE; color: #27500A; border: 1.5px solid #B8D9A0; }
 
-.pri-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; white-space: normal; }
+.pri-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; white-space: nowrap; }
 .pri-p0 { background: #FCEBEB; color: #791F1F; border: 1.5px solid #E8A0A0; }
 .pri-p1 { background: #FAEEDA; color: #633806; border: 1.5px solid #E8CFA0; }
 .pri-p2 { background: #E6F1FB; color: #0C447C; border: 1.5px solid #A0C4E8; }
@@ -598,7 +598,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">16 open</span><span class="simp-only">16 reports</span></span><br></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Dev In Progress</span><span class="simp-only">Engineering is working on a fix</span></div><div class="eta-text">ETA: TBD</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -612,7 +612,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">23 open</span><span class="simp-only">23 reports</span></span><br></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Dev In Progress</span><span class="simp-only">Engineering is working on a fix</span></div><div class="eta-text">ETA: TBD</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -626,7 +626,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">19 open</span><span class="simp-only">19 reports</span></span><br><span style="font-size:11px;color:var(--sev-critical)">V7 + V8</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Dev In Progress</span><span class="simp-only">Engineering is working on a fix</span></div><div class="eta-text">ETA: TBD</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -640,7 +640,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">Within 14 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">~14 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count">NEW</span><br><span style="font-size:11px;color:var(--sev-critical)">high volume</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Dev In Progress</span><span class="simp-only">Engineering is working on a fix</span></div><div class="eta-text">ETA: TBD</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
@@ -655,7 +655,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">56 open</span><span class="simp-only">56 reports</span></span><br></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">With publishers</span><span class="simp-only">With third-party partners</span></div><div class="eta-text">See publisher panel</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -671,7 +671,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">357 open</span><span class="simp-only">357 reports</span></span><br></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Queue processing</span><span class="simp-only">Being processed — volume declining</span></div><div class="eta-text">Ongoing</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -685,7 +685,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-high">High</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p1"><span class="adv-only">P1</span><span class="simp-only">Within 24 hours</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p1"><span class="adv-only">P1</span><span class="simp-only">~24 hours</span></span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">18 open</span><span class="simp-only">18 reports</span></span><br><span style="font-size:11px;color:var(--sev-critical)">fix deployed</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Dev In Progress</span><span class="simp-only">Engineering is working on a fix</span></div><div class="eta-text">Resolution: Done</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
@@ -698,7 +698,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">16 open</span><span class="simp-only">16 reports</span></span><br></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Ongoing — migration related</span><span class="simp-only">Related to ongoing migration</span></div><div class="eta-text">Clears as migrations complete</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -712,7 +712,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">3 open</span><span class="simp-only">3 reports</span></span><br><span style="font-size:11px;color:var(--thryv-steel)">account-level</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">With platform dev</span><span class="simp-only">With development team</span></div><div class="eta-text">Per-ticket basis</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
@@ -727,7 +727,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">115 open</span><span class="simp-only">115 reports</span></span><br><span style="font-size:11px;color:var(--sev-critical)">system-generated</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Investigating</span><span class="simp-only">Our team is looking into this</span></div><div class="eta-text">ETA: TBD</div></td>
         <td data-label="Region"><span class="region-tag">ALL</span></td>
@@ -740,7 +740,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">624 open</span><span class="simp-only">624 reports</span></span><br><span style="font-size:11px;color:var(--sev-critical)">system-generated</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Investigating</span><span class="simp-only">Our team is looking into this</span></div><div class="eta-text">ETA: TBD</div></td>
         <td data-label="Region"><span class="region-tag">ALL</span></td>
@@ -753,7 +753,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">8 open</span><span class="simp-only">8 reports</span></span><br><span style="font-size:11px;color:var(--thryv-steel)">user-reported</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Per-ticket basis</span><span class="simp-only">Handled individually</span></div><div class="eta-text">Ongoing</div></td>
         <td><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
@@ -769,7 +769,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Severity"><span class="sev-badge sev-high">High</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p1"><span class="adv-only">P1</span><span class="simp-only">Within 24 hours</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p1"><span class="adv-only">P1</span><span class="simp-only">~24 hours</span></span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3571685</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Monitoring</span><span class="simp-only">Being monitored</span></div><div class="eta-text">ETA: Apr 25, 2026</div></td>
                 <td data-label="Region"><span class="region-tag">ALL</span></td>
@@ -782,7 +782,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Severity"><span class="sev-badge sev-high">High</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p1"><span class="adv-only">P1</span><span class="simp-only">Within 24 hours</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p1"><span class="adv-only">P1</span><span class="simp-only">~24 hours</span></span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3560909</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Support researching</span><span class="simp-only">Being researched</span></div><div class="eta-text">ETA: Overdue (was Mar 11)</div></td>
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
@@ -795,7 +795,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">Within 14 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">~14 days</span></span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565621</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Investigating</span><span class="simp-only">Our team is looking into this</span></div><div class="eta-text">ETA: TBD</div></td>
                 <td data-label="Region"><span class="region-tag">ALL</span></td>
@@ -808,7 +808,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">Within 14 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">~14 days</span></span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565069</span></td>
         <td data-label="Status / ETA"><div class="status-text">In development</div><div class="eta-text">ETA: Ongoing</div></td>
                 <td data-label="Region"><span class="region-tag">ALL</span></td>
@@ -822,7 +822,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">Within 14 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">~14 days</span></span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3570805</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Researching</span><span class="simp-only">Being researched</span></div><div class="eta-text">ETA: TBD</div></td>
                 <td data-label="Region"><span class="region-tag">ALL</span></td>
@@ -836,7 +836,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">Within 14 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">~14 days</span></span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3551902</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Researching</span><span class="simp-only">Being researched</span></div><div class="eta-text">ETA: May 1, 2026</div></td>
                 <td data-label="Region"><span class="region-tag">ALL</span></td>
@@ -850,7 +850,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3572908</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Researching</span><span class="simp-only">Being researched</span></div><div class="eta-text">ETA: TBD</div></td>
                 <td data-label="Region"><span class="region-tag">ALL</span></td>
@@ -863,7 +863,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3573500</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Investigating</span><span class="simp-only">Our team is looking into this</span></div><div class="eta-text">ETA: TBD</div></td>
         <td data-label="Region"><span class="region-tag">ALL</span></td>
@@ -876,7 +876,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Reported</span><span class="simp-only">Reported to the team</span></div><div class="eta-text">ETA: TBD</div></td>
         <td data-label="Region"><span class="region-tag">ALL</span></td>
@@ -889,7 +889,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Reported</span><span class="simp-only">Reported to the team</span></div><div class="eta-text">ETA: TBD</div></td>
         <td data-label="Region"><span class="region-tag">ALL</span></td>
@@ -904,7 +904,7 @@ body.simplified .simp-only { display: inline !important; }
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">Within 28 days</span></span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></span></td>
         <td data-label="Tickets"><span class="ticket-count">143 total</span><br><span style="font-size:11px;color:var(--sev-low)">mostly Tray.io</span></td>
         <td data-label="Status / ETA"><div class="status-text"><span class="adv-only">Resolved</span><span class="simp-only">Resolved</span></div><div class="eta-text">Queue cleared</div></td>
                 <td data-label="Region"><span class="region-tag">ALL</span></td>
