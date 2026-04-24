@@ -114,7 +114,7 @@ body {
 .filter-btn.active { background: var(--thryv-midnight); color: white; border-color: var(--thryv-midnight); }
 
 /* ── Issue table ── */
-.issue-table { width: 100%; border: 2px solid var(--thryv-cloud); table-layout: fixed; border-collapse: separate; border-spacing: 0; border: 1px solid var(--thryv-cloud); border-radius: var(--radius-lg); overflow: hidden; font-size: 13px; background: var(--thryv-white); }
+.issue-table { width: 100%; table-layout: auto; border-collapse: separate; border-spacing: 0; border: 1px solid var(--thryv-cloud); border-radius: var(--radius-lg); overflow: hidden; font-size: 13px; background: var(--thryv-white); }
 .issue-table thead { background: var(--thryv-mist); }
 .issue-table th { text-align: left; padding: 12px 16px; font-weight: 600; font-size: 11px; color: var(--thryv-midnight); text-transform: uppercase; letter-spacing: 0.5px; }
 .issue-table td { padding: 14px 16px; border-top: 1px solid var(--thryv-cloud); vertical-align: top; }
@@ -501,28 +501,28 @@ body.simplified .simp-only { display: inline !important; }
       <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">99.99% uptime · 5 active issues</div>
     </div>
 
-    <div class="status-card" style="border-top:3px solid #4CAF50;padding-bottom:10px;">
+    <div class="status-card" style="border-top:3px solid #0E7C6B;padding-bottom:10px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;">
-        <div class="status-card-label" style="margin-bottom:0;">Keap</div>
+        <div class="status-card-label" style="margin-bottom:0;line-height:1.3;">Online<br>Listings</div>
         <span style="font-size:10px;font-weight:600;color:#633806;background:#FAEEDA;padding:3px 8px;border-radius:10px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;"><span style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0;display:inline-block;"></span>Monitoring</span>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#4CAF50;">10</span>
-          <span style="font-size:12px;color:var(--thryv-steel);"> known issues</span>
+          <span style="font-size:22px;font-weight:700;color:#0E7C6B;">27</span>
+          <span style="font-size:12px;color:var(--thryv-steel);"><span class="adv-only"> open tickets</span><span class="simp-only"> reported cases</span></span>
         </div>
-        <span style="font-size:11px;font-weight:600;color:var(--sev-high);">→ steady</span>
+        <span style="font-size:11px;font-weight:600;color:var(--sev-critical);">↑ from 15</span>
       </div>
       <svg width="100%" height="36" viewBox="0 0 200 36" preserveAspectRatio="none" style="margin-top:6px;">
-        <defs><linearGradient id="keapGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4CAF50" stop-opacity="0.2"/><stop offset="100%" stop-color="#4CAF50" stop-opacity="0"/></linearGradient></defs>
-        <path d="M0,20 L50,18 L100,16 L150,18 L200,16" fill="none" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M0,20 L50,18 L100,16 L150,18 L200,16 L200,36 L0,36Z" fill="url(#keapGrad)"/>
-        <circle cx="200" cy="16" r="3.5" fill="#4CAF50"/>
+        <defs><linearGradient id="olmGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E7C6B" stop-opacity="0.2"/><stop offset="100%" stop-color="#0E7C6B" stop-opacity="0"/></linearGradient></defs>
+        <path d="M0,28 L50,24 L100,20 L150,16 L200,12" fill="none" stroke="#0E7C6B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M0,28 L50,24 L100,20 L150,16 L200,12 L200,36 L0,36Z" fill="url(#olmGrad)"/>
+        <circle cx="200" cy="12" r="3.5" fill="#0E7C6B"/>
       </svg>
       <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--thryv-steel);margin-top:2px;">
         <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Now</span>
       </div>
-      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">100.0% uptime · tracked via Keap portal</div>
+      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Publisher-routed · 1 active issue</div>
     </div>
 
     <div class="status-card" style="border-top:3px solid #3C3489;padding-bottom:10px;">
