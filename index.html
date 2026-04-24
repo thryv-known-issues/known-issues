@@ -1167,20 +1167,20 @@ body:not(.simplified) .simp-view { display: none !important; }
     <div class="section-title">Known Issues <span class="count-badge">29</span></div>
     <div class="search-box">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="var(--thryv-steel)" stroke-width="1.5"/><path d="M10.5 10.5L14.5 14.5" stroke="var(--thryv-steel)" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <input type="text" id="issueSearch" placeholder="Search by ticket #, Thryv ID, URL, or keyword..." />
+      <input type="text" id="simpIssueSearch" placeholder="Search by ticket #, Thryv ID, URL, or keyword..." />
     </div>
   </div>
 
   <!-- Ticket Lookup Result -->
-  <div class="lookup-result" id="lookupResult">
-    <div class="lookup-result-title" id="lookupTitle"></div>
+  <div class="lookup-result" id="simpLookupResult">
+    <div class="lookup-result-title" id="simpLookupTitle"></div>
     <div class="lookup-result-meta">
-      <span id="lookupProduct"></span>
-      <span id="lookupJira"></span>
+      <span id="simpLookupProduct"></span>
+      <span id="simpLookupJira"></span>
     </div>
   </div>
 
-  <div class="filters" id="issueFilters">
+  <div class="filters" id="simpIssueFilters">
     <button class="filter-btn active" data-filter="all">All Products</button>
     <button class="filter-btn" data-filter="bc">Business Center</button>
     <button class="filter-btn" data-filter="mc">Marketing Center</button>
@@ -1202,13 +1202,13 @@ body:not(.simplified) .simp-view { display: none !important; }
     <thead>
       <tr>
         <th style="width:20%">Issue</th>
-        <th style="width:9%;cursor:pointer;" onclick="sortTable('product')" title="Sort by product area">Product Area <span class="sort-arrow" id="sort-product">&#8597;</span></th>
-        <th style="width:6%;cursor:pointer;" onclick="sortTable('severity')" title="Sort by impact level">Impact <span class="sort-arrow" id="sort-severity">&#8597;</span></th>
-        <th style="width:15%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by expected resolution">Expected Resolution <span class="sort-arrow" id="sort-priority">&#8597;</span></th>
+        <th style="width:9%;cursor:pointer;" onclick="sortTable('product')" title="Sort by product area">Product Area <span class="sort-arrow" id="simp-sort-product">&#8597;</span></th>
+        <th style="width:6%;cursor:pointer;" onclick="sortTable('severity')" title="Sort by impact level">Impact <span class="sort-arrow" id="simp-sort-severity">&#8597;</span></th>
+        <th style="width:15%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by expected resolution">Expected Resolution <span class="sort-arrow" id="simp-sort-priority">&#8597;</span></th>
         <th style="width:7%">Reports</th>
         <th style="width:18%">Current Status</th>
         <th style="width:10%">Regions</th>
-        <th style="width:9%;cursor:pointer;" onclick="sortTable('updated')" title="Sort by date">First Reported <span class="sort-arrow" id="sort-updated">&#8597;</span></th>
+        <th style="width:9%;cursor:pointer;" onclick="sortTable('updated')" title="Sort by date">First Reported <span class="sort-arrow" id="simp-sort-updated">&#8597;</span></th>
       </tr>
     </thead>
     <tbody>
@@ -1934,6 +1934,103 @@ function toggleView(){
   document.body.classList.toggle('simplified');
 }
 document.body.classList.add('simplified');
+
+// -- Simplified view search + filters (mirrors advanced logic) --
+var simpSearchInput = document.getElementById('simpIssueSearch');
+var simpSearchTimeout;
+var simpLookupMatches = [];
+
+if(simpSearchInput){
+  simpSearchInput.addEventListener('input', function(){
+    clearTimeout(simpSearchTimeout);
+    simpSearchTimeout = setTimeout(function(){
+      var query = simpSearchInput.value.trim();
+      simpLookupMatches = simpCheckTicketLookup(query);
+      simpApplyFilters();
+    }, 300);
+  });
+}
+
+function simpCheckTicketLookup(query){
+  var result = document.getElementById('simpLookupResult');
+  var titleEl = document.getElementById('simpLookupTitle');
+  var productEl = document.getElementById('simpLookupProduct');
+  var jiraEl = document.getElementById('simpLookupJira');
+
+  if(!query){ result.classList.remove('visible'); return []; }
+
+  var raw = ticketLookup[query] || ticketLookup[query.toLowerCase()] || ticketLookup[query.toUpperCase()];
+  if(!raw && query.startsWith('#')){
+    var stripped = query.substring(1);
+    raw = ticketLookup[stripped] || ticketLookup[stripped.toLowerCase()];
+  }
+  if(!raw){ result.classList.remove('visible'); return []; }
+
+  var matches = (Array.isArray(raw[0])) ? raw : [raw];
+  var lines = [];
+  matches.forEach(function(match){
+    var isResolved = match[3] === 'Resolved';
+    var icon = isResolved ? '\u2705' : '\u26A0\uFE0F';
+    lines.push(icon + ' ' + match[0] + ' (' + (isResolved ? 'Resolved' : 'Active') + ')');
+  });
+
+  titleEl.textContent = (matches.length === 1 ? 'Known issue found:' : matches.length + ' known issues found:');
+  productEl.innerHTML = lines.join('<br>');
+  var anyActive = matches.some(function(m){ return m[3] !== 'Resolved'; });
+  jiraEl.innerHTML = anyActive ? '<span style="color:#E24B4A;font-weight:600;">This is a known issue our team is working on</span>' : '<span style="color:#1D9E75;font-weight:600;">\u2714 This issue has been resolved</span>';
+  result.style.borderColor = anyActive ? 'var(--thryv-sapphire)' : '#1D9E75';
+  result.style.borderLeftColor = anyActive ? 'var(--thryv-sapphire)' : '#1D9E75';
+  result.classList.add('visible');
+  return matches;
+}
+
+function simpApplyFilters(){
+  var activeFilter = document.querySelector('#simpIssueFilters .filter-btn.active');
+  var filter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+  var query = simpSearchInput.value.toLowerCase().trim();
+  var rows = document.querySelectorAll('.simp-view .issue-table tbody tr[data-product]');
+  var visible = 0;
+
+  var matchTitles = [];
+  if(simpLookupMatches.length > 0){
+    simpLookupMatches.forEach(function(m){ matchTitles.push(m[0].toLowerCase()); });
+  }
+
+  rows.forEach(function(row){
+    var matchesProduct = (filter === 'all' || row.getAttribute('data-product') === filter);
+    var matchesSearch = true;
+    if(query){
+      if(matchTitles.length > 0){
+        var rowTitle = (row.querySelector('.issue-title') || {}).textContent || '';
+        matchesSearch = matchTitles.some(function(t){ return rowTitle.toLowerCase().indexOf(t) !== -1; });
+      } else {
+        var text = row.textContent.toLowerCase();
+        var terms = query.split(/\s+/);
+        matchesSearch = terms.every(function(term){ return text.indexOf(term) !== -1; });
+      }
+    }
+    if(matchesProduct && matchesSearch){
+      row.style.display = '';
+      visible++;
+    } else {
+      row.style.display = 'none';
+    }
+  });
+
+  var badge = document.querySelector('.simp-view .count-badge');
+  if(badge) badge.textContent = visible;
+}
+
+// Simplified filter buttons
+document.querySelectorAll('#simpIssueFilters .filter-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('#simpIssueFilters .filter-btn').forEach(function(x){x.classList.remove('active')});
+    btn.classList.add('active');
+    simpSearchInput.value = '';
+    document.getElementById('simpLookupResult').classList.remove('visible');
+    simpApplyFilters();
+  });
+});
 
 </script>
 </body>
