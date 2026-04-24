@@ -1234,7 +1234,7 @@ function applyFilters(){
   var activeFilter = document.querySelector('#issueFilters .filter-btn.active');
   var filter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
   var query = searchInput.value.toLowerCase().trim();
-  var rows = document.querySelectorAll('.adv-view .issue-table tbody tr[data-product]');
+  var rows = document.querySelectorAll('.adv-view .issue-table:first-of-type tbody tr[data-product]');
   var visible = 0;
 
   var matchTitles = [];
@@ -1276,33 +1276,38 @@ function toggleView(){
 document.body.classList.add('simplified');
 
 // -- Simplified view search + filters --
-// Simplified search setup
-var simpSearch = document.getElementById('simpIssueSearch');
-var simpTimeout;
-var simpMatches = [];
-
-if(simpSearch){
-  simpSearch.addEventListener('input', function(){
-    clearTimeout(simpTimeout);
-    var val = this.value.trim();
-    simpTimeout = setTimeout(function(){
-      simpMatches = simpCheckTicketLookup(val);
-      simpRunFilter(simpSearch, simpMatches);
-    }, 300);
-  });
-}
-
-document.querySelectorAll('#simpIssueFilters .filter-btn').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    document.querySelectorAll('#simpIssueFilters .filter-btn').forEach(function(x){x.classList.remove('active')});
-    btn.classList.add('active');
-    if(simpSearch) simpSearch.value = '';
-    var lr = document.getElementById('simpLookupResult');
-    if(lr) lr.classList.remove('visible');
-    simpMatches = [];
-    simpRunFilter(simpSearch, simpMatches);
-  });
-});
+// Use MutationObserver-like approach: bind to the actual DOM element after confirming it exists
+setTimeout(function(){
+  var simpEl = document.getElementById('simpIssueSearch');
+  if(!simpEl){
+    console.log('simpIssueSearch not found');
+    return;
+  }
+  
+  var st, sm = [];
+  
+  simpEl.oninput = function(){
+    clearTimeout(st);
+    var v = this.value.trim();
+    st = setTimeout(function(){
+      sm = simpCheckTicketLookup(v);
+      simpRunFilter(simpEl, sm);
+    }, 200);
+  };
+  
+  var filterBtns = document.querySelectorAll('#simpIssueFilters .filter-btn');
+  for(var i = 0; i < filterBtns.length; i++){
+    filterBtns[i].onclick = function(){
+      for(var j = 0; j < filterBtns.length; j++) filterBtns[j].classList.remove('active');
+      this.classList.add('active');
+      simpEl.value = '';
+      var lr = document.getElementById('simpLookupResult');
+      if(lr) lr.classList.remove('visible');
+      sm = [];
+      simpRunFilter(simpEl, sm);
+    };
+  }
+}, 100);
 
 function simpCheckTicketLookup(query){
   var result = document.getElementById('simpLookupResult');
@@ -1341,7 +1346,7 @@ function simpRunFilter(searchEl, matchArr){
   var activeFilter = document.querySelector('#simpIssueFilters .filter-btn.active');
   var filter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
   var query = searchEl.value.toLowerCase().trim();
-  var rows = document.querySelectorAll('.simp-view .issue-table tbody tr[data-product]');
+  var rows = document.querySelectorAll('.simp-view .issue-table:first-of-type tbody tr[data-product]');
   var visible = 0;
 
   var matchTitles = [];
