@@ -1087,71 +1087,44 @@ var priOrder = {'P0':0,'P1':1,'P2':2,'P3':3};
 var monthMap = {'Jan':1,'Feb':2,'Mar':3,'Apr':4,'May':5,'Jun':6,'Jul':7,'Aug':8,'Sep':9,'Oct':10,'Nov':11,'Dec':12};
 
 function sortTable(col){
-  // Sort both tables simultaneously
-  var selectors = ['.adv-view .active-issues tbody', '.active-issues tbody'];
-  selectors.forEach(function(sel){
-    var tbody = document.querySelector(sel);
-    if(!tbody) return;
-    var rows = Array.from(tbody.querySelectorAll('tr[data-product]'));
-    var dir = sortState[col] === 'asc' ? 'desc' : 'asc';
-
-    rows.sort(function(a, b){
-      var valA, valB;
-      if(col === 'product'){
-        valA = (a.querySelector('.product-pill') || {}).textContent || '';
-        valB = (b.querySelector('.product-pill') || {}).textContent || '';
-        return dir === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
-      }
-      if(col === 'severity'){
-        valA = sevOrder[(a.querySelector('.sev-badge') || {}).textContent || 'Low'] || 2;
-        valB = sevOrder[(b.querySelector('.sev-badge') || {}).textContent || 'Low'] || 2;
-      } else if(col === 'priority'){
-        var pA = (a.querySelector('.pri-badge') || {}).textContent || '';
-        var pB = (b.querySelector('.pri-badge') || {}).textContent || '';
-        valA = priOrder[pA.substring(0,2)] !== undefined ? priOrder[pA.substring(0,2)] : 3;
-        valB = priOrder[pB.substring(0,2)] !== undefined ? priOrder[pB.substring(0,2)] : 3;
-      } else if(col === 'updated'){
-        valA = parseDate((a.querySelector('.date-text') || {}).textContent || '');
-        valB = parseDate((b.querySelector('.date-text') || {}).textContent || '');
-      } else {
-        valA = a.textContent; valB = b.textContent;
-      }
-      if(valA < valB) return dir === 'asc' ? -1 : 1;
-      if(valA > valB) return dir === 'asc' ? 1 : -1;
-      return 0;
-    });
-
-    rows.forEach(function(r){ tbody.appendChild(r); });
-  });
-
+  var tbody = document.querySelector('.active-issues tbody');
+  if(!tbody) return;
+  var rows = Array.from(tbody.querySelectorAll('tr[data-product]'));
+  var dir = sortState[col] === 'asc' ? 'desc' : 'asc';
   sortState = {};
-  sortState[col] = (sortState[col] === 'asc') ? 'desc' : 'asc';
-  sortState[col] = sortState[col] || 'asc';
+  sortState[col] = dir;
 
-  // Reset all arrows
-  document.querySelectorAll('.sort-arrow').forEach(function(a){ a.textContent = '\u2195'; a.className = 'sort-arrow'; });
-  // Update arrows in both views
-  var dir = sortState[col];
-  ['sort-', 'simp-sort-'].forEach(function(prefix){
-    var arrow = document.getElementById(prefix + col);
-    if(arrow){ arrow.textContent = dir === 'asc' ? '\u2191' : '\u2193'; arrow.className = 'sort-arrow ' + dir; }
-  });
-}
-      return dir === 'asc' ? valA - valB : valB - valA;
+  rows.sort(function(a, b){
+    var valA, valB;
+    if(col === 'product'){
+      valA = (a.querySelector('.product-pill') || {}).textContent || '';
+      valB = (b.querySelector('.product-pill') || {}).textContent || '';
+      return dir === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
     }
-    if(col === 'priority'){
-      valA = priOrder[(a.querySelector('.pri-badge') || {}).textContent || 'P3'] || 3;
-      valB = priOrder[(b.querySelector('.pri-badge') || {}).textContent || 'P3'] || 3;
-      return dir === 'asc' ? valA - valB : valB - valA;
+    if(col === 'severity'){
+      valA = sevOrder[(a.querySelector('.sev-badge') || {}).textContent || 'Low'] || 2;
+      valB = sevOrder[(b.querySelector('.sev-badge') || {}).textContent || 'Low'] || 2;
+    } else if(col === 'priority'){
+      var pA = (a.querySelector('.pri-badge') || {}).textContent || '';
+      var pB = (b.querySelector('.pri-badge') || {}).textContent || '';
+      valA = priOrder[pA.substring(0,2)] !== undefined ? priOrder[pA.substring(0,2)] : 3;
+      valB = priOrder[pB.substring(0,2)] !== undefined ? priOrder[pB.substring(0,2)] : 3;
+    } else if(col === 'updated'){
+      valA = parseDate((a.querySelector('.date-text') || {}).textContent || '');
+      valB = parseDate((b.querySelector('.date-text') || {}).textContent || '');
+    } else {
+      valA = a.textContent; valB = b.textContent;
     }
-    if(col === 'updated'){
-      valA = parseDate(a.querySelectorAll('td'));
-      valB = parseDate(b.querySelectorAll('td'));
-      return dir === 'asc' ? valA - valB : valB - valA;
-    }
+    if(valA < valB) return dir === 'asc' ? -1 : 1;
+    if(valA > valB) return dir === 'asc' ? 1 : -1;
     return 0;
   });
+
   rows.forEach(function(r){ tbody.appendChild(r); });
+
+  document.querySelectorAll('.sort-arrow').forEach(function(a){ a.textContent = '\u2195'; a.className = 'sort-arrow'; });
+  var arrow = document.getElementById('sort-' + col);
+  if(arrow){ arrow.textContent = dir === 'asc' ? '\u2191' : '\u2193'; arrow.className = 'sort-arrow ' + dir; }
 }
 
 function parseDate(tds){
