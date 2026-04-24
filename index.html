@@ -120,7 +120,7 @@ body {
 .issue-table td { padding: 14px 16px; border-top: 1px solid var(--thryv-cloud); vertical-align: top; }
 .issue-table tbody tr { transition: background 0.15s; }
 .issue-table tbody tr:hover td { background: var(--thryv-mist); }
-.issue-table td:not(:first-child) { white-space: nowrap; }
+.issue-table td:not(:first-child) { white-space: normal; }
 .issue-table th { white-space: nowrap; }
 .sort-arrow { font-size:12px; color:var(--thryv-steel); margin-left:2px; }
 .sort-arrow.asc { color:var(--thryv-sapphire); }
@@ -402,6 +402,11 @@ body:not(.simplified) .simp-view { display: none !important; }
 <div class="page-wrapper">
   <div class="mockup-badge">&#10022; Mockup — proposed Compass page · Data through April 24, 2026</div>
 
+  <!-- Shared Publisher slide-down panel (works in both views) -->
+  <div class="pub-slidedown" id="pubSlidedown">
+    <div class="pub-slidedown-inner" id="pubSlidedownInner"></div>
+  </div>
+
 <!-- ═══ ADVANCED VIEW ═══ -->
 <div class="adv-view">
   <!-- Alert Banner -->
@@ -556,11 +561,6 @@ body:not(.simplified) .simp-view { display: none !important; }
       <span style="font-size:11px;background:#FCEBEB;color:#791F1F;padding:2px 8px;border-radius:8px;font-weight:600;">20 issues</span>
       <svg class="pub-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
-  </div>
-
-  <!-- Publisher slide-down panel -->
-  <div class="pub-slidedown" id="pubSlidedown">
-    <div class="pub-slidedown-inner" id="pubSlidedownInner"></div>
   </div>
 
   <table class="issue-table">
@@ -1192,11 +1192,6 @@ body:not(.simplified) .simp-view { display: none !important; }
       <span style="font-size:11px;background:#FCEBEB;color:#791F1F;padding:2px 8px;border-radius:8px;font-weight:600;">20 issues</span>
       <svg class="pub-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
-  </div>
-
-  <!-- Publisher slide-down panel -->
-  <div class="pub-slidedown" id="pubSlidedown">
-    <div class="pub-slidedown-inner" id="pubSlidedownInner"></div>
   </div>
 
   <!-- SIMPLIFIED TABLE — translated headers, plain-english statuses -->
