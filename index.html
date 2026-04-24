@@ -1209,14 +1209,14 @@ body:not(.simplified) .simp-view { display: none !important; }
   <table class="issue-table">
     <thead>
       <tr>
-        <th style="width:22%">Issue</th>
-        <th style="width:10%;cursor:pointer;" onclick="sortTable('product')" title="Sort by product">Product Area <span class="sort-arrow" id="simp-sort-product">&#8597;</span></th>
-        <th style="width:7%;cursor:pointer;" onclick="sortTable('severity')" title="Sort by severity">Impact <span class="sort-arrow" id="simp-sort-severity">&#8597;</span></th>
-        <th style="width:7%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by priority">Expected Resolution <span class="sort-arrow" id="simp-sort-priority">&#8597;</span></th>
-        <th style="width:8%">Reports</th>
-        <th style="width:17%">Current Status</th>
-        <th style="width:12%">Region</th>
-        <th style="width:11%;cursor:pointer;" onclick="sortTable('updated')" title="Sort by date">First Reported <span class="sort-arrow" id="simp-sort-updated">&#8597;</span></th>
+        <th style="width:18%">Issue</th>
+        <th style="width:9%;cursor:pointer;" onclick="sortTable('product')" title="Sort by product">Product Area <span class="sort-arrow" id="simp-sort-product">&#8597;</span></th>
+        <th style="width:6%;cursor:pointer;" onclick="sortTable('severity')" title="Sort by severity">Impact <span class="sort-arrow" id="simp-sort-severity">&#8597;</span></th>
+        <th style="width:11%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by priority">Expected Resolution <span class="sort-arrow" id="simp-sort-priority">&#8597;</span></th>
+        <th style="width:7%">Reports</th>
+        <th style="width:19%">Current Status</th>
+        <th style="width:10%">Regions</th>
+        <th style="width:10%;cursor:pointer;" onclick="sortTable('updated')" title="Sort by date">First Reported <span class="sort-arrow" id="simp-sort-updated">&#8597;</span></th>
       </tr>
     </thead>
     <tbody>
@@ -1907,21 +1907,34 @@ function toggleView(){
 }
 document.body.classList.add('simplified');
 
-// -- Simplified view search + filters (mirrors advanced logic) --
-var simpSearchInput = document.getElementById('simpIssueSearch');
-var simpSearchTimeout;
-var simpLookupMatches = [];
-
-if(simpSearchInput){
-  simpSearchInput.addEventListener('input', function(){
-    clearTimeout(simpSearchTimeout);
-    simpSearchTimeout = setTimeout(function(){
-      var query = simpSearchInput.value.trim();
-      simpLookupMatches = simpCheckTicketLookup(query);
-      simpApplyFilters();
+// -- Simplified view search + filters --
+document.addEventListener('DOMContentLoaded', function(){
+  var simpSearch = document.getElementById('simpIssueSearch');
+  if(!simpSearch) return;
+  
+  var simpTimeout;
+  var simpMatches = [];
+  
+  simpSearch.addEventListener('input', function(){
+    clearTimeout(simpTimeout);
+    var val = this.value.trim();
+    simpTimeout = setTimeout(function(){
+      simpMatches = simpCheckTicketLookup(val);
+      simpRunFilter(simpSearch, simpMatches);
     }, 300);
   });
-}
+  
+  document.querySelectorAll('#simpIssueFilters .filter-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('#simpIssueFilters .filter-btn').forEach(function(x){x.classList.remove('active')});
+      btn.classList.add('active');
+      simpSearch.value = '';
+      document.getElementById('simpLookupResult').classList.remove('visible');
+      simpMatches = [];
+      simpRunFilter(simpSearch, simpMatches);
+    });
+  });
+});
 
 function simpCheckTicketLookup(query){
   var result = document.getElementById('simpLookupResult');
@@ -1956,16 +1969,16 @@ function simpCheckTicketLookup(query){
   return matches;
 }
 
-function simpApplyFilters(){
+function simpRunFilter(searchEl, matchArr){
   var activeFilter = document.querySelector('#simpIssueFilters .filter-btn.active');
   var filter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
-  var query = simpSearchInput.value.toLowerCase().trim();
+  var query = searchEl.value.toLowerCase().trim();
   var rows = document.querySelectorAll('.simp-view .issue-table tbody tr[data-product]');
   var visible = 0;
 
   var matchTitles = [];
-  if(simpLookupMatches.length > 0){
-    simpLookupMatches.forEach(function(m){ matchTitles.push(m[0].toLowerCase()); });
+  if(matchArr.length > 0){
+    matchArr.forEach(function(m){ matchTitles.push(m[0].toLowerCase()); });
   }
 
   rows.forEach(function(row){
@@ -1992,17 +2005,6 @@ function simpApplyFilters(){
   var badge = document.querySelector('.simp-view .count-badge');
   if(badge) badge.textContent = visible;
 }
-
-// Simplified filter buttons
-document.querySelectorAll('#simpIssueFilters .filter-btn').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    document.querySelectorAll('#simpIssueFilters .filter-btn').forEach(function(x){x.classList.remove('active')});
-    btn.classList.add('active');
-    simpSearchInput.value = '';
-    document.getElementById('simpLookupResult').classList.remove('visible');
-    simpApplyFilters();
-  });
-});
 
 </script>
 </body>
