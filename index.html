@@ -313,6 +313,10 @@ body.simplified .simp-view { display: block !important; }
 body:not(.simplified) .adv-view { display: block !important; }
 body:not(.simplified) .simp-view { display: none !important; }
 .simp-view { display: none; }
+.simp-view .issue-table { table-layout: auto; }
+.simp-view .pri-badge { font-size: 11px; padding: 3px 8px; white-space: nowrap; }
+.simp-view .status-text { white-space: normal; }
+.simp-view .eta-text { white-space: normal; }
 
 </style>
 </head>
@@ -1218,7 +1222,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span class="ticket-count">13 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 21</span></td>
         <td data-label="Current Status"><div class="status-text">Identified — fix is being planned</div><div class="eta-text">Case count declining</div></td>
         <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -1232,7 +1236,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span class="ticket-count">12 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 26</span></td>
         <td data-label="Current Status"><div class="status-text">Engineering is working on a fix</div><div class="eta-text">Case count declining</div></td>
         <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -1246,7 +1250,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span class="ticket-count">15 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 16</span></td>
         <td data-label="Current Status"><div class="status-text">Engineering is working on a fix (V7 + V8)</div><div class="eta-text">MCB-220 (V6) released; MCB-265 Dev In Progress; MCB-306 (V8) in backlog</div></td>
         <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -1260,7 +1264,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Fix expected within 14 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Within 14 days</span></td>
         <td data-label="Reports"><span class="ticket-count">~204/day</span><br><span style="font-size:11px;color:var(--sev-critical)">&#8593; +179% WoW</span></td>
         <td data-label="Current Status"><div class="status-text">Engineering is working on a fix</div><div class="eta-text">Dev In Progress — re-emergence post MCB-214 deploy</div></td>
         <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -1275,7 +1279,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-olm">Online Listings</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span class="ticket-count">27 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">&#8593; from 15</span></td>
         <td data-label="Current Status"><div class="status-text">With third-party partners — awaiting resolution</div><div class="eta-text">See publisher panel</div></td>
         <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -1291,7 +1295,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span class="ticket-count">30 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 35</span></td>
         <td data-label="Current Status"><div class="status-text">Being processed — volume declining</div><div class="eta-text">Improving</div></td>
         <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -1305,7 +1309,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-high">High</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p1">Fix expected within 24 hours</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p1">Within 24 hours</span></td>
         <td data-label="Reports"><span class="ticket-count">11 reports</span><br><span style="font-size:11px;color:var(--sev-low)">fix deployed</span></td>
         <td data-label="Current Status"><div class="status-text">Fix developed — testing in progress</div><div class="eta-text">Resolution: Done</div></td>
         <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span></td>
@@ -1318,7 +1322,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span class="ticket-count">20 reports</span><br><span style="font-size:11px;color:var(--sev-low)">94 total this wk</span></td>
         <td data-label="Current Status"><div class="status-text">Ongoing — migration related</div><div class="eta-text">Clears as migrations complete</div></td>
         <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
@@ -1332,7 +1336,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-bc">Business Center</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span class="ticket-count">3 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">account-level</span></td>
         <td data-label="Current Status"><div class="status-text">With platform development team</div><div class="eta-text">Per-case basis</div></td>
         <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span></td>
@@ -1347,7 +1351,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-myaccount">My Account</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span class="ticket-count">14 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 19</span></td>
         <td data-label="Current Status"><div class="status-text">Our team is looking into this</div><div class="eta-text">Timeline TBD</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1360,7 +1364,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-myaccount">My Account</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span class="ticket-count">11 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 22</span></td>
         <td data-label="Current Status"><div class="status-text">Our team is looking into this</div><div class="eta-text">Timeline TBD</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1373,7 +1377,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-myaccount">My Account</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span class="ticket-count">8 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">user-reported</span></td>
         <td data-label="Current Status"><div class="status-text">Per-case basis</div><div class="eta-text">Ongoing</div></td>
         <td><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
@@ -1389,7 +1393,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-high">High</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p1">Fix expected within 24 hours</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p1">Within 24 hours</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3571685</span></td>
         <td data-label="Current Status"><div class="status-text">Monitoring — partially resolved</div><div class="eta-text">ETA: Apr 25, 2026</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1402,7 +1406,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-high">High</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p1">Fix expected within 24 hours</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p1">Within 24 hours</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3560909</span></td>
         <td data-label="Current Status"><div class="status-text">Under review by the engineering team</div><div class="eta-text">Overdue (was Mar 11)</div></td>
         <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
@@ -1415,7 +1419,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Fix expected within 14 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Within 14 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565621</span></td>
         <td data-label="Current Status"><div class="status-text">Our team is looking into this</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1428,7 +1432,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Fix expected within 14 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Within 14 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565069</span></td>
         <td data-label="Current Status"><div class="status-text">Engineering is working on a fix</div><div class="eta-text">Ongoing</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1442,7 +1446,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Fix expected within 14 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Within 14 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3570805</span></td>
         <td data-label="Current Status"><div class="status-text">Our team is looking into this</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1456,7 +1460,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3572908</span></td>
         <td data-label="Current Status"><div class="status-text">Our team is looking into this</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1469,7 +1473,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3573500</span></td>
         <td data-label="Current Status"><div class="status-text">Our team is looking into this</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1482,7 +1486,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1495,7 +1499,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1508,7 +1512,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1521,7 +1525,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1534,7 +1538,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1547,7 +1551,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1560,7 +1564,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1573,7 +1577,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
@@ -1588,7 +1592,7 @@ body:not(.simplified) .simp-view { display: none !important; }
         </td>
         <td data-label="Product Area"><span class="product-pill prod-thryvpay">ThryvPay</span></td>
         <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Fix expected within 28 days</span></td>
+        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
         <td data-label="Reports"><span class="ticket-count">0 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 3</span></td>
         <td data-label="Current Status"><div class="status-text">Fix has been deployed</div><div class="eta-text">Queue cleared</div></td>
         <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
