@@ -635,7 +635,7 @@ body.simplified .simp-only { display: inline !important; }
       <tr data-product="mc">
         <td>
           <div class="issue-title">MC Addon Services — re-emergence post MCB-214</div>
-          <div class="issue-desc"><span class="kw">MC Addon Services</span> not installing correctly after MCB-214 deployment. ~204 tickets/day, +179% WoW. Assigned to Tyler Foreman.</div>
+          <div class="issue-desc"><span class="kw">MC Addon Services</span> not installing correctly after MCB-214 deployment. ~204 tickets/day, +179% WoW. Assigned to engineering.</div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag">MCB-275</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -913,30 +913,157 @@ body.simplified .simp-only { display: inline !important; }
     </tbody>
   </table>
 
-  <!-- Incident Communications -->
-  <div class="talking-points" style="margin-top:24px;">
-    <div class="talking-points-header">
-      <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
-      <div class="talking-points-title">Incident Communication — EP / Growth Package Issues</div>
+  <!-- Incident Communications - Carousel -->
+  <div style="margin-top:24px;position:relative;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <div style="font-size:15px;font-weight:700;color:var(--thryv-midnight);">Incident Communications</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button onclick="prevCard()" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--thryv-cloud);background:var(--thryv-white);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">&#8249;</button>
+        <span id="cardIndicator" style="font-size:12px;color:var(--thryv-steel);min-width:40px;text-align:center;">1 / 6</span>
+        <button onclick="nextCard()" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--thryv-cloud);background:var(--thryv-white);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">&#8250;</button>
+      </div>
     </div>
-    <div class="tp-meta-grid" style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">
-      <span style="font-weight:600;">Priority:</span><span>P3 Low</span>
-      <span style="font-weight:600;">Severity:</span><span>High — Major function not working for a subset of users</span>
-      <span style="font-weight:600;">Status:</span><span style="color:var(--sev-low);font-weight:600;">Dev In Progress — many accounts resolved, verifying remaining</span>
-      <span style="font-weight:600;">Update cadence:</span><span>Per SOP cadence during active work</span>
-      <span style="font-weight:600;">Workaround:</span><span style="color:var(--sev-low);">Yes — submit a Zendesk ticket for manual activation. Include the Thryv ID and Growth Package tier.</span>
-    </div>
-    <div class="tp-section">
-      <div class="tp-label">Impact Summary</div>
-      <div class="tp-text">Enhanced Profiles and Growth Package features are not activating automatically after purchase for some clients. This is caused by a product installation issue in the backend. MCB-168 now in Dev In Progress. MCB-302 (V4) in backlog. Many accounts have been resolved per Karla Cruz — remaining accounts being verified via Gump/Pace. Subscriptions and data are intact — features are simply not surfacing in the UI.</div>
-    </div>
-    <div class="tp-section">
-      <div class="tp-label">Client-Facing Message</div>
-      <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We are aware of a technical issue preventing some Growth Package features from appearing in your Marketing Center. Your subscription is active and no data has been lost. Our engineering team has prioritized this issue and a fix is currently in development. We expect resolution soon and will follow up as soon as the fix is deployed.</div>
-    </div>
-    <div class="tp-section tp-internal">
-      <div class="tp-label">Internal Notes</div>
-      <div class="tp-text">MCB-168 now Dev In Progress (assigned to Victor Diaz Arias). MCB-302 (V4) in Dev Backlog. Karla says many accounts resolved — verify via Gump/Pace that correct YP product is installed (found 2 showing "Activate" instead of "Platinum"). If a client needs immediate activation, submit a Zendesk ticket with the Thryv ID and package tier for manual resolution.</div>
+    <div id="incidentDeck" style="position:relative;overflow:hidden;">
+
+      <!-- Card 1: MC (EP/GP) -->
+      <div class="incident-card" data-queue="mc" style="display:block;">
+        <div class="talking-points">
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Marketing Center — EP / Growth Package Issues</div>
+          </div>
+          <span class="adv-only"><div class="tp-meta-grid" style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">
+            <span style="font-weight:600;">Priority:</span><span>P3 Low</span>
+            <span style="font-weight:600;">Severity:</span><span>High — Major function not working for a subset of users</span>
+            <span style="font-weight:600;">Status:</span><span style="color:var(--sev-low);font-weight:600;">Dev In Progress — many accounts resolved, verifying remaining</span>
+            <span style="font-weight:600;">Update cadence:</span><span>Per SOP cadence during active work</span>
+            <span style="font-weight:600;">Workaround:</span><span style="color:var(--sev-low);">Yes — submit a support ticket for manual activation. Include the Thryv ID and Growth Package tier.</span>
+          </div></span>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Enhanced Profiles and Growth Package features are not activating automatically after purchase for some clients. This is caused by a product installation issue in the backend. Many accounts have been resolved — remaining accounts being verified. Subscriptions and data are intact — features are simply not surfacing in the UI.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Client-Facing Message</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We are aware of a technical issue preventing some Growth Package features from appearing in your Marketing Center. Your subscription is active and no data has been lost. Our engineering team has prioritized this issue and a fix is currently in development. We expect resolution soon and will follow up as soon as the fix is deployed.</div>
+          </div>
+          <span class="adv-only"><div class="tp-section">
+            <div class="tp-label">Internal Notes</div>
+            <div class="tp-text">MCB-168 now Dev In Progress. MCB-302 (V4) in Dev Backlog. Engineering confirms many accounts resolved — verify via Gump/Pace that correct YP product is installed (found 2 showing "Activate" instead of "Platinum"). Submit a support ticket with the Thryv ID and package tier for manual resolution.</div>
+          </div></span>
+        </div>
+      </div>
+
+      <!-- Card 2: BC -->
+      <div class="incident-card" data-queue="bc" style="display:none;">
+        <div class="talking-points">
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Business Center — Social Tab / CRM Issues</div>
+          </div>
+          <span class="adv-only"><div class="tp-meta-grid" style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">
+            <span style="font-weight:600;">Priority:</span><span>P1 High</span>
+            <span style="font-weight:600;">Severity:</span><span>High — Major function down for subset of users</span>
+            <span style="font-weight:600;">Status:</span><span style="color:var(--sev-low);font-weight:600;">Fix deployed — pending confirmation</span>
+            <span style="font-weight:600;">Workaround:</span><span style="color:var(--sev-low);">Log out and log back in. If issue persists, submit a support ticket.</span>
+          </div></span>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Social tab authentication errors affecting some Business Center users. Users see misconfiguration errors or 404s when accessing the Social tab. A fix has been deployed and most users are restored. CRM platform issues being handled via vendor escalation.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Client-Facing Message</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We identified an issue affecting the Social tab in Business Center and a fix has been deployed. If you are still experiencing errors, please log out and log back in. If the issue persists, contact support and we will resolve it promptly.</div>
+          </div>
+          <span class="adv-only"><div class="tp-section">
+            <div class="tp-label">Internal Notes</div>
+            <div class="tp-text">BC-1068 fix deployed per Slack. Kept active pending Jira status update. V #344232 escalated. 18 tickets still active — monitor for resolution confirmation.</div>
+          </div></span>
+        </div>
+      </div>
+
+      <!-- Card 3: OLM -->
+      <div class="incident-card" data-queue="olm" style="display:none;">
+        <div class="talking-points">
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Online Listings — Publisher Sync Issues</div>
+          </div>
+          <span class="adv-only"><div class="tp-meta-grid" style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">
+            <span style="font-weight:600;">Priority:</span><span>P3 Low</span>
+            <span style="font-weight:600;">Severity:</span><span>Medium — Publisher-side, limited workaround</span>
+            <span style="font-weight:600;">Status:</span><span style="color:var(--sev-high);font-weight:600;">With third-party partners — awaiting resolution</span>
+            <span style="font-weight:600;">Workaround:</span><span>See publisher panel for per-publisher status and workarounds.</span>
+          </div></span>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Active listing sync issues across multiple publishers including Bing, Google, Facebook, and Apple. Issues include stuck processing, update failures, and enhanced profile sync errors. These are publisher-side issues routed through Yext. See the Publisher Integration Panel for per-publisher details.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Client-Facing Message</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">Some listing updates are experiencing delays due to issues with our publishing partners. Your listing data is saved and will sync once the partner resolves the issue. We are actively monitoring and will update you when full functionality is restored.</div>
+          </div>
+          <span class="adv-only"><div class="tp-section">
+            <div class="tp-label">Internal Notes</div>
+            <div class="tp-text">Yext #2419893 is the earliest escalation. Bing has 6 active issues, Apple has 2 (including an outage since Apr 12). Check publisher panel for full breakdown. Route client inquiries to OLM queue.</div>
+          </div></span>
+        </div>
+      </div>
+
+      <!-- Card 4: My Account -->
+      <div class="incident-card" data-queue="myaccount" style="display:none;">
+        <div class="talking-points">
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;color:var(--sev-low);">&#10003;</div>
+            <div class="talking-points-title">My Account — Monitoring</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Login and account access issues are at normal levels. Staff delete and Auth0 signup service tickets are system-generated and monitored. No client-facing impact requiring escalation at this time.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Client-Facing Message</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">No known issues affecting account access at this time. If you are experiencing login difficulties, try clearing your browser cache or using an incognito window. Contact support if the issue continues.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: ThryvPay -->
+      <div class="incident-card" data-queue="thryvpay" style="display:none;">
+        <div class="talking-points">
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;color:var(--sev-low);">&#10003;</div>
+            <div class="talking-points-title">ThryvPay — No Active Issues</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Stripe integration queue has been cleared. Remaining volume is largely system-generated alerts. No active client-facing payment processing issues.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Client-Facing Message</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">No known payment processing issues at this time. If you experience any payment-related problems, please contact support for immediate assistance.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6: Keap -->
+      <div class="incident-card" data-queue="keap" style="display:none;">
+        <div class="talking-points">
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;color:var(--sev-low);">&#10003;</div>
+            <div class="talking-points-title">Keap — Monitoring</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">10 known issues tracked via the Keap portal. Steady volume with no spikes. Keap-specific issues are managed through their own support infrastructure.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Client-Facing Message</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">Keap services are operating normally. For Keap-specific issues, please contact Keap support directly or reach out to our team for assistance with Thryv integrations.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -995,7 +1122,7 @@ body.simplified .simp-only { display: inline !important; }
     </thead>
     <tbody>
       <tr class="resolved-row">
-        <td><div class="issue-title">Thryv Leads button grayed out / report unavailable</div><div class="issue-desc">MCB-232 Released. All accounts marked resolved per Karla Cruz (Apr 20). MCB-248 remains in Dev Backlog.</div></td>
+        <td><div class="issue-title">Thryv Leads button grayed out / report unavailable</div><div class="issue-desc">MCB-232 Released. All accounts marked resolved per the engineering team (Apr 20). MCB-248 remains in Dev Backlog.</div></td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td data-label="Date Reported" class="date-text">Released</td>
         <td class="resolved-text">Released</td>
@@ -1288,6 +1415,27 @@ function applyFilters(){
   // No shared badge needed since search is now shared
 }
 // View toggle - default to simplified
+// Incident carousel
+var currentCard = 0;
+var cards = document.querySelectorAll('.incident-card');
+var cardTotal = cards.length;
+
+function showCard(idx){
+  cards.forEach(function(c){ c.style.display = 'none'; });
+  cards[idx].style.display = 'block';
+  document.getElementById('cardIndicator').textContent = (idx + 1) + ' / ' + cardTotal;
+}
+
+function nextCard(){
+  currentCard = (currentCard + 1) % cardTotal;
+  showCard(currentCard);
+}
+
+function prevCard(){
+  currentCard = (currentCard - 1 + cardTotal) % cardTotal;
+  showCard(currentCard);
+}
+
 function toggleView(){
   var track = document.getElementById('viewToggle');
   track.classList.toggle('active');
