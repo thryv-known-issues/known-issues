@@ -143,7 +143,7 @@ body {
 .sev-medium { background: #E6F1FB; color: #0C447C; border: 1.5px solid #A0C4E8; }
 .sev-low { background: #EAF3DE; color: #27500A; border: 1.5px solid #B8D9A0; }
 
-.pri-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.pri-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; white-space: normal; }
 .pri-p0 { background: #FCEBEB; color: #791F1F; border: 1.5px solid #E8A0A0; }
 .pri-p1 { background: #FAEEDA; color: #633806; border: 1.5px solid #E8CFA0; }
 .pri-p2 { background: #E6F1FB; color: #0C447C; border: 1.5px solid #A0C4E8; }
@@ -1198,12 +1198,12 @@ body:not(.simplified) .simp-view { display: none !important; }
   <table class="issue-table">
     <thead>
       <tr>
-        <th style="width:24%">Issue</th>
+        <th style="width:20%">Issue</th>
         <th style="width:9%;cursor:pointer;" onclick="sortTable('product')" title="Sort by product area">Product Area <span class="sort-arrow" id="sort-product">&#8597;</span></th>
-        <th style="width:7%;cursor:pointer;" onclick="sortTable('severity')" title="Sort by impact level">Impact <span class="sort-arrow" id="sort-severity">&#8597;</span></th>
-        <th style="width:12%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by expected resolution">Expected Resolution <span class="sort-arrow" id="sort-priority">&#8597;</span></th>
+        <th style="width:6%;cursor:pointer;" onclick="sortTable('severity')" title="Sort by impact level">Impact <span class="sort-arrow" id="sort-severity">&#8597;</span></th>
+        <th style="width:15%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by expected resolution">Expected Resolution <span class="sort-arrow" id="sort-priority">&#8597;</span></th>
         <th style="width:7%">Reports</th>
-        <th style="width:16%">Current Status</th>
+        <th style="width:18%">Current Status</th>
         <th style="width:10%">Regions</th>
         <th style="width:9%;cursor:pointer;" onclick="sortTable('updated')" title="Sort by date">First Reported <span class="sort-arrow" id="sort-updated">&#8597;</span></th>
       </tr>
