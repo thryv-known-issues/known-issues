@@ -1057,12 +1057,22 @@ body:not(.simplified) .simp-view { display: none !important; }
 
 <!-- ═══ SIMPLIFIED VIEW ═══ -->
 <div class="simp-view">
+  <!-- Alert Banner -->
   <div class="alert-banner">
     <div class="alert-icon">!</div>
     <span><strong>Current status:</strong> Our engineering team is actively working on fixes for several known issues across Marketing Center, Business Center, and Online Listings. Most issue volumes are trending down. See details below.</span>
   </div>
+    <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-low);">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-low);font-weight:600;margin-bottom:4px;">Dev movement</div>
+      <div style="font-size:13px;color:var(--thryv-night);">MCB-168 (EP/GP) moved to Dev In Progress. MCB-275 (MC Addon Services) now tracked. MCB-294 (Missing GP V7) In Review. MCB-306 (visitor tagging V8) in backlog.</div>
+    </div>
+    <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-critical);">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-critical);font-weight:600;margin-bottom:4px;">Watch items</div>
+      <div style="font-size:13px;color:var(--thryv-night);">BC-1068 (Social tab) fix deployed but 18 tickets active. BC-1116 (duplicate work orders) 5 tickets. </div>
+    </div>
+  </div>
 
-<!-- System Status Strip — "reported cases" instead of "open tickets" -->
+  <!-- System Status Strip -->
   <div class="status-strip">
     <div class="status-card" style="border-top:3px solid #121212;padding-bottom:10px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;">
@@ -1071,10 +1081,10 @@ body:not(.simplified) .simp-view { display: none !important; }
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#121212;">54</span>
+          <span style="font-size:22px;font-weight:700;color:#121212;">18</span>
           <span style="font-size:12px;color:var(--thryv-steel);"> reported cases</span>
         </div>
-        <span style="font-size:11px;font-weight:600;color:var(--sev-low);">&#8595; improving</span>
+        <span style="font-size:11px;font-weight:600;color:var(--sev-low);">↓ improving</span>
       </div>
       <svg width="100%" height="36" viewBox="0 0 200 36" preserveAspectRatio="none" style="margin-top:6px;">
         <defs><linearGradient id="bcGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#121212" stop-opacity="0.15"/><stop offset="100%" stop-color="#121212" stop-opacity="0"/></linearGradient></defs>
@@ -1085,31 +1095,31 @@ body:not(.simplified) .simp-view { display: none !important; }
       <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--thryv-steel);margin-top:2px;">
         <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Now</span>
       </div>
-      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">5 active issues</div>
+      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">99.99% uptime · 5 active issues</div>
     </div>
 
-    <div class="status-card" style="border-top:3px solid #0E7C6B;padding-bottom:10px;">
+    <div class="status-card" style="border-top:3px solid #4CAF50;padding-bottom:10px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;">
-        <div class="status-card-label" style="margin-bottom:0;line-height:1.3;">Online<br>Listings</div>
+        <div class="status-card-label" style="margin-bottom:0;">Keap</div>
         <span style="font-size:10px;font-weight:600;color:#633806;background:#FAEEDA;padding:3px 8px;border-radius:10px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;"><span style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0;display:inline-block;"></span>Monitoring</span>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#0E7C6B;">27</span>
-          <span style="font-size:12px;color:var(--thryv-steel);"> reported cases</span>
+          <span style="font-size:22px;font-weight:700;color:#4CAF50;">10</span>
+          <span style="font-size:12px;color:var(--thryv-steel);"> known issues</span>
         </div>
-        <span style="font-size:11px;font-weight:600;color:var(--sev-critical);">&#8593; from 15</span>
+        <span style="font-size:11px;font-weight:600;color:var(--sev-high);">→ steady</span>
       </div>
       <svg width="100%" height="36" viewBox="0 0 200 36" preserveAspectRatio="none" style="margin-top:6px;">
-        <defs><linearGradient id="olmGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E7C6B" stop-opacity="0.2"/><stop offset="100%" stop-color="#0E7C6B" stop-opacity="0"/></linearGradient></defs>
-        <path d="M0,28 L50,24 L100,20 L150,18 L200,10" fill="none" stroke="#0E7C6B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M0,28 L50,24 L100,20 L150,18 L200,10 L200,36 L0,36Z" fill="url(#olmGrad)"/>
-        <circle cx="200" cy="10" r="3.5" fill="#0E7C6B"/>
+        <defs><linearGradient id="keapGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4CAF50" stop-opacity="0.2"/><stop offset="100%" stop-color="#4CAF50" stop-opacity="0"/></linearGradient></defs>
+        <path d="M0,20 L50,18 L100,16 L150,18 L200,16" fill="none" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M0,20 L50,18 L100,16 L150,18 L200,16 L200,36 L0,36Z" fill="url(#keapGrad)"/>
+        <circle cx="200" cy="16" r="3.5" fill="#4CAF50"/>
       </svg>
       <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--thryv-steel);margin-top:2px;">
         <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Now</span>
       </div>
-      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Publisher-routed · 1 active issue</div>
+      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">100.0% uptime · tracked via Keap portal</div>
     </div>
 
     <div class="status-card" style="border-top:3px solid #3C3489;padding-bottom:10px;">
@@ -1119,10 +1129,10 @@ body:not(.simplified) .simp-view { display: none !important; }
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#3C3489;">62</span>
+          <span style="font-size:22px;font-weight:700;color:#3C3489;">148</span>
           <span style="font-size:12px;color:var(--thryv-steel);"> reported cases</span>
         </div>
-        <span style="font-size:11px;font-weight:600;color:var(--sev-low);">&#8595; trending down</span>
+        <span style="font-size:11px;font-weight:600;color:var(--sev-low);">↓ trending down</span>
       </div>
       <svg width="100%" height="36" viewBox="0 0 200 36" preserveAspectRatio="none" style="margin-top:6px;">
         <defs><linearGradient id="mcGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3C3489" stop-opacity="0.2"/><stop offset="100%" stop-color="#3C3489" stop-opacity="0"/></linearGradient></defs>
@@ -1133,7 +1143,7 @@ body:not(.simplified) .simp-view { display: none !important; }
       <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--thryv-steel);margin-top:2px;">
         <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Now</span>
       </div>
-      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 active issues</div>
+      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">99.99% uptime · 6 active issues</div>
     </div>
 
     <div class="status-card" style="border-top:3px solid #FF5000;padding-bottom:10px;">
@@ -1143,10 +1153,10 @@ body:not(.simplified) .simp-view { display: none !important; }
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#121212;">37</span>
+          <span style="font-size:22px;font-weight:700;color:#121212;">129</span>
           <span style="font-size:12px;color:var(--thryv-steel);"> reported cases</span>
         </div>
-        <span style="font-size:11px;font-weight:600;color:var(--sev-low);">&#8595; improving</span>
+        <span style="font-size:11px;font-weight:600;color:var(--thryv-steel);">excl. 5,550 Tray.io alerts</span>
       </div>
       <svg width="100%" height="36" viewBox="0 0 200 36" preserveAspectRatio="none" style="margin-top:6px;">
         <defs><linearGradient id="maGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF5000" stop-opacity="0.15"/><stop offset="100%" stop-color="#FF5000" stop-opacity="0"/></linearGradient></defs>
@@ -1157,17 +1167,16 @@ body:not(.simplified) .simp-view { display: none !important; }
       <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--thryv-steel);margin-top:2px;">
         <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Now</span>
       </div>
-      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">3 active issues</div>
+      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">100.0% uptime · 3 active issues</div>
     </div>
   </div>
 
   <!-- ═══ ACTIVE ISSUES ═══ -->
-
-<div class="section-header">
-    <div class="section-title">Known Issues <span class="count-badge">29</span></div>
+  <div class="section-header">
+    <div class="section-title">Known Issues <span class="count-badge">23</span></div>
     <div class="search-box">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="var(--thryv-steel)" stroke-width="1.5"/><path d="M10.5 10.5L14.5 14.5" stroke="var(--thryv-steel)" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <input type="text" id="simpIssueSearch" placeholder="Search by ticket #, Thryv ID, URL, or keyword..." />
+      <input type="text" id="simpIssueSearch" placeholder="Search by ticket #, Thryv ID, or keyword..." />
     </div>
   </div>
 
@@ -1197,423 +1206,375 @@ body:not(.simplified) .simp-view { display: none !important; }
     </button>
   </div>
 
-  <!-- SIMPLIFIED TABLE — translated headers, plain-english statuses -->
   <table class="issue-table">
     <thead>
       <tr>
-        <th style="width:20%">Issue</th>
-        <th style="width:9%;cursor:pointer;" onclick="sortTable('product')" title="Sort by product area">Product Area <span class="sort-arrow" id="simp-sort-product">&#8597;</span></th>
-        <th style="width:6%;cursor:pointer;" onclick="sortTable('severity')" title="Sort by impact level">Impact <span class="sort-arrow" id="simp-sort-severity">&#8597;</span></th>
-        <th style="width:15%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by expected resolution">Expected Resolution <span class="sort-arrow" id="simp-sort-priority">&#8597;</span></th>
-        <th style="width:7%">Reports</th>
-        <th style="width:18%">Current Status</th>
-        <th style="width:10%">Regions</th>
-        <th style="width:9%;cursor:pointer;" onclick="sortTable('updated')" title="Sort by date">First Reported <span class="sort-arrow" id="simp-sort-updated">&#8597;</span></th>
+        <th style="width:22%">Issue</th>
+        <th style="width:10%;cursor:pointer;" onclick="sortTable('product')" title="Sort by product">Product Area <span class="sort-arrow" id="simp-sort-product">&#8597;</span></th>
+        <th style="width:7%;cursor:pointer;" onclick="sortTable('severity')" title="Sort by severity">Impact <span class="sort-arrow" id="simp-sort-severity">&#8597;</span></th>
+        <th style="width:7%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by priority">Expected Resolution <span class="sort-arrow" id="simp-sort-priority">&#8597;</span></th>
+        <th style="width:8%">Reports</th>
+        <th style="width:17%">Current Status</th>
+        <th style="width:12%">Region</th>
+        <th style="width:11%;cursor:pointer;" onclick="sortTable('updated')" title="Sort by date">First Reported <span class="sort-arrow" id="simp-sort-updated">&#8597;</span></th>
       </tr>
     </thead>
     <tbody>
       <!-- MC Issues -->
       <tr data-product="mc">
         <td>
-          <div class="issue-title">Enhanced profiles not auto-enabling / Growth Package not generating</div>
-          <div class="issue-desc">Some clients' <span class="kw">Enhanced Profiles</span> and <span class="kw">Growth Packages</span> aren't activating automatically after purchase. Subscriptions and data are intact — features just aren't appearing in the interface yet.</div>
-          <div class="issue-meta"><span class="jira-tag">MCB-168</span></div>
+          <div class="issue-title">Enhanced profiles not auto-enabling / GP not generating</div>
+          <div class="issue-desc"><span class="kw">YPO installation</span> issue preventing <span class="kw">Enhanced Profile</span> activation. Wrong <span class="kw">YPO tier</span> sometimes installed. MCB-302 (V4) in backlog. Many accounts resolved, verifying remaining via Gump/Pace.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">13 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 21</span></td>
-        <td data-label="Current Status"><div class="status-text">Identified — fix is being planned</div><div class="eta-text">Case count declining</div></td>
-        <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
-        <td data-label="First Reported" class="date-text">Mar 20, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">16 reports</span><br></td>
+        <td data-label="Status / ETA"><div class="status-text">Engineering is working on a fix</div><div class="eta-text">ETA: TBD</div></td>
+                <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        <td data-label="Date Reported" class="date-text">Mar 20, 2026</td>
       </tr>
       <tr data-product="mc">
         <td>
-          <div class="issue-title">Missing Growth Package add-on — not appearing in Marketing Center</div>
-          <div class="issue-desc"><span class="kw">Growth Packages</span> purchased but not visible in <span class="kw">Marketing Center</span>. Clients paying for the service without it appearing in the software.</div>
-          <div class="issue-meta"><span class="jira-tag">MCB-212</span></div>
+          <div class="issue-title">Missing GP add-on — not appearing in MC</div>
+          <div class="issue-desc"><span class="kw">Growth Packages</span> purchased but not visible in <span class="kw">Marketing Center</span> listings. MCB-294 (V7) In Review. Clients paying for service without it reflected.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">12 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 26</span></td>
-        <td data-label="Current Status"><div class="status-text">Engineering is working on a fix</div><div class="eta-text">Case count declining</div></td>
-        <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
-        <td data-label="First Reported" class="date-text">Mar 31, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">23 reports</span><br></td>
+        <td data-label="Status / ETA"><div class="status-text">Engineering is working on a fix</div><div class="eta-text">ETA: TBD</div></td>
+                <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        <td data-label="Date Reported" class="date-text">Mar 31, 2026</td>
       </tr>
       <tr data-product="mc">
         <td>
           <div class="issue-title">Website analytics / visitor tagging not tracking</div>
-          <div class="issue-desc"><span class="kw">Website analytics</span> not loading in Marketing Center. Non-Thryv sites with tracking code aren't syncing data. Previous version fix released; current version now in development.</div>
-          <div class="issue-meta"><span class="jira-tag">MCB-265</span> <span class="jira-tag">MCB-306</span></div>
+          <div class="issue-desc"><span class="kw">Website analytics</span> not loading in MC. Non-Thryv sites with <span class="kw">visitor tagging</span> code not syncing. <span class="kw">CORS</span> errors. MCB-220 (V6) Released. MCB-306 (V8) in backlog.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">15 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 16</span></td>
-        <td data-label="Current Status"><div class="status-text">Engineering is working on a fix (V7 + V8)</div><div class="eta-text">MCB-220 (V6) released; MCB-265 Dev In Progress; MCB-306 (V8) in backlog</div></td>
-        <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
-        <td data-label="First Reported" class="date-text">Apr 1, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">19 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">V7 + V8</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Engineering is working on a fix</div><div class="eta-text">ETA: TBD</div></td>
+                <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 1, 2026</td>
       </tr>
       <tr data-product="mc">
         <td>
-          <div class="issue-title">MC add-on services not appearing after purchase</div>
-          <div class="issue-desc"><span class="kw">Marketing Center add-on services</span> (SEO, Thryv Leads, Enhanced Profile, etc.) not appearing in MC after purchase. Re-emergence after initial fix deployed. ~204 tickets/day, up 179% week-over-week.</div>
-          <div class="issue-meta"><span class="jira-tag">MCB-275</span></div>
+          <div class="issue-title">MC Addon Services — re-emergence post MCB-214</div>
+          <div class="issue-desc"><span class="kw">MC Addon Services</span> not installing correctly after MCB-214 deployment. ~204 tickets/day, +179% WoW. Assigned to Tyler Foreman.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Within 14 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">~204/day</span><br><span style="font-size:11px;color:var(--sev-critical)">&#8593; +179% WoW</span></td>
-        <td data-label="Current Status"><div class="status-text">Engineering is working on a fix</div><div class="eta-text">Dev In Progress — re-emergence post MCB-214 deploy</div></td>
-        <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
-        <td data-label="First Reported" class="date-text">Apr 15, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p2">Within 14 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">NEW</span><br><span style="font-size:11px;color:var(--sev-critical)">high volume</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Engineering is working on a fix</div><div class="eta-text">ETA: TBD</div></td>
+                <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 16, 2026</td>
       </tr>
-
+      
       <tr data-product="olm">
         <td>
           <div class="issue-title">Listing sync issues — publisher related</div>
-          <div class="issue-desc">Active listing issues across multiple <span class="kw">publishers</span>. Includes listings <span class="kw">stuck processing</span>, <span class="kw">update failures</span>, and enhanced profile sync errors. These are with third-party partners.</div>
-          <div class="issue-meta"><span class="pub-tag">Bing</span> <span class="pub-tag">Google</span> <span class="pub-tag">Facebook</span> <span class="pub-tag">Apple</span> <span class="pub-tag">YP</span> <span class="yext-tag">Yext #2419893</span></div>
+          <div class="issue-desc">Active <span class="kw">Yext</span>-routed listing issues across multiple <span class="kw">publishers</span>. Includes <span class="kw">stuck processing</span>, <span class="kw">update failures</span>, and enhanced profile sync errors.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-olm">Online Listings</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">27 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">&#8593; from 15</span></td>
-        <td data-label="Current Status"><div class="status-text">With third-party partners — awaiting resolution</div><div class="eta-text">See publisher panel</div></td>
-        <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
-        <td data-label="First Reported" class="date-text">Jan 14, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">56 reports</span><br></td>
+        <td data-label="Status / ETA"><div class="status-text">With third-party partners</div><div class="eta-text">See publisher panel</div></td>
+                <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        <td data-label="Date Reported" class="date-text">Jan 14, 2026</td>
       </tr>
 
       <!-- Business Center Issues -->
       <tr data-product="bc">
         <td>
           <div class="issue-title">Cloud Campaign — service portal queue</div>
-          <div class="issue-desc"><span class="kw">Cloud Campaign</span> requests processing through the service portal. Volume has dropped significantly.</div>
-          <div class="issue-meta"><span class="cc-tag">CC #13353</span></div>
+          <div class="issue-desc"><span class="kw">Cloud Campaign</span> tickets through <span class="kw">Service Portal</span>.  volume.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-bc">Business Center</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">30 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 35</span></td>
-        <td data-label="Current Status"><div class="status-text">Being processed — volume declining</div><div class="eta-text">Improving</div></td>
-        <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
-        <td data-label="First Reported" class="date-text">Jan 14, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">357 reports</span><br></td>
+        <td data-label="Status / ETA"><div class="status-text">Being processed — volume declining</div><div class="eta-text">Ongoing</div></td>
+                <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        <td data-label="Date Reported" class="date-text">Jan 14, 2026</td>
       </tr>
       <tr data-product="bc">
         <td>
           <div class="issue-title">Social tab authentication / login errors</div>
-          <div class="issue-desc">Users getting a configuration error on the <span class="kw">Social tab</span>. Connection failures and page-not-found errors. Fix has been developed and deployed.</div>
-          <div class="issue-meta"><span class="jira-tag">BC-1068</span> <span class="v-tag">V #344232</span></div>
+          <div class="issue-desc">Users getting <span class="kw">misconfiguration</span> error on <span class="kw">Social tab</span>. Connection failures and <span class="kw">404</span>s. Fix deployed per Slack \u2014 pending Jira status update.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-bc">Business Center</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-high">High</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p1">Within 24 hours</span></td>
-        <td data-label="Reports"><span class="ticket-count">11 reports</span><br><span style="font-size:11px;color:var(--sev-low)">fix deployed</span></td>
-        <td data-label="Current Status"><div class="status-text">Fix developed — testing in progress</div><div class="eta-text">Resolution: Done</div></td>
-        <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span></td>
-        <td data-label="First Reported" class="date-text">Apr 6, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-high">High</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p1">Within 24 hours</span></td>
+        <td data-label="Tickets"><span class="ticket-count">18 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">fix deployed</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Engineering is working on a fix</div><div class="eta-text">Resolution: Done</div></td>
+                <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 6, 2026</td>
       </tr>
       <tr data-product="bc">
         <td>
           <div class="issue-title">Login issues — Keap migration related</div>
-          <div class="issue-desc"><span class="kw">Login</span> issues elevated due to ongoing Keap-to-Thryv account migrations. Mix of general login problems, <span class="kw">password resets</span>, and <span class="kw">locked accounts</span>.</div>
+          <div class="issue-desc"><span class="kw">Login</span> queue elevated due to ongoing <span class="kw">Keap-to-Thryv</span> auth migrations. Mix of general login issues, <span class="kw">password resets</span>, <span class="kw">locked accounts</span>.</div>
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-bc">Business Center</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">20 reports</span><br><span style="font-size:11px;color:var(--sev-low)">94 total this wk</span></td>
-        <td data-label="Current Status"><div class="status-text">Ongoing — migration related</div><div class="eta-text">Clears as migrations complete</div></td>
-        <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
-        <td data-label="First Reported" class="date-text">Jan 14, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">16 reports</span><br></td>
+        <td data-label="Status / ETA"><div class="status-text">Ongoing — migration related</div><div class="eta-text">Clears as migrations complete</div></td>
+                <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        <td data-label="Date Reported" class="date-text">Jan 14, 2026</td>
       </tr>
       <tr data-product="bc">
         <td>
           <div class="issue-title">CRM platform issues — escalated</div>
-          <div class="issue-desc">Individual account-level issues including <span class="kw">payment processing</span>, <span class="kw">SMS delivery</span>, <span class="kw">staff accounts</span>, and <span class="kw">widget</span> display. Escalated to the platform development team.</div>
-          <div class="issue-meta"><span class="ext-tag">Escalated to Dev</span> <span class="v-tag">V #343004</span></div>
+          <div class="issue-desc">Individual account-level issues including <span class="kw">payment processing</span>, <span class="kw">SMS delivery</span>, <span class="kw">staff account</span> management, and <span class="kw">widget</span> display. Escalated to platform development.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-bc">Business Center</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">3 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">account-level</span></td>
-        <td data-label="Current Status"><div class="status-text">With platform development team</div><div class="eta-text">Per-case basis</div></td>
-        <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span></td>
-        <td data-label="First Reported" class="date-text">Apr 14, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">3 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">account-level</span></td>
+        <td data-label="Status / ETA"><div class="status-text">With development team</div><div class="eta-text">Per-ticket basis</div></td>
+                <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 14, 2026</td>
       </tr>
 
       <!-- My Account -->
       <tr data-product="myaccount">
         <td>
           <div class="issue-title">Staff delete errors — recurring system failures</div>
-          <div class="issue-desc"><span class="kw">Staff deletion</span> process generating recurring system errors. Automated alerts firing. Our team is looking into this.</div>
+          <div class="issue-desc"><span class="kw">Staff deletion</span> process generating recurring errors. <span class="kw">Automated alerts</span> firing in queue. Under investigation.</div>
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-myaccount">My Account</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">14 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 19</span></td>
-        <td data-label="Current Status"><div class="status-text">Our team is looking into this</div><div class="eta-text">Timeline TBD</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 10, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">115 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">system-generated</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Our team is looking into this</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 10, 2026</td>
       </tr>
       <tr data-product="myaccount">
         <td>
-          <div class="issue-title">Account signup service errors</div>
-          <div class="issue-desc">Account signup service generating production errors. Impacting new <span class="kw">account creation</span> flow for some users.</div>
+          <div class="issue-title">Auth0 signup service errors</div>
+          <div class="issue-desc"><span class="kw">Auth0</span> User Service for <span class="kw">Signup</span> generating production errors. Impacting new <span class="kw">account creation</span> flow.</div>
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-myaccount">My Account</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">11 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 22</span></td>
-        <td data-label="Current Status"><div class="status-text">Our team is looking into this</div><div class="eta-text">Timeline TBD</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 8, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">624 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">system-generated</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Our team is looking into this</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 8, 2026</td>
       </tr>
       <tr data-product="myaccount">
         <td>
           <div class="issue-title">Account and settings — user-reported issues</div>
           <div class="issue-desc">Assorted <span class="kw">account access</span>, <span class="kw">settings</span>, and <span class="kw">website builder</span> issues reported by agents. Low volume, individual cases.</div>
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-myaccount">My Account</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">8 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">user-reported</span></td>
-        <td data-label="Current Status"><div class="status-text">Per-case basis</div><div class="eta-text">Ongoing</div></td>
+        <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">8 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">user-reported</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Per-ticket basis</div><div class="eta-text">Ongoing</div></td>
         <td><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
-        <td data-label="First Reported" class="date-text">Apr 6, 2026</td>
+        <td data-label="Date Reported" class="date-text">Apr 6, 2026</td>
       </tr>
 
       <!-- Keap Issues -->
       <tr data-product="keap">
         <td>
           <div class="issue-title">Automation &amp; email broadcast actions not processing</div>
-          <div class="issue-desc">Some automations and <span class="kw">email broadcasts</span> not firing. Actions should now be processing; root cause still under investigation.</div>
-          <div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Partially resolved</span></div>
+          <div class="issue-desc"><span class="kw">Tag goals</span> not firing. <span class="kw">Email broadcasts</span> stuck. Actions should now be processing; root cause still under investigation.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-high">High</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p1">Within 24 hours</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3571685</span></td>
-        <td data-label="Current Status"><div class="status-text">Monitoring — partially resolved</div><div class="eta-text">ETA: Apr 25, 2026</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 4, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-high">High</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p1">Within 24 hours</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3571685</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Monitoring</div><div class="eta-text">ETA: Apr 25, 2026</div></td>
+                <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 4, 2026</td>
       </tr>
       <tr data-product="keap">
         <td>
           <div class="issue-title">Mobile app login failures post-Thryv migration</div>
-          <div class="issue-desc">Users redirected to a <span class="kw">blank white page</span> after logging in. Cannot progress past the login screen on the mobile app.</div>
+          <div class="issue-desc">Users redirected to <span class="kw">blank white page</span> at <span class="kw">login.labs.thryv.com</span>. Cannot progress past <span class="kw">login screen</span>.</div>
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-high">High</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p1">Within 24 hours</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3560909</span></td>
-        <td data-label="Current Status"><div class="status-text">Under review by the engineering team</div><div class="eta-text">Overdue (was Mar 11)</div></td>
-        <td data-label="Regions Affected" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
-        <td data-label="First Reported" class="date-text">Feb 18, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-high">High</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p1">Within 24 hours</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3560909</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Support researching</div><div class="eta-text">ETA: Overdue (was Mar 11)</div></td>
+                <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
+        <td data-label="Date Reported" class="date-text">Feb 18, 2026</td>
       </tr>
       <tr data-product="keap">
         <td>
           <div class="issue-title">Mobile app crashes on outbound calls</div>
           <div class="issue-desc">App crashes when attempting to place an <span class="kw">outbound call</span>.</div>
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Within 14 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565621</span></td>
-        <td data-label="Current Status"><div class="status-text">Our team is looking into this</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Mar 9, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p2">Within 14 days</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565621</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Our team is looking into this</div><div class="eta-text">ETA: TBD</div></td>
+                <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Mar 9, 2026</td>
       </tr>
       <tr data-product="keap">
         <td>
           <div class="issue-title">V2 REST API parity issues</div>
-          <div class="issue-desc">Multiple API endpoints have potential gaps. Under active development.</div>
+          <div class="issue-desc">Multiple endpoints as potential blockers to <span class="kw">XMLRPC</span> value parity.</div>
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Within 14 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565069</span></td>
-        <td data-label="Current Status"><div class="status-text">Engineering is working on a fix</div><div class="eta-text">Ongoing</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Mar 6, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p2">Within 14 days</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565069</span></td>
+        <td data-label="Status / ETA"><div class="status-text">In development</div><div class="eta-text">ETA: Ongoing</div></td>
+                <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Mar 6, 2026</td>
       </tr>
       <tr data-product="keap">
         <td>
           <div class="issue-title">JS webforms not rendering on Edge</div>
-          <div class="issue-desc">Microsoft <span class="kw">Edge</span> browser's tracking prevention blocks forms from appearing.</div>
-          <div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Workaround: disable tracking prevention</span></div>
+          <div class="issue-desc"><span class="kw">Edge</span> tracking prevention blocks <span class="kw">cookies</span>, forms don't appear.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-medium">Medium</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p2">Within 14 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3570805</span></td>
-        <td data-label="Current Status"><div class="status-text">Our team is looking into this</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Mar 31, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p2">Within 14 days</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3570805</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Researching</div><div class="eta-text">ETA: TBD</div></td>
+                <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Mar 31, 2026</td>
+      </tr>
+      <tr data-product="keap">
+        <td>
+          <div class="issue-title">Automation email sends blank with deleted link</div>
+          <div class="issue-desc">Emails referencing a <span class="kw">deleted automation link</span> send <span class="kw">blank</span>.</div>
+          
+        </td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-medium">Medium</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p2">Within 14 days</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3551902</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Researching</div><div class="eta-text">ETA: May 1, 2026</div></td>
+                <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Jan 14, 2026</td>
       </tr>
       <tr data-product="keap">
         <td>
           <div class="issue-title">Merge fields show raw tags in automated deals</div>
-          <div class="issue-desc">Deals show placeholder tags instead of actual client data.</div>
-          <div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Workaround: use ~~ format</span></div>
+          <div class="issue-desc">Deals show <span class="kw">[[contact.first_name]]</span> instead of actual data.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3572908</span></td>
-        <td data-label="Current Status"><div class="status-text">Our team is looking into this</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 9, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3572908</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Researching</div><div class="eta-text">ETA: TBD</div></td>
+                <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 9, 2026</td>
       </tr>
       <tr data-product="keap">
         <td>
-          <div class="issue-title">Appointment types from deactivated users still showing</div>
-          <div class="issue-desc">Appointment types from <span class="kw">deactivated users</span> still appear as options in automated workflows.</div>
+          <div class="issue-title">Appointment types from deactivated users in automation goals</div>
+          <div class="issue-desc"><span class="kw">Appointment types</span>/<span class="kw">booking links</span> from <span class="kw">deactivated users</span> still appear as options in appointment goals within advanced automations.</div>
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3573500</span></td>
-        <td data-label="Current Status"><div class="status-text">Our team is looking into this</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 13, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3573500</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Our team is looking into this</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 13, 2026</td>
       </tr>
       <tr data-product="keap">
         <td>
           <div class="issue-title">Premium phone support icon unavailable</div>
-          <div class="issue-desc">Membership Service customers can't see the "Premium phone support" icon in the Keap interface.</div>
+          <div class="issue-desc"><span class="kw">Membership Service</span> customers cannot see the "<span class="kw">Premium phone support</span>" icon in Keap Pro/Max interface.</div>
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
-        <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 17, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Reported</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 17, 2026</td>
       </tr>
       <tr data-product="keap">
         <td>
-          <div class="issue-title">Dynamic Content preview mismatch</div>
-          <div class="issue-desc">Email editor preview doesn't match what recipients actually see when using Yes/No fields.</div>
+          <div class="issue-title">Dynamic Content preview mismatch on Yes/No fields</div>
+          <div class="issue-desc">Complex <span class="kw">Dynamic Content</span> editor preview does not match actual sent emails when evaluating <span class="kw">Yes/No field</span> values.</div>
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
-        <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 17, 2026</td>
-      </tr>
-      <tr data-product="keap">
-        <td>
-          <div class="issue-title">Pipeline deal activity history missing invoices</div>
-          <div class="issue-desc">Pipeline deal activity isn't displaying invoices related to the deal.</div>
-        </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
-        <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 20, 2026</td>
-      </tr>
-      <tr data-product="keap">
-        <td>
-          <div class="issue-title">Landing Page Editor shows no content</div>
-          <div class="issue-desc">Landing Page editor appears blank, but the <span class="kw">live page</span> still displays correctly to visitors.</div>
-        </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
-        <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 20, 2026</td>
-      </tr>
-      <tr data-product="keap">
-        <td>
-          <div class="issue-title">State fields show incorrectly after save</div>
-          <div class="issue-desc">Some countries' State contact address fields may show incorrectly after saving.</div>
-        </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
-        <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 20, 2026</td>
-      </tr>
-      <tr data-product="keap">
-        <td>
-          <div class="issue-title">Merge fields in "Create a deal" not working</div>
-          <div class="issue-desc">Merge fields added using the picker in "Create a deal" don't work as intended in some apps.</div>
-        </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
-        <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 20, 2026</td>
-      </tr>
-      <tr data-product="keap">
-        <td>
-          <div class="issue-title">Unable to logout in Ultimate interface</div>
-          <div class="issue-desc">Users unable to <span class="kw">logout</span> of the application in the Ultimate interface.</div>
-        </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
-        <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 20, 2026</td>
-      </tr>
-      <tr data-product="keap">
-        <td>
-          <div class="issue-title">Large duplicate checking throws error</div>
-          <div class="issue-desc">Large duplicate checking operations throw an error during processing.</div>
-        </td>
-        <td data-label="Product Area"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
-        <td data-label="Current Status"><div class="status-text">Reported to the team</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Apr 20, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Reported</div><div class="eta-text">ETA: TBD</div></td>
+        <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 17, 2026</td>
       </tr>
 
-      <tr data-product="thryvpay">
+      <tr data-product="bc">
         <td>
           <div class="issue-title">Stripe integration — residual queue</div>
-          <div class="issue-desc">Payment processing queue fully cleared. All cases resolved.</div>
-          <div class="issue-meta"></div>
+          <div class="issue-desc"><span class="kw">Stripe</span> queue cleared of genuine issues. Remaining volume largely <span class="kw">Tray.io</span> automated alerts. No active client-facing issues.</div>
+          
         </td>
-        <td data-label="Product Area"><span class="product-pill prod-thryvpay">ThryvPay</span></td>
-        <td data-label="Impact Level"><span class="sev-badge sev-low">Low</span></td>
-        <td data-label="Expected Resolution"><span class="pri-badge pri-p3">Within 28 days</span></td>
-        <td data-label="Reports"><span class="ticket-count">0 reports</span><br><span style="font-size:11px;color:var(--sev-low)">&#8595; from 3</span></td>
-        <td data-label="Current Status"><div class="status-text">Fix has been deployed</div><div class="eta-text">Queue cleared</div></td>
-        <td data-label="Regions Affected"><span class="region-tag">ALL</span></td>
-        <td data-label="First Reported" class="date-text">Jan 14, 2026</td>
+        <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
+        <td data-label="Severity"><span class="sev-badge sev-low">Low</span></td>
+        <td data-label="Priority"><span class="pri-badge pri-p3">Within 28 days</span></td>
+        <td data-label="Tickets"><span class="ticket-count">143 total</span><br><span style="font-size:11px;color:var(--sev-low)">mostly Tray.io</span></td>
+        <td data-label="Status / ETA"><div class="status-text">Resolved</div><div class="eta-text">Queue cleared</div></td>
+                <td data-label="Region"><span class="region-tag">ALL</span></td>
+        <td data-label="Date Reported" class="date-text">Jan 14, 2026</td>
       </tr>
     </tbody>
   </table>
 
-<!-- Incident Communications - Carousel (simplified: summary + client msg only) -->
-  <div id="incidentCommsContainer" style="margin-top:24px;position:relative;">
-    <div id="incidentDeck" style="position:relative;"></div>
-    <div id="incidentNav" style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;">
-      <button id="incPrev" onclick="navigateIncident(-1)" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--thryv-cloud);background:var(--thryv-white);cursor:pointer;font-size:16px;color:var(--thryv-midnight);display:flex;align-items:center;justify-content:center;transition:all 0.2s;">&larr;</button>
-      <span id="incIndicator" style="font-size:12px;font-weight:600;color:var(--thryv-steel);min-width:80px;text-align:center;"></span>
-      <button id="incNext" onclick="navigateIncident(1)" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--thryv-cloud);background:var(--thryv-white);cursor:pointer;font-size:16px;color:var(--thryv-midnight);display:flex;align-items:center;justify-content:center;transition:all 0.2s;">&rarr;</button>
+  <!-- Incident Communications -->
+  <div class="talking-points" style="margin-top:24px;">
+    <div class="talking-points-header">
+      <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+      <div class="talking-points-title">Incident Communication — EP / Growth Package Issues</div>
+    </div>
+    <div class="tp-meta-grid" style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">
+      <span style="font-weight:600;">Priority:</span><span>P3 Low</span>
+      <span style="font-weight:600;">Severity:</span><span>High — Major function not working for a subset of users</span>
+      <span style="font-weight:600;">Status:</span><span style="color:var(--sev-low);font-weight:600;">Dev In Progress — many accounts resolved, verifying remaining</span>
+      <span style="font-weight:600;">Update cadence:</span><span>Per SOP cadence during active work</span>
+      <span style="font-weight:600;">Workaround:</span><span style="color:var(--sev-low);">Yes — submit a Zendesk ticket for manual activation. Include the Thryv ID and Growth Package tier.</span>
+    </div>
+    <div class="tp-section">
+      <div class="tp-label">Impact Summary</div>
+      <div class="tp-text">Enhanced Profiles and Growth Package features are not activating automatically after purchase for some clients. This is caused by a product installation issue in the backend. MCB-168 now in Dev In Progress. MCB-302 (V4) in backlog. Many accounts have been resolved per Karla Cruz — remaining accounts being verified via Gump/Pace. Subscriptions and data are intact — features are simply not surfacing in the UI.</div>
+    </div>
+    <div class="tp-section">
+      <div class="tp-label">Client-Facing Message</div>
+      <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We are aware of a technical issue preventing some Growth Package features from appearing in your Marketing Center. Your subscription is active and no data has been lost. Our engineering team has prioritized this issue and a fix is currently in development. We expect resolution soon and will follow up as soon as the fix is deployed.</div>
+    </div>
+    <div class="tp-section tp-internal">
+      <div class="tp-label">Internal Notes</div>
+      <div class="tp-text">MCB-168 now Dev In Progress (assigned to Victor Diaz Arias). MCB-302 (V4) in Dev Backlog. Karla says many accounts resolved — verify via Gump/Pace that correct YP product is installed (found 2 showing "Activate" instead of "Platinum"). If a client needs immediate activation, submit a Zendesk ticket with the Thryv ID and package tier for manual resolution.</div>
     </div>
   </div>
 
-<!-- Legend — Simplified: Impact + Expected Resolution explained -->
+  <!-- Legend -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0 10px;">
     <div style="background:var(--thryv-white);border:1px solid var(--thryv-cloud);border-radius:var(--radius-lg);padding:16px 20px;">
-      <div style="font-size:13px;font-weight:600;color:var(--thryv-midnight);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;">Impact Level</div>
+      <div style="font-size:13px;font-weight:600;color:var(--thryv-midnight);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;">Severity</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;align-items:center;gap:10px;white-space:nowrap;"><span class="sev-badge sev-critical" style="font-size:11px;min-width:80px;justify-content:center;">Critical</span><span style="font-size:12px;color:var(--thryv-night);">Severe disruption to essential business functions</span></div>
         <div style="display:flex;align-items:center;gap:10px;white-space:nowrap;"><span class="sev-badge sev-high" style="font-size:11px;min-width:80px;justify-content:center;">High</span><span style="font-size:12px;color:var(--thryv-night);">Major function down for a subset of users</span></div>
@@ -1622,29 +1583,33 @@ body:not(.simplified) .simp-view { display: none !important; }
       </div>
     </div>
     <div style="background:var(--thryv-white);border:1px solid var(--thryv-cloud);border-radius:var(--radius-lg);padding:16px 20px;">
-      <div style="font-size:13px;font-weight:600;color:var(--thryv-midnight);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;">Expected Resolution</div>
+      <div style="font-size:13px;font-weight:600;color:var(--thryv-midnight);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;">Priority &amp; expected resolution</div>
       <div style="display:flex;flex-direction:column;gap:8px;">
         <div style="display:flex;align-items:center;gap:10px;white-space:nowrap;">
-          <span style="font-size:12px;font-weight:600;color:#791F1F;background:#FCEBEB;padding:3px 10px;border-radius:8px;min-width:120px;text-align:center;">Urgent</span>
-          <span style="font-size:12px;color:var(--thryv-night);flex:1;">Fix in progress now</span>
+          <span class="pri-badge pri-p0" style="font-size:11px;min-width:80px;justify-content:center;">P0 Critical</span>
+          <span style="font-size:12px;color:var(--thryv-night);flex:1;">Active outage — fix in progress now</span>
+          <span style="font-size:12px;font-weight:600;color:#791F1F;background:#FCEBEB;padding:2px 10px;border-radius:8px;">&#9201; within 4 hours</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;white-space:nowrap;">
-          <span style="font-size:12px;font-weight:600;color:#633806;background:#FAEEDA;padding:3px 10px;border-radius:8px;min-width:120px;text-align:center;">Within 24 hours</span>
-          <span style="font-size:12px;color:var(--thryv-night);flex:1;">Team is actively working on it</span>
+          <span class="pri-badge pri-p1" style="font-size:11px;min-width:80px;justify-content:center;">P1 High</span>
+          <span style="font-size:12px;color:var(--thryv-night);flex:1;">Major issue — team is actively working on it</span>
+          <span style="font-size:12px;font-weight:600;color:#633806;background:#FAEEDA;padding:2px 10px;border-radius:8px;">&#9201; within 24 hours</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;white-space:nowrap;">
-          <span style="font-size:12px;font-weight:600;color:#0C447C;background:#E6F1FB;padding:3px 10px;border-radius:8px;min-width:120px;text-align:center;">Within 14 days</span>
+          <span class="pri-badge pri-p2" style="font-size:11px;min-width:80px;justify-content:center;">P2 Medium</span>
           <span style="font-size:12px;color:var(--thryv-night);flex:1;">Known issue — fix is planned</span>
+          <span style="font-size:12px;font-weight:600;color:#0C447C;background:#E6F1FB;padding:2px 10px;border-radius:8px;">&#9201; within 14 days</span>
         </div>
         <div style="display:flex;align-items:center;gap:10px;white-space:nowrap;">
-          <span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 10px;border-radius:8px;min-width:120px;text-align:center;">Within 28 days</span>
+          <span class="pri-badge pri-p3" style="font-size:11px;min-width:80px;justify-content:center;">P3 Low</span>
           <span style="font-size:12px;color:var(--thryv-night);flex:1;">Minor issue — fix is scheduled</span>
+          <span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:2px 10px;border-radius:8px;">&#9201; within 28 days</span>
         </div>
       </div>
     </div>
   </div>
 
-<!-- Recently Resolved — Simplified: just issue name + Resolved badge -->
+  <!-- Recently Resolved -->
   <div class="section-header" style="margin-top:36px;">
     <div class="section-title">Recently Resolved</div>
   </div>
@@ -1652,77 +1617,84 @@ body:not(.simplified) .simp-view { display: none !important; }
   <table class="issue-table">
     <thead>
       <tr>
-        <th style="width:40%">Issue</th>
-        <th style="width:20%">Product Area</th>
-        <th style="width:20%">Status</th>
+        <th style="width:30%">Issue</th>
+        <th style="width:14%">Product</th>
+        <th style="width:14%">Tickets</th>
+        <th style="width:22%">Resolution</th>
         <th style="width:20%">Time to resolve</th>
       </tr>
     </thead>
     <tbody>
       <tr class="resolved-row">
-        <td><div class="issue-title">Thryv Leads button grayed out / report unavailable</div><div class="issue-desc">Leads report button grayed out under Analytics. MCB-232 fix released — all accounts confirmed resolved Apr 20.</div><div class="issue-meta"><span class="jira-tag">MCB-232</span></div></td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 12px;border-radius:12px;border:1.5px solid #B8D9A0;">&#10003; Resolved</span></td>
-        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~2 weeks</span></td>
+        <td><div class="issue-title">Thryv Leads button grayed out / report unavailable</div><div class="issue-desc">MCB-232 Released. All accounts marked resolved per Karla Cruz (Apr 20). MCB-248 remains in Dev Backlog.</div></td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Date Reported" class="date-text">Released</td>
+        <td class="resolved-text">Released</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~2 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P3 SLA</span></td>
       </tr>
       <tr class="resolved-row">
-        <td><div class="issue-title">Visitor tagging V6 — website analytics not tracking</div><div class="issue-desc">Website analytics and heatmap tracking fix deployed for affected accounts.</div></td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 12px;border-radius:12px;border:1.5px solid #B8D9A0;">&#10003; Resolved</span></td>
-        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~3 weeks</span></td>
+        <td><div class="issue-title">Visitor tagging V6 — website analytics not tracking</div><div class="issue-desc">MCB-220 Released. Visitor tagging and heatmap fixes deployed for V6 accounts.</div></td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Date Reported" class="date-text">Released</td>
+        <td class="resolved-text">Released</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~3 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
       </tr>
       <tr class="resolved-row">
-        <td><div class="issue-title">Stripe integration — queue fully cleared</div><div class="issue-desc">Payment processing queue dropped from 111 to 0. All cases resolved.</div></td>
+        <td><div class="issue-title">External ID already in use — publish failures</div><div class="issue-desc">Listings publish failures due to external ID conflicts. Released in Jira.</div></td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Date Reported" class="date-text">4 → 0 active</td>
+        <td class="resolved-text">Released</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~3 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
+      </tr>
+      <tr class="resolved-row">
+        <td><div class="issue-title">Thryv Leads reporting link missing</div><div class="issue-desc">Thryv Leads link not visible in Analytics tab.</div></td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Date Reported" class="date-text">14 → 0 active</td>
+        <td class="resolved-text">Resolved</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~3 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
+      </tr>
+      <tr class="resolved-row">
+        <td><div class="issue-title">Listings not appearing / address errors (404)</div><div class="issue-desc">Listings 404 errors and RAQ missing.</div></td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Date Reported" class="date-text">8 → 0 active</td>
+        <td class="resolved-text">Resolved</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~2 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
+      </tr>
+      <tr class="resolved-row">
+        <td><div class="issue-title">Missing GP add-on subset</div><div class="issue-desc">Subset of tickets closed — remaining tracked under parent issue.</div></td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Date Reported" class="date-text">6 → 0 active</td>
+        <td class="resolved-text">Resolved / merged</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-high);">~4 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">merged into active P0</span></td>
+      </tr>
+      <tr class="resolved-row">
+        <td><div class="issue-title">Stripe bulk open queue</div><div class="issue-desc">Stripe queue dropped from 111 to 3 active. Largely cleared.</div></td>
         <td><span class="product-pill prod-pay">ThryvPay</span></td>
-        <td><span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 12px;border-radius:12px;border:1.5px solid #B8D9A0;">&#10003; Resolved</span></td>
-        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~4 weeks</span></td>
+        <td data-label="Date Reported" class="date-text">111 → 3 active</td>
+        <td class="resolved-text">Substantially resolved</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~3 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
       </tr>
       <tr class="resolved-row">
-        <td><div class="issue-title">External ID conflicts — publish failures</div><div class="issue-desc">Listings publish failures due to ID conflicts. Fix deployed.</div></td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 12px;border-radius:12px;border:1.5px solid #B8D9A0;">&#10003; Resolved</span></td>
-        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~3 weeks</span></td>
-      </tr>
-      <tr class="resolved-row">
-        <td><div class="issue-title">Thryv Leads reporting link missing</div><div class="issue-desc">Thryv Leads link wasn't visible in the Analytics tab.</div></td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 12px;border-radius:12px;border:1.5px solid #B8D9A0;">&#10003; Resolved</span></td>
-        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~3 weeks</span></td>
-      </tr>
-      <tr class="resolved-row">
-        <td><div class="issue-title">Listings not appearing / address errors</div><div class="issue-desc">Listings 404 errors and missing pages.</div></td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 12px;border-radius:12px;border:1.5px solid #B8D9A0;">&#10003; Resolved</span></td>
-        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~2 weeks</span></td>
-      </tr>
-      <tr class="resolved-row">
-        <td><div class="issue-title">Missing Growth Package add-on subset</div><div class="issue-desc">Subset of cases closed — remaining tracked under parent issue.</div></td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 12px;border-radius:12px;border:1.5px solid #B8D9A0;">&#10003; Resolved</span></td>
-        <td><span style="font-size:13px;font-weight:600;color:var(--sev-high);">~4 weeks</span></td>
-      </tr>
-      <tr class="resolved-row">
-        <td><div class="issue-title">Stripe bulk open queue</div><div class="issue-desc">Queue dropped from 111 to 0 active. Fully cleared.</div></td>
-        <td><span class="product-pill prod-pay">ThryvPay</span></td>
-        <td><span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 12px;border-radius:12px;border:1.5px solid #B8D9A0;">&#10003; Resolved</span></td>
-        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~4 weeks</span></td>
-      </tr>
-      <tr class="resolved-row">
-        <td><div class="issue-title">Update listings failed</div><div class="issue-desc">Listings unable to save. Bulk update failures.</div></td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 12px;border-radius:12px;border:1.5px solid #B8D9A0;">&#10003; Resolved</span></td>
-        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~5 weeks</span></td>
+        <td><div class="issue-title">Update listings failed</div><div class="issue-desc">Listings management unable to save. Bulk update failures.</div></td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Date Reported" class="date-text">61 (all closed)</td>
+        <td class="resolved-text">Resolved</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~5 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
       </tr>
       <tr class="resolved-row">
         <td><div class="issue-title">Listing sync failures</div><div class="issue-desc">Listings failing to sync. Service areas showing stale data.</div></td>
-        <td data-label="Product Area"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span style="font-size:12px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 12px;border-radius:12px;border:1.5px solid #B8D9A0;">&#10003; Resolved</span></td>
-        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~4 weeks</span></td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td data-label="Date Reported" class="date-text">34 (all closed)</td>
+        <td class="resolved-text">Resolved</td>
+        <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~4 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
       </tr>
     </tbody>
   </table>
+
+
 </div>
 <!-- ═══ END SIMPLIFIED VIEW ═══ -->
+
 
   <!-- Footer -->
   <div class="page-footer">
