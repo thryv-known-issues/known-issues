@@ -387,24 +387,20 @@ body:not(.simplified) .simp-view { display: none !important; }
       <a class="active" href="#">System status</a>
       <a href="#">Resources</a>
     </div>
-    <div id="viewToggle" style="display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;" onclick="toggleViewMode()">
-      <span id="toggleLabel" style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.5px;">Simplified</span>
-      <div id="toggleTrack" style="width:40px;height:22px;border-radius:11px;background:rgba(255,255,255,0.2);position:relative;transition:background 0.3s;">
-        <div id="toggleKnob" style="width:18px;height:18px;border-radius:50%;background:white;position:absolute;top:2px;left:2px;transition:left 0.3s;box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>
-      </div>
-    </div>
   </div>
-  <div style="display:flex;align-items:center;gap:8px;">
-      <span class="toggle-label">Simplified</span>
-      <div class="toggle-track" id="viewToggle" onclick="toggleView()">
-        <div class="toggle-knob"></div>
-      </div>
-      <span class="toggle-label">Advanced</span>
-    </div>
 </div>
 
 <div class="page-wrapper">
   <div class="mockup-badge">&#10022; Mockup — proposed Compass page · Data through April 24, 2026</div>
+
+  <!-- View Toggle -->
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:12px 0 0;">
+    <span class="toggle-label" style="color:var(--thryv-night);">Simplified</span>
+    <div class="toggle-track" id="viewToggle" onclick="toggleView()">
+      <div class="toggle-knob"></div>
+    </div>
+    <span class="toggle-label" style="color:var(--thryv-night);">Advanced</span>
+  </div>
 
   <!-- Shared Publisher slide-down panel (works in both views) -->
   <div class="pub-slidedown" id="pubSlidedown">
@@ -1734,111 +1730,7 @@ body:not(.simplified) .simp-view { display: none !important; }
 
 <script>
 // View mode toggle - Simplified (default) / Advanced
-var isAdvanced = false;
-
-var simplifiedStatus = {
-  'Dev In Progress': 'Engineering is working on a fix',
-  'Dev Backlog': 'Identified \u2014 fix is being planned',
-  'Dev Complete': 'Fix developed \u2014 testing in progress',
-  'Investigating': 'Our team is looking into this',
-  'In Review': 'Under review by the engineering team',
-  'Released': 'Fix has been deployed',
-  'Resolved': 'Resolved',
-  'Queue processing': 'Being processed \u2014 volume declining',
-  'Clearing': 'Nearly resolved',
-  'With platform dev': 'With our development team',
-  'Ongoing \u2014 migration related': 'Related to system migration',
-  'Reported': 'Reported to the team'
-};
-
-var simplifiedPriority = {
-  'P0': 'Urgent \u2014 fix in progress now',
-  'P1': 'Fix expected within 24 hours',
-  'P2': 'Fix expected within 14 days',
-  'P3': 'Fix expected within 28 days'
-};
-
-var headerMap = {
-  'Issue': 'Issue', 'Product': 'Product Area', 'Severity': 'Impact Level',
-  'Priority': 'Expected Resolution', 'Tickets': 'Reports',
-  'Status / ETA': 'Current Status', 'Region': 'Regions Affected',
-  'Date Reported': 'First Reported'
-};
-
-function toggleViewMode(){
-  isAdvanced = !isAdvanced;
-  document.body.classList.toggle('simplified', !isAdvanced);
-  var label = document.getElementById('toggleLabel');
-  var knob = document.getElementById('toggleKnob');
-  var track = document.getElementById('toggleTrack');
-  if(isAdvanced){
-    label.textContent = 'Advanced';
-    knob.style.left = '20px';
-    track.style.background = 'var(--thryv-orange)';
-  } else {
-    label.textContent = 'Simplified';
-    knob.style.left = '2px';
-    track.style.background = 'rgba(255,255,255,0.2)';
-  }
-  applyViewMode();
-}
-
-function applyViewMode(){
-  // Status text
-  document.querySelectorAll('.status-text').forEach(function(el){
-    if(!el.getAttribute('data-adv')) el.setAttribute('data-adv', el.textContent);
-    el.textContent = isAdvanced ? el.getAttribute('data-adv') : (simplifiedStatus[el.getAttribute('data-adv')] || el.getAttribute('data-adv'));
-  });
-  // Priority badges
-  document.querySelectorAll('.pri-badge').forEach(function(el){
-    if(!el.getAttribute('data-adv')) el.setAttribute('data-adv', el.textContent);
-    if(!isAdvanced){
-      var code = el.getAttribute('data-adv').trim().split(' ')[0];
-      el.textContent = simplifiedPriority[code] || el.getAttribute('data-adv');
-    } else {
-      el.textContent = el.getAttribute('data-adv');
-    }
-  });
-  // Status card labels
-  document.querySelectorAll('.status-card span').forEach(function(s){
-    if(s.textContent.indexOf('open tickets') !== -1 || s.textContent.indexOf('reported cases') !== -1){
-      if(!s.getAttribute('data-adv')) s.setAttribute('data-adv', s.textContent);
-      s.textContent = isAdvanced ? s.getAttribute('data-adv').replace('reported cases','open tickets') : s.getAttribute('data-adv').replace('open tickets','reported cases');
-    }
-  });
-  // Table headers
-  document.querySelectorAll('.issue-table th').forEach(function(th){
-    var arrow = th.querySelector('.sort-arrow');
-    if(!th.getAttribute('data-adv-h')){
-      var t = th.textContent.trim();
-      if(arrow) t = t.replace(arrow.textContent,'').trim();
-      th.setAttribute('data-adv-h', t);
-    }
-    var orig = th.getAttribute('data-adv-h');
-    var mapped = headerMap[orig] || orig;
-    if(arrow){ th.innerHTML = (isAdvanced ? orig : mapped) + ' ' + arrow.outerHTML; }
-    else { th.textContent = isAdvanced ? orig : mapped; }
-  });
-  // Alert banner
-  var ab = document.querySelector('.alert-banner span');
-  if(ab){
-    if(!ab.getAttribute('data-adv-alert')) ab.setAttribute('data-adv-alert', ab.innerHTML);
-    ab.innerHTML = isAdvanced ? ab.getAttribute('data-adv-alert') : '<strong>Current status:</strong> Our engineering team is actively working on fixes for several known issues. Most issue volumes are stable or declining. See details below for the latest updates.';
-  }
-  // Incident comm labels
-  document.querySelectorAll('.tp-label').forEach(function(el){
-    if(!el.getAttribute('data-adv-l')) el.setAttribute('data-adv-l', el.textContent);
-    if(!isAdvanced){
-      if(el.getAttribute('data-adv-l') === 'Impact Summary') el.textContent = "What's happening";
-      else if(el.getAttribute('data-adv-l') === 'Client-Facing Message') el.textContent = 'What to tell the client';
-      else el.textContent = el.getAttribute('data-adv-l');
-    } else {
-      el.textContent = el.getAttribute('data-adv-l');
-    }
-  });
-}
-
-// Initialize simplified
+// Initialize simplified mode
 document.body.classList.add('simplified');
 
 // Column sorting
