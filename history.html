@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historical Archive — Known System Issues | Thryv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --thryv-orange: #FF5000;
+  --thryv-midnight: #29355D;
+  --thryv-sapphire: #5378FC;
+  --thryv-mist: #F4F6FB;
+  --thryv-cloud: #ECEEF1;
+  --thryv-steel: #808080;
+  --thryv-night: #4D4D4D;
+  --thryv-black: #121212;
+  --thryv-white: #FFFFFF;
+  --sev-critical: #E24B4A;
+  --sev-high: #EF9F27;
+  --sev-medium: #5378FC;
+  --sev-low: #1D9E75;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--thryv-mist); color: var(--thryv-black); }
+
+.topbar { background: var(--thryv-midnight); padding: 12px 32px; display: flex; align-items: center; justify-content: space-between; }
+.topbar-logo { display: flex; align-items: center; gap: 8px; }
+.topbar-logo span:first-child { font-size: 20px; font-weight: 700; color: var(--thryv-orange); }
+.topbar-logo span:last-child { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: 1px; text-transform: uppercase; }
+.topbar-nav { display: flex; gap: 24px; }
+.topbar-nav a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; font-weight: 500; }
+.topbar-nav a:hover { color: white; }
+.topbar-nav a.active { color: white; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: var(--thryv-orange); }
+
+.page-wrapper { max-width: 1280px; margin: 0 auto; padding: 0 24px 40px; }
+
+.product-pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; color: white; }
+.prod-mc { background: #3C3489; }
+.prod-bc { background: #121212; }
+.prod-olm { background: #0E7C6B; }
+.prod-keap { background: #4CAF50; }
+.prod-pay { background: #5378FC; }
+
+.pri-badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.pri-p0 { background: #FCEBEB; color: #791F1F; }
+.pri-p1 { background: #FAEEDA; color: #633806; }
+.pri-p2 { background: #E6F1FB; color: #0C447C; }
+.pri-p3 { background: #EAF3DE; color: #27500A; }
+
+.res-badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.res-released { background: #E8F5E9; color: #1D9E75; }
+.res-merged { background: #F3E5F5; color: #7B2D8E; }
+.res-partial { background: #FFF3E0; color: #E67E22; }
+
+.issue-table { width: 100%; table-layout: auto; border-collapse: separate; border-spacing: 0; border: 1px solid var(--thryv-cloud); border-radius: var(--radius-lg); overflow: hidden; font-size: 13px; background: var(--thryv-white); }
+.issue-table thead { background: var(--thryv-mist); }
+.issue-table th { padding: 10px 12px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--thryv-night); border-bottom: 2px solid var(--thryv-cloud); }
+.issue-table td { padding: 12px; border-bottom: 1px solid var(--thryv-cloud); vertical-align: top; }
+.issue-table tbody tr:last-child td { border-bottom: none; }
+
+.month-header { font-size: 16px; font-weight: 700; color: var(--thryv-midnight); padding: 10px 0; border-bottom: 3px solid var(--thryv-orange); margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+.month-count { font-size: 11px; background: var(--thryv-orange); color: white; padding: 2px 10px; border-radius: 12px; font-weight: 600; }
+.empty-month { font-size: 13px; color: var(--thryv-steel); padding: 16px; font-style: italic; background: var(--thryv-white); border-radius: var(--radius-lg); border: 1px solid var(--thryv-cloud); }
+
+.year-header { font-size: 22px; font-weight: 700; color: var(--thryv-midnight); margin: 28px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--thryv-midnight); }
+
+.stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
+.stat-card { background: var(--thryv-white); border: 1px solid var(--thryv-cloud); border-radius: var(--radius-lg); padding: 16px; text-align: center; }
+.stat-number { font-size: 28px; font-weight: 700; color: var(--thryv-midnight); }
+.stat-label { font-size: 12px; color: var(--thryv-steel); margin-top: 4px; }
+
+.search-bar { width: 100%; padding: 10px 16px 10px 40px; border: 2px solid var(--thryv-cloud); border-radius: var(--radius-lg); font-size: 14px; background: var(--thryv-white); outline: none; }
+.search-bar:focus { border-color: var(--thryv-sapphire); }
+
+.filter-btn { padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--thryv-cloud); background: var(--thryv-white); font-size: 12px; font-weight: 600; cursor: pointer; color: var(--thryv-night); }
+.filter-btn:hover { border-color: var(--thryv-sapphire); }
+.filter-btn.active { background: var(--thryv-midnight); color: white; border-color: var(--thryv-midnight); }
+
+.jira-ref { font-size: 10px; font-weight: 600; color: var(--thryv-steel); background: var(--thryv-mist); padding: 2px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div style="background:#29355D;color:rgba(255,255,255,0.85);text-align:center;padding:6px 16px;font-size:11px;font-weight:600;letter-spacing:0.5px;">
+  INTERNAL USE ONLY — This page contains confidential information. Do not share externally.
+</div>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <span>thryv</span>
+    <span style="color:var(--thryv-orange);">&#9656;</span>
+    <span>COMPASS</span>
+  </div>
+  <div class="topbar-nav">
+    <a href="index.html">Home</a>
+    <a href="#">Software stats</a>
+    <a href="index.html">System status</a>
+    <a href="#">Resources</a>
+    <a class="active" href="history.html">Historical</a>
+  </div>
+</div>
+
+<div class="page-wrapper">
+  <div style="background:var(--thryv-orange);color:white;padding:6px 20px;border-radius:0 0 var(--radius-md) var(--radius-md);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;display:inline-block;">
+    Historical Archive — All Resolved Known Issues
+  </div>
+
+  <!-- Summary Stats -->
+  <div class="stats-strip">
+    <div class="stat-card">
+      <div class="stat-number">9</div>
+      <div class="stat-label">Total Resolved (2026 YTD)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">~3.2 wks</div>
+      <div class="stat-label">Avg. Time to Resolve</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">9</div>
+      <div class="stat-label">Resolved in April</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">0</div>
+      <div class="stat-label">Resolved in Q1</div>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div style="position:relative;margin:20px 0;">
+    <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:0.4;" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <input type="text" class="search-bar" id="historySearch" placeholder="Search resolved issues by name, product, or keyword..." oninput="filterHistory()">
+  </div>
+
+  <!-- Filters -->
+  <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;">
+    <button class="filter-btn active" data-filter="all" onclick="filterByProduct('all', this)">All Products</button>
+    <button class="filter-btn" data-filter="mc" onclick="filterByProduct('mc', this)">Marketing Center</button>
+    <button class="filter-btn" data-filter="bc" onclick="filterByProduct('bc', this)">Business Center</button>
+    <button class="filter-btn" data-filter="olm" onclick="filterByProduct('olm', this)">Online Listings</button>
+    <button class="filter-btn" data-filter="thryvpay" onclick="filterByProduct('thryvpay', this)">ThryvPay</button>
+    <button class="filter-btn" data-filter="myaccount" onclick="filterByProduct('myaccount', this)">My Account</button>
+    <button class="filter-btn" data-filter="keap" onclick="filterByProduct('keap', this)">Keap</button>
+  </div>
+
+  <!-- 2026 -->
+  <div class="year-header">2026</div>
+
+  <!-- April 2026 -->
+  <div style="margin-bottom:32px;">
+    <div class="month-header">April 2026 <span class="month-count">9 resolved</span></div>
+    <table class="issue-table">
+      <thead>
+        <tr>
+          <th style="width:22%">Issue</th>
+          <th style="width:10%">Product</th>
+          <th style="width:7%">Priority</th>
+          <th style="width:12%">Reported</th>
+          <th style="width:12%">Resolved</th>
+          <th style="width:8%">Duration</th>
+          <th style="width:8%">Status</th>
+          <th style="width:21%">Resolution Summary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 1. Thryv Leads button grayed out -->
+        <tr data-product="mc">
+          <td>
+            <strong>Thryv Leads button grayed out / report unavailable</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Clients with active TL subscriptions could not access their report in MC Analytics. CTA button appeared grayed out.</div>
+            <div style="margin-top:4px;"><span class="jira-ref">MCB-232</span> <span class="jira-ref">MCB-248 remains in Dev Backlog</span></div>
+          </td>
+          <td><span class="product-pill prod-mc">Marketing Center</span></td>
+          <td><span class="pri-badge pri-p3">P3</span></td>
+          <td style="font-size:12px;">Apr 7, 2026<br><span style="color:var(--thryv-steel);">2:19 PM CT</span></td>
+          <td style="font-size:12px;">Apr 21, 2026<br><span style="color:var(--sev-low);font-weight:600;">9:34 AM CT</span></td>
+          <td style="font-size:12px;font-weight:600;">~2 weeks</td>
+          <td><span class="res-badge res-released">Released</span></td>
+          <td style="font-size:12px;">Fix deployed. All affected accounts resolved. TL report button now functional for all eligible users.</td>
+        </tr>
+        <!-- 2. Visitor tagging V6 -->
+        <tr data-product="mc">
+          <td>
+            <strong>Website analytics / visitor tagging not tracking (V6)</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Website analytics and heatmap data not appearing in MC. CORS errors on third-party sites. DB misconfigurations on Thryv-managed sites.</div>
+            <div style="margin-top:4px;"><span class="jira-ref">MCB-220</span></div>
+          </td>
+          <td><span class="product-pill prod-mc">Marketing Center</span></td>
+          <td><span class="pri-badge pri-p3">P3</span></td>
+          <td style="font-size:12px;">Apr 3, 2026<br><span style="color:var(--thryv-steel);">8:41 AM CT</span></td>
+          <td style="font-size:12px;">Apr 20, 2026<br><span style="color:var(--sev-low);font-weight:600;">10:12 AM CT</span></td>
+          <td style="font-size:12px;font-weight:600;">~3 weeks</td>
+          <td><span class="res-badge res-released">Released</span></td>
+          <td style="font-size:12px;">CORS fixes deployed. DB corrections applied for mismarked managed sites. V7 continues tracking remaining cases under MCB-265.</td>
+        </tr>
+        <!-- 3. External ID conflicts -->
+        <tr data-product="mc">
+          <td>
+            <strong>External ID already in use — publish failures</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Listings publish failures due to "External IDs already used" error in Yext integration. Affected accounts unable to save or publish listing content.</div>
+            <div style="margin-top:4px;"><span class="jira-ref">MCB-197</span></div>
+          </td>
+          <td><span class="product-pill prod-mc">Marketing Center</span></td>
+          <td><span class="pri-badge pri-p2">P2</span></td>
+          <td style="font-size:12px;">Mar 27, 2026<br><span style="color:var(--thryv-steel);">4:32 PM CT</span></td>
+          <td style="font-size:12px;">Apr 16, 2026<br><span style="color:var(--sev-low);font-weight:600;">4:28 PM CT</span></td>
+          <td style="font-size:12px;font-weight:600;">~3 weeks</td>
+          <td><span class="res-badge res-released">Released</span></td>
+          <td style="font-size:12px;">External ID deduplication fix deployed. Yext account linkage restored. 4 tickets, 0 remaining active.</td>
+        </tr>
+        <!-- 4. Thryv Leads reporting link missing -->
+        <tr data-product="mc">
+          <td>
+            <strong>Thryv Leads reporting link missing</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Thryv Leads link not visible in the Analytics tab of Marketing Center. Clients unable to navigate to their TL reporting.</div>
+          </td>
+          <td><span class="product-pill prod-mc">Marketing Center</span></td>
+          <td><span class="pri-badge pri-p2">P2</span></td>
+          <td style="font-size:12px;">~Mar 2026</td>
+          <td style="font-size:12px;"><span style="color:var(--sev-low);font-weight:600;">~Apr 2026</span></td>
+          <td style="font-size:12px;font-weight:600;">~3 weeks</td>
+          <td><span class="res-badge res-released">Resolved</span></td>
+          <td style="font-size:12px;">Reporting link restored in MC Analytics. 14 tickets opened, 0 remaining active.</td>
+        </tr>
+        <!-- 5. Listings not appearing / address errors (404) -->
+        <tr data-product="mc">
+          <td>
+            <strong>Listings not appearing / address errors (404)</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Listings 404 errors and RAQ (Request a Quote) missing from Marketing Center listings management interface.</div>
+          </td>
+          <td><span class="product-pill prod-mc">Marketing Center</span></td>
+          <td><span class="pri-badge pri-p2">P2</span></td>
+          <td style="font-size:12px;">~Mar 2026</td>
+          <td style="font-size:12px;"><span style="color:var(--sev-low);font-weight:600;">~Apr 2026</span></td>
+          <td style="font-size:12px;font-weight:600;">~2 weeks</td>
+          <td><span class="res-badge res-released">Resolved</span></td>
+          <td style="font-size:12px;">404 errors resolved. Listings now appearing correctly. 8 tickets opened, 0 remaining active.</td>
+        </tr>
+        <!-- 6. Missing GP add-on subset -->
+        <tr data-product="mc">
+          <td>
+            <strong>Missing GP add-on subset</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Subset of tickets closed for GP add-on not appearing. Remaining cases tracked under the active parent issue (MCB-212/MCB-150).</div>
+          </td>
+          <td><span class="product-pill prod-mc">Marketing Center</span></td>
+          <td><span class="pri-badge pri-p3">P3</span></td>
+          <td style="font-size:12px;">~Mar 2026</td>
+          <td style="font-size:12px;"><span style="color:var(--sev-low);font-weight:600;">~Apr 2026</span></td>
+          <td style="font-size:12px;font-weight:600;">~4 weeks</td>
+          <td><span class="res-badge res-merged">Resolved / Merged</span></td>
+          <td style="font-size:12px;">Subset resolved. Remaining tickets merged into active parent issue for continued tracking. 6 tickets, 0 remaining in this subset.</td>
+        </tr>
+        <!-- 7. Stripe bulk open queue -->
+        <tr data-product="thryvpay">
+          <td>
+            <strong>Stripe bulk open queue</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Stripe queue experienced a large volume of open tickets (111). Queue has been largely cleared with only residual items remaining.</div>
+          </td>
+          <td><span class="product-pill prod-pay">ThryvPay</span></td>
+          <td><span class="pri-badge pri-p2">P2</span></td>
+          <td style="font-size:12px;">~Mar 2026</td>
+          <td style="font-size:12px;"><span style="color:var(--sev-low);font-weight:600;">~Apr 2026</span></td>
+          <td style="font-size:12px;font-weight:600;">~3 weeks</td>
+          <td><span class="res-badge res-partial">Substantially Resolved</span></td>
+          <td style="font-size:12px;">Queue dropped from 111 to 3 active tickets. Remaining items are account-specific. Largely cleared.</td>
+        </tr>
+        <!-- 8. Update listings failed -->
+        <tr data-product="mc">
+          <td>
+            <strong>Update listings failed</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Listings management unable to save. Bulk update failures affecting multiple client accounts.</div>
+          </td>
+          <td><span class="product-pill prod-mc">Marketing Center</span></td>
+          <td><span class="pri-badge pri-p2">P2</span></td>
+          <td style="font-size:12px;">~Feb 2026</td>
+          <td style="font-size:12px;"><span style="color:var(--sev-low);font-weight:600;">~Apr 2026</span></td>
+          <td style="font-size:12px;font-weight:600;">~5 weeks</td>
+          <td><span class="res-badge res-released">Resolved</span></td>
+          <td style="font-size:12px;">Update failures resolved. All 61 tickets closed. Listing management save functionality restored.</td>
+        </tr>
+        <!-- 9. Listing sync failures -->
+        <tr data-product="mc">
+          <td>
+            <strong>Listing sync failures</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Listings failing to sync across publishers. Service areas showing stale data for affected accounts.</div>
+          </td>
+          <td><span class="product-pill prod-mc">Marketing Center</span></td>
+          <td><span class="pri-badge pri-p2">P2</span></td>
+          <td style="font-size:12px;">~Feb 2026</td>
+          <td style="font-size:12px;"><span style="color:var(--sev-low);font-weight:600;">~Apr 2026</span></td>
+          <td style="font-size:12px;font-weight:600;">~4 weeks</td>
+          <td><span class="res-badge res-released">Resolved</span></td>
+          <td style="font-size:12px;">Sync failures resolved. All 34 tickets closed. Publisher data now updating correctly.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- March 2026 -->
+  <div style="margin-bottom:32px;">
+    <div class="month-header">March 2026 <span class="month-count" style="background:var(--thryv-steel);">0 resolved</span></div>
+    <div class="empty-month">No issues were resolved in March 2026.</div>
+  </div>
+
+  <!-- February 2026 -->
+  <div style="margin-bottom:32px;">
+    <div class="month-header">February 2026 <span class="month-count" style="background:var(--thryv-steel);">0 resolved</span></div>
+    <div class="empty-month">No issues were resolved in February 2026.</div>
+  </div>
+
+  <!-- January 2026 -->
+  <div style="margin-bottom:32px;">
+    <div class="month-header">January 2026 <span class="month-count" style="background:var(--thryv-steel);">0 resolved</span></div>
+    <div class="empty-month">Dashboard tracking began mid-January 2026. No resolved issues recorded for this period.</div>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center;padding:24px 0 12px;margin-top:32px;border-top:1px solid var(--thryv-cloud);">
+    <span style="font-size:12px;color:var(--thryv-steel);">Compass — Known System Issues Historical Archive · Maintained by Advanced Technical Support</span>
+    <div style="margin-top:8px;font-size:10px;color:var(--thryv-steel);font-style:italic;">Confidential — Internal Use Only. Do not distribute outside Thryv.</div>
+    <div style="margin-top:4px;font-size:10px;color:var(--thryv-steel);">Resolved issues move here from the main status page each week. Data cumulative from January 1, 2026.</div>
+  </div>
+</div>
+
+<script>
+var currentFilter = 'all';
+
+function filterHistory(){
+  var query = document.getElementById('historySearch').value.toLowerCase().trim();
+  var rows = document.querySelectorAll('.issue-table tbody tr[data-product]');
+  rows.forEach(function(row){
+    var text = row.textContent.toLowerCase();
+    var matchesSearch = !query || text.indexOf(query) !== -1;
+    var matchesProduct = currentFilter === 'all' || row.getAttribute('data-product') === currentFilter;
+    row.style.display = (matchesSearch && matchesProduct) ? '' : 'none';
+  });
+}
+
+function filterByProduct(filter, btn){
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  filterHistory();
+}
+</script>
+</body>
+</html>
