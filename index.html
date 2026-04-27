@@ -268,8 +268,8 @@ body {
   .filters { flex-wrap: wrap; gap: 6px; }
   .filter-btn { font-size: 11px; padding: 5px 12px; }
   .publisher-btn { font-size: 11px; padding: 8px 14px; }
-  .issue-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .issue-table thead { display: none; }
+  .issue-table { display: table; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .issue-table thead { display: table-header-group; position: sticky; top: 0; z-index: 10; }
   .issue-table tbody { display: block; }
   .issue-table tbody tr { display: block; padding: 14px; margin-bottom: 10px; border: 2px solid var(--thryv-cloud); border-radius: var(--radius-lg); background: var(--thryv-white); }
   .issue-table tbody tr td { display: flex; align-items: flex-start; padding: 4px 0; border: none; white-space: normal !important; }
