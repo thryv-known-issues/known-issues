@@ -27,7 +27,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'DM Sans', sans-serif; background: var(--thryv-mist); color: var(--thryv-black); }
 
-.topbar { background: var(--thryv-midnight); padding: 12px 32px; display: flex; align-items: center; justify-content: space-between; }
+.topbar { background: var(--thryv-midnight); padding: 12px 32px; position: sticky; top: 32px; z-index: 999; display: flex; align-items: center; justify-content: space-between; }
 .topbar-logo { display: flex; align-items: center; gap: 8px; }
 .topbar-logo span:first-child { font-size: 20px; font-weight: 700; color: var(--thryv-orange); }
 .topbar-logo span:last-child { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: 1px; text-transform: uppercase; }
@@ -106,7 +106,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
 .issue-table tbody tr:last-child td:last-child { border-bottom-right-radius: var(--radius-lg); }
 
 /* Sticky header */
-.issue-table thead { position: sticky; top: 32px; z-index: 10; background: var(--thryv-mist); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.issue-table thead { position: sticky; top: 80px; z-index: 10; background: var(--thryv-mist); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 </style>
 </head>
 <body>
@@ -116,15 +116,10 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
 
 <div class="topbar">
   <div class="topbar-logo">
-    <span>thryv</span>
-    <span style="color:var(--thryv-orange);">&#9656;</span>
-    <span>COMPASS</span>
+    <span style="font-size:11px;font-weight:700;color:white;border:2px solid white;padding:2px 8px;letter-spacing:2px;">COMPASS</span>
   </div>
   <div class="topbar-nav">
-    <a href="index.html">Home</a>
-    <a href="#">Software stats</a>
-    <a href="index.html">System status</a>
-    <a href="#">Resources</a>
+    <a href="index.html">System Status</a>
     <a class="active" href="history.html">Historical</a>
   </div>
 </div>
