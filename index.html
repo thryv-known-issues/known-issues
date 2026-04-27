@@ -37,7 +37,7 @@ body {
 .page-wrapper { max-width: 1280px; margin: 0 auto; padding: 0 24px 48px; }
 
 /* ── Top bar ── */
-.topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: var(--thryv-midnight); color: white; position: sticky; top: 32px; z-index: 999; }
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: var(--thryv-midnight); color: white;  }
 .topbar-logo { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
 .topbar-logo .arrow { color: var(--thryv-orange); }
 .topbar-logo .compass { font-weight: 400; opacity: 0.7; margin-left: 8px; font-size: 16px; letter-spacing: 1px; text-transform: uppercase; }
@@ -357,7 +357,7 @@ body.simplified .simp-only { display: inline !important; }
 .issue-table tbody tr:hover { background: rgba(83,120,252,0.04); transition: background 0.2s ease; }
 
 /* Sticky table header */
-.issue-table thead { position: sticky; top: 80px; z-index: 10; background: var(--thryv-mist); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.issue-table thead { position: sticky; top: 0; z-index: 10; background: var(--thryv-mist); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 
 /* P0/P1 priority pulse */
 @keyframes priorityPulse {
@@ -510,7 +510,7 @@ div[style*="display:grid;grid-template-columns:repeat(4"] + * {
 </style>
 </head>
 <body>
-<div style="background:#29355D;color:rgba(255,255,255,0.85);text-align:center;padding:6px 16px;font-size:11px;font-weight:600;letter-spacing:0.5px;position:sticky;top:0;z-index:1000;">
+<div style="background:#29355D;color:rgba(255,255,255,0.85);text-align:center;padding:6px 16px;font-size:11px;font-weight:600;letter-spacing:0.5px;">
   INTERNAL USE ONLY — This page contains confidential information. Do not share externally.
 </div>
 
