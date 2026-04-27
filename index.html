@@ -115,7 +115,7 @@ body {
 
 /* ── Issue table ── */
 .issue-table { width: 100%; table-layout: auto; border-collapse: separate; border-spacing: 0; border: 1px solid var(--thryv-cloud); border-radius: 0;  font-size: 13px; background: var(--thryv-white); }
-.issue-table thead { background: var(--thryv-mist); }
+.issue-table thead { position: sticky; top: 0; z-index: 10; background: var(--thryv-mist); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 .issue-table th { text-align: left; padding: 12px 16px; font-weight: 600; font-size: 11px; color: var(--thryv-midnight); text-transform: uppercase; letter-spacing: 0.5px; }
 .issue-table td { padding: 14px 16px; border-top: 1px solid var(--thryv-cloud); vertical-align: top; }
 .issue-table tbody tr { transition: background 0.15s; }
@@ -357,7 +357,6 @@ body.simplified .simp-only { display: inline !important; }
 .issue-table tbody tr:hover { background: rgba(83,120,252,0.04); transition: background 0.2s ease; }
 
 /* Sticky table header */
-.issue-table thead { position: sticky; top: 0; z-index: 10; background: var(--thryv-mist); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 
 /* P0/P1 priority pulse */
 @keyframes priorityPulse {
