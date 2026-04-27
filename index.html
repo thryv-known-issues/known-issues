@@ -114,7 +114,7 @@ body {
 .filter-btn.active { background: var(--thryv-midnight); color: white; border-color: var(--thryv-midnight); }
 
 /* ── Issue table ── */
-.issue-table { width: 100%; table-layout: auto; border-collapse: separate; border-spacing: 0; border: 1px solid var(--thryv-cloud); border-radius: var(--radius-lg); overflow: hidden; font-size: 13px; background: var(--thryv-white); }
+.issue-table { width: 100%; table-layout: auto; border-collapse: separate; border-spacing: 0; border: 1px solid var(--thryv-cloud); border-radius: 0;  font-size: 13px; background: var(--thryv-white); }
 .issue-table thead { background: var(--thryv-mist); }
 .issue-table th { text-align: left; padding: 12px 16px; font-weight: 600; font-size: 11px; color: var(--thryv-midnight); text-transform: uppercase; letter-spacing: 0.5px; }
 .issue-table td { padding: 14px 16px; border-top: 1px solid var(--thryv-cloud); vertical-align: top; }
@@ -342,6 +342,13 @@ body.simplified .simp-only { display: inline !important; }
 
 .tkt-open:hover { opacity:0.8; box-shadow: 0 1px 3px rgba(83,120,252,0.3); }
 
+
+/* Table border radius without overflow:hidden */
+.issue-table thead tr:first-child th:first-child { border-top-left-radius: var(--radius-lg); }
+.issue-table thead tr:first-child th:last-child { border-top-right-radius: var(--radius-lg); }
+.issue-table tbody tr:last-child td:first-child { border-bottom-left-radius: var(--radius-lg); }
+.issue-table tbody tr:last-child td:last-child { border-bottom-right-radius: var(--radius-lg); }
+
 /* ── UI POLISH ── */
 
 /* Zebra striping */
@@ -498,6 +505,8 @@ div[style*="display:grid;grid-template-columns:repeat(4"] + * {
 ::-webkit-scrollbar-track { background: var(--thryv-mist); }
 ::-webkit-scrollbar-thumb { background: var(--thryv-cloud); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--thryv-steel); }
+
+
 </style>
 </head>
 <body>
@@ -1530,6 +1539,7 @@ function toggleView(){
   document.body.classList.toggle('simplified');
 }
 document.body.classList.add('simplified');
+
 
 // Issue description click-to-expand
 document.querySelectorAll('.issue-desc').forEach(function(desc){

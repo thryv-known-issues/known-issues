@@ -56,7 +56,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--thryv-mist); color:
 .res-merged { background: #F3E5F5; color: #7B2D8E; }
 .res-partial { background: #FFF3E0; color: #E67E22; }
 
-.issue-table { width: 100%; table-layout: auto; border-collapse: separate; border-spacing: 0; border: 1px solid var(--thryv-cloud); border-radius: var(--radius-lg); overflow: hidden; font-size: 13px; background: var(--thryv-white); }
+.issue-table { width: 100%; table-layout: auto; border-collapse: separate; border-spacing: 0; border: 1px solid var(--thryv-cloud); border-radius: 0;  font-size: 13px; background: var(--thryv-white); }
 .issue-table thead { background: var(--thryv-mist); }
 .issue-table th { padding: 10px 12px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--thryv-night); border-bottom: 2px solid var(--thryv-cloud); }
 .issue-table td { padding: 12px; border-bottom: 1px solid var(--thryv-cloud); vertical-align: top; }
@@ -98,6 +98,15 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
 ::-webkit-scrollbar-track { background: var(--thryv-mist); }
 ::-webkit-scrollbar-thumb { background: var(--thryv-cloud); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--thryv-steel); }
+
+/* Table border radius without overflow:hidden */
+.issue-table thead tr:first-child th:first-child { border-top-left-radius: var(--radius-lg); }
+.issue-table thead tr:first-child th:last-child { border-top-right-radius: var(--radius-lg); }
+.issue-table tbody tr:last-child td:first-child { border-bottom-left-radius: var(--radius-lg); }
+.issue-table tbody tr:last-child td:last-child { border-bottom-right-radius: var(--radius-lg); }
+
+/* Sticky header */
+.issue-table thead { position: sticky; top: 32px; z-index: 10; background: var(--thryv-mist); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 </style>
 </head>
 <body>
