@@ -115,7 +115,7 @@ body {
 
 /* ── Issue table ── */
 .issue-table { width: 100%; table-layout: auto; border-collapse: separate; border-spacing: 0; border: 1px solid var(--thryv-cloud); border-radius: 0;  font-size: 13px; background: var(--thryv-white); }
-.issue-table thead { position: sticky; top: 0; z-index: 10; background: var(--thryv-mist); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.issue-table thead { background: var(--thryv-mist); }
 .issue-table th { text-align: left; padding: 12px 16px; font-weight: 600; font-size: 11px; color: var(--thryv-midnight); text-transform: uppercase; letter-spacing: 0.5px; }
 .issue-table td { padding: 14px 16px; border-top: 1px solid var(--thryv-cloud); vertical-align: top; }
 .issue-table tbody tr { transition: background 0.15s; }
@@ -1750,6 +1750,60 @@ document.querySelectorAll('.issue-desc').forEach(function(desc){
       vline.style.opacity = '0';
       tooltip.classList.remove('visible');
     });
+  });
+})();
+
+// JS-based sticky table header (works at any zoom level)
+(function(){
+  var table = document.querySelector('.active-issues');
+  if(!table) return;
+  var thead = table.querySelector('thead');
+  if(!thead) return;
+  
+  // Create a fixed clone of the thead
+  var clone = thead.cloneNode(true);
+  var wrapper = document.createElement('div');
+  wrapper.id = 'stickyHeader';
+  wrapper.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:100;display:none;background:var(--thryv-mist);box-shadow:0 2px 8px rgba(0,0,0,0.1);';
+  
+  var cloneTable = document.createElement('table');
+  cloneTable.className = table.className;
+  cloneTable.style.cssText = 'width:' + table.offsetWidth + 'px;margin:0 auto;table-layout:auto;border-collapse:separate;border-spacing:0;font-size:13px;';
+  cloneTable.appendChild(clone);
+  wrapper.appendChild(cloneTable);
+  document.body.appendChild(wrapper);
+  
+  function syncWidths(){
+    var origThs = thead.querySelectorAll('th');
+    var cloneThs = clone.querySelectorAll('th');
+    cloneTable.style.width = table.offsetWidth + 'px';
+    // Match the table's left offset
+    var tableRect = table.getBoundingClientRect();
+    cloneTable.style.marginLeft = tableRect.left + 'px';
+    cloneTable.style.marginRight = 'auto';
+    cloneTable.style.width = tableRect.width + 'px';
+    for(var i = 0; i < origThs.length && i < cloneThs.length; i++){
+      cloneThs[i].style.width = origThs[i].offsetWidth + 'px';
+    }
+  }
+  
+  function onScroll(){
+    var rect = thead.getBoundingClientRect();
+    if(rect.top < 0 && rect.top > -table.offsetHeight + 100){
+      wrapper.style.display = 'block';
+      syncWidths();
+    } else {
+      wrapper.style.display = 'none';
+    }
+  }
+  
+  window.addEventListener('scroll', onScroll, {passive: true});
+  window.addEventListener('resize', function(){ syncWidths(); onScroll(); });
+  
+  // Also sync when sort arrows are clicked
+  clone.querySelectorAll('th').forEach(function(th, idx){
+    th.style.cursor = thead.querySelectorAll('th')[idx].style.cursor;
+    th.onclick = thead.querySelectorAll('th')[idx].onclick;
   });
 })();
 
