@@ -507,6 +507,29 @@ div[style*="display:grid;grid-template-columns:repeat(4"] + * {
 ::-webkit-scrollbar-thumb:hover { background: var(--thryv-steel); }
 
 
+
+/* Interactive sparkline hover */
+.status-card svg { cursor: crosshair; }
+.spark-tooltip {
+  position: absolute;
+  background: rgba(41,53,93,0.92);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  white-space: nowrap;
+  z-index: 50;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.spark-tooltip.visible { opacity: 1; }
+.spark-dot {
+  transition: opacity 0.15s ease;
+  filter: drop-shadow(0 0 3px currentColor);
+}
 </style>
 </head>
 <body>
@@ -1617,6 +1640,119 @@ document.querySelectorAll('.issue-desc').forEach(function(desc){
   });
 })();
 
+
+// Interactive sparkline hover tracking
+(function(){
+  // Define data points for each card (month: value)
+  // These map to the SVG viewBox 0-200 width, 5 data points (Jan-Now)
+  var cardData = [
+    { label: 'Business Center', months: ['Jan','Feb','Mar','Apr','Now'], values: [22,20,18,16,35], color: '#121212' },
+    { label: 'Online Listings', months: ['Jan','Feb','Mar','Apr','Now'], values: [15,18,22,28,61], color: '#0E7C6B' },
+    { label: 'Marketing Center', months: ['Jan','Feb','Mar','Apr','Now'], values: [180,165,155,148,148], color: '#FF5000' },
+    { label: 'My Account', months: ['Jan','Feb','Mar','Apr','Now'], values: [110,115,120,125,129], color: '#29355D' },
+  ];
+  
+  var cards = document.querySelectorAll('.status-card');
+  
+  cards.forEach(function(card, idx){
+    if(idx >= cardData.length) return;
+    var data = cardData[idx];
+    var svg = card.querySelector('svg');
+    if(!svg) return;
+    
+    // Create tooltip
+    var tooltip = document.createElement('div');
+    tooltip.className = 'spark-tooltip';
+    card.style.position = 'relative';
+    card.appendChild(tooltip);
+    
+    // Create tracking dot in SVG
+    var dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    dot.setAttribute('r', '4');
+    dot.setAttribute('fill', data.color);
+    dot.setAttribute('stroke', 'white');
+    dot.setAttribute('stroke-width', '2');
+    dot.setAttribute('class', 'spark-dot');
+    dot.style.opacity = '0';
+    svg.appendChild(dot);
+    
+    // Create vertical line in SVG
+    var vline = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    vline.setAttribute('stroke', data.color);
+    vline.setAttribute('stroke-width', '0.5');
+    vline.setAttribute('stroke-dasharray', '2,2');
+    vline.style.opacity = '0';
+    svg.appendChild(vline);
+    
+    // Get the path points from the SVG path data
+    var path = svg.querySelector('path[fill="none"]');
+    if(!path){
+      // Try the first path
+      var paths = svg.querySelectorAll('path');
+      for(var p = 0; p < paths.length; p++){
+        if(paths[p].getAttribute('fill') === 'none'){
+          path = paths[p];
+          break;
+        }
+      }
+    }
+    if(!path) return;
+    
+    svg.addEventListener('mousemove', function(e){
+      var rect = svg.getBoundingClientRect();
+      var mouseX = e.clientX - rect.left;
+      var svgWidth = rect.width;
+      var ratio = mouseX / svgWidth;
+      
+      // Clamp
+      ratio = Math.max(0, Math.min(1, ratio));
+      
+      // Get point on path
+      var pathLength = path.getTotalLength();
+      var point = path.getPointAtLength(ratio * pathLength);
+      
+      // Position dot
+      dot.setAttribute('cx', point.x);
+      dot.setAttribute('cy', point.y);
+      dot.style.opacity = '1';
+      
+      // Position vertical line
+      vline.setAttribute('x1', point.x);
+      vline.setAttribute('y1', '0');
+      vline.setAttribute('x2', point.x);
+      vline.setAttribute('y2', '36');
+      vline.style.opacity = '0.4';
+      
+      // Interpolate month and value
+      var monthIdx = Math.round(ratio * (data.months.length - 1));
+      var exactIdx = ratio * (data.months.length - 1);
+      var lowerIdx = Math.floor(exactIdx);
+      var upperIdx = Math.ceil(exactIdx);
+      var frac = exactIdx - lowerIdx;
+      
+      var interpValue;
+      if(lowerIdx === upperIdx){
+        interpValue = data.values[lowerIdx];
+      } else {
+        interpValue = Math.round(data.values[lowerIdx] + frac * (data.values[upperIdx] - data.values[lowerIdx]));
+      }
+      
+      var monthLabel = data.months[monthIdx];
+      
+      // Position tooltip
+      tooltip.textContent = monthLabel + ': ' + interpValue + ' cases';
+      tooltip.style.left = (mouseX - 30) + 'px';
+      tooltip.style.top = (svg.offsetTop - 24) + 'px';
+      tooltip.classList.add('visible');
+    });
+    
+    svg.addEventListener('mouseleave', function(){
+      dot.style.opacity = '0';
+      vline.style.opacity = '0';
+      tooltip.classList.remove('visible');
+    });
+  });
+})();
 
 </script>
 </body>
