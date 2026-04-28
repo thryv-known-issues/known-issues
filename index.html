@@ -534,9 +534,15 @@ div[style*="display:grid;grid-template-columns:repeat(4"] + * {
 .queue-tag { display:inline-block; font-size:9px; font-weight:600; padding:2px 6px; border-radius:4px; background:rgba(83,120,252,0.1); color:var(--thryv-sapphire); margin-left:6px; vertical-align:middle; letter-spacing:0.3px; }
 /* Other product pill */
 .prod-other { background:#6B7280; color:white; }
+
+/* Sticky Sidebar */
+.sidebar-nav { position:fixed; left:0; top:50%; transform:translateY(-50%); z-index:90; display:flex; flex-direction:column; gap:2px; padding:8px 0; background:rgba(255,255,255,0.95); backdrop-filter:blur(8px); border-radius:0 8px 8px 0; box-shadow:2px 0 12px rgba(0,0,0,0.08); border:1px solid var(--thryv-cloud); border-left:none; }
+.sidebar-nav a { padding:8px 12px; font-size:10px; font-weight:600; color:var(--thryv-steel); text-decoration:none; transition:all 0.2s; white-space:nowrap; border-left:3px solid transparent; cursor:pointer; }
+.sidebar-nav a:hover { color:var(--thryv-midnight); background:var(--thryv-mist); border-left-color:var(--thryv-orange); }
+.sidebar-nav a.sb-active { color:var(--thryv-midnight); border-left-color:var(--thryv-orange); font-weight:700; }
 </style>
 </head>
-<body>
+<body class="simplified">
 <div style="background:#29355D;color:rgba(255,255,255,0.85);text-align:center;padding:6px 16px;font-size:11px;font-weight:600;letter-spacing:0.5px;">
   INTERNAL USE ONLY — This page contains confidential information. Do not share externally.
 </div>
@@ -609,23 +615,97 @@ div[style*="display:grid;grid-template-columns:repeat(4"] + * {
   </div>
 </div>
 
+<!-- Sticky Sidebar -->
+<div class="sidebar-nav" id="sidebarNav">
+  <a onclick="jumpTo('bc')">BC</a>
+  <a onclick="jumpTo('mc')">MC</a>
+  <a onclick="jumpTo('olm')">OLM</a>
+  <a onclick="jumpTo('myaccount')">My Acct</a>
+  <a onclick="jumpTo('thryvpay')">TP</a>
+  <a onclick="jumpTo('keap')">Keap</a>
+  <a onclick="jumpTo('ooe')">OOE</a>
+  <a onclick="jumpTo('other')">Other</a>
+</div>
 <div class="page-wrapper">
   <div class="mockup-badge">&#10022; Mockup — proposed Compass page · Data through April 28, 2026</div>
 
-  <!-- View Toggle -->
-  <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:12px 0 0;">
-    <span class="toggle-label" style="color:var(--thryv-night);">Simplified</span>
-    <div class="toggle-track" id="viewToggle" onclick="toggleView()">
-      <div class="toggle-knob"></div>
-    </div>
-    <span class="toggle-label" style="color:var(--thryv-night);">Advanced</span>
-  </div>
+  <!-- Simplified view only for launch -->
 
   <!-- Shared Publisher slide-down panel (works in both views) -->
   <div class="pub-slidedown" id="pubSlidedown">
     <div class="pub-slidedown-inner" id="pubSlidedownInner"></div>
   </div>
 
+
+  <!-- Shared Search Bar (works in both views) -->
+<div class="section-header">
+    <div class="section-title">Known Issues <span class="count-badge">20</span></div>
+    <div class="search-box">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="var(--thryv-steel)" stroke-width="1.5"/><path d="M10.5 10.5L14.5 14.5" stroke="var(--thryv-steel)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <input type="text" id="issueSearch" placeholder="Search by ticket #, Thryv ID, or keyword..." />
+    </div>
+  </div>
+
+  <!-- Ticket Lookup Result -->
+  <div class="lookup-result" id="lookupResult">
+    <div class="lookup-result-title" id="lookupTitle"></div>
+    <div class="lookup-result-meta">
+      <span id="lookupProduct"></span>
+      <span id="lookupJira"></span>
+    </div>
+  </div>
+
+  <div class="filters" id="issueFilters">
+    <button class="filter-btn active" data-filter="all">All Products</button>
+    <button class="filter-btn" data-filter="bc">Business Center</button>
+    <button class="filter-btn" data-filter="mc">Marketing Center</button>
+    <button class="filter-btn" data-filter="olm">Online Listings</button>
+    <button class="filter-btn" data-filter="myaccount">My Account</button>
+    <button class="filter-btn" data-filter="thryvpay">ThryvPay</button>
+    <button class="filter-btn" data-filter="keap">Keap</button>
+    <button class="filter-btn" data-filter="other">Other</button>
+    <span style="flex:1"></span>
+    <button class="publisher-btn" onclick="togglePublisherPanel()">
+      <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="1" y="3" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M1 7h16" stroke="currentColor" stroke-width="1.4"/><path d="M6 7v8" stroke="currentColor" stroke-width="1.4"/></svg>
+      Publisher integration status
+      <span style="font-size:11px;background:#FCEBEB;color:#791F1F;padding:2px 8px;border-radius:8px;font-weight:600;">17 issues</span>
+      <svg class="pub-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  
+  <!-- Alert Banner -->
+  <div class="alert-banner">
+    <div class="alert-icon">!</div>
+    <span class="adv-only"><strong>Active alert:</strong> MCB-168 (EP/GP V3) and MCB-265 (Visitor Tagging V7) both DEPLOYED/RELEASED this week. BC-1116 (Duplicate WOs) also RELEASED. MCB-294 leads active volume at 26 tickets. BC-1068 at 22. Weekly refresh applied Apr 28.</span>
+    <span class="simp-only"><strong>Current status:</strong> Three issues resolved this week. Our engineering team continues working on remaining known issues. Growth Package missing add-on has the highest active volume. See details below.</span>
+  </div>
+
+  <div class="adv-only"><!-- Weekly Summary -->
+  <div class="weekly-summary-cards" style="display:flex;gap:12px;margin:16px 0 0;flex-wrap:wrap;width:100%;">
+    <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-low);">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-low);font-weight:600;margin-bottom:4px;">Resolved</div>
+      <div style="font-size:13px;color:var(--thryv-night);">MCB-232 (Thryv Leads) Released. MCB-220 (visitor tagging V6) deployed. Stripe queue fully cleared to 0.</div>
+    </div>
+    <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-low);">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-low);font-weight:600;margin-bottom:4px;">Dev movement</div>
+      <div style="font-size:13px;color:var(--thryv-night);">MCB-168 (EP/GP) moved to Dev In Progress. MCB-275 (MC Addon Services) now tracked. MCB-294 (Missing GP V7) In Review. MCB-306 (visitor tagging V8) in backlog.</div>
+    </div>
+    <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-critical);">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-critical);font-weight:600;margin-bottom:4px;">Watch items</div>
+      <div style="font-size:13px;color:var(--thryv-night);">BC-1068 (Social tab) at 22 tickets, Dev In Progress. BC-1116 (duplicate WOs) RELEASED. </div>
+    </div>
+  </div>
+
+  <!-- System Status Strip -->
+  </div>
+    <!-- Status Overview (Collapsed) -->
+  <div style="margin-bottom:16px;">
+    <button id="statsToggle" onclick="var el=document.getElementById('statsPanel');if(el.style.display==='none'){el.style.display='grid';this.textContent='▾ Hide Status Overview';}else{el.style.display='none';this.textContent='▸ Show Status Overview';}" style="background:none;border:1px solid var(--thryv-cloud);border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;color:var(--thryv-night);cursor:pointer;font-family:inherit;transition:background 0.2s;">▸ Show Status Overview</button>
+    <div id="statsPanel" style="display:none;margin-top:12px;">
+
+    </div>
+  </div>
 
   <!-- Shared Search Bar (works in both views) -->
 <div class="section-header">
@@ -900,6 +980,7 @@ div[style*="display:grid;grid-template-columns:repeat(4"] + * {
                 <td data-label="Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
         <td data-label="Date Reported" class="date-text">Apr 6, 2026 · 12:00 AM CT</td>
       </tr>
+      <tr id="section-bc" style="height:0;border:none;padding:0;"></tr>
       <tr data-product="bc" data-wa="yes" data-wa-text="Try clearing browser cache or using an incognito window. If the issue persists, open a ticket to support with the Thryv ID. The ticket will be added to the ongoing engineering investigation." data-tkt="no" data-aud="Support">
         <td>
           <div class="issue-title">Login Issues — Migration Related — Ongoing</div>
@@ -929,6 +1010,7 @@ div[style*="display:grid;grid-template-columns:repeat(4"] + * {
       <!-- My Account -->
       
       
+      <tr id="section-myaccount" style="height:0;border:none;padding:0;"></tr>
       <tr data-product="myaccount" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a description of the specific account or settings issue." data-tkt="open" data-aud="Support">
         <td>
           <div class="issue-title">Account and Settings Issues — User Reported</div>
@@ -943,6 +1025,7 @@ div[style*="display:grid;grid-template-columns:repeat(4"] + * {
       </tr>
 
       <!-- Keap Issues -->
+      <tr id="section-keap" style="height:0;border:none;padding:0;"></tr>
       <tr data-product="keap">
         <td>
           <div class="issue-title">Automation &amp; email broadcast actions not processing</div>
@@ -1840,6 +1923,48 @@ document.querySelectorAll('.issue-desc').forEach(function(desc){
   });
 })();
 
+
+// Jump navigation
+function jumpTo(product) {
+  var el = document.getElementById('section-' + product);
+  if (el) {
+    var top = el.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({top: top, behavior: 'smooth'});
+  }
+}
+
+// Sidebar scroll spy
+(function() {
+  var sections = ['bc','mc','olm','myaccount','thryvpay','keap','ooe','other'];
+  var links = document.querySelectorAll('.sidebar-nav a');
+  window.addEventListener('scroll', function() {
+    var current = '';
+    sections.forEach(function(s) {
+      var el = document.getElementById('section-' + s);
+      if (el && el.getBoundingClientRect().top < 150) current = s;
+    });
+    links.forEach(function(link, i) {
+      link.classList.toggle('sb-active', sections[i] === current);
+    });
+  }, {passive: true});
+})();
 </script>
 </body>
+    <!-- Jump Links -->
+  <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;">
+    <a onclick="jumpTo('bc');return false;" style="padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--thryv-cloud);color:var(--thryv-night);text-decoration:none;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--thryv-orange)';this.style.color='var(--thryv-orange)'" onmouseout="this.style.borderColor='';this.style.color='var(--thryv-night)'">Business Center</a>
+    <a onclick="jumpTo('mc');return false;" style="padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--thryv-cloud);color:var(--thryv-night);text-decoration:none;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--thryv-orange)';this.style.color='var(--thryv-orange)'" onmouseout="this.style.borderColor='';this.style.color='var(--thryv-night)'">Marketing Center</a>
+    <a onclick="jumpTo('olm');return false;" style="padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--thryv-cloud);color:var(--thryv-night);text-decoration:none;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--thryv-orange)';this.style.color='var(--thryv-orange)'" onmouseout="this.style.borderColor='';this.style.color='var(--thryv-night)'">Online Listings</a>
+    <a onclick="jumpTo('myaccount');return false;" style="padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--thryv-cloud);color:var(--thryv-night);text-decoration:none;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--thryv-orange)';this.style.color='var(--thryv-orange)'" onmouseout="this.style.borderColor='';this.style.color='var(--thryv-night)'">My Account</a>
+    <a onclick="jumpTo('thryvpay');return false;" style="padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--thryv-cloud);color:var(--thryv-night);text-decoration:none;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--thryv-orange)';this.style.color='var(--thryv-orange)'" onmouseout="this.style.borderColor='';this.style.color='var(--thryv-night)'">ThryvPay</a>
+    <a onclick="jumpTo('keap');return false;" style="padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--thryv-cloud);color:var(--thryv-night);text-decoration:none;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--thryv-orange)';this.style.color='var(--thryv-orange)'" onmouseout="this.style.borderColor='';this.style.color='var(--thryv-night)'">Keap</a>
+    <a onclick="jumpTo('ooe');return false;" style="padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--thryv-cloud);color:var(--thryv-night);text-decoration:none;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--thryv-orange)';this.style.color='var(--thryv-orange)'" onmouseout="this.style.borderColor='';this.style.color='var(--thryv-night)'">OOE</a>
+    <a onclick="jumpTo('other');return false;" style="padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--thryv-cloud);color:var(--thryv-night);text-decoration:none;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--thryv-orange)';this.style.color='var(--thryv-orange)'" onmouseout="this.style.borderColor='';this.style.color='var(--thryv-night)'">Other</a>
+  </div>
+
+<!-- Orientation -->
+  <div style="max-width:640px;margin:0 auto 20px;text-align:center;">
+    <p style="font-size:14px;color:var(--thryv-night);line-height:1.6;">This page shows active software issues affecting client-facing products. Use the filters below to find what applies to your team and region.</p>
+  </div>
+
 </html>
