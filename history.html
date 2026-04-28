@@ -66,7 +66,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--thryv-mist); color:
 .month-count { font-size: 11px; background: var(--thryv-orange); color: white; padding: 2px 10px; border-radius: 12px; font-weight: 600; }
 .empty-month { font-size: 13px; color: var(--thryv-steel); padding: 16px; font-style: italic; background: var(--thryv-white); border-radius: var(--radius-lg); border: 1px solid var(--thryv-cloud); }
 
-.year-header { font-size: 22px; font-weight: 700; color: var(--thryv-midnight); margin: 28px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--thryv-midnight); }
+.year-header { font-size: 26px; font-weight: 700; color: var(--thryv-midnight); margin: 36px 0 20px; padding: 12px 16px; border-left: 6px solid var(--thryv-midnight); background: linear-gradient(135deg, rgba(41,53,93,0.06) 0%, rgba(41,53,93,0.02) 100%); border-radius: 0 8px 8px 0; letter-spacing: 0.5px; }
 
 .stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
 .stat-card { background: var(--thryv-white); border: 1px solid var(--thryv-cloud); border-radius: var(--radius-lg); padding: 16px; text-align: center; }
@@ -93,7 +93,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
 .filter-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(83,120,252,0.15); }
 .search-bar:focus { box-shadow: 0 0 0 3px rgba(83,120,252,0.15); border-color: var(--thryv-sapphire); }
 .month-header { padding-left: 12px; border-left: 4px solid var(--thryv-orange); }
-.year-header { border-left: 6px solid var(--thryv-midnight); padding-left: 14px; }
+
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--thryv-mist); }
 ::-webkit-scrollbar-thumb { background: var(--thryv-cloud); border-radius: 4px; }
@@ -107,6 +107,22 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
 
 /* Sticky header */
 .issue-table thead { position: sticky; top: 0; z-index: 10; background: var(--thryv-mist); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+
+/* Year/Month Navigation */
+.history-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 2px solid var(--thryv-cloud); padding: 12px 0; margin-bottom: 24px; }
+.nav-years { display: flex; gap: 0; margin-bottom: 0; }
+.nav-year-group { display: flex; align-items: center; }
+.nav-year-group:not(:last-child) { border-right: 1px solid var(--thryv-cloud); margin-right: 0; padding-right: 0; }
+.year-btn { padding: 8px 16px; font-size: 15px; font-weight: 700; cursor: pointer; border: none; background: transparent; color: var(--thryv-steel); transition: all 0.2s ease; position: relative; }
+.year-btn:hover { color: var(--thryv-midnight); }
+.year-btn.active { color: var(--thryv-midnight); }
+.year-btn.active::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 24px; height: 3px; background: var(--thryv-orange); border-radius: 2px; }
+.month-pills { display: flex; gap: 2px; padding: 0 4px; }
+.month-pill { padding: 4px 8px; font-size: 11px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--thryv-steel); border-radius: 4px; transition: all 0.15s ease; }
+.month-pill:hover { background: rgba(255,80,0,0.08); color: var(--thryv-orange); }
+.month-pill.active { background: var(--thryv-orange); color: white; font-weight: 600; }
+.month-pill.empty { opacity: 0.3; cursor: default; }
+.month-pill.empty:hover { background: transparent; color: var(--thryv-steel); }
 </style>
 </head>
 <body>
@@ -137,6 +153,8 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
     <input type="text" class="search-bar" id="historySearch" placeholder="Search resolved issues by name, product, or keyword..." oninput="filterHistory()">
   </div>
 
+  
+
   <!-- Filters -->
   <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;">
     <button class="filter-btn active" data-filter="all" onclick="filterByProduct('all', this)">All Products</button>
@@ -149,11 +167,51 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
   </div>
 
   <!-- 2026 -->
-  <div class="year-header">2026</div>
+  <!-- Year/Month Navigation -->
+  <div class="history-nav">
+    <div class="nav-years">
+      <div class="nav-year-group">
+        <button class="year-btn active" onclick="navTo('year-2026')">2026</button>
+        <div class="month-pills">
+          <button class="month-pill" onclick="navTo('april-2026')">Apr</button>
+          <button class="month-pill" onclick="navTo('march-2026')">Mar</button>
+          <button class="month-pill empty" onclick="navTo('february-2026')">Feb</button>
+          <button class="month-pill" onclick="navTo('january-2026')">Jan</button>
+        </div>
+      </div>
+      <div class="nav-year-group">
+        <button class="year-btn" onclick="navTo('year-2025')">2025</button>
+        <div class="month-pills">
+          <button class="month-pill" onclick="navTo('december-2025')">Dec</button>
+          <button class="month-pill" onclick="navTo('november-2025')">Nov</button>
+          <button class="month-pill" onclick="navTo('october-2025')">Oct</button>
+          <button class="month-pill" onclick="navTo('september-2025')">Sep</button>
+          <button class="month-pill" onclick="navTo('august-2025')">Aug</button>
+          <button class="month-pill" onclick="navTo('july-2025')">Jul</button>
+          <button class="month-pill empty" onclick="navTo('june-2025')">Jun</button>
+        </div>
+      </div>
+      <div class="nav-year-group">
+        <button class="year-btn" onclick="navTo('year-2024')">2024</button>
+        <div class="month-pills">
+          <button class="month-pill" onclick="navTo('december-2024')">Dec</button>
+          <button class="month-pill" onclick="navTo('november-2024')">Nov</button>
+          <button class="month-pill" onclick="navTo('october-2024')">Oct</button>
+          <button class="month-pill" onclick="navTo('september-2024')">Sep</button>
+          <button class="month-pill" onclick="navTo('august-2024')">Aug</button>
+          <button class="month-pill" onclick="navTo('july-2024')">Jul</button>
+          <button class="month-pill" onclick="navTo('june-2024')">Jun</button>
+          <button class="month-pill" onclick="navTo('may-2024')">May</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="year-header" id="year-2026">2026</div>
 
   <!-- April 2026 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header">April 2026 <span class="month-count">9 resolved</span></div>
+    <div class="month-header" id="april-2026">April 2026 <span class="month-count">9 resolved</span></div>
     <table class="issue-table">
       <thead>
         <tr>
@@ -171,7 +229,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <!-- 1. Thryv Leads button grayed out -->
         <tr data-product="mc">
           <td>
-            <strong>Thryv Leads button grayed out / report unavailable</strong>
+            <strong>Thryv Leads Report Missing (V4) — Resolved</strong>
             <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Clients with active TL subscriptions could not access their report in MC Analytics. CTA button appeared grayed out.</div>
             <div style="margin-top:4px;"><span class="jira-ref">MCB-232</span> <span class="jira-ref">MCB-248 remains in Dev Backlog</span></div>
           </td>
@@ -186,7 +244,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <!-- 2. Visitor tagging V6 -->
         <tr data-product="mc">
           <td>
-            <strong>Website analytics / visitor tagging not tracking (V6)</strong>
+            <strong>Website Analytics / Visitor Tagging (V6) — Resolved</strong>
             <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Website analytics and heatmap data not appearing in MC. CORS errors on third-party sites. DB misconfigurations on Thryv-managed sites.</div>
             <div style="margin-top:4px;"><span class="jira-ref">MCB-220</span></div>
           </td>
@@ -201,7 +259,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <!-- 3. External ID conflicts -->
         <tr data-product="mc">
           <td>
-            <strong>External ID already in use — publish failures</strong>
+            <strong>External ID Conflicts — Listing Publish Failures (V1) — Resolved</strong>
             <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Listings publish failures due to "External IDs already used" error in Yext integration. Affected accounts unable to save or publish listing content.</div>
             <div style="margin-top:4px;"><span class="jira-ref">MCB-197</span></div>
           </td>
@@ -216,7 +274,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <!-- 4. Thryv Leads reporting link missing -->
         <tr data-product="mc">
           <td>
-            <strong>Thryv Leads reporting link missing</strong>
+            <strong>Thryv Leads Reporting Link Missing (V3) — Resolved</strong>
             <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Thryv Leads link not visible in the Analytics tab of Marketing Center. Clients unable to navigate to their TL reporting.</div>
           </td>
           <td><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -230,7 +288,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <!-- 5. Listings not appearing / address errors (404) -->
         <tr data-product="mc">
           <td>
-            <strong>Listings not appearing / address errors (404)</strong>
+            <strong>Listings Not Appearing / Address Errors (V1) — Resolved</strong>
             <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Listings 404 errors and RAQ (Request a Quote) missing from Marketing Center listings management interface.</div>
           </td>
           <td><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -244,7 +302,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <!-- 6. Missing GP add-on subset -->
         <tr data-product="mc">
           <td>
-            <strong>Missing GP add-on subset</strong>
+            <strong>Missing Growth Package Add-on (V6) — Resolved</strong>
             <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Subset of tickets closed for GP add-on not appearing. Remaining cases tracked under the active parent issue (MCB-212/MCB-150).</div>
           </td>
           <td><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -258,7 +316,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <!-- 7. Stripe bulk open queue -->
         <tr data-product="thryvpay">
           <td>
-            <strong>Stripe bulk open queue</strong>
+            <strong>Stripe Payment Queue — Cleared</strong>
             <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Stripe queue experienced a large volume of open tickets (111). Queue has been largely cleared with only residual items remaining.</div>
           </td>
           <td><span class="product-pill prod-pay">ThryvPay</span></td>
@@ -272,7 +330,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <!-- 8. Update listings failed -->
         <tr data-product="mc">
           <td>
-            <strong>Update listings failed</strong>
+            <strong>Listing Updates Failing (V4) — Resolved</strong>
             <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Listings management unable to save. Bulk update failures affecting multiple client accounts.</div>
           </td>
           <td><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -286,7 +344,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <!-- 9. Listing sync failures -->
         <tr data-product="mc">
           <td>
-            <strong>Listing sync failures</strong>
+            <strong>Listing Sync Failures (V1) — Resolved</strong>
             <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Listings failing to sync across publishers. Service areas showing stale data for affected accounts.</div>
           </td>
           <td><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -304,7 +362,7 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
   
   <!-- March 2026 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header">March 2026 <span class="month-count">1 resolved</span></div>
+    <div class="month-header" id="march-2026">March 2026 <span class="month-count">1 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:22%">Issue</th><th style="width:10%">Product</th><th style="width:7%">Priority</th>
@@ -312,20 +370,20 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:8%">Status</th><th style="width:21%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="olm"><td><strong>Existing listing errors (AUS)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Australian accounts encountering errors when modifying existing listings in Listings Management.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3274</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Oct 1, 2025<br><span style="color:var(--thryv-steel);">11:58 PM CT</span></td><td style="font-size:12px;">Mar 23, 2026<br><span style="color:var(--sev-low);font-weight:600;">11:13 AM CT</span></td><td style="font-size:12px;font-weight:600;">~25 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Listing error fix deployed for AUS accounts. 23 tickets resolved.</td></tr>
+        <tr data-product="olm"><td><strong>Existing Listing Errors — AUS (V1) — Resolved</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Australian accounts encountering errors when modifying existing listings in Listings Management.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3274</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Oct 1, 2025<br><span style="color:var(--thryv-steel);">11:58 PM CT</span></td><td style="font-size:12px;">Mar 23, 2026<br><span style="color:var(--sev-low);font-weight:600;">11:13 AM CT</span></td><td style="font-size:12px;font-weight:600;">~25 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Listing error fix deployed for AUS accounts. 23 tickets resolved.</td></tr>
       </tbody>
     </table>
   </div>
 
   <!-- February 2026 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header">February 2026 <span class="month-count">0 resolved</span></div>
+    <div class="month-header" id="february-2026">February 2026 <span class="month-count">0 resolved</span></div>
     <div class="empty-month">No major issues were resolved in February 2026.</div>
   </div>
 
   <!-- January 2026 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header">January 2026 <span class="month-count">7 resolved</span></div>
+    <div class="month-header" id="january-2026">January 2026 <span class="month-count">7 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:22%">Issue</th><th style="width:10%">Product</th><th style="width:7%">Priority</th>
@@ -333,24 +391,24 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:8%">Status</th><th style="width:21%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="mc"><td><strong>Enhanced Profile not saving (AUS)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Australian MC accounts unable to save Enhanced Profile settings. Changes would not persist after saving.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3291</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Oct 9, 2025<br><span style="color:var(--thryv-steel);">10:44 AM CT</span></td><td style="font-size:12px;">Jan 27, 2026<br><span style="color:var(--sev-low);font-weight:600;">9:25 AM CT</span></td><td style="font-size:12px;font-weight:600;">~16 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">EP save functionality restored for AUS accounts. 97 tickets resolved.</td></tr>
-        <tr data-product="myaccount"><td><strong>Auth0 login / settings errors</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Authentication errors affecting Business Center settings access. Auth0 integration causing intermittent failures.</div><div style="margin-top:4px;"><span class="jira-ref">AUTH-8597</span></div></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Nov 19, 2025<br><span style="color:var(--thryv-steel);">2:34 PM CT</span></td><td style="font-size:12px;">Jan 11, 2026<br><span style="color:var(--sev-low);font-weight:600;">5:41 PM CT</span></td><td style="font-size:12px;font-weight:600;">~8 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Auth0 integration stabilized. Login and settings access restored. 24 tickets resolved.</td></tr>
-        <tr data-product="olm"><td><strong>Update listings failed (US)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">US accounts experiencing "Update Listings Failed" errors when publishing listing changes.</div><div style="margin-top:4px;"><span class="jira-ref">MC-4064</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Dec 2, 2025<br><span style="color:var(--thryv-steel);">1:46 PM CT</span></td><td style="font-size:12px;">Jan 16, 2026<br><span style="color:var(--sev-low);font-weight:600;">12:01 PM CT</span></td><td style="font-size:12px;font-weight:600;">~6 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Listing update failures resolved. 10 tickets closed.</td></tr>
-        <tr data-product="olm"><td><strong>Update listings failed (US V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Second batch of US listing update failures. Same root cause as MC-4064.</div><div style="margin-top:4px;"><span class="jira-ref">MC-4180</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Nov 7, 2025<br><span style="color:var(--thryv-steel);">10:20 AM CT</span></td><td style="font-size:12px;">Jan 19, 2026<br><span style="color:var(--sev-low);font-weight:600;">10:17 AM CT</span></td><td style="font-size:12px;font-weight:600;">~10 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Listing update fix deployed. 10 tickets closed.</td></tr>
-              <tr data-product="mc"><td><strong>MC — Website analytics AUS tracking (V3)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">8 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-4068</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Nov 26, 2025<br><span style="color:var(--thryv-steel);">10:53 PM CT</span></td><td style="font-size:12px;">Jan 12, 2026<br><span style="color:var(--sev-low);font-weight:600;">9:33 PM CT</span></td><td style="font-size:12px;font-weight:600;">~7 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">AUS analytics tracking V3 fix deployed. 8 tickets closed.</td></tr>
-              <tr data-product="myaccount"><td><strong>Auth0 — locked account errors</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">AUTH-8590</span></div></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Nov 18, 2025<br><span style="color:var(--thryv-steel);">4:46 PM CT</span></td><td style="font-size:12px;">Jan 26, 2026<br><span style="color:var(--sev-low);font-weight:600;">9:44 AM CT</span></td><td style="font-size:12px;font-weight:600;">~10 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Locked account authentication errors resolved. 6 tickets closed.</td></tr>
-              <tr data-product="olm"><td><strong>OLM — Update listings failed (V3)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">5 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3628</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Oct 29, 2025<br><span style="color:var(--thryv-steel);">4:09 PM CT</span></td><td style="font-size:12px;">Jan 13, 2026<br><span style="color:var(--sev-low);font-weight:600;">2:57 PM CT</span></td><td style="font-size:12px;font-weight:600;">~11 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Listing update failures V3 resolved. 5 tickets closed.</td></tr>
+        <tr data-product="mc"><td><strong>Enhanced Profile Save Errors — AUS (V1) — Resolved</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Australian MC accounts unable to save Enhanced Profile settings. Changes would not persist after saving.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3291</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Oct 9, 2025<br><span style="color:var(--thryv-steel);">10:44 AM CT</span></td><td style="font-size:12px;">Jan 27, 2026<br><span style="color:var(--sev-low);font-weight:600;">9:25 AM CT</span></td><td style="font-size:12px;font-weight:600;">~16 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">EP save functionality restored for AUS accounts. 97 tickets resolved.</td></tr>
+        <tr data-product="myaccount"><td><strong>Login / Settings Authentication Errors (V1) — Resolved</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Authentication errors affecting Business Center settings access. Auth0 integration causing intermittent failures.</div><div style="margin-top:4px;"><span class="jira-ref">AUTH-8597</span></div></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Nov 19, 2025<br><span style="color:var(--thryv-steel);">2:34 PM CT</span></td><td style="font-size:12px;">Jan 11, 2026<br><span style="color:var(--sev-low);font-weight:600;">5:41 PM CT</span></td><td style="font-size:12px;font-weight:600;">~8 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Auth0 integration stabilized. Login and settings access restored. 24 tickets resolved.</td></tr>
+        <tr data-product="olm"><td><strong>Update Listings Failed — US (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">US accounts experiencing "Update Listings Failed" errors when publishing listing changes.</div><div style="margin-top:4px;"><span class="jira-ref">MC-4064</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Dec 2, 2025<br><span style="color:var(--thryv-steel);">1:46 PM CT</span></td><td style="font-size:12px;">Jan 16, 2026<br><span style="color:var(--sev-low);font-weight:600;">12:01 PM CT</span></td><td style="font-size:12px;font-weight:600;">~6 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Listing update failures resolved. 10 tickets closed.</td></tr>
+        <tr data-product="olm"><td><strong>Update Listings Failed — US (V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Second batch of US listing update failures. Same root cause as MC-4064.</div><div style="margin-top:4px;"><span class="jira-ref">MC-4180</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Nov 7, 2025<br><span style="color:var(--thryv-steel);">10:20 AM CT</span></td><td style="font-size:12px;">Jan 19, 2026<br><span style="color:var(--sev-low);font-weight:600;">10:17 AM CT</span></td><td style="font-size:12px;font-weight:600;">~10 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Listing update fix deployed. 10 tickets closed.</td></tr>
+              <tr data-product="mc"><td><strong>Website Analytics — AUS Tracking (V3)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">8 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-4068</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Nov 26, 2025<br><span style="color:var(--thryv-steel);">10:53 PM CT</span></td><td style="font-size:12px;">Jan 12, 2026<br><span style="color:var(--sev-low);font-weight:600;">9:33 PM CT</span></td><td style="font-size:12px;font-weight:600;">~7 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">AUS analytics tracking V3 fix deployed. 8 tickets closed.</td></tr>
+              <tr data-product="myaccount"><td><strong>Auth0 Locked Account Errors (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">AUTH-8590</span></div></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Nov 18, 2025<br><span style="color:var(--thryv-steel);">4:46 PM CT</span></td><td style="font-size:12px;">Jan 26, 2026<br><span style="color:var(--sev-low);font-weight:600;">9:44 AM CT</span></td><td style="font-size:12px;font-weight:600;">~10 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Locked account authentication errors resolved. 6 tickets closed.</td></tr>
+              <tr data-product="olm"><td><strong>Update Listings Failed (V3)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">5 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3628</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Oct 29, 2025<br><span style="color:var(--thryv-steel);">4:09 PM CT</span></td><td style="font-size:12px;">Jan 13, 2026<br><span style="color:var(--sev-low);font-weight:600;">2:57 PM CT</span></td><td style="font-size:12px;font-weight:600;">~11 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Listing update failures V3 resolved. 5 tickets closed.</td></tr>
       </tbody>
     </table>
   </div>
 
 
   <!-- ═══ 2025 ═══ -->
-  <div class="year-header">2025</div>
+  <div class="year-header" id="year-2025">2025</div>
 
   <!-- December 2025 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header">December 2025 <span class="month-count">4 resolved</span></div>
+    <div class="month-header" id="december-2025">December 2025 <span class="month-count">4 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:22%">Issue</th><th style="width:10%">Product</th><th style="width:7%">Priority</th>
@@ -358,17 +416,17 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:8%">Status</th><th style="width:21%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="myaccount"><td><strong>Auth0 — CC settings access errors (AUS)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">8 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">AUTH-8548</span></div></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Nov 18, 2025<br><span style="color:var(--thryv-steel);">2:04 PM CT</span></td><td style="font-size:12px;">Dec 23, 2025<br><span style="color:var(--sev-low);font-weight:600;">10:43 AM CT</span></td><td style="font-size:12px;font-weight:600;">~5 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Auth0 settings access restored for AUS CC accounts. 8 tickets closed.</td></tr>
-              <tr data-product="mc"><td><strong>MC — Website analytics tracking (V6 pre-release)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">8 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3870</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Oct 28, 2025<br><span style="color:var(--thryv-steel);">11:23 AM CT</span></td><td style="font-size:12px;">Dec 9, 2025<br><span style="color:var(--sev-low);font-weight:600;">3:53 PM CT</span></td><td style="font-size:12px;font-weight:600;">~6 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Analytics tracking pre-V6 fix deployed. 8 tickets closed.</td></tr>
-              <tr data-product="olm"><td><strong>OLM — Existing listing errors (US)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2729</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jul 11, 2025<br><span style="color:var(--thryv-steel);">7:12 AM CT</span></td><td style="font-size:12px;">Dec 2, 2025<br><span style="color:var(--sev-low);font-weight:600;">1:51 PM CT</span></td><td style="font-size:12px;font-weight:600;">~21 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Listing error fix deployed for US accounts. 6 tickets closed.</td></tr>
-              <tr data-product="olm"><td><strong>OLM — Update listings failed (batch)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">5 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-4167</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Dec 11, 2025<br><span style="color:var(--thryv-steel);">9:24 AM CT</span></td><td style="font-size:12px;">Dec 16, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:38 PM CT</span></td><td style="font-size:12px;font-weight:600;">~5 days</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Batch listing update failures resolved. 5 tickets closed.</td></tr>
+        <tr data-product="myaccount"><td><strong>Auth0 Settings Access Errors — AUS (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">8 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">AUTH-8548</span></div></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Nov 18, 2025<br><span style="color:var(--thryv-steel);">2:04 PM CT</span></td><td style="font-size:12px;">Dec 23, 2025<br><span style="color:var(--sev-low);font-weight:600;">10:43 AM CT</span></td><td style="font-size:12px;font-weight:600;">~5 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Auth0 settings access restored for AUS CC accounts. 8 tickets closed.</td></tr>
+              <tr data-product="mc"><td><strong>Website Analytics Tracking (V6)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">8 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3870</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Oct 28, 2025<br><span style="color:var(--thryv-steel);">11:23 AM CT</span></td><td style="font-size:12px;">Dec 9, 2025<br><span style="color:var(--sev-low);font-weight:600;">3:53 PM CT</span></td><td style="font-size:12px;font-weight:600;">~6 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Analytics tracking pre-V6 fix deployed. 8 tickets closed.</td></tr>
+              <tr data-product="olm"><td><strong>Existing Listing Errors — US (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2729</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jul 11, 2025<br><span style="color:var(--thryv-steel);">7:12 AM CT</span></td><td style="font-size:12px;">Dec 2, 2025<br><span style="color:var(--sev-low);font-weight:600;">1:51 PM CT</span></td><td style="font-size:12px;font-weight:600;">~21 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Listing error fix deployed for US accounts. 6 tickets closed.</td></tr>
+              <tr data-product="olm"><td><strong>Update Listings Failed — Batch (V5)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">5 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-4167</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Dec 11, 2025<br><span style="color:var(--thryv-steel);">9:24 AM CT</span></td><td style="font-size:12px;">Dec 16, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:38 PM CT</span></td><td style="font-size:12px;font-weight:600;">~5 days</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Batch listing update failures resolved. 5 tickets closed.</td></tr>
       </tbody>
     </table>
   </div>
 
   <!-- November 2025 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header">November 2025 <span class="month-count">6 resolved</span></div>
+    <div class="month-header" id="november-2025">November 2025 <span class="month-count">6 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:22%">Issue</th><th style="width:10%">Product</th><th style="width:7%">Priority</th>
@@ -376,19 +434,19 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:8%">Status</th><th style="width:21%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="olm"><td><strong>Facebook connection failures in Listings Management</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Users unable to connect Facebook profiles through the Listings Management interface. Setup button not appearing for new clients.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3233</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Sep 24, 2025<br><span style="color:var(--thryv-steel);">12:53 PM CT</span></td><td style="font-size:12px;">Nov 7, 2025<br><span style="color:var(--sev-low);font-weight:600;">1:50 PM CT</span></td><td style="font-size:12px;font-weight:600;">~6 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Facebook connection flow restored in Listings Management. 22 tickets resolved.</td></tr>
-              <tr data-product="mc"><td><strong>MC — Website analytics tracking (V4)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">9 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2969</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Aug 28, 2025<br><span style="color:var(--thryv-steel);">12:00 AM CT</span></td><td style="font-size:12px;">Nov 29, 2025<br><span style="color:var(--sev-low);font-weight:600;">8:06 PM CT</span></td><td style="font-size:12px;font-weight:600;">~13 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Analytics tracking fix V4 deployed. 9 tickets closed.</td></tr>
-              <tr data-product="mc"><td><strong>MC — Website analytics AUS (V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">9 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3496</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Oct 17, 2025<br><span style="color:var(--thryv-steel);">12:27 PM CT</span></td><td style="font-size:12px;">Nov 16, 2025<br><span style="color:var(--sev-low);font-weight:600;">4:09 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">AUS analytics fix deployed. 9 tickets closed.</td></tr>
-              <tr data-product="olm"><td><strong>OLM — Listing content/category errors (BC)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">7 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3167</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Sep 10, 2025<br><span style="color:var(--thryv-steel);">4:07 PM CT</span></td><td style="font-size:12px;">Nov 25, 2025<br><span style="color:var(--sev-low);font-weight:600;">10:18 AM CT</span></td><td style="font-size:12px;font-weight:600;">~11 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Content/category errors in BC listings resolved. 7 tickets closed.</td></tr>
-              <tr data-product="mc"><td><strong>MC — Website analytics tracking (V5)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3272</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Sep 3, 2025<br><span style="color:var(--thryv-steel);">11:12 AM CT</span></td><td style="font-size:12px;">Nov 21, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:31 PM CT</span></td><td style="font-size:12px;font-weight:600;">~11 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Analytics tracking fix V5 deployed. 6 tickets closed.</td></tr>
-              <tr data-product="olm"><td><strong>OLM — Listing content/category errors (US)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">5 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2719</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Aug 4, 2025<br><span style="color:var(--thryv-steel);">3:51 PM CT</span></td><td style="font-size:12px;">Nov 28, 2025<br><span style="color:var(--sev-low);font-weight:600;">5:38 PM CT</span></td><td style="font-size:12px;font-weight:600;">~17 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Content/category errors in US listings resolved. 5 tickets closed.</td></tr>
+        <tr data-product="olm"><td><strong>Facebook Connection Failures in Listings (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Users unable to connect Facebook profiles through the Listings Management interface. Setup button not appearing for new clients.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3233</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Sep 24, 2025<br><span style="color:var(--thryv-steel);">12:53 PM CT</span></td><td style="font-size:12px;">Nov 7, 2025<br><span style="color:var(--sev-low);font-weight:600;">1:50 PM CT</span></td><td style="font-size:12px;font-weight:600;">~6 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Facebook connection flow restored in Listings Management. 22 tickets resolved.</td></tr>
+              <tr data-product="mc"><td><strong>Website Analytics Tracking (V4)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">9 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2969</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Aug 28, 2025<br><span style="color:var(--thryv-steel);">12:00 AM CT</span></td><td style="font-size:12px;">Nov 29, 2025<br><span style="color:var(--sev-low);font-weight:600;">8:06 PM CT</span></td><td style="font-size:12px;font-weight:600;">~13 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Analytics tracking fix V4 deployed. 9 tickets closed.</td></tr>
+              <tr data-product="mc"><td><strong>Website Analytics — AUS (V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">9 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3496</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Oct 17, 2025<br><span style="color:var(--thryv-steel);">12:27 PM CT</span></td><td style="font-size:12px;">Nov 16, 2025<br><span style="color:var(--sev-low);font-weight:600;">4:09 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">AUS analytics fix deployed. 9 tickets closed.</td></tr>
+              <tr data-product="olm"><td><strong>Listing Content / Category Errors — BC (V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">7 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3167</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Sep 10, 2025<br><span style="color:var(--thryv-steel);">4:07 PM CT</span></td><td style="font-size:12px;">Nov 25, 2025<br><span style="color:var(--sev-low);font-weight:600;">10:18 AM CT</span></td><td style="font-size:12px;font-weight:600;">~11 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Content/category errors in BC listings resolved. 7 tickets closed.</td></tr>
+              <tr data-product="mc"><td><strong>Website Analytics Tracking (V5)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3272</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Sep 3, 2025<br><span style="color:var(--thryv-steel);">11:12 AM CT</span></td><td style="font-size:12px;">Nov 21, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:31 PM CT</span></td><td style="font-size:12px;font-weight:600;">~11 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Analytics tracking fix V5 deployed. 6 tickets closed.</td></tr>
+              <tr data-product="olm"><td><strong>Listing Content / Category Errors — US (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">5 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2719</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Aug 4, 2025<br><span style="color:var(--thryv-steel);">3:51 PM CT</span></td><td style="font-size:12px;">Nov 28, 2025<br><span style="color:var(--sev-low);font-weight:600;">5:38 PM CT</span></td><td style="font-size:12px;font-weight:600;">~17 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Content/category errors in US listings resolved. 5 tickets closed.</td></tr>
       </tbody>
     </table>
   </div>
 
   <!-- October 2025 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header">October 2025 <span class="month-count">5 resolved</span></div>
+    <div class="month-header" id="october-2025">October 2025 <span class="month-count">5 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:22%">Issue</th><th style="width:10%">Product</th><th style="width:7%">Priority</th>
@@ -396,18 +454,18 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:8%">Status</th><th style="width:21%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="mc"><td><strong>Growth Package installation failures (AUS)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Growth Package features not installing or activating for Australian MC accounts after purchase. Highest-volume issue of 2025.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3346</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Oct 1, 2025<br><span style="color:var(--thryv-steel);">3:42 PM CT</span></td><td style="font-size:12px;">Oct 28, 2025<br><span style="color:var(--sev-low);font-weight:600;">5:27 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">GP installation fix deployed. All AUS accounts restored. 90 tickets resolved.</td></tr>
-        <tr data-product="olm"><td><strong>Listing content / category errors (AUS)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Content and category fields not saving correctly in Listings App for Australian accounts. Long-running issue.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2266</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 17, 2025<br><span style="color:var(--thryv-steel);">4:29 PM CT</span></td><td style="font-size:12px;">Oct 10, 2025<br><span style="color:var(--sev-low);font-weight:600;">5:22 PM CT</span></td><td style="font-size:12px;font-weight:600;">~17 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Content and category save fix deployed. 48 tickets resolved.</td></tr>
-        <tr data-product="olm"><td><strong>Update listings failed — bulk publish errors</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Users receiving "Update Listings Failed" errors when attempting to publish listing changes in bulk.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3050</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Sep 9, 2025<br><span style="color:var(--thryv-steel);">10:07 AM CT</span></td><td style="font-size:12px;">Oct 6, 2025<br><span style="color:var(--sev-low);font-weight:600;">3:15 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Bulk publish fix deployed. Listing updates now saving correctly. 39 tickets resolved.</td></tr>
-        <tr data-product="mc"><td><strong>Growth Package not visible after purchase (AUS V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Second wave of Growth Package visibility issues for Australian accounts.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3307</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Sep 30, 2025<br><span style="color:var(--thryv-steel);">4:25 PM CT</span></td><td style="font-size:12px;">Oct 26, 2025<br><span style="color:var(--sev-low);font-weight:600;">5:44 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">GP visibility fix deployed for AUS accounts. 34 tickets resolved.</td></tr>
-              <tr data-product="mc"><td><strong>MC — Website analytics AUS tracking failures</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">7 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2807</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 4, 2025<br><span style="color:var(--thryv-steel);">1:54 AM CT</span></td><td style="font-size:12px;">Oct 17, 2025<br><span style="color:var(--sev-low);font-weight:600;">2:39 PM CT</span></td><td style="font-size:12px;font-weight:600;">~19 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">AUS analytics tracking restored. 7 tickets closed.</td></tr>
+        <tr data-product="mc"><td><strong>Growth Package Installation Failures — AUS (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Growth Package features not installing or activating for Australian MC accounts after purchase. Highest-volume issue of 2025.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3346</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Oct 1, 2025<br><span style="color:var(--thryv-steel);">3:42 PM CT</span></td><td style="font-size:12px;">Oct 28, 2025<br><span style="color:var(--sev-low);font-weight:600;">5:27 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">GP installation fix deployed. All AUS accounts restored. 90 tickets resolved.</td></tr>
+        <tr data-product="olm"><td><strong>Listing Content / Category Errors — AUS (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Content and category fields not saving correctly in Listings App for Australian accounts. Long-running issue.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2266</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 17, 2025<br><span style="color:var(--thryv-steel);">4:29 PM CT</span></td><td style="font-size:12px;">Oct 10, 2025<br><span style="color:var(--sev-low);font-weight:600;">5:22 PM CT</span></td><td style="font-size:12px;font-weight:600;">~17 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Content and category save fix deployed. 48 tickets resolved.</td></tr>
+        <tr data-product="olm"><td><strong>Update Listings Failed — Bulk Publish (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Users receiving "Update Listings Failed" errors when attempting to publish listing changes in bulk.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3050</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Sep 9, 2025<br><span style="color:var(--thryv-steel);">10:07 AM CT</span></td><td style="font-size:12px;">Oct 6, 2025<br><span style="color:var(--sev-low);font-weight:600;">3:15 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Bulk publish fix deployed. Listing updates now saving correctly. 39 tickets resolved.</td></tr>
+        <tr data-product="mc"><td><strong>Growth Package Not Visible After Purchase — AUS (V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Second wave of Growth Package visibility issues for Australian accounts.</div><div style="margin-top:4px;"><span class="jira-ref">MC-3307</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Sep 30, 2025<br><span style="color:var(--thryv-steel);">4:25 PM CT</span></td><td style="font-size:12px;">Oct 26, 2025<br><span style="color:var(--sev-low);font-weight:600;">5:44 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">GP visibility fix deployed for AUS accounts. 34 tickets resolved.</td></tr>
+              <tr data-product="mc"><td><strong>Website Analytics — AUS Tracking (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">7 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2807</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 4, 2025<br><span style="color:var(--thryv-steel);">1:54 AM CT</span></td><td style="font-size:12px;">Oct 17, 2025<br><span style="color:var(--sev-low);font-weight:600;">2:39 PM CT</span></td><td style="font-size:12px;font-weight:600;">~19 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">AUS analytics tracking restored. 7 tickets closed.</td></tr>
       </tbody>
     </table>
   </div>
 
   <!-- September 2025 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header">September 2025 <span class="month-count">2 resolved</span></div>
+    <div class="month-header" id="september-2025">September 2025 <span class="month-count">2 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:22%">Issue</th><th style="width:10%">Product</th><th style="width:7%">Priority</th>
@@ -415,15 +473,15 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:8%">Status</th><th style="width:21%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="mc"><td><strong>Visitor tagging not syncing (AUS accounts)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Visitor tagging code not syncing for Australian Marketing Center accounts. Analytics not populating for affected users.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2574</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jul 15, 2025<br><span style="color:var(--thryv-steel);">4:39 PM CT</span></td><td style="font-size:12px;">Sep 2, 2025<br><span style="color:var(--sev-low);font-weight:600;">1:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~7 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Visitor tagging sync fix deployed for AUS accounts. 16 tickets resolved.</td></tr>
-              <tr data-product="mc"><td><strong>MC — Website analytics not tracking (V3)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">9 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2706</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jul 8, 2025<br><span style="color:var(--thryv-steel);">2:40 PM CT</span></td><td style="font-size:12px;">Sep 29, 2025<br><span style="color:var(--sev-low);font-weight:600;">10:35 AM CT</span></td><td style="font-size:12px;font-weight:600;">~12 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Third iteration of analytics tracking fix. 9 tickets closed.</td></tr>
+        <tr data-product="mc"><td><strong>Visitor Tagging Not Syncing — AUS (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Visitor tagging code not syncing for Australian Marketing Center accounts. Analytics not populating for affected users.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2574</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jul 15, 2025<br><span style="color:var(--thryv-steel);">4:39 PM CT</span></td><td style="font-size:12px;">Sep 2, 2025<br><span style="color:var(--sev-low);font-weight:600;">1:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~7 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Visitor tagging sync fix deployed for AUS accounts. 16 tickets resolved.</td></tr>
+              <tr data-product="mc"><td><strong>Website Analytics Not Tracking (V3)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">9 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2706</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jul 8, 2025<br><span style="color:var(--thryv-steel);">2:40 PM CT</span></td><td style="font-size:12px;">Sep 29, 2025<br><span style="color:var(--sev-low);font-weight:600;">10:35 AM CT</span></td><td style="font-size:12px;font-weight:600;">~12 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Third iteration of analytics tracking fix. 9 tickets closed.</td></tr>
       </tbody>
     </table>
   </div>
 
   <!-- August 2025 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header">August 2025 <span class="month-count">5 resolved</span></div>
+    <div class="month-header" id="august-2025">August 2025 <span class="month-count">5 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:22%">Issue</th><th style="width:10%">Product</th><th style="width:7%">Priority</th>
@@ -431,18 +489,18 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:8%">Status</th><th style="width:21%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="olm"><td><strong>Listings 404 errors — listings not appearing</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Listings returning 404 errors in Online Listings Management. Clients unable to view or manage their listings.</div><div style="margin-top:4px;"><span class="jira-ref">MC-749</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Jun 3, 2025<br><span style="color:var(--thryv-steel);">10:43 AM CT</span></td><td style="font-size:12px;">Aug 1, 2025<br><span style="color:var(--sev-low);font-weight:600;">2:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~8 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Fix deployed. Listings now appearing correctly. 18 tickets resolved.</td></tr>
-        <tr data-product="mc"><td><strong>Marketing Center not appearing in Command Center</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">MC not visible as an installed center in Command Center left navigation for some accounts.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2808</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Aug 19, 2025<br><span style="color:var(--thryv-steel);">5:20 PM CT</span></td><td style="font-size:12px;">Aug 29, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~10 days</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">MC now appearing correctly in CC navigation. 16 tickets resolved.</td></tr>
-        <tr data-product="mc"><td><strong>Website analytics tracking failures (V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Visitor data not appearing in MC UI. Second iteration of analytics tracking issues.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2412</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jul 8, 2025<br><span style="color:var(--thryv-steel);">12:36 AM CT</span></td><td style="font-size:12px;">Aug 8, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:03 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Analytics tracking fix deployed. 14 tickets resolved.</td></tr>
-        <tr data-product="mc"><td><strong>Heatmap display issues (V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Heatmap data not rendering correctly in Marketing Center. Second iteration of heatmap fixes.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2261</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 20, 2025<br><span style="color:var(--thryv-steel);">4:58 PM CT</span></td><td style="font-size:12px;">Aug 5, 2025<br><span style="color:var(--sev-low);font-weight:600;">4:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~6 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Heatmap rendering fix deployed. 12 tickets resolved.</td></tr>
-              <tr data-product="mc"><td><strong>MC — Growth Packages display errors (US V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">5 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2476</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jul 9, 2025<br><span style="color:var(--thryv-steel);">11:45 AM CT</span></td><td style="font-size:12px;">Aug 1, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~3 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">GP display fix deployed. 5 tickets closed.</td></tr>
+        <tr data-product="olm"><td><strong>Listings 404 Errors — Not Appearing (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Listings returning 404 errors in Online Listings Management. Clients unable to view or manage their listings.</div><div style="margin-top:4px;"><span class="jira-ref">MC-749</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Jun 3, 2025<br><span style="color:var(--thryv-steel);">10:43 AM CT</span></td><td style="font-size:12px;">Aug 1, 2025<br><span style="color:var(--sev-low);font-weight:600;">2:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~8 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Fix deployed. Listings now appearing correctly. 18 tickets resolved.</td></tr>
+        <tr data-product="mc"><td><strong>Marketing Center Not Appearing in Command Center (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">MC not visible as an installed center in Command Center left navigation for some accounts.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2808</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">Aug 19, 2025<br><span style="color:var(--thryv-steel);">5:20 PM CT</span></td><td style="font-size:12px;">Aug 29, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~10 days</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">MC now appearing correctly in CC navigation. 16 tickets resolved.</td></tr>
+        <tr data-product="mc"><td><strong>Website Analytics Tracking Failures (V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Visitor data not appearing in MC UI. Second iteration of analytics tracking issues.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2412</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jul 8, 2025<br><span style="color:var(--thryv-steel);">12:36 AM CT</span></td><td style="font-size:12px;">Aug 8, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:03 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Analytics tracking fix deployed. 14 tickets resolved.</td></tr>
+        <tr data-product="mc"><td><strong>Heatmap Display Issues (V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Heatmap data not rendering correctly in Marketing Center. Second iteration of heatmap fixes.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2261</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 20, 2025<br><span style="color:var(--thryv-steel);">4:58 PM CT</span></td><td style="font-size:12px;">Aug 5, 2025<br><span style="color:var(--sev-low);font-weight:600;">4:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~6 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Heatmap rendering fix deployed. 12 tickets resolved.</td></tr>
+              <tr data-product="mc"><td><strong>Growth Package Display Errors — US (V2)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">5 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2476</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jul 9, 2025<br><span style="color:var(--thryv-steel);">11:45 AM CT</span></td><td style="font-size:12px;">Aug 1, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~3 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">GP display fix deployed. 5 tickets closed.</td></tr>
       </tbody>
     </table>
   </div>
 
   <!-- July 2025 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header">July 2025 <span class="month-count">6 resolved</span></div>
+    <div class="month-header" id="july-2025">July 2025 <span class="month-count">6 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:22%">Issue</th><th style="width:10%">Product</th><th style="width:7%">Priority</th>
@@ -450,29 +508,29 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:8%">Status</th><th style="width:21%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="mc"><td><strong>Heatmap not loading in Marketing Center</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Heatmap feature in MC not generating or displaying data. Tags were not deploying correctly.</div><div style="margin-top:4px;"><span class="jira-ref">MC-1985</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 2, 2025<br><span style="color:var(--thryv-steel);">10:39 AM CT</span></td><td style="font-size:12px;">Jul 1, 2025<br><span style="color:var(--sev-low);font-weight:600;">3:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Heatmap data now rendering correctly in MC UI. 15 tickets resolved.</td></tr>
-        <tr data-product="mc"><td><strong>Website analytics not tracking visitor data</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Website analytics data not populating in Marketing Center UI for some accounts.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2222</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 13, 2025<br><span style="color:var(--thryv-steel);">10:30 AM CT</span></td><td style="font-size:12px;">Jul 11, 2025<br><span style="color:var(--sev-low);font-weight:600;">10:03 AM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Analytics tracking restored. 11 tickets resolved.</td></tr>
-              <tr data-product="myaccount"><td><strong>CC — customer support request handling errors</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">7 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">CC-3090</span></div></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 27, 2025<br><span style="color:var(--thryv-steel);">9:38 AM CT</span></td><td style="font-size:12px;">Jul 28, 2025<br><span style="color:var(--sev-low);font-weight:600;">3:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Support request handling errors resolved. 7 tickets closed.</td></tr>
-              <tr data-product="myaccount"><td><strong>CC — Calls & Voicemail routing issues</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">CC-3133</span></div></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 4, 2025<br><span style="color:var(--thryv-steel);">8:59 AM CT</span></td><td style="font-size:12px;">Jul 21, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~7 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Call and voicemail routing fix deployed. 6 tickets closed.</td></tr>
-              <tr data-product="olm"><td><strong>OLM — Enhanced Profile not saving (Listings App)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2366</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 30, 2025<br><span style="color:var(--thryv-steel);">1:40 PM CT</span></td><td style="font-size:12px;">Jul 18, 2025<br><span style="color:var(--sev-low);font-weight:600;">11:02 AM CT</span></td><td style="font-size:12px;font-weight:600;">~3 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">EP save fix deployed for Listings App. 6 tickets closed.</td></tr>
-              <tr data-product="mc"><td><strong>MC — Growth Packages not loading (US)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">5 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-1717</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 13, 2025<br><span style="color:var(--thryv-steel);">1:02 PM CT</span></td><td style="font-size:12px;">Jul 11, 2025<br><span style="color:var(--sev-low);font-weight:600;">6:01 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">GP loading fix deployed for US accounts. 5 tickets closed.</td></tr>
+        <tr data-product="mc"><td><strong>Heatmap Not Loading in Marketing Center (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Heatmap feature in MC not generating or displaying data. Tags were not deploying correctly.</div><div style="margin-top:4px;"><span class="jira-ref">MC-1985</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 2, 2025<br><span style="color:var(--thryv-steel);">10:39 AM CT</span></td><td style="font-size:12px;">Jul 1, 2025<br><span style="color:var(--sev-low);font-weight:600;">3:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Heatmap data now rendering correctly in MC UI. 15 tickets resolved.</td></tr>
+        <tr data-product="mc"><td><strong>Website Analytics Not Tracking Visitor Data (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Website analytics data not populating in Marketing Center UI for some accounts.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2222</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 13, 2025<br><span style="color:var(--thryv-steel);">10:30 AM CT</span></td><td style="font-size:12px;">Jul 11, 2025<br><span style="color:var(--sev-low);font-weight:600;">10:03 AM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Analytics tracking restored. 11 tickets resolved.</td></tr>
+              <tr data-product="myaccount"><td><strong>Customer Support Request Handling Errors (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">7 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">CC-3090</span></div></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 27, 2025<br><span style="color:var(--thryv-steel);">9:38 AM CT</span></td><td style="font-size:12px;">Jul 28, 2025<br><span style="color:var(--sev-low);font-weight:600;">3:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Support request handling errors resolved. 7 tickets closed.</td></tr>
+              <tr data-product="myaccount"><td><strong>Calls & Voicemail Routing Issues (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">CC-3133</span></div></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 4, 2025<br><span style="color:var(--thryv-steel);">8:59 AM CT</span></td><td style="font-size:12px;">Jul 21, 2025<br><span style="color:var(--sev-low);font-weight:600;">12:02 PM CT</span></td><td style="font-size:12px;font-weight:600;">~7 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">Call and voicemail routing fix deployed. 6 tickets closed.</td></tr>
+              <tr data-product="olm"><td><strong>Enhanced Profile Not Saving — Listings App (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-2366</span></div></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 30, 2025<br><span style="color:var(--thryv-steel);">1:40 PM CT</span></td><td style="font-size:12px;">Jul 18, 2025<br><span style="color:var(--sev-low);font-weight:600;">11:02 AM CT</span></td><td style="font-size:12px;font-weight:600;">~3 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">EP save fix deployed for Listings App. 6 tickets closed.</td></tr>
+              <tr data-product="mc"><td><strong>Growth Packages Not Loading — US (V1)</strong><div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">5 tickets tracked.</div><div style="margin-top:4px;"><span class="jira-ref">MC-1717</span></div></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">Jun 13, 2025<br><span style="color:var(--thryv-steel);">1:02 PM CT</span></td><td style="font-size:12px;">Jul 11, 2025<br><span style="color:var(--sev-low);font-weight:600;">6:01 PM CT</span></td><td style="font-size:12px;font-weight:600;">~4 weeks</td><td><span class="res-badge res-released">Resolved</span></td><td style="font-size:12px;">GP loading fix deployed for US accounts. 5 tickets closed.</td></tr>
       </tbody>
     </table>
   </div>
 
   <!-- June 2025 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header">June 2025 <span class="month-count">0 resolved</span></div>
+    <div class="month-header" id="june-2025">June 2025 <span class="month-count">0 resolved</span></div>
     <div class="empty-month">Dashboard tracking began June 2025. Issues reported this month were resolved in subsequent months.</div>
   </div>
 
   
   <!-- ═══ 2024 ═══ -->
-  <div class="year-header">2024</div>
+  <div class="year-header" id="year-2024">2024</div>
   <div style="background:#FFF3E0;border:1px solid #EF9F27;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:#633806;"><strong>Note:</strong> 2024 data is based on historical SharePoint tracking records. Exact timestamps and ticket counts are not available for this period. Dates shown are approximate based on weekly tracking reports. Issue details are accurate but may not reflect the full scope of each incident.</div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">December 2024 <span class="month-count">1 resolved</span></div>
+    <div class="month-header" id="december-2024">December 2024 <span class="month-count">1 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:25%">Issue</th><th style="width:12%">Product</th><th style="width:7%">Priority</th>
@@ -480,13 +538,13 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:32%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="bc"><td><strong>BC — Listings Management tab caching/sticking</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Nov 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Dec 2, 2024</td><td style="font-size:12px;">LM tab caching fix deployed. Navigation between tabs restored.</td></tr>
+        <tr data-product="bc"><td><strong>Listings Management Tab Caching (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Nov 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Dec 2, 2024</td><td style="font-size:12px;">LM tab caching fix deployed. Navigation between tabs restored.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">November 2024 <span class="month-count">3 resolved</span></div>
+    <div class="month-header" id="november-2024">November 2024 <span class="month-count">3 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:25%">Issue</th><th style="width:12%">Product</th><th style="width:7%">Priority</th>
@@ -494,15 +552,15 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:32%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="bc"><td><strong>BC — CRM 2.0 filtered export returning all records</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Oct 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Nov 25, 2024</td><td style="font-size:12px;">Filtered export now returns correct results.</td></tr>
-        <tr data-product="bc"><td><strong>BC — Website Widgets custom color theme error</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Oct 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Nov 11, 2024</td><td style="font-size:12px;">Custom color theme creation restored.</td></tr>
-        <tr data-product="bc"><td><strong>SP — Staff management access failures</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Nov 25, 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Nov 25, 2024</td><td style="font-size:12px;">Staff management access restored same day.</td></tr>
+        <tr data-product="bc"><td><strong>CRM Filtered Export Returning All Records (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Oct 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Nov 25, 2024</td><td style="font-size:12px;">Filtered export now returns correct results.</td></tr>
+        <tr data-product="bc"><td><strong>Website Widgets Custom Color Theme Error (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Oct 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Nov 11, 2024</td><td style="font-size:12px;">Custom color theme creation restored.</td></tr>
+        <tr data-product="bc"><td><strong>Staff Management Access Failures (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Nov 25, 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Nov 25, 2024</td><td style="font-size:12px;">Staff management access restored same day.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">October 2024 <span class="month-count">3 resolved</span></div>
+    <div class="month-header" id="october-2024">October 2024 <span class="month-count">3 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:25%">Issue</th><th style="width:12%">Product</th><th style="width:7%">Priority</th>
@@ -510,15 +568,15 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:32%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="bc"><td><strong>BC — Reputation tab not loading</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Sep 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Oct 28, 2024</td><td style="font-size:12px;">Reputation tab loading fix deployed.</td></tr>
-        <tr data-product="bc"><td><strong>BC — Invoices/Payments mobile app crash</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Sep 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Oct 21, 2024</td><td style="font-size:12px;">Mobile app invoices tab stabilized.</td></tr>
-        <tr data-product="thryvpay"><td><strong>ThryvPay — payment processing errors</strong></td><td><span class="product-pill prod-pay">ThryvPay</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Aug 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Oct 24, 2024</td><td style="font-size:12px;">Payment processing errors resolved.</td></tr>
+        <tr data-product="bc"><td><strong>Reputation Tab Not Loading (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Sep 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Oct 28, 2024</td><td style="font-size:12px;">Reputation tab loading fix deployed.</td></tr>
+        <tr data-product="bc"><td><strong>Invoices / Payments Mobile App Crash (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Sep 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Oct 21, 2024</td><td style="font-size:12px;">Mobile app invoices tab stabilized.</td></tr>
+        <tr data-product="thryvpay"><td><strong>ThryvPay Payment Processing Errors (V1)</strong></td><td><span class="product-pill prod-pay">ThryvPay</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Aug 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Oct 24, 2024</td><td style="font-size:12px;">Payment processing errors resolved.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">September 2024 <span class="month-count">5 resolved</span></div>
+    <div class="month-header" id="september-2024">September 2024 <span class="month-count">5 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:25%">Issue</th><th style="width:12%">Product</th><th style="width:7%">Priority</th>
@@ -526,17 +584,17 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:32%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="myaccount"><td><strong>CC — Website Builder edit error</strong></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Sep 2024</td><td style="font-size:12px;">DIY website editing restored in Website Builder.</td></tr>
-        <tr data-product="myaccount"><td><strong>CC — Meta channel connection failures</strong></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jul 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Sep 2024</td><td style="font-size:12px;">Meta channel connection restored in CC.</td></tr>
-        <tr data-product="myaccount"><td><strong>CC — Website contact forms not injecting to CC</strong></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jul 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Sep 2024</td><td style="font-size:12px;">Contact form submissions now appear in CC leads.</td></tr>
-        <tr data-product="bc"><td><strong>Integrations — tax-inclusive invoice sync errors</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jul 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Sep 6, 2024</td><td style="font-size:12px;">Tax-inclusive invoices now syncing to QBO/MYOB/Xero.</td></tr>
-        <tr data-product="bc"><td><strong>Integrations — Clover integration errors</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jul 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Sep 6, 2024</td><td style="font-size:12px;">Clover integration flow fixed.</td></tr>
+        <tr data-product="myaccount"><td><strong>Website Builder Edit Error (V1)</strong></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Sep 2024</td><td style="font-size:12px;">DIY website editing restored in Website Builder.</td></tr>
+        <tr data-product="myaccount"><td><strong>Meta Channel Connection Failures (V1)</strong></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jul 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Sep 2024</td><td style="font-size:12px;">Meta channel connection restored in CC.</td></tr>
+        <tr data-product="myaccount"><td><strong>Website Contact Forms Not Injecting (V1)</strong></td><td><span class="product-pill" style="background:#FF5000;">My Account</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jul 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Sep 2024</td><td style="font-size:12px;">Contact form submissions now appear in CC leads.</td></tr>
+        <tr data-product="bc"><td><strong>Tax-Inclusive Invoice Sync Errors (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jul 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Sep 6, 2024</td><td style="font-size:12px;">Tax-inclusive invoices now syncing to QBO/MYOB/Xero.</td></tr>
+        <tr data-product="bc"><td><strong>Clover Integration Errors (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jul 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Sep 6, 2024</td><td style="font-size:12px;">Clover integration flow fixed.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">August 2024 <span class="month-count">4 resolved</span></div>
+    <div class="month-header" id="august-2024">August 2024 <span class="month-count">4 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:25%">Issue</th><th style="width:12%">Product</th><th style="width:7%">Priority</th>
@@ -544,23 +602,23 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:32%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="bc"><td><strong>Social — HEIC image upload failures (iPhone)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">iPhone HEIC image uploads now supported.</td></tr>
-        <tr data-product="bc"><td><strong>Social — schedule creation errors</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Schedule creation errors resolved.</td></tr>
-        <tr data-product="bc"><td><strong>Social — subscription mismatch (BC vs Recurly)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Subscription sync between BC and Recurly restored.</td></tr>
-        <tr data-product="olm"><td><strong>OLM — Google Profile image upload failures</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Image upload to Google Profile restored.</td></tr>
-        <tr data-product="olm"><td><strong>OLM — Missing Country Code error on publish</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Apr 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Country code validation fix deployed.</td></tr>
-        <tr data-product="olm"><td><strong>OLM — Growth Package features not loading</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">GP features now loading correctly in OLM.</td></tr>
-        <tr data-product="mc"><td><strong>MC — Quick Setup Guide category restart</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Category selection no longer restarts setup guide.</td></tr>
-        <tr data-product="mc"><td><strong>MC — missing Google Profile Analytics</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Google Profile Analytics restored in MC.</td></tr>
-        <tr data-product="mc"><td><strong>MC — redirecting to demo page for active accounts</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Active accounts no longer redirect to demo.</td></tr>
-        <tr data-product="mc"><td><strong>MC — missing in Command Center navigation</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">MC now appears correctly in CC nav.</td></tr>
-        <tr data-product="mc"><td><strong>MC — campaign analytics inaccessible</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jul 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Campaign analytics access restored.</td></tr>
+        <tr data-product="bc"><td><strong>Social — HEIC Image Upload Failures (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">iPhone HEIC image uploads now supported.</td></tr>
+        <tr data-product="bc"><td><strong>Social — Schedule Creation Errors (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Schedule creation errors resolved.</td></tr>
+        <tr data-product="bc"><td><strong>Social — Subscription Mismatch (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Subscription sync between BC and Recurly restored.</td></tr>
+        <tr data-product="olm"><td><strong>Google Profile Image Upload Failures (V1)</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Image upload to Google Profile restored.</td></tr>
+        <tr data-product="olm"><td><strong>Missing Country Code Error on Publish (V1)</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Apr 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Country code validation fix deployed.</td></tr>
+        <tr data-product="olm"><td><strong>Growth Package Features Not Loading (V1)</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">GP features now loading correctly in OLM.</td></tr>
+        <tr data-product="mc"><td><strong>Quick Setup Guide Category Restart (V1)</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Category selection no longer restarts setup guide.</td></tr>
+        <tr data-product="mc"><td><strong>Missing Google Profile Analytics (V1)</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Google Profile Analytics restored in MC.</td></tr>
+        <tr data-product="mc"><td><strong>Redirecting to Demo Page for Active Accounts (V1)</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Active accounts no longer redirect to demo.</td></tr>
+        <tr data-product="mc"><td><strong>MC Missing in Command Center Navigation (V1)</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Jun 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">MC now appears correctly in CC nav.</td></tr>
+        <tr data-product="mc"><td><strong>Campaign Analytics Inaccessible (V1)</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Jul 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Aug 2024</td><td style="font-size:12px;">Campaign analytics access restored.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">July 2024 <span class="month-count">1 resolved</span></div>
+    <div class="month-header" id="july-2024">July 2024 <span class="month-count">1 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:25%">Issue</th><th style="width:12%">Product</th><th style="width:7%">Priority</th>
@@ -568,18 +626,18 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:32%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="bc"><td><strong>Social — blank screen on access</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">Blank screen when accessing Social tab resolved.</td></tr>
-        <tr data-product="bc"><td><strong>Social — unable to connect Instagram & Facebook</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">IG/FB connection flow restored in Social.</td></tr>
-        <tr data-product="olm"><td><strong>OLM — unable to enable EPs for AUS/NZ clients</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Apr 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">Enhanced Profile enablement restored for AUS/NZ accounts.</td></tr>
-        <tr data-product="olm"><td><strong>OLM — Holiday Hours not saving</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">Holiday hours now save and publish correctly.</td></tr>
-        <tr data-product="olm"><td><strong>OLM — Facebook URL not updating</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">Facebook URL field now updates correctly.</td></tr>
-        <tr data-product="olm"><td><strong>OLM — CTN reprovisioning failures (MC Plus)</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Apr 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">CTN reprovisioning restored for MC Plus accounts.</td></tr>
+        <tr data-product="bc"><td><strong>Social — Blank Screen on Access (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">Blank screen when accessing Social tab resolved.</td></tr>
+        <tr data-product="bc"><td><strong>Social — Unable to Connect IG & FB (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">IG/FB connection flow restored in Social.</td></tr>
+        <tr data-product="olm"><td><strong>Unable to Enable EPs for AUS/NZ (V1)</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Apr 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">Enhanced Profile enablement restored for AUS/NZ accounts.</td></tr>
+        <tr data-product="olm"><td><strong>Holiday Hours Not Saving (V1)</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">Holiday hours now save and publish correctly.</td></tr>
+        <tr data-product="olm"><td><strong>Facebook URL Not Updating (V1)</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~May 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">Facebook URL field now updates correctly.</td></tr>
+        <tr data-product="olm"><td><strong>CTN Reprovisioning Failures — MC Plus (V1)</strong></td><td><span class="product-pill prod-olm">Online Listings</span></td><td><span class="pri-badge pri-p2">P2</span></td><td style="font-size:12px;">~Apr 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jul 2024</td><td style="font-size:12px;">CTN reprovisioning restored for MC Plus accounts.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">June 2024 <span class="month-count">1 resolved</span></div>
+    <div class="month-header" id="june-2024">June 2024 <span class="month-count">1 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:25%">Issue</th><th style="width:12%">Product</th><th style="width:7%">Priority</th>
@@ -587,13 +645,13 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:32%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="mc"><td><strong>Social — Meta/Facebook outage impact (May 17–Jun 17)</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p1">P1</span></td><td style="font-size:12px;">~May 17, 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jun 17, 2024</td><td style="font-size:12px;">Month-long Facebook and Instagram outage resolved by Meta. Social posting restored.</td></tr>
+        <tr data-product="mc"><td><strong>Meta / Facebook Outage Impact (V1)</strong></td><td><span class="product-pill prod-mc">Marketing Center</span></td><td><span class="pri-badge pri-p1">P1</span></td><td style="font-size:12px;">~May 17, 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~Jun 17, 2024</td><td style="font-size:12px;">Month-long Facebook and Instagram outage resolved by Meta. Social posting restored.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">May 2024 <span class="month-count">1 resolved</span></div>
+    <div class="month-header" id="may-2024">May 2024 <span class="month-count">1 resolved</span></div>
     <table class="issue-table">
       <thead><tr>
         <th style="width:25%">Issue</th><th style="width:12%">Product</th><th style="width:7%">Priority</th>
@@ -601,28 +659,28 @@ body > div:first-child { background: rgba(41,53,93,0.92) !important; backdrop-fi
         <th style="width:32%">Resolution Summary</th>
       </tr></thead>
       <tbody>
-        <tr data-product="bc"><td><strong>Estimates not showing issue date</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Mar 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~May 1, 2024</td><td style="font-size:12px;">Estimates now display the issue date correctly.</td></tr>
+        <tr data-product="bc"><td><strong>Estimates Not Showing Issue Date (V1)</strong></td><td><span class="product-pill" style="background:#29355D;">Business Center</span></td><td><span class="pri-badge pri-p3">P3</span></td><td style="font-size:12px;">~Mar 2024</td><td style="font-size:12px;color:var(--sev-low);font-weight:600;">~May 1, 2024</td><td style="font-size:12px;">Estimates now display the issue date correctly.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">April 2024 <span class="month-count">0 resolved</span></div>
+    <div class="month-header" id="april-2024">April 2024 <span class="month-count">0 resolved</span></div>
     <div class="empty-month">No major issues resolved. Q1 2024 tracking was limited.</div>
   </div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">March 2024 <span class="month-count">0 resolved</span></div>
+    <div class="month-header" id="march-2024">March 2024 <span class="month-count">0 resolved</span></div>
     <div class="empty-month">No major issues resolved. Q1 2024 tracking was limited.</div>
   </div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">February 2024 <span class="month-count">0 resolved</span></div>
+    <div class="month-header" id="february-2024">February 2024 <span class="month-count">0 resolved</span></div>
     <div class="empty-month">No major issues resolved. Q1 2024 tracking was limited.</div>
   </div>
 
   <div style="margin-bottom:32px;">
-    <div class="month-header">January 2024 <span class="month-count">0 resolved</span></div>
+    <div class="month-header" id="january-2024">January 2024 <span class="month-count">0 resolved</span></div>
     <div class="empty-month">No major issues resolved. Q1 2024 tracking was limited.</div>
   </div>
 
@@ -654,6 +712,64 @@ function filterByProduct(filter, btn){
   btn.classList.add('active');
   filterHistory();
 }
+</script>
+
+<script>
+function navTo(id){
+  var el = document.getElementById(id);
+  if(el){
+    var navHeight = document.querySelector('.history-nav').offsetHeight;
+    var top = el.getBoundingClientRect().top + window.scrollY - navHeight - 10;
+    window.scrollTo({top: top, behavior: 'smooth'});
+  }
+}
+
+// Scroll spy — highlight active year/month as user scrolls
+(function(){
+  var yearBtns = document.querySelectorAll('.year-btn');
+  var monthPills = document.querySelectorAll('.month-pill');
+  var allAnchors = [];
+  
+  // Collect all anchored elements
+  document.querySelectorAll('[id^="year-"],[id^="january"],[id^="february"],[id^="march"],[id^="april"],[id^="may"],[id^="june"],[id^="july"],[id^="august"],[id^="september"],[id^="october"],[id^="november"],[id^="december"]').forEach(function(el){
+    allAnchors.push({id: el.id, el: el});
+  });
+  
+  function updateNav(){
+    var navHeight = document.querySelector('.history-nav').offsetHeight + 20;
+    var current = null;
+    
+    for(var i = allAnchors.length - 1; i >= 0; i--){
+      var rect = allAnchors[i].el.getBoundingClientRect();
+      if(rect.top <= navHeight + 50){
+        current = allAnchors[i].id;
+        break;
+      }
+    }
+    
+    if(!current) current = 'year-2026';
+    
+    // Determine active year
+    var activeYear = '2026';
+    if(current.includes('2025')) activeYear = '2025';
+    if(current.includes('2024')) activeYear = '2024';
+    
+    yearBtns.forEach(function(btn){
+      var btnYear = btn.textContent.trim();
+      btn.classList.toggle('active', btnYear === activeYear);
+    });
+    
+    monthPills.forEach(function(pill){
+      var pillId = pill.getAttribute('onclick').match(/'([^']+)'/);
+      if(pillId){
+        pill.classList.toggle('active', pillId[1] === current);
+      }
+    });
+  }
+  
+  window.addEventListener('scroll', updateNav, {passive: true});
+  updateNav();
+})();
 </script>
 </body>
 </html>
