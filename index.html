@@ -106,6 +106,10 @@ body {
 .section-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 28px 0 14px; }
 .section-title { white-space:nowrap; font-size: 18px; font-weight: 600; color: var(--thryv-midnight); display: flex; align-items: center; gap: 10px; }
 .count-badge { font-size: 12px; background: var(--thryv-orange); color: white; padding: 2px 10px; border-radius: 12px; font-weight: 600; }
+.high-priority-badge { display: none; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: #fff; background: linear-gradient(90deg, #C13B3B 0%, #D14D4D 100%); padding: 2px 10px 2px 8px; border-radius: 12px; margin-left: 6px; cursor: pointer; box-shadow: 0 1px 3px rgba(193, 59, 59, 0.25); transition: transform 0.1s ease, box-shadow 0.15s ease; line-height: 1.5; }
+.high-priority-badge.show { display: inline-flex; }
+.high-priority-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(193, 59, 59, 0.4); }
+.high-priority-badge::before { content: "⚠"; font-size: 12px; line-height: 1; }
 
 /* ── Filters ── */
 .filters { white-space:nowrap; display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
@@ -437,13 +441,13 @@ body.simplified .simp-only { display: inline !important; }
 
 /* Sticky table header */
 
-/* P0/P1 priority pulse */
+/* P0/P1 priority badge breathing pulse — ambient, draws the eye */
 @keyframes priorityPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(226,75,74,0.3); }
-  50% { box-shadow: 0 0 0 4px rgba(226,75,74,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(226,75,74,0.45); }
+  50%      { box-shadow: 0 0 0 6px rgba(226,75,74,0); }
 }
-.pri-p0 { animation: priorityPulse 2.5s ease-in-out infinite; }
-.pri-p1 { animation: priorityPulse 3s ease-in-out infinite; }
+.pri-p0 { animation: priorityPulse 2s ease-in-out infinite; }
+.pri-p1 { animation: priorityPulse 2.6s ease-in-out infinite; }
 
 /* Issue description truncation - optional click to expand */
 .issue-desc {
@@ -616,16 +620,59 @@ div[style*="display:grid;grid-template-columns:repeat(4"] + * {
 
 .jump-pill:hover { border-color: var(--thryv-orange) !important; color: var(--thryv-orange) !important; }
 
-/* P0/P1 Urgency Styling */
-tr[data-priority="p0"], tr[data-priority="p1"] {
-  background: rgba(226,75,74,0.06) !important;
-  border-left: 4px solid var(--sev-critical) !important;
+/* P0/P1 Urgency Styling — bold treatment that visually demands attention */
+tr[data-priority="p1"] {
+  background: rgba(226,75,74,0.09) !important;
+  border-left: 5px solid var(--sev-critical) !important;
+  box-shadow: inset 0 0 0 1px rgba(226,75,74,0.06);
 }
-tr[data-priority="p0"]:hover, tr[data-priority="p1"]:hover {
-  background: rgba(226,75,74,0.1) !important;
+tr[data-priority="p0"] {
+  background: rgba(226,75,74,0.14) !important;
+  border-left: 6px solid #B22A2A !important;
+  box-shadow: inset 0 0 0 1px rgba(178,42,42,0.12);
 }
-tr[data-priority="p0"] .issue-title, tr[data-priority="p1"] .issue-title {
-  color: var(--sev-critical);
+tr[data-priority="p0"]:hover { background: rgba(226,75,74,0.20) !important; }
+tr[data-priority="p1"]:hover { background: rgba(226,75,74,0.14) !important; }
+
+/* Title color + weight emphasis */
+tr[data-priority="p1"] .issue-title { color: var(--sev-critical); font-weight: 700; }
+tr[data-priority="p0"] .issue-title { color: #8A1A1A; font-weight: 700; }
+
+/* Pulsing red dot before the title (the eye-catcher) */
+tr[data-priority="p0"] .issue-title::before,
+tr[data-priority="p1"] .issue-title::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 7px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+tr[data-priority="p1"] .issue-title::before {
+  background: var(--sev-critical);
+  box-shadow: 0 0 0 0 rgba(226,75,74,0.7);
+  animation: priorityDot 1.6s ease-in-out infinite;
+}
+tr[data-priority="p0"] .issue-title::before {
+  background: #B22A2A;
+  box-shadow: 0 0 0 0 rgba(178,42,42,0.85);
+  animation: priorityDot 1.2s ease-in-out infinite;
+}
+@keyframes priorityDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(226,75,74,0.7); transform: scale(1); }
+  50%      { box-shadow: 0 0 0 6px rgba(226,75,74,0); transform: scale(1.15); }
+}
+
+/* Larger, bolder P0/P1 badge */
+tr[data-priority="p0"] .pri-badge.pri-p0,
+tr[data-priority="p1"] .pri-badge.pri-p1 {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 3px 11px;
+  letter-spacing: 0.5px;
 }
 
 /* Hide workaround badges on P2 rows */
@@ -730,7 +777,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
 
   <!-- Shared Search Bar (works in both views) -->
 <div class="section-header">
-    <div class="section-title">Known Issues <span class="count-badge">15</span></div>
+    <div class="section-title">Known Issues <span class="count-badge">15</span><span class="high-priority-badge" id="highPriorityBadge" title="Click to view high-priority active issues"><span id="highPriorityCount">0</span> high-priority active</span></div>
     <div class="search-box">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="var(--thryv-steel)" stroke-width="1.5"/><path d="M10.5 10.5L14.5 14.5" stroke="var(--thryv-steel)" stroke-width="1.5" stroke-linecap="round"/></svg>
       <input type="text" id="issueSearch" placeholder="Search by ticket #, Thryv ID, or keyword..." />
@@ -1347,12 +1394,12 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
   <div style="margin:24px 0 10px;padding:12px 20px;background:var(--thryv-white);border:1px solid var(--thryv-cloud);border-radius:var(--radius-lg);">
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
       <span style="font-size:12px;font-weight:700;color:var(--thryv-midnight);text-transform:uppercase;letter-spacing:0.5px;">Priority Guide</span>
-      <span style="font-size:11px;color:var(--thryv-steel);font-style:italic;">Expected resolution times are estimates based on historical SLA — not guaranteed.</span>
+      <span style="font-size:11px;color:var(--thryv-steel);font-style:italic;">Expected SLA times — not guaranteed.</span>
     </div>
     <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
-      <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p0" style="font-size:11px;">P0</span><span style="font-size:12px;color:var(--thryv-night);">Full Outage</span><span style="font-size:11px;color:var(--thryv-steel);">~4 hours</span></div>
-      <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p1" style="font-size:11px;">P1</span><span style="font-size:12px;color:var(--thryv-night);">Major Degradation</span><span style="font-size:11px;color:var(--thryv-steel);">~24 hours</span></div>
-      <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p2" style="font-size:11px;">P2</span><span style="font-size:12px;color:var(--thryv-night);">Degraded — Fix In Progress</span><span style="font-size:11px;color:var(--thryv-steel);">~14 days</span></div>
+      <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p0" style="font-size:11px;">P0</span><span style="font-size:12px;color:var(--thryv-night);">Critical</span><span style="font-size:11px;color:var(--thryv-steel);">~4 hours</span></div>
+      <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p1" style="font-size:11px;">P1</span><span style="font-size:12px;color:var(--thryv-night);">High Impact</span><span style="font-size:11px;color:var(--thryv-steel);">~24 hours</span></div>
+      <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p2" style="font-size:11px;">P2</span><span style="font-size:12px;color:var(--thryv-night);">Medium Impact</span><span style="font-size:11px;color:var(--thryv-steel);">~14 days</span></div>
       <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p3" style="font-size:11px;">P3</span><span style="font-size:12px;color:var(--thryv-night);">Low Impact</span><span style="font-size:11px;color:var(--thryv-steel);">~28 days</span></div>
     </div>
   </div>
@@ -1430,7 +1477,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
 
   <!-- Footer -->
   <div class="page-footer">
-    <span>Updated weekly · Every Monday by 9:00 AM CT · Last refreshed: April 28, 2026</span>
+    <span>Updated daily · Last refreshed: April 29, 2026</span>
     <span>Maintained by Thryv Technical Support Team</span>
   </div>
 </div>
@@ -1851,52 +1898,81 @@ function applyFilters(){
   var activeFilter = document.querySelector('#issueFilters .filter-btn.active');
   var filter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
   var query = searchInput.value.toLowerCase().trim();
-  
-  // Apply to BOTH tables
+
+  // Read current region filter state from the dropdown checkboxes
+  var regionChecks = document.querySelectorAll('#regionDropdown input[data-region-filter]');
+  var selectedRegions = [];
+  for(var ri = 0; ri < regionChecks.length; ri++){
+    if(regionChecks[ri].checked) selectedRegions.push(regionChecks[ri].getAttribute('data-region-filter'));
+  }
+  var regionFilterActive = selectedRegions.length > 0;
+
   var tables = ['.active-issues'];
-  
+
   var matchTitles = [];
   if(lookupMatches.length > 0){
     lookupMatches.forEach(function(m){ matchTitles.push(m[0].toLowerCase()); });
   }
-  
+
   tables.forEach(function(tableSelector){
     var rows = document.querySelectorAll(tableSelector + ' tbody tr[data-product]');
     var visible = 0;
-    
+
     rows.forEach(function(row){
+      // Threshold-hidden rows stay hidden no matter what
+      if(row.getAttribute('data-hidden') === 'threshold'){
+        row.style.display = 'none';
+        return;
+      }
+
+      // Condition A: product filter
       var matchesProduct = (filter === 'all' || row.getAttribute('data-product') === filter);
+
+      // Condition B: search query — match against ID lookup (existing) OR title/description text (new keyword search)
       var matchesSearch = true;
       if(query){
         if(matchTitles.length > 0){
+          // ID-based lookup hit — match rows whose title contains the matched issue title
           var rowTitle = (row.querySelector('.issue-title') || {}).textContent || '';
           var rowTitleLower = rowTitle.toLowerCase();
           matchesSearch = matchTitles.some(function(t){ return rowTitleLower.indexOf(t) !== -1; });
         } else {
-          var text = row.textContent.toLowerCase();
-          var terms = query.split(/\s+/);
-          matchesSearch = terms.every(function(term){ return text.indexOf(term) !== -1; });
+          // No ID hit — fall back to keyword search across title + description text
+          var titleText = ((row.querySelector('.issue-title') || {}).textContent || '').toLowerCase();
+          var descText = ((row.querySelector('.issue-desc') || {}).textContent || '').toLowerCase();
+          var combined = titleText + ' ' + descText;
+          var terms = query.split(/\s+/).filter(function(t){ return t.length > 0; });
+          matchesSearch = terms.every(function(term){ return combined.indexOf(term) !== -1; });
         }
       }
-      if(matchesProduct && matchesSearch){
+
+      // Condition C: region filter (if any region checkboxes selected)
+      var matchesRegion = true;
+      if(regionFilterActive){
+        var rowRegions = (row.getAttribute('data-region') || '').split(',');
+        // ALL-tagged rows always show
+        if(rowRegions.indexOf('ALL') !== -1){
+          matchesRegion = true;
+        } else {
+          matchesRegion = false;
+          for(var sj = 0; sj < selectedRegions.length; sj++){
+            if(rowRegions.indexOf(selectedRegions[sj]) !== -1){ matchesRegion = true; break; }
+          }
+        }
+      }
+
+      // Show only if ALL three conditions pass
+      if(matchesProduct && matchesSearch && matchesRegion){
         row.style.display = '';
         visible++;
       } else {
         row.style.display = 'none';
       }
     });
-    
-    // Update the badge in the correct view
-    var viewClass = '';
+
     var badge = document.querySelector('.count-badge');
     if(badge) badge.textContent = visible;
   });
-  
-  // Also update the shared badge
-  var sharedBadge = document.querySelector('.section-header .count-badge');
-  
-  
-  // No shared badge needed since search is now shared
 }
 // View toggle - default to simplified
 // Toggle Recently Resolved section
@@ -1961,27 +2037,6 @@ function onRegionFilterChange(){
 }
 
 function applyRegionFilter(selected){
-  var rows = document.querySelectorAll('tr[data-region]');
-  var noFilter = (selected.length === 0);
-  for(var i = 0; i < rows.length; i++){
-    if(rows[i].getAttribute('data-hidden') === 'threshold') continue;
-    if(noFilter){
-      rows[i].style.display = '';
-      continue;
-    }
-    var rowRegions = (rows[i].getAttribute('data-region') || '').split(',');
-    // Always show ALL-tagged rows
-    if(rowRegions.indexOf('ALL') !== -1){
-      rows[i].style.display = '';
-      continue;
-    }
-    // Otherwise show if any selected region is in the row
-    var matches = false;
-    for(var j = 0; j < selected.length; j++){
-      if(rowRegions.indexOf(selected[j]) !== -1){ matches = true; break; }
-    }
-    rows[i].style.display = matches ? '' : 'none';
-  }
   // Update header indicator
   var header = document.getElementById('regionHeader');
   var count = document.getElementById('regionCount');
@@ -1994,6 +2049,8 @@ function applyRegionFilter(selected){
       if(count) count.style.display = 'none';
     }
   }
+  // Delegate the actual row filtering to applyFilters() so product + search + region all stack
+  if(typeof applyFilters === 'function') applyFilters();
 }
 
 function clearRegionFilters(e){
@@ -2054,6 +2111,49 @@ function toggleView(){
   document.body.classList.toggle('simplified');
 }
 document.body.classList.add('simplified');
+
+// ── High-priority count badge populator ──
+// Scans active rows on load. If any active (non-resolved, non-threshold-hidden)
+// rows are P0 or P1, surfaces the count in a small badge next to the section
+// heading. Clicking the badge scrolls to and pulses the first such row.
+(function populateHighPriorityBadge(){
+  var badge = document.getElementById('highPriorityBadge');
+  var countEl = document.getElementById('highPriorityCount');
+  if(!badge || !countEl) return;
+
+  var rows = document.querySelectorAll('.active-issues tbody tr[data-priority]');
+  var highRows = [];
+  for(var i = 0; i < rows.length; i++){
+    var pri = rows[i].getAttribute('data-priority');
+    if(pri !== 'p0' && pri !== 'p1') continue;
+    if(rows[i].getAttribute('data-hidden') === 'threshold') continue;
+    highRows.push(rows[i]);
+  }
+
+  if(highRows.length === 0){
+    badge.classList.remove('show');
+    return;
+  }
+
+  countEl.textContent = highRows.length;
+  badge.classList.add('show');
+
+  // On click, jump to and pulse the first high-priority row
+  badge.onclick = function(){
+    var firstRow = highRows[0];
+    if(!firstRow) return;
+    var rowId = firstRow.getAttribute('id');
+    if(rowId){
+      jumpToRow(rowId);
+    } else {
+      firstRow.scrollIntoView({behavior:'smooth', block:'center'});
+      firstRow.classList.remove('jump-pulse');
+      void firstRow.offsetWidth;
+      firstRow.classList.add('jump-pulse');
+      setTimeout(function(){ firstRow.classList.remove('jump-pulse'); }, 5200);
+    }
+  };
+})();
 
 
 // Issue description click-to-expand
