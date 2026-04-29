@@ -1820,12 +1820,30 @@ function checkTicketLookup(query){
     directJira = { ref: jiraQuery, info: historyJiraRefs[jiraQuery] };
   }
 
-  if(!raw && !directJira){ hideLookup(); return []; }
+  // Title-based historyJiraRefs match: typing "Thryv Leads Report Missing" should
+  // route to the resolved card just like typing the Jira ID would.
+  // Only kicks in when the query is at least 4 chars (avoid noisy single-letter matches).
+  var titleMatches = [];
+  if(!raw && !directJira && query.length >= 4 && typeof historyJiraRefs !== 'undefined'){
+    var qLower = query.toLowerCase();
+    for(var ref in historyJiraRefs){
+      if(!Object.prototype.hasOwnProperty.call(historyJiraRefs, ref)) continue;
+      var entry = historyJiraRefs[ref];
+      if(entry.title && entry.title.toLowerCase().indexOf(qLower) !== -1){
+        titleMatches.push({ ref: ref, info: entry });
+      }
+    }
+  }
 
-  // If only direct-jira hit (no ticketLookup match), build a synthetic resolved match
+  if(!raw && !directJira && titleMatches.length === 0){ hideLookup(); return []; }
+
+  // Build matches array. If only directJira hit, synthesize a resolved match.
+  // If only titleMatches hit, synthesize one resolved match per match.
   var matches;
   if(!raw && directJira){
     matches = [[directJira.info.title, '', directJira.ref, 'Resolved']];
+  } else if(!raw && titleMatches.length > 0){
+    matches = titleMatches.map(function(t){ return [t.info.title, '', t.ref, 'Resolved']; });
   } else {
     matches = (Array.isArray(raw[0])) ? raw : [raw];
   }
