@@ -830,10 +830,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       <tr>
         <th style="width:20%">Issue</th>
         <th style="width:10%;cursor:pointer;" onclick="sortTable('product')" title="Sort by product"><span class="adv-only">Product</span><span class="simp-only">Product Area</span> <span class="sort-arrow" id="sort-product">&#8597;</span></th>
-        <th style="width:10%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by priority"><span class="adv-only">Priority</span><span class="simp-only">Expected Resolution</span> <span class="sort-arrow" id="sort-priority">&#8597;</span></th>
+        <th style="width:10%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by priority"><span class="adv-only">Priority</span><span class="simp-only">Priority</span> <span class="sort-arrow" id="sort-priority">&#8597;</span></th>
         <th style="width:7%"><span class="adv-only">Tickets</span><span class="simp-only">Reports</span></th>
-        <th style="width:18%"><span class="adv-only">Status / ETA</span><span class="simp-only">Current Status</span></th>
-        <th style="width:10%">Region</th>
+        
+        <th style="width:10%">Reported Region</th>
         <th style="width:10%;cursor:pointer;" onclick="sortTable('updated')" title="Sort by date"><span class="adv-only">Date Reported</span><span class="simp-only">First Reported</span> <span class="sort-arrow" id="sort-updated">&#8597;</span></th>
       </tr>
     </thead>
@@ -846,10 +846,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-168</span> <span class="jira-tag"><span class="adv-only">MCB-302</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">11 open</span><span class="simp-only">11 reports</span><br></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Dev In Progress</span><span class="simp-only">Engineering is working on a fix</span></div><div class="eta-text">ETA: TBD</div></td>
-                <td data-label="Reported Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        
+                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text" title="Jira created: Mar 20, 2026 2:02 PM CT">Mar 20, 2026 · 2:02 PM CT</td>
       </tr>
       <tr data-product="mc" data-wa="yes" data-wa-text="Submit a support ticket for manual GP installation" data-tkt="open" data-aud="Support,CSMs" data-priority="p3">
@@ -859,10 +859,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-212</span> <span class="jira-tag"><span class="adv-only">MCB-294</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">12 open</span><span class="simp-only">12 reports</span><br></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Dev In Progress</span><span class="simp-only">Engineering is working on a fix</span></div><div class="eta-text">ETA: TBD</div></td>
-                <td data-label="Reported Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        
+                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text" title="Jira created: Apr 1, 2026 9:05 AM CT">Apr 1, 2026 · 9:05 AM CT</td>
       </tr>
       <tr data-product="mc" data-wa="yes" data-wa-text="Open a ticket to support. Include a screenshot of the browser Inspect tool showing the Visitor Tag in the Elements tab. If present, check the Console tab for CORS errors and include that as well." data-tkt="open" data-aud="Support" data-priority="p3">
@@ -872,10 +872,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-265</span> <span class="jira-tag"><span class="adv-only">MCB-306</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">22 open</span><span class="simp-only">22 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">V7 + V8</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Dev In Progress</span><span class="simp-only">Engineering is working on a fix</span></div><div class="eta-text">ETA: TBD</div></td>
-                <td data-label="Reported Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        
+                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text" title="Jira created: Apr 14, 2026 8:19 AM CT">Apr 14, 2026 · 8:19 AM CT</td>
       </tr>
       <tr data-product="mc" data-wa="yes" data-wa-text="Open a ticket to support if a client reports an add-on feature not working. Include the Thryv ID and which add-on is affected." data-tkt="open" data-aud="Support" data-priority="p2" style="display:none;" data-hidden="threshold">
@@ -885,10 +885,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-275</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">~14 days</span></td>
+        <td><span class="pri-badge pri-p2">P2</span></td>
         <td data-label="Tickets"><span class="ticket-count">NEW</span><br><span style="font-size:11px;color:var(--sev-critical)">high volume</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Dev In Progress</span><span class="simp-only">Engineering is working on a fix</span></div><div class="eta-text">ETA: TBD</div></td>
-                <td data-label="Reported Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
+        
+                <td style="white-space:nowrap;"><span class="region-tag">US</span></td>
         <td data-label="Date Reported" class="date-text" title="Jira created: Apr 15, 2026 12:17 PM CT">Apr 15, 2026 · 12:17 PM CT</td>
       </tr>
       
@@ -899,10 +899,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="pub-tag">Bing</span> <span class="pub-tag">Google</span> <span class="pub-tag">Facebook</span> <span class="pub-tag">Apple</span> <span class="pub-tag">YP</span> <span class="yext-tag">Yext #2419893</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">56 open</span><span class="simp-only">56 reports</span><br></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">With publishers</span><span class="simp-only">With third-party partners</span></div><div class="eta-text">See publisher panel</div></td>
-                <td data-label="Reported Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        
+                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026 · 12:00 AM CT</td>
       </tr>
 
@@ -914,10 +914,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="cc-tag">CC #13353</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Other</span><span class="queue-tag">Service Portal</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">15 open</span><span class="simp-only">15 reports</span><br></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Queue processing</span><span class="simp-only">Being processed — volume declining</span></div><div class="eta-text">Ongoing</div></td>
-                <td data-label="Reported Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        
+                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026 · 12:00 AM CT</td>
       </tr>
       <tr data-product="other" data-wa="yes" data-wa-text="Try clearing cache or logging out and back in. If the issue persists, open a ticket to support with the Thryv ID and affected user email. The ticket will be added to the ongoing BC-1068 remediation." data-tkt="open" data-aud="Support,CSMs" data-priority="p1">
@@ -927,10 +927,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">BC-1068</span> <span class="v-tag">V #344232</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Other</span><span class="queue-tag">Social</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p1"><span class="adv-only">P1</span><span class="simp-only">~24 hours</span></td>
+        <td><span class="pri-badge pri-p1">P1</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">22 open</span><span class="simp-only">22 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">fix deployed</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Dev In Progress</span><span class="simp-only">Engineering is working on a fix</span></div><div class="eta-text">Resolution: Done</div></td>
-                <td data-label="Reported Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
+        
+                <td style="white-space:nowrap;"><span class="region-tag">US</span></td>
         <td data-label="Date Reported" class="date-text">Apr 6, 2026 · 12:00 AM CT</td>
       </tr>
       <tr id="section-bc" style="height:0;border:none;padding:0;"></tr>
@@ -940,10 +940,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <div class="issue-desc"><span class="kw">Login</span> queue elevated due to ongoing <span class="kw">Keap-to-Thryv</span> auth migrations. Mix of general login issues, <span class="kw">password resets</span>, <span class="kw">locked accounts</span>.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">17 open</span><span class="simp-only">17 reports</span><br></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Ongoing — migration related</span><span class="simp-only">Related to ongoing migration</span></div><div class="eta-text">Clears as migrations complete</div></td>
-                <td data-label="Reported Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+        
+                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026 · 12:00 AM CT</td>
       </tr>
       <tr data-product="bc" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a clear description of the CRM issue (payment processing, SMS delivery, staff accounts, widget display, etc.)." data-tkt="open" data-aud="Support" data-priority="p3" style="display:none;" data-hidden="threshold">
@@ -953,10 +953,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="ext-tag">Escalated to Dev</span> <span class="v-tag">V #343004</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">3 open</span><span class="simp-only">3 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">account-level</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">With platform dev</span><span class="simp-only">With development team</span></div><div class="eta-text">Per-ticket basis</div></td>
-                <td data-label="Reported Region" style="white-space:nowrap;"><span class="region-tag">US</span></td>
+        
+                <td style="white-space:nowrap;"><span class="region-tag">US</span></td>
         <td data-label="Date Reported" class="date-text">Apr 14, 2026</td>
       </tr>
 
@@ -970,9 +970,9 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <div class="issue-desc">Assorted <span class="kw">account access</span>, <span class="kw">settings</span>, and <span class="kw">website builder</span> issues reported by agents. Low volume, individual cases.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">8 open</span><span class="simp-only">8 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">user-reported</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Per-ticket basis</span><span class="simp-only">Handled individually</span></div><div class="eta-text">Ongoing</div></td>
+        
         <td><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
         <td data-label="Date Reported" class="date-text">Apr 6, 2026 · 12:00 AM CT</td>
       </tr>
@@ -986,10 +986,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Partially resolved</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p1"><span class="adv-only">P1</span><span class="simp-only">~24 hours</span></td>
+        <td><span class="pri-badge pri-p1">P1</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3571685</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Monitoring</span><span class="simp-only">Being monitored</span></div><div class="eta-text">ETA: Apr 25, 2026</div></td>
-                <td data-label="Reported Region"><span class="region-tag">ALL</span></td>
+        
+                <td><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 4, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p1">
@@ -998,10 +998,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <div class="issue-desc">Users redirected to <span class="kw">blank white page</span> at <span class="kw">login.labs.thryv.com</span>. Cannot progress past <span class="kw">login screen</span>.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p1"><span class="adv-only">P1</span><span class="simp-only">~24 hours</span></td>
+        <td><span class="pri-badge pri-p1">P1</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3560909</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Support researching</span><span class="simp-only">Being researched</span></div><div class="eta-text">ETA: Overdue (was Mar 11)</div></td>
-                <td data-label="Reported Region" style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
+        
+                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
         <td data-label="Date Reported" class="date-text">Feb 18, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p2">
@@ -1010,10 +1010,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <div class="issue-desc">App crashes when attempting to place an <span class="kw">outbound call</span>.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">~14 days</span></td>
+        <td><span class="pri-badge pri-p2">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565621</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Investigating</span><span class="simp-only">Our team is looking into this</span></div><div class="eta-text">ETA: TBD</div></td>
-                <td data-label="Reported Region"><span class="region-tag">ALL</span></td>
+        
+                <td><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Mar 9, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p2">
@@ -1022,10 +1022,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <div class="issue-desc">Multiple endpoints as potential blockers to <span class="kw">XMLRPC</span> value parity.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">~14 days</span></td>
+        <td><span class="pri-badge pri-p2">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565069</span></td>
-        <td data-label="Priority"><div class="status-text">In development</div><div class="eta-text">ETA: Ongoing</div></td>
-                <td data-label="Reported Region"><span class="region-tag">ALL</span></td>
+        
+                <td><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Mar 6, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p2">
@@ -1035,10 +1035,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Workaround: disable tracking prevention</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">~14 days</span></td>
+        <td><span class="pri-badge pri-p2">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3570805</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Researching</span><span class="simp-only">Being researched</span></div><div class="eta-text">ETA: TBD</div></td>
-                <td data-label="Reported Region"><span class="region-tag">ALL</span></td>
+        
+                <td><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Mar 31, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p2">
@@ -1048,10 +1048,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Workaround: remove link &amp; republish</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p2"><span class="adv-only">P2</span><span class="simp-only">~14 days</span></td>
+        <td><span class="pri-badge pri-p2">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3551902</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Researching</span><span class="simp-only">Being researched</span></div><div class="eta-text">ETA: May 1, 2026</div></td>
-                <td data-label="Reported Region"><span class="region-tag">ALL</span></td>
+        
+                <td><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026 · 12:00 AM CT</td>
       </tr>
       <tr data-product="keap" data-priority="p3">
@@ -1061,10 +1061,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <span class="adv-only"><div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Workaround: use ~~ format</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3572908</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Researching</span><span class="simp-only">Being researched</span></div><div class="eta-text">ETA: TBD</div></td>
-                <td data-label="Reported Region"><span class="region-tag">ALL</span></td>
+        
+                <td><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 9, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p3">
@@ -1073,10 +1073,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <div class="issue-desc"><span class="kw">Appointment types</span>/<span class="kw">booking links</span> from <span class="kw">deactivated users</span> still appear as options in appointment goals within advanced automations.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3573500</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Investigating</span><span class="simp-only">Our team is looking into this</span></div><div class="eta-text">ETA: TBD</div></td>
-        <td data-label="Reported Region"><span class="region-tag">ALL</span></td>
+        
+        <td><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 13, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p3">
@@ -1085,10 +1085,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <div class="issue-desc"><span class="kw">Membership Service</span> customers cannot see the "<span class="kw">Premium phone support</span>" icon in Keap Pro/Max interface.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Reported</span><span class="simp-only">Reported to the team</span></div><div class="eta-text">ETA: TBD</div></td>
-        <td data-label="Reported Region"><span class="region-tag">ALL</span></td>
+        
+        <td><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 17, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p3">
@@ -1097,10 +1097,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <div class="issue-desc">Complex <span class="kw">Dynamic Content</span> editor preview does not match actual sent emails when evaluating <span class="kw">Yes/No field</span> values.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td data-label="Priority"><span class="pri-badge pri-p3"><span class="adv-only">P3</span><span class="simp-only">~28 days</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
-        <td data-label="Priority"><div class="status-text"><span class="adv-only">Reported</span><span class="simp-only">Reported to the team</span></div><div class="eta-text">ETA: TBD</div></td>
-        <td data-label="Reported Region"><span class="region-tag">ALL</span></td>
+        
+        <td><span class="region-tag">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 17, 2026</td>
       </tr>
 
