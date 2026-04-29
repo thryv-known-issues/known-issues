@@ -743,11 +743,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
     <span class="simp-only"><strong>This week:</strong> Three issues fixed and shipped — <a href="javascript:void(0);" onclick="jumpToResolved('row-resolved-analytics');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">website analytics tracking</a>, <a href="javascript:void(0);" onclick="jumpToResolved('row-resolved-social');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">duplicate social submissions</a>, and <a href="javascript:void(0);" onclick="jumpToResolved('row-resolved-leads');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">Thryv Leads access</a>. The biggest active issue is Growth Package add-ons not appearing after purchase — we're working on it. Full list below.</span>
   </div>
 
-  <!-- Weekly Summary (collapsed by default) -->
-  <div style="margin:16px 0 0;">
-    <button id="summaryToggle" onclick="toggleWeeklySummary()" style="background:none;border:1px solid var(--thryv-cloud);border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;color:var(--thryv-night);cursor:pointer;font-family:inherit;">▸ Show this week's summary</button>
-  </div>
-  <div class="weekly-summary-cards" id="weeklySummaryCards" style="display:none;gap:12px;margin:12px 0 0;flex-wrap:wrap;width:100%;">
+  <!-- Weekly Summary (always visible) -->
+  <div class="weekly-summary-cards" id="weeklySummaryCards" style="display:flex;gap:12px;margin:16px 0 0;flex-wrap:wrap;width:100%;">
     <div style="flex:1;min-width:200px;padding:12px 16px;background:#EAF5EE;border-radius:var(--radius-lg);border:2px solid #C7E5D2;border-left:3px solid var(--sev-low);">
       <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-low);font-weight:600;margin-bottom:4px;">Resolved this week</div>
       <div style="font-size:13px;color:var(--thryv-night);line-height:1.55;">Website visitor tracking is back for one group of accounts. Social content submissions were getting processed twice — fixed this week. The fix for <a href="javascript:void(0);" onclick="jumpToRow('row-social-tab');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">social tab errors</a> is live — we're confirming it stuck.</div>
@@ -1788,19 +1785,6 @@ function toggleResolved(){
   } else {
     section.style.display = 'none';
     arrow.style.transform = 'rotate(0deg)';
-  }
-}
-
-function toggleWeeklySummary(){
-  var cards = document.getElementById('weeklySummaryCards');
-  var btn = document.getElementById('summaryToggle');
-  if(!cards || !btn) return;
-  if(cards.style.display === 'none' || cards.style.display === ''){
-    cards.style.display = 'flex';
-    btn.textContent = "▾ Hide this week's summary";
-  } else {
-    cards.style.display = 'none';
-    btn.textContent = "▸ Show this week's summary";
   }
 }
 
