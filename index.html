@@ -133,7 +133,37 @@ body {
 .issue-meta { display: flex; gap: 12px; margin-top: 6px; flex-wrap: wrap; }
 .ext-tag { display:inline-block; font-size:11px; color:var(--thryv-midnight); font-weight:600; padding:2px 8px; border:2px solid var(--thryv-midnight); border-radius:6px; background:rgba(41,53,93,0.06); }
 .pub-tag { display:inline-block; font-size:11px; color:#085041; font-weight:600; padding:2px 8px; border:2px solid #085041; border-radius:6px; background:rgba(29,158,117,0.06); }
-.region-tag { display:inline-block; font-size:9px; color:var(--thryv-midnight); font-weight:600; padding:1px 6px; border-radius:4px; background:var(--thryv-cloud); margin-left:2px; border:1.5px solid #B0B4BC; }
+/* Region tags — subtle flag-inspired color washes. Click the column header to filter. */
+.region-tag { display:inline-block; font-size:9px; font-weight:600; padding:1px 6px; border-radius:4px; margin-left:2px; border:1.5px solid; line-height:1.4; user-select:none; }
+/* US — subtle red/blue wash via gradient, navy text */
+.region-tag[data-region-val="US"] { color:#1A2D5C; background:linear-gradient(135deg, #FFF0F0 0%, #FFFFFF 50%, #EAF0FB 100%); border-color:#9DACC9; }
+/* CAN — subtle pale red wash, dark red text */
+.region-tag[data-region-val="CAN"] { color:#7A1A1A; background:#FBEAEA; border-color:#D4A8A8; }
+/* AU — subtle blue+red wash (Southern Cross), navy text */
+.region-tag[data-region-val="AU"] { color:#1A3A6E; background:linear-gradient(135deg, #E5EBF7 0%, #F4E5E8 100%); border-color:#9FB1CE; }
+/* NZ — subtle blue wash with red accent, navy text */
+.region-tag[data-region-val="NZ"] { color:#1A3A6E; background:linear-gradient(135deg, #E5EBF7 0%, #F0F2F8 70%, #F4E5E8 100%); border-color:#9FB1CE; }
+/* ALL — neutral gray with globe icon */
+.region-tag[data-region-val="ALL"] { color:var(--thryv-midnight); background:var(--thryv-cloud); border-color:#B0B4BC; }
+.region-tag[data-region-val="ALL"]::before { content:"🌎"; margin-right:3px; font-size:10px; line-height:1; }
+
+/* Reported Region column — clickable header with dropdown */
+.region-header { position:relative; cursor:pointer; user-select:none; }
+.region-header:hover { color:var(--thryv-orange); }
+.region-header.has-filter { color:var(--thryv-orange); font-weight:700; }
+.region-header .region-arrow { display:inline-block; font-size:9px; margin-left:4px; transition:transform 0.2s ease; vertical-align:middle; }
+.region-header.open .region-arrow { transform:rotate(180deg); }
+.region-header .region-count { display:inline-block; background:var(--thryv-orange); color:#fff; font-size:10px; font-weight:700; padding:0 6px; border-radius:8px; margin-left:5px; line-height:1.4; }
+.region-dropdown { display:none; position:absolute; top:calc(100% + 4px); left:0; min-width:180px; background:var(--thryv-white); border:1.5px solid var(--thryv-cloud); border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,0.12); padding:6px; z-index:1000; font-weight:400; text-transform:none; letter-spacing:0; }
+.region-dropdown.open { display:block; }
+.region-dropdown-item { display:flex; align-items:center; gap:8px; padding:7px 10px; border-radius:6px; cursor:pointer; font-size:13px; color:var(--thryv-night); transition:background 0.1s ease; }
+.region-dropdown-item:hover { background:var(--thryv-mist); }
+.region-dropdown-item input[type="checkbox"] { margin:0; cursor:pointer; accent-color:var(--thryv-orange); }
+.region-dropdown-item .region-tag { pointer-events:none; }
+.region-dropdown-divider { border-top:1px solid var(--thryv-cloud); margin:4px 0; }
+.region-dropdown-actions { display:flex; gap:6px; padding:6px 4px 2px; }
+.region-dropdown-actions button { flex:1; background:transparent; border:1px solid var(--thryv-cloud); padding:5px 10px; border-radius:6px; font-size:11px; font-weight:600; cursor:pointer; color:var(--thryv-night); transition:background 0.1s ease, color 0.1s ease, border-color 0.1s ease; font-family:inherit; }
+.region-dropdown-actions button:hover { background:var(--thryv-orange); color:#fff; border-color:var(--thryv-orange); }
 .jira-tag { display:inline-block; font-size:11px; color:var(--thryv-sapphire); font-weight:600; padding:2px 8px; border:2px solid var(--thryv-sapphire); border-radius:6px; background:rgba(83,120,252,0.06); }
 
 .ticket-count { font-size: 11px; color: var(--thryv-night); background: var(--thryv-cloud); padding: 1px 8px; border-radius: 8px; font-weight: 600; }
@@ -877,13 +907,13 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <th style="width:10%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by priority"><span class="adv-only">Priority</span><span class="simp-only">Priority</span> <span class="sort-arrow" id="sort-priority">&#8597;</span></th>
         <th style="width:7%"><span class="adv-only">Tickets</span><span class="simp-only">Reports</span></th>
         
-        <th style="width:10%">Reported Region</th>
+        <th style="width:10%" id="regionHeaderCell"><div class="region-header" id="regionHeader" onclick="toggleRegionDropdown(event)">Reported Region<span class="region-arrow">▾</span><span class="region-count" id="regionCount" style="display:none;">0</span><div class="region-dropdown" id="regionDropdown" onclick="event.stopPropagation();"><label class="region-dropdown-item"><input type="checkbox" data-region-filter="US" onchange="onRegionFilterChange()"> <span class="region-tag" data-region-val="US">US</span> <span style="color:var(--thryv-steel);">United States</span></label><label class="region-dropdown-item"><input type="checkbox" data-region-filter="CAN" onchange="onRegionFilterChange()"> <span class="region-tag" data-region-val="CAN">CAN</span> <span style="color:var(--thryv-steel);">Canada</span></label><label class="region-dropdown-item"><input type="checkbox" data-region-filter="AU" onchange="onRegionFilterChange()"> <span class="region-tag" data-region-val="AU">AU</span> <span style="color:var(--thryv-steel);">Australia</span></label><label class="region-dropdown-item"><input type="checkbox" data-region-filter="NZ" onchange="onRegionFilterChange()"> <span class="region-tag" data-region-val="NZ">NZ</span> <span style="color:var(--thryv-steel);">New Zealand</span></label><div class="region-dropdown-divider"></div><label class="region-dropdown-item" title="Issues affecting all regions are always shown"><input type="checkbox" disabled checked> <span class="region-tag" data-region-val="ALL">ALL</span> <span style="color:var(--thryv-steel);font-size:11px;">always shown</span></label><div class="region-dropdown-actions"><button type="button" onclick="clearRegionFilters(event)">Clear</button><button type="button" onclick="closeRegionDropdown(event)">Done</button></div></div></div></th>
         <th style="width:10%;cursor:pointer;" onclick="sortTable('updated')" title="Sort by date"><span class="adv-only">Date Reported</span><span class="simp-only">First Reported</span> <span class="sort-arrow" id="sort-updated">&#8597;</span></th>
       </tr>
     </thead>
     <tbody>
       <!-- MC Issues -->
-      <tr id="row-ep-gp" data-product="mc" data-wa="yes" data-wa-text="First, confirm the purchase went through on the billing/order screen. If confirmed and the features still aren't activating, open a ticket to support with the Thryv ID, the Growth Package tier, and a screenshot of what's missing. Reassure the client that their subscription is active and we're working on it — no action needed on their end." data-tkt="open" data-aud="Support,CSMs" data-priority="p3">
+      <tr id="row-ep-gp" data-product="mc" data-wa="yes" data-wa-text="First, confirm the purchase went through on the billing/order screen. If confirmed and the features still aren't activating, open a ticket to support with the Thryv ID, the Growth Package tier, and a screenshot of what's missing. Reassure the client that their subscription is active and we're working on it — no action needed on their end." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
         <td>
           <div class="issue-title">Growth Package features not activating after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">YPO installation</span> issue preventing <span class="kw">Enhanced Profile</span> activation. Wrong <span class="kw">YPO tier</span> sometimes installed. <span class="adv-only">MCB-302 (V4)</span> in backlog. Many accounts resolved, verifying remaining via <span class="adv-only">Gump/Pace</span>.</span><span class="simp-only">Some Growth Package and Enhanced Profile features aren't turning on automatically after purchase. Subscriptions and data are fine — this is an issue on our end, not the account. Most accounts are already fixed; we're working through the rest.</span></div>
@@ -894,10 +924,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">11 open</span><span class="simp-only">11 reports</span><br></td>
         
-                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
         <td data-label="Date Reported" class="date-text" title="Jira created: Mar 20, 2026 2:02 PM CT">Mar 20, 2026 · 2:02 PM CT</td>
       </tr>
-      <tr id="row-missing-gp" data-product="mc" data-wa="yes" data-wa-text="First, confirm the purchase went through on the billing/order screen, and confirm the client is looking in Marketing Center (not another product). If the Growth Package is still missing, open a ticket to support with the Thryv ID, GP tier, date of purchase, and a screenshot of MC showing the missing package. Tell the client this is a known issue being worked case by case." data-tkt="open" data-aud="Support,CSMs" data-priority="p3">
+      <tr id="row-missing-gp" data-product="mc" data-wa="yes" data-wa-text="First, confirm the purchase went through on the billing/order screen, and confirm the client is looking in Marketing Center (not another product). If the Growth Package is still missing, open a ticket to support with the Thryv ID, GP tier, date of purchase, and a screenshot of MC showing the missing package. Tell the client this is a known issue being worked case by case." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
         <td>
           <div class="issue-title">Growth Package missing from Marketing Center after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Growth Packages</span> purchased but not visible in <span class="kw">Marketing Center</span> listings. <span class="adv-only">MCB-294 (V7)</span> In Review. Clients paying for service without it reflected.</span><span class="simp-only">Some clients have purchased a Growth Package but don't see it in their Marketing Center listings. Billing is correct — we're working on a fix to make the package show up properly.</span></div>
@@ -908,10 +938,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">12 open</span><span class="simp-only">12 reports</span><br></td>
         
-                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
         <td data-label="Date Reported" class="date-text" title="Jira created: Apr 1, 2026 9:05 AM CT">Apr 1, 2026 · 9:05 AM CT</td>
       </tr>
-      <tr id="row-website-analytics" data-product="mc" data-wa="yes" data-wa-text="First, check whether the site is Thryv-hosted or third-party. If Thryv-hosted, open a ticket immediately. If third-party, confirm the visitor tracking script has been added to the site — if so, open a ticket for further review. Include the Thryv ID, site URL, and whether the site is Thryv-hosted or external. Tell the client this is a known issue under review." data-tkt="open" data-aud="Support" data-priority="p3">
+      <tr id="row-website-analytics" data-product="mc" data-wa="yes" data-wa-text="First, check whether the site is Thryv-hosted or third-party. If Thryv-hosted, open a ticket immediately. If third-party, confirm the visitor tracking script has been added to the site — if so, open a ticket for further review. Include the Thryv ID, site URL, and whether the site is Thryv-hosted or external. Tell the client this is a known issue under review." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,AU,NZ">
         <td>
           <div class="issue-title">Website analytics not tracking visitors<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Website analytics</span> not loading in MC. Non-Thryv sites with <span class="kw">visitor tagging</span> code not syncing. <span class="kw">CORS</span> errors. <span class="adv-only">MCB-220 (V6)</span> Released. <span class="adv-only">MCB-306 (V8)</span> in backlog.</span><span class="simp-only">Website visitor data isn't loading in Marketing Center for some accounts. This affects sites that aren't hosted by Thryv. We fixed it for one group of accounts and are working on the rest.</span></div>
@@ -922,10 +952,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">22 open</span><span class="simp-only">22 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">V7 + V8</span></td>
         
-                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
         <td data-label="Date Reported" class="date-text" title="Jira created: Apr 14, 2026 8:19 AM CT">Apr 14, 2026 · 8:19 AM CT</td>
       </tr>
-      <tr data-product="mc" data-wa="yes" data-wa-text="Open a ticket to support if a client reports an add-on feature not working. Include the Thryv ID and which add-on is affected." data-tkt="open" data-aud="Support" data-priority="p2" style="display:none;" data-hidden="threshold">
+      <tr data-product="mc" data-wa="yes" data-wa-text="Open a ticket to support if a client reports an add-on feature not working. Include the Thryv ID and which add-on is affected." data-tkt="open" data-aud="Support" data-priority="p2" style="display:none;" data-hidden="threshold" data-region="US">
         <td>
           <div class="issue-title">Marketing Center add-on services not installing</div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">MC Addon Services</span> not installing correctly after <span class="adv-only">MCB-214</span> deployment. ~204 tickets/day, +179% WoW. Assigned to engineering.</span><span class="simp-only">Some Marketing Center add-on services aren't installing correctly. We know what's causing it and we're working on a fix.</span></div>
@@ -935,11 +965,11 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p2">P2</span></td>
         <td data-label="Tickets"><span class="ticket-count">NEW</span><br><span style="font-size:11px;color:var(--sev-critical)">high volume</span></td>
         
-                <td style="white-space:nowrap;"><span class="region-tag">US</span></td>
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
         <td data-label="Date Reported" class="date-text" title="Jira created: Apr 15, 2026 12:17 PM CT">Apr 15, 2026 · 12:17 PM CT</td>
       </tr>
       
-      <tr data-product="olm" data-wa="yes" data-wa-text="Open a ticket to support. Include the business name, address, phone number, the listing URL, and specific issues with the listing." data-tkt="open" data-aud="Support,CSMs" data-priority="p3">
+      <tr data-product="olm" data-wa="yes" data-wa-text="Open a ticket to support. Include the business name, address, phone number, the listing URL, and specific issues with the listing." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
         <td>
           <div class="issue-title">Listing updates delayed across publishers<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only">Active <span class="kw">Yext</span>-routed listing issues across multiple <span class="kw">publishers</span>. Includes <span class="kw">stuck processing</span>, <span class="kw">update failures</span>, and enhanced profile sync errors.</span><span class="simp-only">Some listing updates are delayed because of issues on the publisher side (Google, Facebook, Bing, and others). Listing data is saved and will sync once the publisher resolves the issue. See the <a href="javascript:void(0);" onclick="openPublisherPanel();return false;" style="font-weight:700;color:var(--thryv-orange);text-decoration:underline;cursor:pointer;">Publisher Panel</a> for which publishers are affected.</span></div>
@@ -950,12 +980,12 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">75 open</span><span class="simp-only">75 reports</span><br></td>
         
-                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026 · 12:00 AM CT</td>
       </tr>
 
       <!-- Business Center Issues -->
-      <tr data-product="other" data-wa="no" data-wa-text="No fix available yet. Open a ticket so we can log it and add the client to the tracker." data-tkt="open" data-aud="Support" data-priority="p3">
+      <tr data-product="other" data-wa="no" data-wa-text="No fix available yet. Open a ticket so we can log it and add the client to the tracker." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN,AU,NZ">
         <td>
           <div class="issue-title">Cloud Campaign — high ticket volume</div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Cloud Campaign</span> tickets through <span class="kw">Service Portal</span>.  volume.</span><span class="simp-only">More Cloud Campaign tickets than usual are coming in through the Service Portal. We're working through them one by one.</span></div>
@@ -965,10 +995,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">15 open</span><span class="simp-only">15 reports</span><br></td>
         
-                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026 · 12:00 AM CT</td>
       </tr>
-      <tr id="row-social-tab" data-product="other" data-wa="yes" data-wa-text="Try clearing cache or logging out and back in. If the issue persists, open a ticket to support with the Thryv ID and affected user email. The ticket will be added to the ongoing investigation." data-tkt="open" data-aud="Support,CSMs" data-priority="p1">
+      <tr id="row-social-tab" data-product="other" data-wa="yes" data-wa-text="Try clearing cache or logging out and back in. If the issue persists, open a ticket to support with the Thryv ID and affected user email. The ticket will be added to the ongoing investigation." data-tkt="open" data-aud="Support,CSMs" data-priority="p1" data-region="US">
         <td>
           <div class="issue-title">Social tab errors in Business Center — Fix Deployed<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only">Users getting <span class="kw">misconfiguration</span> error on <span class="kw">Social tab</span>. Connection failures and <span class="kw">404</span>s. External ID mismatch between Thryv and Cloud Campaign affecting all product lines and regions. Fix deployed — pending full remediation.</span><span class="simp-only">Some users were seeing errors when clicking the Social tab in Business Center. A fix has been deployed. If errors continue, log out and log back in. If the issue still happens, contact support.</span></div>
@@ -979,11 +1009,11 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p1">P1</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">22 open</span><span class="simp-only">22 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">fix deployed</span></td>
         
-                <td style="white-space:nowrap;"><span class="region-tag">US</span></td>
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
         <td data-label="Date Reported" class="date-text">Apr 6, 2026 · 12:00 AM CT</td>
       </tr>
       <tr id="section-bc" style="height:0;border:none;padding:0;"></tr>
-      <tr data-product="bc" data-wa="yes" data-wa-text="Try clearing browser cache or using an incognito window. If the issue persists, open a ticket to support with the Thryv ID. The ticket will be added to the ongoing issue." data-tkt="open" data-aud="Support" data-priority="p3">
+      <tr data-product="bc" data-wa="yes" data-wa-text="Try clearing browser cache or using an incognito window. If the issue persists, open a ticket to support with the Thryv ID. The ticket will be added to the ongoing issue." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN,AU,NZ">
         <td>
           <div class="issue-title">Login issues during Keap-to-Thryv migration<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Login</span> queue elevated due to ongoing <span class="kw">Keap-to-Thryv</span> auth migrations. Mix of general login issues, <span class="kw">password resets</span>, <span class="kw">locked accounts</span>.</span><span class="simp-only">Some clients are seeing login problems while we move accounts from Keap to Thryv. This includes password resets and locked accounts. Most are resolved on first contact — clear browser cache or try an incognito window first, then contact support if it persists.</span></div>
@@ -993,10 +1023,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">17 open</span><span class="simp-only">17 reports</span><br></td>
         
-                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span> <span class="region-tag">AU</span> <span class="region-tag">NZ</span></td>
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026 · 12:00 AM CT</td>
       </tr>
-      <tr data-product="bc" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a clear description of the CRM issue (payment processing, SMS delivery, staff accounts, widget display, etc.)." data-tkt="open" data-aud="Support" data-priority="p3" style="display:none;" data-hidden="threshold">
+      <tr data-product="bc" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a clear description of the CRM issue (payment processing, SMS delivery, staff accounts, widget display, etc.)." data-tkt="open" data-aud="Support" data-priority="p3" style="display:none;" data-hidden="threshold" data-region="US">
         <td>
           <div class="issue-title">CRM problems — handled one by one</div>
           <div class="issue-desc"><span class="adv-only">Individual account-level issues including <span class="kw">payment processing</span>, <span class="kw">SMS delivery</span>, <span class="kw">staff account</span> management, and <span class="kw">widget</span> display. Escalated to platform development.</span><span class="simp-only">A small number of accounts are seeing CRM problems like payment processing, SMS delivery, staff account management, or widget display. These are being handled one account at a time and passed to the team that fixes those issues.</span></div>
@@ -1006,7 +1036,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">3 open</span><span class="simp-only">3 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">account-level</span></td>
         
-                <td style="white-space:nowrap;"><span class="region-tag">US</span></td>
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
         <td data-label="Date Reported" class="date-text">Apr 14, 2026</td>
       </tr>
 
@@ -1014,7 +1044,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       
       
       <tr id="section-myaccount" style="height:0;border:none;padding:0;"></tr>
-      <tr data-product="myaccount" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a description of the specific account or settings issue." data-tkt="open" data-aud="Support" data-priority="p3">
+      <tr data-product="myaccount" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a description of the specific account or settings issue." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN">
         <td>
           <div class="issue-title">Account, settings, and website builder — small mix of reports<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only">Assorted <span class="kw">account access</span>, <span class="kw">settings</span>, and <span class="kw">website builder</span> issues reported by agents. Low volume, individual cases.</span><span class="simp-only">A small number of clients have reported issues with account access, settings, or the website builder. These are one-off cases — contact support and we'll work through each one.</span></div>
@@ -1024,13 +1054,13 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">8 open</span><span class="simp-only">8 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">user-reported</span></td>
         
-        <td><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
+        <td><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span></td>
         <td data-label="Date Reported" class="date-text">Apr 6, 2026 · 12:00 AM CT</td>
       </tr>
 
       <!-- Keap Issues -->
       <tr id="section-keap" style="height:0;border:none;padding:0;"></tr>
-      <tr data-product="keap" data-priority="p1">
+      <tr data-product="keap" data-priority="p1" data-region="ALL">
         <td>
           <div class="issue-title">Automation &amp; email broadcast actions not processing</div>
           <div class="issue-desc"><span class="kw">Tag goals</span> not firing. <span class="kw">Email broadcasts</span> stuck. Actions should now be processing; root cause still under investigation.</div>
@@ -1040,10 +1070,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p1">P1</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3571685</span></td>
         
-                <td><span class="region-tag">ALL</span></td>
+                <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 4, 2026</td>
       </tr>
-      <tr data-product="keap" data-priority="p1">
+      <tr data-product="keap" data-priority="p1" data-region="US,CAN">
         <td>
           <div class="issue-title">Mobile app login failures post-Thryv migration</div>
           <div class="issue-desc">Users redirected to <span class="kw">blank white page</span> at <span class="kw">login.labs.thryv.com</span>. Cannot progress past <span class="kw">login screen</span>.</div>
@@ -1052,10 +1082,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p1">P1</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3560909</span></td>
         
-                <td style="white-space:nowrap;"><span class="region-tag">US</span> <span class="region-tag">CAN</span></td>
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span></td>
         <td data-label="Date Reported" class="date-text">Feb 18, 2026</td>
       </tr>
-      <tr data-product="keap" data-priority="p2">
+      <tr data-product="keap" data-priority="p2" data-region="ALL">
         <td>
           <div class="issue-title">Mobile app crashes on outbound calls</div>
           <div class="issue-desc">App crashes when attempting to place an <span class="kw">outbound call</span>.</div>
@@ -1064,10 +1094,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p2">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565621</span></td>
         
-                <td><span class="region-tag">ALL</span></td>
+                <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Mar 9, 2026</td>
       </tr>
-      <tr data-product="keap" data-priority="p2">
+      <tr data-product="keap" data-priority="p2" data-region="ALL">
         <td>
           <div class="issue-title">V2 REST API parity issues</div>
           <div class="issue-desc">Multiple endpoints as potential blockers to <span class="kw">XMLRPC</span> value parity.</div>
@@ -1076,10 +1106,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p2">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565069</span></td>
         
-                <td><span class="region-tag">ALL</span></td>
+                <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Mar 6, 2026</td>
       </tr>
-      <tr data-product="keap" data-priority="p2">
+      <tr data-product="keap" data-priority="p2" data-region="ALL">
         <td>
           <div class="issue-title">JS webforms not rendering on Edge</div>
           <div class="issue-desc"><span class="kw">Edge</span> tracking prevention blocks <span class="kw">cookies</span>, forms don't appear.</div>
@@ -1089,10 +1119,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p2">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3570805</span></td>
         
-                <td><span class="region-tag">ALL</span></td>
+                <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Mar 31, 2026</td>
       </tr>
-      <tr data-product="keap" data-priority="p2">
+      <tr data-product="keap" data-priority="p2" data-region="ALL">
         <td>
           <div class="issue-title">Automation email sends blank with deleted link</div>
           <div class="issue-desc">Emails referencing a <span class="kw">deleted automation link</span> send <span class="kw">blank</span>.</div>
@@ -1102,10 +1132,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p2">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3551902</span></td>
         
-                <td><span class="region-tag">ALL</span></td>
+                <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Jan 14, 2026 · 12:00 AM CT</td>
       </tr>
-      <tr data-product="keap" data-priority="p3">
+      <tr data-product="keap" data-priority="p3" data-region="ALL">
         <td>
           <div class="issue-title">Merge fields show raw tags in automated deals</div>
           <div class="issue-desc">Deals show <span class="kw">[[contact.first_name]]</span> instead of actual data.</div>
@@ -1115,10 +1145,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3572908</span></td>
         
-                <td><span class="region-tag">ALL</span></td>
+                <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 9, 2026</td>
       </tr>
-      <tr data-product="keap" data-priority="p3">
+      <tr data-product="keap" data-priority="p3" data-region="ALL">
         <td>
           <div class="issue-title">Appointment types from deactivated users in automation goals</div>
           <div class="issue-desc"><span class="kw">Appointment types</span>/<span class="kw">booking links</span> from <span class="kw">deactivated users</span> still appear as options in appointment goals within advanced automations.</div>
@@ -1127,10 +1157,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3573500</span></td>
         
-        <td><span class="region-tag">ALL</span></td>
+        <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 13, 2026</td>
       </tr>
-      <tr data-product="keap" data-priority="p3">
+      <tr data-product="keap" data-priority="p3" data-region="ALL">
         <td>
           <div class="issue-title">Premium phone support icon unavailable</div>
           <div class="issue-desc"><span class="kw">Membership Service</span> customers cannot see the "<span class="kw">Premium phone support</span>" icon in Keap Pro/Max interface.</div>
@@ -1139,10 +1169,10 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         
-        <td><span class="region-tag">ALL</span></td>
+        <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 17, 2026</td>
       </tr>
-      <tr data-product="keap" data-priority="p3">
+      <tr data-product="keap" data-priority="p3" data-region="ALL">
         <td>
           <div class="issue-title">Dynamic Content preview mismatch on Yes/No fields</div>
           <div class="issue-desc">Complex <span class="kw">Dynamic Content</span> editor preview does not match actual sent emails when evaluating <span class="kw">Yes/No field</span> values.</div>
@@ -1151,7 +1181,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td><span class="pri-badge pri-p3">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         
-        <td><span class="region-tag">ALL</span></td>
+        <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
         <td data-label="Date Reported" class="date-text">Apr 17, 2026</td>
       </tr>
 
@@ -1786,6 +1816,97 @@ function toggleResolved(){
     section.style.display = 'none';
     arrow.style.transform = 'rotate(0deg)';
   }
+}
+
+// ── Region filter (multi-select via column header dropdown) ──
+// Click the "Reported Region" header to open a checkbox dropdown.
+// Pick any combination of US/CAN/AU/NZ. Rows tagged "ALL" always show.
+// Empty selection = no filter (show all rows).
+function toggleRegionDropdown(e){
+  if(e) e.stopPropagation();
+  var dd = document.getElementById('regionDropdown');
+  var header = document.getElementById('regionHeader');
+  if(!dd || !header) return;
+  var willOpen = !dd.classList.contains('open');
+  dd.classList.toggle('open');
+  header.classList.toggle('open');
+  if(willOpen){
+    // Close on outside click — register listener after open so this click doesn't close it
+    setTimeout(function(){
+      document.addEventListener('click', closeRegionDropdownOnOutside, { once:true });
+    }, 0);
+  }
+}
+
+function closeRegionDropdownOnOutside(e){
+  var header = document.getElementById('regionHeader');
+  if(header && !header.contains(e.target)) closeRegionDropdown();
+  else {
+    // Re-register for next outside click
+    setTimeout(function(){
+      document.addEventListener('click', closeRegionDropdownOnOutside, { once:true });
+    }, 0);
+  }
+}
+
+function closeRegionDropdown(e){
+  if(e) e.stopPropagation();
+  var dd = document.getElementById('regionDropdown');
+  var header = document.getElementById('regionHeader');
+  if(dd) dd.classList.remove('open');
+  if(header) header.classList.remove('open');
+}
+
+function onRegionFilterChange(){
+  var checks = document.querySelectorAll('#regionDropdown input[data-region-filter]');
+  var selected = [];
+  for(var i = 0; i < checks.length; i++){
+    if(checks[i].checked) selected.push(checks[i].getAttribute('data-region-filter'));
+  }
+  applyRegionFilter(selected);
+}
+
+function applyRegionFilter(selected){
+  var rows = document.querySelectorAll('tr[data-region]');
+  var noFilter = (selected.length === 0);
+  for(var i = 0; i < rows.length; i++){
+    if(rows[i].getAttribute('data-hidden') === 'threshold') continue;
+    if(noFilter){
+      rows[i].style.display = '';
+      continue;
+    }
+    var rowRegions = (rows[i].getAttribute('data-region') || '').split(',');
+    // Always show ALL-tagged rows
+    if(rowRegions.indexOf('ALL') !== -1){
+      rows[i].style.display = '';
+      continue;
+    }
+    // Otherwise show if any selected region is in the row
+    var matches = false;
+    for(var j = 0; j < selected.length; j++){
+      if(rowRegions.indexOf(selected[j]) !== -1){ matches = true; break; }
+    }
+    rows[i].style.display = matches ? '' : 'none';
+  }
+  // Update header indicator
+  var header = document.getElementById('regionHeader');
+  var count = document.getElementById('regionCount');
+  if(header){
+    if(selected.length > 0){
+      header.classList.add('has-filter');
+      if(count){ count.textContent = selected.length; count.style.display = 'inline-block'; }
+    } else {
+      header.classList.remove('has-filter');
+      if(count) count.style.display = 'none';
+    }
+  }
+}
+
+function clearRegionFilters(e){
+  if(e) e.stopPropagation();
+  var checks = document.querySelectorAll('#regionDropdown input[data-region-filter]');
+  for(var i = 0; i < checks.length; i++) checks[i].checked = false;
+  applyRegionFilter([]);
 }
 
 // Default sort: P0 first (newest), then P1, P2, P3
