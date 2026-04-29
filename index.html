@@ -695,7 +695,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
   <div class="alert-banner">
     <div class="alert-icon">!</div>
     <span class="adv-only"><strong>Active alert:</strong> MCB-168 (EP/GP V3) and MCB-265 (Visitor Tagging V7) both DEPLOYED/RELEASED this week. BC-1116 (Duplicate WOs) also RELEASED. MCB-294 leads active volume at 26 tickets. BC-1068 at 22. Weekly refresh applied Apr 28.</span>
-    <span class="simp-only"><strong>Current status:</strong> Three issues resolved this week. Our engineering team continues working on remaining known issues. Growth Package missing add-on has the highest active volume. See details below.</span>
+    <span class="simp-only"><strong>This week:</strong> Three issues fixed and shipped. The biggest active issue is Growth Package add-ons not appearing after purchase — we're working on it. Full list below.</span>
   </div>
 
   <div class="adv-only"><!-- Weekly Summary -->
@@ -841,8 +841,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       <!-- MC Issues -->
       <tr data-product="mc" data-wa="yes" data-wa-text="Submit a support ticket with Thryv ID and GP tier for manual activation" data-tkt="open" data-aud="Support,CSMs" data-priority="p3">
         <td>
-          <div class="issue-title">Enhanced Profile / Growth Package Activation Issues — Ongoing</div>
-          <div class="issue-desc"><span class="kw">YPO installation</span> issue preventing <span class="kw">Enhanced Profile</span> activation. Wrong <span class="kw">YPO tier</span> sometimes installed. <span class="adv-only">MCB-302 (V4)</span> in backlog. Many accounts resolved, verifying remaining via <span class="adv-only">Gump/Pace</span>.</div>
+          <div class="issue-title">Growth Package features not activating after purchase</div>
+          <div class="issue-desc"><span class="adv-only"><span class="kw">YPO installation</span> issue preventing <span class="kw">Enhanced Profile</span> activation. Wrong <span class="kw">YPO tier</span> sometimes installed. <span class="adv-only">MCB-302 (V4)</span> in backlog. Many accounts resolved, verifying remaining via <span class="adv-only">Gump/Pace</span>.</span><span class="simp-only">Some Growth Package and Enhanced Profile features aren't turning on automatically after purchase. Subscriptions and data are fine — this is a backend activation issue. Most accounts are already fixed; we're working through the rest.</span></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-168</span> <span class="jira-tag"><span class="adv-only">MCB-302</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -854,8 +854,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       </tr>
       <tr data-product="mc" data-wa="yes" data-wa-text="Submit a support ticket for manual GP installation" data-tkt="open" data-aud="Support,CSMs" data-priority="p3">
         <td>
-          <div class="issue-title">Growth Package Not Appearing After Purchase — Ongoing</div>
-          <div class="issue-desc"><span class="kw">Growth Packages</span> purchased but not visible in <span class="kw">Marketing Center</span> listings. <span class="adv-only">MCB-294 (V7)</span> In Review. Clients paying for service without it reflected.</div>
+          <div class="issue-title">Growth Package missing from Marketing Center after purchase</div>
+          <div class="issue-desc"><span class="adv-only"><span class="kw">Growth Packages</span> purchased but not visible in <span class="kw">Marketing Center</span> listings. <span class="adv-only">MCB-294 (V7)</span> In Review. Clients paying for service without it reflected.</span><span class="simp-only">Some clients have purchased a Growth Package but don't see it in their Marketing Center listings. Billing is correct — we're working on a fix to make the package show up properly.</span></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-212</span> <span class="jira-tag"><span class="adv-only">MCB-294</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -867,8 +867,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       </tr>
       <tr data-product="mc" data-wa="yes" data-wa-text="Open a ticket to support. Include a screenshot of the browser Inspect tool showing the Visitor Tag in the Elements tab. If present, check the Console tab for CORS errors and include that as well." data-tkt="open" data-aud="Support" data-priority="p3">
         <td>
-          <div class="issue-title">Website Analytics / Visitor Tagging Not Tracking — Ongoing</div>
-          <div class="issue-desc"><span class="kw">Website analytics</span> not loading in MC. Non-Thryv sites with <span class="kw">visitor tagging</span> code not syncing. <span class="kw">CORS</span> errors. <span class="adv-only">MCB-220 (V6)</span> Released. <span class="adv-only">MCB-306 (V8)</span> in backlog.</div>
+          <div class="issue-title">Website analytics not tracking visitors</div>
+          <div class="issue-desc"><span class="adv-only"><span class="kw">Website analytics</span> not loading in MC. Non-Thryv sites with <span class="kw">visitor tagging</span> code not syncing. <span class="kw">CORS</span> errors. <span class="adv-only">MCB-220 (V6)</span> Released. <span class="adv-only">MCB-306 (V8)</span> in backlog.</span><span class="simp-only">Website visitor data isn't loading in Marketing Center for some accounts. This affects sites that aren't hosted by Thryv. We've shipped a fix for one batch of accounts and are working on the rest.</span></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-265</span> <span class="jira-tag"><span class="adv-only">MCB-306</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -880,8 +880,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       </tr>
       <tr data-product="mc" data-wa="yes" data-wa-text="Open a ticket to support if a client reports an add-on feature not working. Include the Thryv ID and which add-on is affected." data-tkt="open" data-aud="Support" data-priority="p2" style="display:none;" data-hidden="threshold">
         <td>
-          <div class="issue-title">Marketing Center Add-on Services Errors — Ongoing</div>
-          <div class="issue-desc"><span class="kw">MC Addon Services</span> not installing correctly after <span class="adv-only">MCB-214</span> deployment. ~204 tickets/day, +179% WoW. Assigned to engineering.</div>
+          <div class="issue-title">Marketing Center add-on services not installing</div>
+          <div class="issue-desc"><span class="adv-only"><span class="kw">MC Addon Services</span> not installing correctly after <span class="adv-only">MCB-214</span> deployment. ~204 tickets/day, +179% WoW. Assigned to engineering.</span><span class="simp-only">Some Marketing Center add-on services aren't installing correctly. We've identified the cause and engineering is working on a fix.</span></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-275</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -894,8 +894,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       
       <tr data-product="olm" data-wa="yes" data-wa-text="Open a ticket to support. Include the business name, address, phone number, and the specific listing causing issues." data-tkt="open" data-aud="Support,CSMs" data-priority="p3">
         <td>
-          <div class="issue-title">Listing Sync Issues — Publisher Related — Ongoing</div>
-          <div class="issue-desc">Active <span class="kw">Yext</span>-routed listing issues across multiple <span class="kw">publishers</span>. Includes <span class="kw">stuck processing</span>, <span class="kw">update failures</span>, and enhanced profile sync errors.</div>
+          <div class="issue-title">Listing updates delayed across publishers</div>
+          <div class="issue-desc"><span class="adv-only">Active <span class="kw">Yext</span>-routed listing issues across multiple <span class="kw">publishers</span>. Includes <span class="kw">stuck processing</span>, <span class="kw">update failures</span>, and enhanced profile sync errors.</span><span class="simp-only">Some listing updates are delayed because of issues on the publisher side (Google, Facebook, Bing, and others). Listing data is saved and will sync once the publisher resolves the issue. See the Publisher Panel for which publishers are affected.</span></div>
           <span class="adv-only"><div class="issue-meta"><span class="pub-tag">Bing</span> <span class="pub-tag">Google</span> <span class="pub-tag">Facebook</span> <span class="pub-tag">Apple</span> <span class="pub-tag">YP</span> <span class="yext-tag">Yext #2419893</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
@@ -909,8 +909,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       <!-- Business Center Issues -->
       <tr data-product="other" data-wa="no" data-tkt="open" data-aud="Support" data-priority="p3">
         <td>
-          <div class="issue-title">Cloud Campaign — Service Portal Issues — Ongoing</div>
-          <div class="issue-desc"><span class="kw">Cloud Campaign</span> tickets through <span class="kw">Service Portal</span>.  volume.</div>
+          <div class="issue-title">Cloud Campaign — Service Portal volume</div>
+          <div class="issue-desc"><span class="adv-only"><span class="kw">Cloud Campaign</span> tickets through <span class="kw">Service Portal</span>.  volume.</span><span class="simp-only">Elevated Cloud Campaign ticket volume routed through the Service Portal. We're monitoring and triaging individual cases.</span></div>
           <span class="adv-only"><div class="issue-meta"><span class="cc-tag">CC #13353</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Other</span><span class="queue-tag">Service Portal</span></td>
@@ -922,8 +922,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       </tr>
       <tr data-product="other" data-wa="yes" data-wa-text="Try clearing cache or logging out and back in. If the issue persists, open a ticket to support with the Thryv ID and affected user email. The ticket will be added to the ongoing BC-1068 remediation." data-tkt="open" data-aud="Support,CSMs" data-priority="p1">
         <td>
-          <div class="issue-title">Social Tab Access Errors — Fix Deployed</div>
-          <div class="issue-desc">Users getting <span class="kw">misconfiguration</span> error on <span class="kw">Social tab</span>. Connection failures and <span class="kw">404</span>s. External ID mismatch between Thryv and Cloud Campaign affecting all product lines and regions. Fix deployed — pending full remediation.</div>
+          <div class="issue-title">Social tab errors in Business Center — Fix Deployed</div>
+          <div class="issue-desc"><span class="adv-only">Users getting <span class="kw">misconfiguration</span> error on <span class="kw">Social tab</span>. Connection failures and <span class="kw">404</span>s. External ID mismatch between Thryv and Cloud Campaign affecting all product lines and regions. Fix deployed — pending full remediation.</span><span class="simp-only">Some users were seeing errors when clicking the Social tab in Business Center. A fix has been deployed. If errors continue, log out and log back in. If the issue still happens, contact support.</span></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">BC-1068</span> <span class="v-tag">V #344232</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Other</span><span class="queue-tag">Social</span></td>
@@ -936,8 +936,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       <tr id="section-bc" style="height:0;border:none;padding:0;"></tr>
       <tr data-product="bc" data-wa="yes" data-wa-text="Try clearing browser cache or using an incognito window. If the issue persists, open a ticket to support with the Thryv ID. The ticket will be added to the ongoing engineering investigation." data-tkt="no" data-aud="Support" data-priority="p3">
         <td>
-          <div class="issue-title">Login Issues — Migration Related — Ongoing</div>
-          <div class="issue-desc"><span class="kw">Login</span> queue elevated due to ongoing <span class="kw">Keap-to-Thryv</span> auth migrations. Mix of general login issues, <span class="kw">password resets</span>, <span class="kw">locked accounts</span>.</div>
+          <div class="issue-title">Login issues during Keap-to-Thryv migration</div>
+          <div class="issue-desc"><span class="adv-only"><span class="kw">Login</span> queue elevated due to ongoing <span class="kw">Keap-to-Thryv</span> auth migrations. Mix of general login issues, <span class="kw">password resets</span>, <span class="kw">locked accounts</span>.</span><span class="simp-only">Some clients are seeing login problems while we move accounts from Keap to Thryv. This includes password resets and locked accounts. Most are resolved on first contact — clear browser cache or try an incognito window first, then contact support if it persists.</span></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
         <td><span class="pri-badge pri-p3">P3</span></td>
@@ -948,8 +948,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       </tr>
       <tr data-product="bc" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a clear description of the CRM issue (payment processing, SMS delivery, staff accounts, widget display, etc.)." data-tkt="open" data-aud="Support" data-priority="p3" style="display:none;" data-hidden="threshold">
         <td>
-          <div class="issue-title">CRM Platform Issues — Individual Escalations</div>
-          <div class="issue-desc">Individual account-level issues including <span class="kw">payment processing</span>, <span class="kw">SMS delivery</span>, <span class="kw">staff account</span> management, and <span class="kw">widget</span> display. Escalated to platform development.</div>
+          <div class="issue-title">CRM platform — individual account escalations</div>
+          <div class="issue-desc"><span class="adv-only">Individual account-level issues including <span class="kw">payment processing</span>, <span class="kw">SMS delivery</span>, <span class="kw">staff account</span> management, and <span class="kw">widget</span> display. Escalated to platform development.</span><span class="simp-only">A small number of accounts are seeing CRM-related issues like payment processing, SMS delivery, staff account management, or widget display. These are being handled case-by-case and escalated to the platform team.</span></div>
           <span class="adv-only"><div class="issue-meta"><span class="ext-tag">Escalated to Dev</span> <span class="v-tag">V #343004</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
@@ -966,8 +966,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       <tr id="section-myaccount" style="height:0;border:none;padding:0;"></tr>
       <tr data-product="myaccount" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a description of the specific account or settings issue." data-tkt="open" data-aud="Support" data-priority="p3">
         <td>
-          <div class="issue-title">Account and Settings Issues — User Reported</div>
-          <div class="issue-desc">Assorted <span class="kw">account access</span>, <span class="kw">settings</span>, and <span class="kw">website builder</span> issues reported by agents. Low volume, individual cases.</div>
+          <div class="issue-title">Account, settings, and website builder — assorted reports</div>
+          <div class="issue-desc"><span class="adv-only">Assorted <span class="kw">account access</span>, <span class="kw">settings</span>, and <span class="kw">website builder</span> issues reported by agents. Low volume, individual cases.</span><span class="simp-only">A small number of clients have reported issues with account access, settings, or the website builder. These are individual cases — contact support and we'll work through each one.</span></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
         <td><span class="pri-badge pri-p3">P3</span></td>
@@ -1136,11 +1136,11 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           </div></span>
           <div class="tp-section">
             <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">Enhanced Profiles and Growth Package features are not activating automatically after purchase for some clients. This is caused by a product installation issue in the backend. Many accounts have been resolved — remaining accounts being verified. Subscriptions and data are intact — features are simply not surfacing in the UI.</div>
+            <div class="tp-text">Some Growth Package and Enhanced Profile features aren't turning on automatically after purchase. The cause is a backend installation issue, not anything wrong with the client's account. Most accounts have already been resolved — we're verifying the rest. Subscriptions are active and no data has been lost.</div>
           </div>
           <div class="tp-section">
             <div class="tp-label">Client-Facing Message <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We are aware of a technical issue preventing some Growth Package features from appearing in your Marketing Center. Your subscription is active and no data has been lost. Our engineering team has prioritized this issue and a fix is currently in development. We expect resolution soon and will follow up as soon as the fix is deployed.</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We're aware that some Growth Package features aren't showing up correctly in your Marketing Center. Your subscription and data are both fine — this is a display issue on our end. We're actively working on a fix and will reach out as soon as it's resolved.</div>
           </div>
           <span class="adv-only"><div class="tp-section">
             <div class="tp-label">Internal Notes</div>
@@ -1164,11 +1164,11 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           </div></span>
           <div class="tp-section">
             <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">Social tab authentication errors affecting some Business Center users. Users see misconfiguration errors or 404s when accessing the Social tab. A fix has been deployed and most users are restored. CRM platform issues being handled via vendor escalation.</div>
+            <div class="tp-text">Some Business Center users were seeing errors on the Social tab — misconfiguration messages or 404s. A fix has been deployed and most accounts are working again. We're monitoring the remaining 22 active reports. CRM platform issues are being handled separately through vendor escalation.</div>
           </div>
           <div class="tp-section">
             <div class="tp-label">Client-Facing Message <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We identified an issue affecting the Social tab in Business Center and a fix has been deployed. If you are still experiencing errors, please log out and log back in. If the issue persists, contact support and we will resolve it promptly.</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We've shipped a fix for the Social tab errors in Business Center. If you're still seeing the issue, log out and log back in. If it keeps happening after that, let us know and we'll get it sorted right away.</div>
           </div>
           <span class="adv-only"><div class="tp-section">
             <div class="tp-label">Internal Notes</div>
@@ -1192,11 +1192,11 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           </div></span>
           <div class="tp-section">
             <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">Active listing sync issues across multiple publishers including Bing, Google, Facebook, and Apple. Issues include stuck processing, update failures, and enhanced profile sync errors. These are publisher-side issues routed through Yext. See the Publisher Integration Panel for per-publisher details.</div>
+            <div class="tp-text">Listing updates are slow or stuck for some clients because of issues on the publisher side — Bing, Google, Facebook, and Apple. This includes stuck processing, failed updates, and Enhanced Profile sync errors. Listing data is saved on our end. See the Publisher Panel for which publishers are affected and the workaround for each.</div>
           </div>
           <div class="tp-section">
             <div class="tp-label">Client-Facing Message <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">Some listing updates are experiencing delays due to issues with our publishing partners. Your listing data is saved and will sync once the partner resolves the issue. We are actively monitoring and will update you when full functionality is restored.</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">A few of the listing publishers are having issues on their end, so some of your listing updates are taking longer than usual to go live. Your information is saved and will publish as soon as the publisher fixes things on their side. We're keeping an eye on it and will let you know once it's caught up.</div>
           </div>
           <span class="adv-only"><div class="tp-section">
             <div class="tp-label">Internal Notes</div>
@@ -1214,11 +1214,11 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           </div>
           <div class="tp-section">
             <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">Login and account access issues are at normal levels. Staff delete and Auth0 signup service tickets are system-generated and monitored. No client-facing impact requiring escalation at this time.</div>
+            <div class="tp-text">Login and account access are running normally. No active client-facing issues right now. The remaining ticket volume is system-generated alerts being filtered automatically.</div>
           </div>
           <div class="tp-section">
             <div class="tp-label">Client-Facing Message <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">No known issues affecting account access at this time. If you are experiencing login difficulties, try clearing your browser cache or using an incognito window. Contact support if the issue continues.</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">No known issues with account access right now. If you're having trouble logging in, try clearing your browser cache or using an incognito window. If that doesn't work, let us know and we'll help.</div>
           </div>
         </div>
       </div>
@@ -1232,11 +1232,11 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           </div>
           <div class="tp-section">
             <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">Stripe integration queue has been cleared. Remaining volume is largely system-generated alerts. No active client-facing payment processing issues.</div>
+            <div class="tp-text">Stripe queue is fully cleared. No active payment processing issues. Remaining volume is system-generated alerts.</div>
           </div>
           <div class="tp-section">
             <div class="tp-label">Client-Facing Message <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">No known payment processing issues at this time. If you experience any payment-related problems, please contact support for immediate assistance.</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">No known payment processing issues right now. If a payment doesn't go through or you see something unexpected, let us know and we'll look into it right away.</div>
           </div>
         </div>
       </div>
@@ -1250,11 +1250,11 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           </div>
           <div class="tp-section">
             <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">10 known issues tracked via the Keap portal. Steady volume with no spikes. Keap-specific issues are managed through their own support infrastructure.</div>
+            <div class="tp-text">10 active Keap issues are being tracked through the Keap portal. Volume is steady — no spikes. Keap-specific issues are still being managed through Keap's own support infrastructure for now.</div>
           </div>
           <div class="tp-section">
             <div class="tp-label">Client-Facing Message <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">Keap services are operating normally. For Keap-specific issues, please contact Keap support directly or reach out to our team for assistance with Thryv integrations.</div>
+            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">Keap is running normally. For Keap-specific issues, you can reach Keap support directly, or contact us if it involves a Thryv integration and we'll route it for you.</div>
           </div>
         </div>
       </div>
@@ -1297,8 +1297,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       <tbody>
         <tr class="resolved-row">
           <td>
-            <div class="issue-title">Website Analytics / Visitor Tagging (V7) — Resolved</div>
-            <div class="issue-desc"><span class="adv-only">MCB-265 Released. CORS fixes and GA4 properties deployed. MCB-306 (V8) remains active.</span><span class="simp-only">Website analytics tracking restored for this batch of affected accounts.</span></div>
+            <div class="issue-title">Website analytics tracking — Marketing Center</div>
+            <div class="issue-desc"><span class="adv-only">MCB-265 Released. CORS fixes and GA4 properties deployed. MCB-306 (V8) remains active.</span><span class="simp-only">Website analytics tracking has been restored for this batch of accounts.</span></div>
           </td>
           <td><span class="product-pill prod-mc">Marketing Center</span></td>
           <td class="resolved-text">Released</td>
@@ -1308,8 +1308,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         </tr>
         <tr class="resolved-row">
           <td>
-            <div class="issue-title">Duplicate Work Orders on Social Submissions (V1) — Resolved</div>
-            <div class="issue-desc"><span class="adv-only">BC-1116 Released. Duplicate WOs and CC workspaces on social content submission fixed.</span><span class="simp-only">Duplicate work order issue on social content submissions has been resolved.</span></div>
+            <div class="issue-title">Duplicate work orders on social submissions</div>
+            <div class="issue-desc"><span class="adv-only">BC-1116 Released. Duplicate WOs and CC workspaces on social content submission fixed.</span><span class="simp-only">Duplicate work orders on social content submissions are no longer happening.</span></div>
           </td>
           <td><span class="product-pill prod-bc">Business Center</span></td>
           <td class="resolved-text">5 total</td>
@@ -1319,8 +1319,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         </tr>
         <tr class="resolved-row">
           <td>
-            <div class="issue-title">Thryv Leads Missing — Ongoing</div>
-            <div class="issue-desc"><span class="adv-only">MCB-232 Released. All accounts marked resolved. MCB-248 remains in Dev Backlog.</span><span class="simp-only">Thryv Leads report access has been restored for all affected clients.</span></div>
+            <div class="issue-title">Thryv Leads access</div>
+            <div class="issue-desc"><span class="adv-only">MCB-232 Released. All accounts marked resolved. MCB-248 remains in Dev Backlog.</span><span class="simp-only">Thryv Leads report access has been restored for affected clients.</span></div>
           </td>
           <td><span class="product-pill prod-mc">Marketing Center</span></td>
           <td class="resolved-text">Released</td>
@@ -1330,8 +1330,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         </tr>
         <tr class="resolved-row">
           <td>
-            <div class="issue-title">Visitor tagging V6 — website analytics not tracking</div>
-            <div class="issue-desc"><span class="adv-only">MCB-220 Released. Visitor tagging and heatmap fixes deployed for V6 accounts.</span><span class="simp-only">Website analytics tracking has been restored for affected accounts.</span></div>
+            <div class="issue-title">Visitor tagging — earlier batch</div>
+            <div class="issue-desc"><span class="adv-only">MCB-220 Released. Visitor tagging and heatmap fixes deployed for V6 accounts.</span><span class="simp-only">Website analytics tracking has been restored for this earlier batch of accounts.</span></div>
           </td>
           <td><span class="product-pill prod-mc">Marketing Center</span></td>
           <td class="resolved-text">Released</td>
