@@ -201,6 +201,15 @@ body {
 .cfm-cycle-btn:active { transform:scale(0.96); }
 .cfm-cycle-btn::before { content:"↻"; font-size:11px; line-height:1; }
 .cfm-persona-pill { display:inline-flex; align-items:center; font-size:10px; font-weight:600; color:#5C6470; background:#EEF0F4; border:1px solid #D6DAE0; padding:2px 8px; border-radius:10px; letter-spacing:0.3px; line-height:1.4; }
+.lyrics-btn { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:700; color:#5C6470; background:#F1F0E9; border:1px solid #D6DAE0; padding:2px 8px 2px 7px; border-radius:10px; cursor:pointer; letter-spacing:0.4px; text-transform:uppercase; line-height:1.4; margin-left:8px; vertical-align:middle; transition:background 0.15s ease, color 0.15s ease; position:relative; top:-1px; }
+.lyrics-btn:hover { background:var(--thryv-orange); color:#fff; border-color:var(--thryv-orange); }
+.lyrics-btn::before { content:"♪"; font-size:11px; line-height:1; }
+.lyrics-panel { display:none; margin-top:8px; padding:10px 14px; background:var(--thryv-mist); border-radius:var(--radius-md); border-left:3px solid var(--thryv-orange); }
+.lyrics-panel.open { display:block; }
+.lyrics-panel-label { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--thryv-steel); margin-bottom:6px; }
+.lyrics-panel-text { font-size:13px; font-style:italic; color:var(--thryv-night); line-height:1.5; }
+.lyrics-copy-btn { background:transparent; color:var(--thryv-steel); border:1px solid #D6DAE0; padding:3px 9px; border-radius:6px; font-size:10px; font-weight:600; cursor:pointer; margin-top:8px; }
+.lyrics-copy-btn:hover { color:var(--thryv-orange); border-color:var(--thryv-orange); }
 .talking-points .tp-text { font-size: 13px; color: var(--thryv-night); line-height: 1.6; }
 
 /* ── Legend ── */
@@ -862,8 +871,9 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       <!-- MC Issues -->
       <tr id="row-ep-gp" data-product="mc" data-wa="yes" data-wa-text="Submit a support ticket with Thryv ID and GP tier for manual activation" data-tkt="open" data-aud="Support,CSMs" data-priority="p3">
         <td>
-          <div class="issue-title">Growth Package features not activating after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span></div>
+          <div class="issue-title">Growth Package features not activating after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">YPO installation</span> issue preventing <span class="kw">Enhanced Profile</span> activation. Wrong <span class="kw">YPO tier</span> sometimes installed. <span class="adv-only">MCB-302 (V4)</span> in backlog. Many accounts resolved, verifying remaining via <span class="adv-only">Gump/Pace</span>.</span><span class="simp-only">Some Growth Package and Enhanced Profile features aren't turning on automatically after purchase. Subscriptions and data are fine — this is an issue on our end, not the account. Most accounts are already fixed; we're working through the rest.</span></div>
+          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We're aware that some Growth Package features aren't turning on automatically after purchase. Your subscription is active and your data is safe — we're working on getting the features installed correctly and will reach out once it's resolved.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-168</span> <span class="jira-tag"><span class="adv-only">MCB-302</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -875,8 +885,9 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       </tr>
       <tr id="row-missing-gp" data-product="mc" data-wa="yes" data-wa-text="Submit a support ticket for manual GP installation" data-tkt="open" data-aud="Support,CSMs" data-priority="p3">
         <td>
-          <div class="issue-title">Growth Package missing from Marketing Center after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span></div>
+          <div class="issue-title">Growth Package missing from Marketing Center after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Growth Packages</span> purchased but not visible in <span class="kw">Marketing Center</span> listings. <span class="adv-only">MCB-294 (V7)</span> In Review. Clients paying for service without it reflected.</span><span class="simp-only">Some clients have purchased a Growth Package but don't see it in their Marketing Center listings. Billing is correct — we're working on a fix to make the package show up properly.</span></div>
+          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We can see that the Growth Package add-on you purchased isn't showing up in your Marketing Center yet. The purchase did go through and we're getting it activated — we'll let you know as soon as it appears.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-212</span> <span class="jira-tag"><span class="adv-only">MCB-294</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -888,8 +899,9 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       </tr>
       <tr id="row-website-analytics" data-product="mc" data-wa="yes" data-wa-text="Open a ticket to support. Include the Thryv ID, site ID, and website URL." data-tkt="open" data-aud="Support" data-priority="p3">
         <td>
-          <div class="issue-title">Website analytics not tracking visitors<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span></div>
+          <div class="issue-title">Website analytics not tracking visitors<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Website analytics</span> not loading in MC. Non-Thryv sites with <span class="kw">visitor tagging</span> code not syncing. <span class="kw">CORS</span> errors. <span class="adv-only">MCB-220 (V6)</span> Released. <span class="adv-only">MCB-306 (V8)</span> in backlog.</span><span class="simp-only">Website visitor data isn't loading in Marketing Center for some accounts. This affects sites that aren't hosted by Thryv. We fixed it for one group of accounts and are working on the rest.</span></div>
+          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">Some Marketing Center accounts aren't tracking website visitors right now. No data has been lost; tracking will resume once we ship the fix and we'll backfill where we can. We'll keep you posted.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-265</span> <span class="jira-tag"><span class="adv-only">MCB-306</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
@@ -915,8 +927,9 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       
       <tr data-product="olm" data-wa="yes" data-wa-text="Open a ticket to support. Include the business name, address, phone number, the listing URL, and specific issues with the listing." data-tkt="open" data-aud="Support,CSMs" data-priority="p3">
         <td>
-          <div class="issue-title">Listing updates delayed across publishers</div>
+          <div class="issue-title">Listing updates delayed across publishers<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only">Active <span class="kw">Yext</span>-routed listing issues across multiple <span class="kw">publishers</span>. Includes <span class="kw">stuck processing</span>, <span class="kw">update failures</span>, and enhanced profile sync errors.</span><span class="simp-only">Some listing updates are delayed because of issues on the publisher side (Google, Facebook, Bing, and others). Listing data is saved and will sync once the publisher resolves the issue. See the <a href="javascript:void(0);" onclick="openPublisherPanel();return false;" style="font-weight:700;color:var(--thryv-orange);text-decoration:underline;cursor:pointer;">Publisher Panel</a> for which publishers are affected.</span></div>
+          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">A few of the listing publishers are having issues on their end, so some of your listing updates are taking longer than usual to go live. Your information is saved and will publish as soon as the publisher fixes things on their side.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="pub-tag">Bing</span> <span class="pub-tag">Google</span> <span class="pub-tag">Facebook</span> <span class="pub-tag">Apple</span> <span class="pub-tag">YP</span> <span class="yext-tag">Yext #2419893</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
@@ -943,8 +956,9 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       </tr>
       <tr id="row-social-tab" data-product="other" data-wa="yes" data-wa-text="Try clearing cache or logging out and back in. If the issue persists, open a ticket to support with the Thryv ID and affected user email. The ticket will be added to the ongoing BC-1068 remediation." data-tkt="open" data-aud="Support,CSMs" data-priority="p1">
         <td>
-          <div class="issue-title">Social tab errors in Business Center — Fix Deployed</div>
+          <div class="issue-title">Social tab errors in Business Center — Fix Deployed<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only">Users getting <span class="kw">misconfiguration</span> error on <span class="kw">Social tab</span>. Connection failures and <span class="kw">404</span>s. External ID mismatch between Thryv and Cloud Campaign affecting all product lines and regions. Fix deployed — pending full remediation.</span><span class="simp-only">Some users were seeing errors when clicking the Social tab in Business Center. A fix has been deployed. If errors continue, log out and log back in. If the issue still happens, contact support.</span></div>
+          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We've shipped a fix for the Social tab errors in Business Center. If you're still seeing the issue, log out and log back in. If it keeps happening, let us know and we'll take a closer look.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">BC-1068</span> <span class="v-tag">V #344232</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Other</span><span class="queue-tag">Social</span></td>
@@ -957,8 +971,9 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       <tr id="section-bc" style="height:0;border:none;padding:0;"></tr>
       <tr data-product="bc" data-wa="yes" data-wa-text="Try clearing browser cache or using an incognito window. If the issue persists, open a ticket to support with the Thryv ID. The ticket will be added to the ongoing engineering investigation." data-tkt="no" data-aud="Support" data-priority="p3">
         <td>
-          <div class="issue-title">Login issues during Keap-to-Thryv migration</div>
+          <div class="issue-title">Login issues during Keap-to-Thryv migration<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Login</span> queue elevated due to ongoing <span class="kw">Keap-to-Thryv</span> auth migrations. Mix of general login issues, <span class="kw">password resets</span>, <span class="kw">locked accounts</span>.</span><span class="simp-only">Some clients are seeing login problems while we move accounts from Keap to Thryv. This includes password resets and locked accounts. Most are resolved on first contact — clear browser cache or try an incognito window first, then contact support if it persists.</span></div>
+          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">If you're having trouble logging in during your Keap-to-Thryv migration, this is a known issue we're actively resolving. Try resetting your password through the login page first; if that doesn't work, contact support and we'll get you in.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
         <td><span class="pri-badge pri-p3">P3</span></td>
@@ -987,8 +1002,9 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       <tr id="section-myaccount" style="height:0;border:none;padding:0;"></tr>
       <tr data-product="myaccount" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a description of the specific account or settings issue." data-tkt="open" data-aud="Support" data-priority="p3">
         <td>
-          <div class="issue-title">Account, settings, and website builder — small mix of reports</div>
+          <div class="issue-title">Account, settings, and website builder — small mix of reports<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only">Assorted <span class="kw">account access</span>, <span class="kw">settings</span>, and <span class="kw">website builder</span> issues reported by agents. Low volume, individual cases.</span><span class="simp-only">A small number of clients have reported issues with account access, settings, or the website builder. These are one-off cases — contact support and we'll work through each one.</span></div>
+          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We're aware of a small number of unrelated issues across account settings and the website builder. These are being handled individually as they come in, so please reach out to support if you're experiencing one and we'll address it directly.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
         <td><span class="pri-badge pri-p3">P3</span></td>
@@ -1575,6 +1591,48 @@ function renderClientMessage(cardId){
   var pillEl = document.getElementById('cfm-' + cardId + '-pill');
   if(msgEl) msgEl.textContent = v[idx].text;
   if(pillEl) pillEl.textContent = (idx + 1) + ' of 3 · ' + v[idx].label;
+}
+
+// ── Lyrics: per-row inline AI client message (Standard tone only) ──
+// Each Lyrics button sits inside .issue-title; the panel sits as a sibling
+// after .issue-desc. Toggle adds/removes .open class on the nearest panel.
+function toggleLyrics(btn){
+  if(!btn) return;
+  // Walk up to the cell, then find the lyrics panel inside it
+  var cell = btn.closest('td');
+  if(!cell) return;
+  var panel = cell.querySelector('.lyrics-panel');
+  if(!panel) return;
+  panel.classList.toggle('open');
+}
+
+function copyLyrics(btn){
+  if(!btn) return;
+  var panel = btn.closest('.lyrics-panel');
+  if(!panel) return;
+  var textEl = panel.querySelector('.lyrics-panel-text');
+  if(!textEl) return;
+  var text = textEl.textContent;
+  // Modern clipboard API with fallback
+  var done = function(){
+    var orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(function(){ btn.textContent = orig; }, 1500);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(function(){
+      // Fallback if clipboard API rejected
+      var ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch(e){}
+      document.body.removeChild(ta);
+    });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch(e){}
+    document.body.removeChild(ta);
+  }
 }
 
 // Issue table product filters
