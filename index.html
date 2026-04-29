@@ -210,6 +210,20 @@ body {
 .lyrics-panel-text { font-size:13px; font-style:italic; color:var(--thryv-night); line-height:1.5; }
 .lyrics-copy-btn { background:transparent; color:var(--thryv-steel); border:1px solid #D6DAE0; padding:3px 9px; border-radius:6px; font-size:10px; font-weight:600; cursor:pointer; margin-top:8px; }
 .lyrics-copy-btn:hover { color:var(--thryv-orange); border-color:var(--thryv-orange); }
+
+/* Jump-to-row pulse: gentle orange glow ring that pulses 3x then stops.
+   Layered on top of the existing flash background. Applied via JS,
+   then auto-removed when animation ends. */
+@keyframes jumpPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 80, 0, 0.55), 0 0 0 0 rgba(255, 80, 0, 0.0); }
+  50%  { box-shadow: 0 0 0 4px rgba(255, 80, 0, 0.0), 0 0 14px 6px rgba(255, 80, 0, 0.35); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 80, 0, 0.0), 0 0 0 0 rgba(255, 80, 0, 0.0); }
+}
+tr.jump-pulse, .resolved-row.jump-pulse {
+  animation: jumpPulse 1.7s ease-out 3;
+  position: relative;
+  z-index: 1;
+}
 .talking-points .tp-text { font-size: 13px; color: var(--thryv-night); line-height: 1.6; }
 
 /* ── Legend ── */
@@ -731,17 +745,17 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
 
   <!-- Weekly Summary -->
   <div class="weekly-summary-cards" style="display:flex;gap:12px;margin:16px 0 0;flex-wrap:wrap;width:100%;">
-    <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-low);">
+    <div style="flex:1;min-width:200px;padding:12px 16px;background:#EAF5EE;border-radius:var(--radius-lg);border:2px solid #C7E5D2;border-left:3px solid var(--sev-low);">
       <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-low);font-weight:600;margin-bottom:4px;">Resolved this week</div>
       <div style="font-size:13px;color:var(--thryv-night);line-height:1.55;">Website visitor tracking is back for one group of accounts. Social content submissions were getting processed twice — fixed this week. The fix for <a href="javascript:void(0);" onclick="jumpToRow('row-social-tab');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">social tab errors</a> is live — we're confirming it stuck.</div>
     </div>
-    <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-low);">
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-low);font-weight:600;margin-bottom:4px;">In progress</div>
+    <div style="flex:1;min-width:200px;padding:12px 16px;background:#FFF0E5;border-radius:var(--radius-lg);border:2px solid #FFD9BD;border-left:3px solid var(--thryv-orange);">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--thryv-orange);font-weight:600;margin-bottom:4px;">In progress</div>
       <div style="font-size:13px;color:var(--thryv-night);line-height:1.55;"><a href="javascript:void(0);" onclick="jumpToRow('row-missing-gp');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">Growth Package issues</a> are the highest active volume right now and engineering is actively working on them. We're also fixing <a href="javascript:void(0);" onclick="jumpToRow('row-website-analytics');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">website analytics</a> for the next group of accounts and looking into Thryv Leads not showing up.</div>
     </div>
-    <div style="flex:1;min-width:200px;padding:12px 16px;background:var(--thryv-white);border-radius:var(--radius-lg);border:2px solid var(--thryv-cloud);border-left:3px solid var(--sev-critical);">
+    <div style="flex:1;min-width:200px;padding:12px 16px;background:#FCEDED;border-radius:var(--radius-lg);border:2px solid #F4CCCC;border-left:3px solid var(--sev-critical);">
       <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-critical);font-weight:600;margin-bottom:4px;">Watch items</div>
-      <div style="font-size:13px;color:var(--thryv-night);line-height:1.55;">The fix for <a href="javascript:void(0);" onclick="jumpToRow('row-social-tab');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">social tab errors</a> is live but reports are still coming in (22 this week) — watching for it to clear.<div style="margin-top:8px;padding-top:8px;border-top:1px dashed #FFCBC0;font-size:12px;"><strong>Keeping an eye on:</strong> Yelp activation errors (3 reports since late March). Apple listing data showing wrong hours, category, status, or address (5 reports since February). If either grows, they'll get their own row.</div></div>
+      <div style="font-size:13px;color:var(--thryv-night);line-height:1.55;">The fix for <a href="javascript:void(0);" onclick="jumpToRow('row-social-tab');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">social tab errors</a> is live but reports are still coming in (22 this week) — watching for it to clear.<div style="margin-top:8px;padding-top:8px;border-top:1px dashed #E8B7B7;font-size:12px;"><strong>Keeping an eye on:</strong> Yelp activation errors (3 reports since late March). Apple listing data showing wrong hours, category, status, or address (5 reports since February). If either grows, they'll get their own row.</div></div>
     </div>
   </div>
 
@@ -1500,7 +1514,7 @@ function jumpToRow(rowId){
   var row = document.getElementById(rowId);
   if(!row) return;
   row.scrollIntoView({behavior:'smooth', block:'center'});
-  // Flash highlight the row so the user sees where they landed
+  // Layer 1: existing background tint flash (kept as-is for continuity)
   var origBg = row.style.backgroundColor;
   var origTrans = row.style.transition;
   row.style.transition = 'background-color 0.4s ease';
@@ -1512,6 +1526,13 @@ function jumpToRow(rowId){
     row.style.backgroundColor = origBg;
     setTimeout(function(){ row.style.transition = origTrans; }, 500);
   }, 1800);
+  // Layer 2: pulsating glow ring — 3 cycles × 1.7s = ~5.1s total
+  // Re-trigger by removing/re-adding the class so repeat clicks restart cleanly
+  row.classList.remove('jump-pulse');
+  // Force a reflow so the animation restarts on rapid re-clicks
+  void row.offsetWidth;
+  row.classList.add('jump-pulse');
+  setTimeout(function(){ row.classList.remove('jump-pulse'); }, 5200);
 }
 
 // Jump to a row inside the Recently Resolved section.
