@@ -245,6 +245,10 @@ body {
 .lyrics-copy-btn { background:transparent; color:var(--thryv-steel); border:1px solid #D6DAE0; padding:3px 9px; border-radius:6px; font-size:10px; font-weight:600; cursor:pointer; margin-top:8px; }
 .lyrics-copy-btn:hover { color:var(--thryv-orange); border-color:var(--thryv-orange); }
 
+/* Known Issue ID column — small, monospace, muted */
+.ki-id { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; font-weight: 600; color: var(--thryv-steel); letter-spacing: 0.3px; white-space: nowrap; }
+.ki-id-empty { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; color: #C8CDD3; }
+
 /* Jump-to-row pulse: gentle orange glow ring that pulses 3x then stops.
    Layered on top of the existing flash background. Applied via JS,
    then auto-removed when animation ends. */
@@ -949,7 +953,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
   <table class="issue-table active-issues">
     <thead>
       <tr>
-        <th style="width:20%">Issue</th>
+        <th style="width:5%">ID</th>
+        <th style="width:18%">Issue</th>
         <th style="width:10%;cursor:pointer;" onclick="sortTable('product')" title="Sort by product"><span class="adv-only">Product</span><span class="simp-only">Product Area</span> <span class="sort-arrow" id="sort-product">&#8597;</span></th>
         <th style="width:10%;cursor:pointer;" onclick="sortTable('priority')" title="Sort by priority"><span class="adv-only">Priority</span><span class="simp-only">Priority</span> <span class="sort-arrow" id="sort-priority">&#8597;</span></th>
         <th style="width:7%"><span class="adv-only">Tickets</span><span class="simp-only">Reports</span></th>
@@ -961,6 +966,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
     <tbody>
       <!-- MC Issues -->
       <tr id="row-ep-gp" data-product="mc" data-wa="yes" data-wa-text="First, confirm the purchase went through on the billing/order screen. If confirmed and the features still aren't activating, open a ticket to support with the Thryv ID, the Growth Package tier, and a screenshot of what's missing. Reassure the client that their subscription is active and we're working on it — no action needed on their end." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
+          <td><span class="ki-id">#0008</span></td>
         <td>
           <div class="issue-title">Growth Package features not activating after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">YPO installation</span> issue preventing <span class="kw">Enhanced Profile</span> activation. Wrong <span class="kw">YPO tier</span> sometimes installed. <span class="adv-only">MCB-302 (V4)</span> in backlog. Many accounts resolved, verifying remaining via <span class="adv-only">Gump/Pace</span>.</span><span class="simp-only">Some Growth Package and Enhanced Profile features aren't turning on automatically after purchase. Subscriptions and data are fine — this is an issue on our end, not the account. Most accounts are already fixed; we're working through the rest.</span></div>
@@ -975,6 +981,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text" title="Jira created: Mar 20, 2026 2:02 PM CT">Mar 20, 2026 · 2:02 PM CT</td>
       </tr>
       <tr id="row-missing-gp" data-product="mc" data-wa="yes" data-wa-text="First, confirm the purchase went through on the billing/order screen, and confirm the client is looking in Marketing Center (not another product). If the Growth Package is still missing, open a ticket to support with the Thryv ID, GP tier, date of purchase, and a screenshot of MC showing the missing package. Tell the client this is a known issue being worked case by case." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
+          <td><span class="ki-id">#0010</span></td>
         <td>
           <div class="issue-title">Growth Package missing from Marketing Center after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Growth Packages</span> purchased but not visible in <span class="kw">Marketing Center</span> listings. <span class="adv-only">MCB-294 (V7)</span> In Review. Clients paying for service without it reflected.</span><span class="simp-only">Some clients have purchased a Growth Package but don't see it in their Marketing Center listings. Billing is correct — we're working on a fix to make the package show up properly.</span></div>
@@ -989,6 +996,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text" title="Jira created: Apr 1, 2026 9:05 AM CT">Apr 1, 2026 · 9:05 AM CT</td>
       </tr>
       <tr id="row-website-analytics" data-product="mc" data-wa="yes" data-wa-text="First, check whether the site is Thryv-hosted or third-party. If Thryv-hosted, open a ticket immediately. If third-party, confirm the visitor tracking script has been added to the site — if so, open a ticket for further review. Include the Thryv ID, site URL, and whether the site is Thryv-hosted or external. Tell the client this is a known issue under review." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,AU,NZ">
+          <td><span class="ki-id">#0016</span></td>
         <td>
           <div class="issue-title">Website analytics not tracking visitors<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Website analytics</span> not loading in MC. Non-Thryv sites with <span class="kw">visitor tagging</span> code not syncing. <span class="kw">CORS</span> errors. <span class="adv-only">MCB-220 (V6)</span> Released. <span class="adv-only">MCB-306 (V8)</span> in backlog.</span><span class="simp-only">Website visitor data isn't loading in Marketing Center for some accounts. This affects sites that aren't hosted by Thryv. We fixed it for one group of accounts and are working on the rest.</span></div>
@@ -1003,6 +1011,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text" title="Jira created: Apr 14, 2026 8:19 AM CT">Apr 14, 2026 · 8:19 AM CT</td>
       </tr>
       <tr data-product="mc" data-wa="yes" data-wa-text="Open a ticket to support if a client reports an add-on feature not working. Include the Thryv ID and which add-on is affected." data-tkt="open" data-aud="Support" data-priority="p2" style="display:none;" data-hidden="threshold" data-region="US">
+          <td><span class="ki-id">#0018</span></td>
         <td>
           <div class="issue-title">Marketing Center add-on services not installing</div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">MC Addon Services</span> not installing correctly after <span class="adv-only">MCB-214</span> deployment. ~204 tickets/day, +179% WoW. Assigned to engineering.</span><span class="simp-only">Some Marketing Center add-on services aren't installing correctly. We know what's causing it and we're working on a fix.</span></div>
@@ -1017,6 +1026,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       </tr>
       
       <tr data-product="olm" data-wa="yes" data-wa-text="Open a ticket to support. Include the business name, address, phone number, the listing URL, and specific issues with the listing." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
+          <td><span class="ki-id">#0001</span></td>
         <td>
           <div class="issue-title">Listing updates delayed across publishers<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only">Active <span class="kw">Yext</span>-routed listing issues across multiple <span class="kw">publishers</span>. Includes <span class="kw">stuck processing</span>, <span class="kw">update failures</span>, and enhanced profile sync errors.</span><span class="simp-only">Some listing updates are delayed because of issues on the publisher side (Google, Facebook, Bing, and others). Listing data is saved and will sync once the publisher resolves the issue. See the <a href="javascript:void(0);" onclick="openPublisherPanel();return false;" style="font-weight:700;color:var(--thryv-orange);text-decoration:underline;cursor:pointer;">Publisher Panel</a> for which publishers are affected.</span></div>
@@ -1033,6 +1043,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
 
       <!-- Business Center Issues -->
       <tr data-product="other" data-wa="no" data-wa-text="No fix available yet. Open a ticket so we can log it and add the client to the tracker." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN,AU,NZ">
+          <td><span class="ki-id">#0002</span></td>
         <td>
           <div class="issue-title">Cloud Campaign — high ticket volume</div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Cloud Campaign</span> tickets through <span class="kw">Service Portal</span>.  volume.</span><span class="simp-only">More Cloud Campaign tickets than usual are coming in through the Service Portal. We're working through them one by one.</span></div>
@@ -1046,6 +1057,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text">Jan 14, 2026 · 12:00 AM CT</td>
       </tr>
       <tr id="row-social-tab" data-product="other" data-wa="yes" data-wa-text="Try clearing cache or logging out and back in. If the issue persists, open a ticket to support with the Thryv ID and affected user email. The ticket will be added to the ongoing investigation." data-tkt="open" data-aud="Support,CSMs" data-priority="p1" data-region="US">
+          <td><span class="ki-id">#0012</span></td>
         <td>
           <div class="issue-title">Social tab errors in Business Center — Fix Deployed<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only">Users getting <span class="kw">misconfiguration</span> error on <span class="kw">Social tab</span>. Connection failures and <span class="kw">404</span>s. External ID mismatch between Thryv and Cloud Campaign affecting all product lines and regions. Fix deployed — pending full remediation.</span><span class="simp-only">Some users were seeing errors when clicking the Social tab in Business Center. A fix has been deployed. If errors continue, log out and log back in. If the issue still happens, contact support.</span></div>
@@ -1061,6 +1073,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       </tr>
       <tr id="section-bc" style="height:0;border:none;padding:0;"></tr>
       <tr data-product="bc" data-wa="yes" data-wa-text="Try clearing browser cache or using an incognito window. If the issue persists, open a ticket to support with the Thryv ID. The ticket will be added to the ongoing issue." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN,AU,NZ">
+          <td><span class="ki-id">#0003</span></td>
         <td>
           <div class="issue-title">Login issues during Keap-to-Thryv migration<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Login</span> queue elevated due to ongoing <span class="kw">Keap-to-Thryv</span> auth migrations. Mix of general login issues, <span class="kw">password resets</span>, <span class="kw">locked accounts</span>.</span><span class="simp-only">Some clients are seeing login problems while we move accounts from Keap to Thryv. This includes password resets and locked accounts. Most are resolved on first contact — clear browser cache or try an incognito window first, then contact support if it persists.</span></div>
@@ -1074,6 +1087,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text">Jan 14, 2026 · 12:00 AM CT</td>
       </tr>
       <tr data-product="bc" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a clear description of the CRM issue (payment processing, SMS delivery, staff accounts, widget display, etc.)." data-tkt="open" data-aud="Support" data-priority="p3" style="display:none;" data-hidden="threshold" data-region="US">
+          <td><span class="ki-id">#0017</span></td>
         <td>
           <div class="issue-title">CRM problems — handled one by one</div>
           <div class="issue-desc"><span class="adv-only">Individual account-level issues including <span class="kw">payment processing</span>, <span class="kw">SMS delivery</span>, <span class="kw">staff account</span> management, and <span class="kw">widget</span> display. Escalated to platform development.</span><span class="simp-only">A small number of accounts are seeing CRM problems like payment processing, SMS delivery, staff account management, or widget display. These are being handled one account at a time and passed to the team that fixes those issues.</span></div>
@@ -1092,6 +1106,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       
       <tr id="section-myaccount" style="height:0;border:none;padding:0;"></tr>
       <tr data-product="myaccount" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a description of the specific account or settings issue." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN">
+          <td><span class="ki-id">#0013</span></td>
         <td>
           <div class="issue-title">Account, settings, and website builder — small mix of reports<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
           <div class="issue-desc"><span class="adv-only">Assorted <span class="kw">account access</span>, <span class="kw">settings</span>, and <span class="kw">website builder</span> issues reported by agents. Low volume, individual cases.</span><span class="simp-only">A small number of clients have reported issues with account access, settings, or the website builder. These are one-off cases — contact support and we'll work through each one.</span></div>
@@ -1108,6 +1123,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       <!-- Keap Issues -->
       <tr id="section-keap" style="height:0;border:none;padding:0;"></tr>
       <tr data-product="keap" data-priority="p1" data-region="ALL">
+          <td><span class="ki-id">#0011</span></td>
         <td>
           <div class="issue-title">Automation &amp; email broadcast actions not processing</div>
           <div class="issue-desc"><span class="kw">Tag goals</span> not firing. <span class="kw">Email broadcasts</span> stuck. Actions should now be processing; root cause still under investigation.</div>
@@ -1121,6 +1137,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text">Apr 4, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p1" data-region="US,CAN">
+          <td><span class="ki-id">#0005</span></td>
         <td>
           <div class="issue-title">Mobile app login failures post-Thryv migration</div>
           <div class="issue-desc">Users redirected to <span class="kw">blank white page</span> at <span class="kw">login.labs.thryv.com</span>. Cannot progress past <span class="kw">login screen</span>.</div>
@@ -1133,6 +1150,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text">Feb 18, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p2" data-region="ALL">
+          <td><span class="ki-id">#0007</span></td>
         <td>
           <div class="issue-title">Mobile app crashes on outbound calls</div>
           <div class="issue-desc">App crashes when attempting to place an <span class="kw">outbound call</span>.</div>
@@ -1145,6 +1163,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text">Mar 9, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p2" data-region="ALL">
+          <td><span class="ki-id">#0006</span></td>
         <td>
           <div class="issue-title">V2 REST API parity issues</div>
           <div class="issue-desc">Multiple endpoints as potential blockers to <span class="kw">XMLRPC</span> value parity.</div>
@@ -1157,6 +1176,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text">Mar 6, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p2" data-region="ALL">
+          <td><span class="ki-id">#0009</span></td>
         <td>
           <div class="issue-title">JS webforms not rendering on Edge</div>
           <div class="issue-desc"><span class="kw">Edge</span> tracking prevention blocks <span class="kw">cookies</span>, forms don't appear.</div>
@@ -1170,6 +1190,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text">Mar 31, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p2" data-region="ALL">
+          <td><span class="ki-id">#0004</span></td>
         <td>
           <div class="issue-title">Automation email sends blank with deleted link</div>
           <div class="issue-desc">Emails referencing a <span class="kw">deleted automation link</span> send <span class="kw">blank</span>.</div>
@@ -1183,6 +1204,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text">Jan 14, 2026 · 12:00 AM CT</td>
       </tr>
       <tr data-product="keap" data-priority="p3" data-region="ALL">
+          <td><span class="ki-id">#0014</span></td>
         <td>
           <div class="issue-title">Merge fields show raw tags in automated deals</div>
           <div class="issue-desc">Deals show <span class="kw">[[contact.first_name]]</span> instead of actual data.</div>
@@ -1196,6 +1218,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text">Apr 9, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p3" data-region="ALL">
+          <td><span class="ki-id">#0015</span></td>
         <td>
           <div class="issue-title">Appointment types from deactivated users in automation goals</div>
           <div class="issue-desc"><span class="kw">Appointment types</span>/<span class="kw">booking links</span> from <span class="kw">deactivated users</span> still appear as options in appointment goals within advanced automations.</div>
@@ -1208,6 +1231,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text">Apr 13, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p3" data-region="ALL">
+          <td><span class="ki-id">#0019</span></td>
         <td>
           <div class="issue-title">Premium phone support icon unavailable</div>
           <div class="issue-desc"><span class="kw">Membership Service</span> customers cannot see the "<span class="kw">Premium phone support</span>" icon in Keap Pro/Max interface.</div>
@@ -1220,6 +1244,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         <td data-label="Date Reported" class="date-text">Apr 17, 2026</td>
       </tr>
       <tr data-product="keap" data-priority="p3" data-region="ALL">
+          <td><span class="ki-id">#0020</span></td>
         <td>
           <div class="issue-title">Dynamic Content preview mismatch on Yes/No fields</div>
           <div class="issue-desc">Complex <span class="kw">Dynamic Content</span> editor preview does not match actual sent emails when evaluating <span class="kw">Yes/No field</span> values.</div>
@@ -1414,7 +1439,8 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
     <table class="issue-table">
       <thead>
         <tr>
-          <th style="width:25%">Issue</th>
+          <th style="width:5%">ID</th>
+          <th style="width:23%">Issue</th>
           <th style="width:12%">Product</th>
           <th style="width:12%">Tickets</th>
           <th style="width:12%">Resolution</th>
@@ -1424,6 +1450,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       </thead>
       <tbody>
         <tr class="resolved-row" id="row-resolved-analytics">
+          <td><span class="ki-id">#0023</span></td>
           <td>
             <div class="issue-title">Website analytics tracking — Marketing Center</div>
             <div class="issue-desc"><span class="adv-only">MCB-265 Released. CORS fixes and GA4 properties deployed. MCB-306 (V8) remains active.</span><span class="simp-only">Website analytics tracking has been restored for this batch of accounts.</span></div>
@@ -1435,6 +1462,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~2 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P3 SLA</span></td>
         </tr>
         <tr class="resolved-row" id="row-resolved-social">
+          <td><span class="ki-id">#0024</span></td>
           <td>
             <div class="issue-title">Social content submissions processed twice</div>
             <div class="issue-desc"><span class="adv-only">BC-1116 Released. Duplicate WOs and CC workspaces on social content submission fixed.</span><span class="simp-only">Social content submissions were getting processed twice. Fixed.</span></div>
@@ -1446,6 +1474,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~5 days</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P3 SLA</span></td>
         </tr>
         <tr class="resolved-row" id="row-resolved-leads">
+          <td><span class="ki-id">#0022</span></td>
           <td>
             <div class="issue-title">Thryv Leads access</div>
             <div class="issue-desc"><span class="adv-only">MCB-232 Released. All accounts marked resolved. MCB-248 remains in Dev Backlog.</span><span class="simp-only">Thryv Leads report access has been restored for affected clients.</span></div>
@@ -1457,6 +1486,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
           <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~2 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P3 SLA</span></td>
         </tr>
         <tr class="resolved-row">
+          <td><span class="ki-id">#0021</span></td>
           <td>
             <div class="issue-title">Visitor tagging — earlier batch</div>
             <div class="issue-desc"><span class="adv-only">MCB-220 Released. Visitor tagging and heatmap fixes deployed for V6 accounts.</span><span class="simp-only">Website analytics tracking has been restored for this earlier batch of accounts.</span></div>
@@ -2196,8 +2226,10 @@ document.querySelectorAll('.issue-desc').forEach(function(desc){
     var tkt = row.getAttribute('data-tkt');
     var aud = (row.getAttribute('data-aud') || '').split(',');
     
-    var firstTd = row.querySelector('td');
-    if(!firstTd) return;
+    // Issue column is now the second <td> (first is the ID column we added)
+    var tds = row.querySelectorAll('td');
+    var issueTd = tds.length >= 2 ? tds[1] : tds[0];
+    if(!issueTd) return;
     
     var waClass = wa === 'yes' ? 'wa-yes' : 'wa-no';
     var waLabel = 'What to do';
@@ -2254,8 +2286,8 @@ document.querySelectorAll('.issue-desc').forEach(function(desc){
       badgeDiv.appendChild(audSpan);
     });
     
-    firstTd.appendChild(badgeDiv);
-    if(waText) firstTd.appendChild(detailDiv);
+    issueTd.appendChild(badgeDiv);
+    if(waText) issueTd.appendChild(detailDiv);
   });
 })();
 
