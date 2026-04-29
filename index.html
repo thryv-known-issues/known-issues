@@ -781,7 +781,7 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
 
   <!-- Shared Search Bar (works in both views) -->
 <div class="section-header">
-    <div class="section-title">Known Issues <span class="count-badge">15</span><span class="high-priority-badge" id="highPriorityBadge" title="Click to view high-priority active issues"><span id="highPriorityCount">0</span> high-priority active</span></div>
+    <div class="section-title">Known Issues <span class="count-badge">18</span><span class="high-priority-badge" id="highPriorityBadge" title="Click to view high-priority active issues"><span id="highPriorityCount">0</span> high-priority active</span></div>
     <div class="search-box">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="var(--thryv-steel)" stroke-width="1.5"/><path d="M10.5 10.5L14.5 14.5" stroke="var(--thryv-steel)" stroke-width="1.5" stroke-linecap="round"/></svg>
       <input type="text" id="issueSearch" placeholder="Search by ticket #, Thryv ID, or keyword..." />
@@ -998,14 +998,14 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
       <tr id="row-website-analytics" data-product="mc" data-wa="yes" data-wa-text="First, check whether the site is Thryv-hosted or third-party. If Thryv-hosted, open a ticket immediately. If third-party, confirm the visitor tracking script has been added to the site — if so, open a ticket for further review. Include the Thryv ID, site URL, and whether the site is Thryv-hosted or external. Tell the client this is a known issue under review." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,AU,NZ">
           <td><span class="ki-id">#0016</span></td>
         <td>
-          <div class="issue-title">Website analytics not tracking visitors<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
-          <div class="issue-desc"><span class="adv-only"><span class="kw">Website analytics</span> not loading in MC. Non-Thryv sites with <span class="kw">visitor tagging</span> code not syncing. <span class="kw">CORS</span> errors. <span class="adv-only">MCB-220 (V6)</span> Released. <span class="adv-only">MCB-306 (V8)</span> in backlog.</span><span class="simp-only">Website visitor data isn't loading in Marketing Center for some accounts. This affects sites that aren't hosted by Thryv. We fixed it for one group of accounts and are working on the rest.</span></div>
-          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">Some Marketing Center accounts aren't tracking website visitors right now. No data has been lost; tracking will resume once we ship the fix and we'll backfill where we can. We'll keep you posted.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
-          <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-265</span> <span class="jira-tag"><span class="adv-only">MCB-306</span></div></span>
+          <div class="issue-title">Website + Heatmap analytics not tracking visitors<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-desc"><span class="adv-only"><span class="kw">Website analytics</span> and <span class="kw">heatmap</span> not loading in MC. Non-Thryv sites with <span class="kw">visitor tagging</span> code not syncing. <span class="kw">CORS</span> errors. <span class="adv-only">MCB-220 (V6)</span> Released. <span class="adv-only">MCB-306 (V8)</span> in backlog. <span class="adv-only">MCB-335 (V9)</span> heatmap not installing.</span><span class="simp-only">Website visitor data and heatmaps aren't loading correctly for some Marketing Center accounts. Affects sites not hosted by Thryv. Fixed for one group; working through the rest.</span></div>
+          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">Some Marketing Center accounts aren't tracking website visitors or heatmap data right now. No data has been lost; tracking will resume once we ship the fix and we'll backfill where we can. We'll keep you posted.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
+          <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-265</span> <span class="jira-tag"><span class="adv-only">MCB-306</span> <span class="jira-tag"><span class="adv-only">MCB-335</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
         <td><span class="pri-badge pri-p3">P3</span></td>
-        <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">22 open</span><span class="simp-only">22 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">V7 + V8</span></td>
+        <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">27 open</span><span class="simp-only">27 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">V7 + V8 + V9</span></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
         <td data-label="Date Reported" class="date-text" title="Jira created: Apr 14, 2026 8:19 AM CT">Apr 14, 2026 · 8:19 AM CT</td>
@@ -1070,6 +1070,49 @@ tr[data-priority="p2"] .wa-badge { display: none !important; }
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
         <td data-label="Date Reported" class="date-text">Apr 6, 2026 · 12:00 AM CT</td>
+      </tr>
+      <tr id="row-sp-locid-search" data-product="other" data-wa="yes" data-wa-text="Some accounts have a 16-digit Thryv/vCita ID — for those, search by the 16-digit ID instead of the LOC ID and the account will populate. For accounts that don't have a 16-digit ID, there is no workaround at this time — open a ticket and we'll handle the impersonation case-by-case while a fix is in progress." data-tkt="open" data-aud="Support,CSMs" data-priority="p1" data-region="US,CAN,AU,NZ">
+          <td><span class="ki-id">#0042</span></td>
+        <td>
+          <div class="issue-title">Service Portal — searching by LOC ID returns no results<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-desc"><span class="adv-only"><span class="kw">Service Portal</span> queries the <span class="kw">vCita data structures</span> on initial search. Accounts not yet in those structures don't return results. Affects <span class="kw">CSM</span>/<span class="kw">TSS</span> impersonation. Investigation in progress on data-source pointing.</span><span class="simp-only">Searching for accounts in Service Portal by LOC ID isn't returning results for some accounts, blocking impersonation. Affects internal teams (CSM, TSS) helping clients.</span></div>
+          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">This is an internal tool issue affecting agent workflows — clients aren't directly affected. If a CSM or support agent reaches out about delays helping you, this is the underlying cause and we're working on it.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
+        </td>
+        <td data-label="Product"><span class="product-pill prod-other">Service Portal</span></td>
+        <td><span class="pri-badge pri-p1">P1</span></td>
+        <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">5 open</span><span class="simp-only">5 reports</span></td>
+
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 28, 2026 · 12:00 PM CT</td>
+      </tr>
+      <tr id="row-sp-multi-loc-switcher" data-product="other" data-wa="yes" data-wa-text="Confirm the account is a parent account with child accounts under it (multi-location structure). If yes and the switcher is missing, open a ticket with the parent account's Thryv ID and the list of child account IDs. The team is working through these case-by-case as part of an ongoing migration cleanup." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
+          <td><span class="ki-id">#0043</span></td>
+        <td>
+          <div class="issue-title">Service Portal — multi-location switcher missing<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-desc"><span class="adv-only">Multi-location <span class="kw">skittle switcher</span> not appearing in <span class="kw">SP</span> for some parent accounts post-cohort migration. Token + account IDs verified. Workflow re-run needed for affected parent groups.</span><span class="simp-only">For some multi-location accounts, the switcher that lets agents move between parent and child accounts isn't showing up in Service Portal. This affects internal navigation for those accounts.</span></div>
+          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">This is an internal navigation issue affecting how our team accesses multi-location accounts. Clients aren't directly affected, but if you have multiple locations under one account and reach out to support, response times may be slightly longer while we resolve it.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
+        </td>
+        <td data-label="Product"><span class="product-pill prod-other">Service Portal</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">5 open</span><span class="simp-only">5 reports</span></td>
+
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
+        <td data-label="Date Reported" class="date-text">Apr 27, 2026 · 12:00 PM CT</td>
+      </tr>
+      <tr id="row-thryv-leads" data-product="mc" data-wa="yes" data-wa-text="First, verify the account has an active Thryv Leads subscription in Recurly. If active and Thryv Leads still isn't visible in Manage My Listings or Analytics, open a ticket to support with the Thryv ID, MC plan, country, and confirmation that the subscription shows active. Tell the client this is a known issue being worked case by case." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
+          <td><span class="ki-id">#0044</span></td>
+        <td>
+          <div class="issue-title">Thryv Leads add-on missing from Marketing Center<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-desc"><span class="adv-only">Active <span class="kw">Thryv Leads</span> subscription in <span class="kw">Recurly</span> but reporting linkout doesn't appear in <span class="kw">Manage My Listings</span> or <span class="kw">Analytics</span>. <span class="adv-only">MCB-326 (V5)</span>. Prior versions resolved.</span><span class="simp-only">Some clients have an active Thryv Leads subscription, but the product isn't showing up in their Marketing Center. Subscription is fine — the product just isn't appearing where it should.</span></div>
+          <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We can see your Thryv Leads subscription is active, but the product isn't showing up in your Marketing Center yet. This is a known issue we're actively working on. Your billing and subscription are fine — we'll reach out as soon as it's resolved.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
+          <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-326</span></div></span>
+        </td>
+        <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
+        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">9 open</span><span class="simp-only">9 reports</span></td>
+
+                <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
+        <td data-label="Date Reported" class="date-text">Feb 10, 2026 · 9:29 PM CT</td>
       </tr>
       <tr id="section-bc" style="height:0;border:none;padding:0;"></tr>
       <tr data-product="bc" data-wa="yes" data-wa-text="Try clearing browser cache or using an incognito window. If the issue persists, open a ticket to support with the Thryv ID. The ticket will be added to the ongoing issue." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN,AU,NZ">
