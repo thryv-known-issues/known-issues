@@ -1823,13 +1823,19 @@ function checkTicketLookup(query){
   // Title-based historyJiraRefs match: typing "Thryv Leads Report Missing" should
   // route to the resolved card just like typing the Jira ID would.
   // Only kicks in when the query is at least 4 chars (avoid noisy single-letter matches).
+  // Deduplicates by anchor: if multiple refs map to the same history.html row,
+  // only surface one (e.g. MCB-232 and MCB-248 both point to row-mcb-232).
   var titleMatches = [];
   if(!raw && !directJira && query.length >= 4 && typeof historyJiraRefs !== 'undefined'){
     var qLower = query.toLowerCase();
+    var seenAnchors = {};
     for(var ref in historyJiraRefs){
       if(!Object.prototype.hasOwnProperty.call(historyJiraRefs, ref)) continue;
       var entry = historyJiraRefs[ref];
       if(entry.title && entry.title.toLowerCase().indexOf(qLower) !== -1){
+        var anchorKey = entry.anchor || ref;
+        if(seenAnchors[anchorKey]) continue;
+        seenAnchors[anchorKey] = true;
         titleMatches.push({ ref: ref, info: entry });
       }
     }
