@@ -160,8 +160,41 @@ tr.jump-pulse {
     Historical Archive — All Resolved Known Issues
   </div>
 
-  <!-- Summary Stats -->
-  
+  <!-- 2026 YTD Ticket Tracker (collapsible) -->
+  <div style="margin:20px 0;">
+    <button id="trackerToggle" onclick="var el=document.getElementById('trackerPanel');if(el.style.display==='none'){el.style.display='block';this.textContent='▾ Hide YTD 2026 Ticket Breakdown';}else{el.style.display='none';this.textContent='▸ Show YTD 2026 Ticket Breakdown';}" style="background:none;border:1px solid var(--thryv-cloud);border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;color:var(--thryv-night);cursor:pointer;font-family:inherit;">▸ Show YTD 2026 Ticket Breakdown</button>
+  </div>
+
+  <div id="trackerPanel" style="display:none;margin:0 0 24px;">
+
+    <!-- Top: Overall Reported / Resolved cards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+      <div style="background:#FFF0E5;border:1.5px solid #FFD9BD;border-left:4px solid var(--thryv-orange);border-radius:var(--radius-lg);padding:18px 22px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--thryv-orange);margin-bottom:6px;">Reported (YTD)</div>
+        <div style="font-size:32px;font-weight:700;color:var(--thryv-night);line-height:1;">14,252</div>
+        <div style="font-size:12px;color:var(--thryv-steel);margin-top:6px;">Total Zendesk tickets opened in 2026 · <strong style="color:var(--thryv-night);">1,188 still open</strong></div>
+      </div>
+      <div style="background:#EAF5EE;border:1.5px solid #C7E5D2;border-left:4px solid var(--sev-low);border-radius:var(--radius-lg);padding:18px 22px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--sev-low);margin-bottom:6px;">Resolved (YTD)</div>
+        <div style="font-size:32px;font-weight:700;color:var(--thryv-night);line-height:1;">13,064</div>
+        <div style="font-size:12px;color:var(--thryv-steel);margin-top:6px;">Closed via fixes shipped in 2026 · <strong style="color:var(--sev-low);">92% resolution rate</strong></div>
+      </div>
+    </div>
+
+    <!-- Per-Product Breakdown -->
+    <div style="background:white;border:1px solid var(--thryv-cloud);border-radius:var(--radius-lg);padding:16px 20px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--thryv-steel);margin-bottom:12px;">Reported YTD by Product</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:var(--thryv-mist);border-radius:6px;"><span style="font-size:12px;font-weight:600;color:var(--thryv-night);">Marketing Center</span><span style="font-size:14px;font-weight:700;color:var(--thryv-orange);">6,221</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:var(--thryv-mist);border-radius:6px;"><span style="font-size:12px;font-weight:600;color:var(--thryv-night);">Online Listings</span><span style="font-size:14px;font-weight:700;color:var(--thryv-orange);">2,645</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:var(--thryv-mist);border-radius:6px;"><span style="font-size:12px;font-weight:600;color:var(--thryv-night);">Business Center</span><span style="font-size:14px;font-weight:700;color:var(--thryv-orange);">2,525</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:var(--thryv-mist);border-radius:6px;"><span style="font-size:12px;font-weight:600;color:var(--thryv-night);">My Account</span><span style="font-size:14px;font-weight:700;color:var(--thryv-orange);">2,861</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:var(--thryv-mist);border-radius:6px;"><span style="font-size:12px;font-weight:600;color:var(--thryv-night);">Service Portal / Other</span><span style="font-size:14px;font-weight:700;color:var(--thryv-orange);">~2,800</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:var(--thryv-mist);border-radius:6px;"><span style="font-size:12px;font-weight:600;color:var(--thryv-night);">ThryvPay</span><span style="font-size:14px;font-weight:700;color:var(--thryv-orange);">~500</span></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Search -->
   <div style="position:relative;margin:20px 0;">
     <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:0.4;" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
