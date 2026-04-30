@@ -2201,8 +2201,8 @@ function applyFilters(){
     var visible = 0;
 
     rows.forEach(function(row){
-      // Threshold-hidden rows stay hidden no matter what
-      if(row.getAttribute('data-hidden') === 'threshold'){
+      // Hidden rows (threshold, keap-paused, system-generated) stay hidden no matter what
+      if(row.hasAttribute('data-hidden')){
         row.style.display = 'none';
         return;
       }
@@ -2422,7 +2422,8 @@ document.body.classList.add('simplified');
   for(var i = 0; i < rows.length; i++){
     var pri = rows[i].getAttribute('data-priority');
     if(pri !== 'p0' && pri !== 'p1') continue;
-    if(rows[i].getAttribute('data-hidden') === 'threshold') continue;
+    // Skip any hidden rows (threshold, keap-paused, system-generated, etc.)
+    if(rows[i].hasAttribute('data-hidden')) continue;
     highRows.push(rows[i]);
   }
 
