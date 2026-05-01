@@ -1814,7 +1814,8 @@ function parseDate(tds){
     var yr = parseInt(m[3]);
     return new Date(yr, mon - 1, day).getTime();
   }
-  ret
+  return 0;
+}
 
 // String-input variant of parseDate — takes a textContent string directly.
 // Used by sortTable() which already has the cell text in hand.
@@ -1830,7 +1831,6 @@ function parseDateText(txt){
     return new Date(yr, mon - 1, day).getTime();
   }
   return 0;
-}urn 0;
 }
 
 // Ticket/Thryv ID lookup database (from Zendesk export)
