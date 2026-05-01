@@ -1786,8 +1786,8 @@ function sortTable(col){
       valA = priOrder[pA.substring(0,2)] !== undefined ? priOrder[pA.substring(0,2)] : 3;
       valB = priOrder[pB.substring(0,2)] !== undefined ? priOrder[pB.substring(0,2)] : 3;
     } else if(col === 'updated'){
-      valA = parseDate((a.querySelector('.date-text') || {}).textContent || '');
-      valB = parseDate((b.querySelector('.date-text') || {}).textContent || '');
+      valA = parseDateText((a.querySelector('.date-text') || {}).textContent || '');
+      valB = parseDateText((b.querySelector('.date-text') || {}).textContent || '');
     } else {
       valA = a.textContent; valB = b.textContent;
     }
@@ -1814,7 +1814,23 @@ function parseDate(tds){
     var yr = parseInt(m[3]);
     return new Date(yr, mon - 1, day).getTime();
   }
+  ret
+
+// String-input variant of parseDate — takes a textContent string directly.
+// Used by sortTable() which already has the cell text in hand.
+function parseDateText(txt){
+  txt = (txt || '').trim();
+  if(!txt) return 0;
+  // Parse "Apr 17, 2026 · 12:00 PM CT" or "Apr 2026" or "Feb 18, 2026"
+  var m = txt.match(/([A-Za-z]+)\s*(\d+)?,?\s*(\d{4})/);
+  if(m){
+    var mon = monthMap[m[1]] || 1;
+    var day = m[2] ? parseInt(m[2], 10) : 15;
+    var yr = parseInt(m[3], 10);
+    return new Date(yr, mon - 1, day).getTime();
+  }
   return 0;
+}urn 0;
 }
 
 // Ticket/Thryv ID lookup database (from Zendesk export)
