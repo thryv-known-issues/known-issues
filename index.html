@@ -179,7 +179,9 @@ body {
 .sev-medium { background: #E6F1FB; color: #0C447C; border: 1.5px solid #A0C4E8; }
 .sev-low { background: #EAF3DE; color: #27500A; border: 1.5px solid #B8D9A0; }
 
-.pri-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.pri-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; white-space: nowrap;}
+.issue-table .pri-badge { cursor: help; }
+
 .pri-p0 { background: #FCEBEB; color: #791F1F; border: 1.5px solid #E8A0A0; }
 .pri-p1 { background: #FAEEDA; color: #633806; border: 1.5px solid #E8CFA0; }
 .pri-p2 { background: #E6F1FB; color: #0C447C; border: 1.5px solid #A0C4E8; }
@@ -1003,7 +1005,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-168</span> <span class="jira-tag"><span class="adv-only">MCB-302</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">9 open</span><span class="simp-only">53 reports</span><br></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1018,7 +1020,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-212</span> <span class="jira-tag"><span class="adv-only">MCB-294</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">34 open</span><span class="simp-only">62 reports</span><br></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1033,7 +1035,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-265</span> <span class="jira-tag"><span class="adv-only">MCB-306</span> <span class="jira-tag"><span class="adv-only">MCB-335</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">21 open</span><span class="simp-only">37 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">V7 + V8 + V9</span></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1048,7 +1050,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-275</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span class="pri-badge pri-p2">P2</span></td>
+        <td><span class="pri-badge pri-p2" title="Medium Impact — ~14 days">P2</span></td>
         <td data-label="Tickets"><span class="ticket-count">NEW</span><br><span style="font-size:11px;color:var(--sev-critical)">high volume</span></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
@@ -1064,7 +1066,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="pub-tag">Bing</span> <span class="pub-tag">Google</span> <span class="pub-tag">Facebook</span> <span class="pub-tag">Apple</span> <span class="pub-tag">YP</span> <span class="yext-tag">Yext #2419893</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">75 open</span><span class="simp-only">75 reports</span><br></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1081,7 +1083,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="cc-tag">CC #13353</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Other</span><span class="queue-tag">Service Portal</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">15 open</span><span class="simp-only">15 reports</span><br></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1096,7 +1098,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">BC-1068</span> <span class="v-tag">V #344232</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Other</span><span class="queue-tag">Social</span></td>
-        <td><span class="pri-badge pri-p1">P1</span></td>
+        <td><span class="pri-badge pri-p1" title="High Impact — ~24 hours">P1</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">13 open</span><span class="simp-only">27 reports</span><br><span style="font-size:11px;color:var(--sev-critical)">fix deployed</span></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
@@ -1110,7 +1112,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">This is an internal tool issue affecting agent workflows — clients aren't directly affected. If a CSM or support agent reaches out about delays helping you, this is the underlying cause and we're working on it.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Service Portal</span></td>
-        <td><span class="pri-badge pri-p1">P1</span></td>
+        <td><span class="pri-badge pri-p1" title="High Impact — ~24 hours">P1</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">5 open</span><span class="simp-only">5 reports</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1125,7 +1127,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">IGT-367</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Other</span><span class="queue-tag">Service Portal</span></td>
-        <td><span class="pri-badge pri-p1">P1</span></td>
+        <td><span class="pri-badge pri-p1" title="High Impact — ~24 hours">P1</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">5 open</span><span class="simp-only">5 reports</span></td>
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="AU">AU</span></td>
         <td data-label="Date Reported" class="date-text">May 1, 2026 · 9:21 AM CT</td>
@@ -1138,7 +1140,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">This is an internal navigation issue affecting how our team accesses multi-location accounts. Clients aren't directly affected, but if you have multiple locations under one account and reach out to support, response times may be slightly longer while we resolve it.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Service Portal</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">5 open</span><span class="simp-only">5 reports</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1153,7 +1155,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-326</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">5 open</span><span class="simp-only">5 reports</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1168,7 +1170,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">SPIS-80</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Service Portal</span></td>
-        <td><span class="pri-badge pri-p1">P1</span></td>
+        <td><span class="pri-badge pri-p1" title="High Impact — ~24 hours">P1</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">0 open</span><span class="simp-only">5 reports</span><br><span style="font-size:11px;color:var(--sev-low)">fix in QA</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1183,7 +1185,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MC-4615</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">268 accounts</span><span class="simp-only">268 accounts</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
@@ -1198,7 +1200,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">LDM-170</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
-        <td><span class="pri-badge pri-p2">P2</span></td>
+        <td><span class="pri-badge pri-p2" title="Medium Impact — ~14 days">P2</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">6 open</span><span class="simp-only">7 reports</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1213,7 +1215,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-271</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
-        <td><span class="pri-badge pri-p2">P2</span></td>
+        <td><span class="pri-badge pri-p2" title="Medium Impact — ~14 days">P2</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">12 open</span><span class="simp-only">12 reports</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1228,7 +1230,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-305</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
-        <td><span class="pri-badge pri-p2">P2</span></td>
+        <td><span class="pri-badge pri-p2" title="Medium Impact — ~14 days">P2</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">3 open</span><span class="simp-only">3 reports</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1243,7 +1245,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-110</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
-        <td><span class="pri-badge pri-p2">P2</span></td>
+        <td><span class="pri-badge pri-p2" title="Medium Impact — ~14 days">P2</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">5 open</span><span class="simp-only">7 reports</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1258,7 +1260,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MC-2441</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">13 reports</span><span class="simp-only">13 reports</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
@@ -1273,7 +1275,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MC-5362</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-olm">Online Listings</span></td>
-        <td><span class="pri-badge pri-p2">P2</span></td>
+        <td><span class="pri-badge pri-p2" title="Medium Impact — ~14 days">P2</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">1 open</span><span class="simp-only">1 reports</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
@@ -1288,7 +1290,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">BC-1117</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">1 open</span><span class="simp-only">1 reports</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1303,7 +1305,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">SW-130</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Other</span><span class="queue-tag">Social</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">8 open</span><span class="simp-only">8 reports</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1318,7 +1320,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-333</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-mc">Marketing Center</span></td>
-        <td><span class="pri-badge pri-p2">P2</span></td>
+        <td><span class="pri-badge pri-p2" title="Medium Impact — ~14 days">P2</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">6 accounts</span><span class="simp-only">6 accounts</span></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
@@ -1333,7 +1335,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">If you're having trouble logging in during your Keap-to-Thryv migration, this is a known issue we're actively resolving. Try resetting your password through the login page first; if that doesn't work, contact support and we'll get you in.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">17 open</span><span class="simp-only">17 reports</span><br></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
@@ -1347,7 +1349,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="ext-tag">Escalated to Dev</span> <span class="v-tag">V #343004</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-bc">Business Center</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">3 open</span><span class="simp-only">3 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">account-level</span></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
@@ -1366,7 +1368,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We're aware of a small number of unrelated issues across account settings and the website builder. These are being handled individually as they come in, so please reach out to support if you're experiencing one and we'll address it directly.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
         </td>
         <td data-label="Product"><span class="product-pill prod-myaccount">My Account</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span class="ticket-count"><span class="adv-only">8 open</span><span class="simp-only">8 reports</span><br><span style="font-size:11px;color:var(--thryv-steel)">user-reported</span></td>
         
         <td><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span></td>
@@ -1383,7 +1385,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Partially resolved</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td><span class="pri-badge pri-p1">P1</span></td>
+        <td><span class="pri-badge pri-p1" title="High Impact — ~24 hours">P1</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3571685</span></td>
         
                 <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
@@ -1396,7 +1398,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <div class="issue-desc">Users redirected to <span class="kw">blank white page</span> at <span class="kw">login.labs.thryv.com</span>. Cannot progress past <span class="kw">login screen</span>.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td><span class="pri-badge pri-p1">P1</span></td>
+        <td><span class="pri-badge pri-p1" title="High Impact — ~24 hours">P1</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3560909</span></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span></td>
@@ -1409,7 +1411,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <div class="issue-desc">App crashes when attempting to place an <span class="kw">outbound call</span>.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td><span class="pri-badge pri-p2">P2</span></td>
+        <td><span class="pri-badge pri-p2" title="Medium Impact — ~14 days">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565621</span></td>
         
                 <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
@@ -1422,7 +1424,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <div class="issue-desc">Multiple endpoints as potential blockers to <span class="kw">XMLRPC</span> value parity.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td><span class="pri-badge pri-p2">P2</span></td>
+        <td><span class="pri-badge pri-p2" title="Medium Impact — ~14 days">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3565069</span></td>
         
                 <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
@@ -1436,7 +1438,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> What to do: disable tracking prevention</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td><span class="pri-badge pri-p2">P2</span></td>
+        <td><span class="pri-badge pri-p2" title="Medium Impact — ~14 days">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3570805</span></td>
         
                 <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
@@ -1450,7 +1452,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> What to do: remove link &amp; republish</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td><span class="pri-badge pri-p2">P2</span></td>
+        <td><span class="pri-badge pri-p2" title="Medium Impact — ~14 days">P2</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3551902</span></td>
         
                 <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
@@ -1464,7 +1466,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <span class="adv-only"><div class="issue-meta"><span class="workaround-tag"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> What to do: use ~~ format</span></div></span>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3572908</span></td>
         
                 <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
@@ -1477,7 +1479,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <div class="issue-desc"><span class="kw">Appointment types</span>/<span class="kw">booking links</span> from <span class="kw">deactivated users</span> still appear as options in appointment goals within advanced automations.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">Keap #3573500</span></td>
         
         <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
@@ -1490,7 +1492,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <div class="issue-desc"><span class="kw">Membership Service</span> customers cannot see the "<span class="kw">Premium phone support</span>" icon in Keap Pro/Max interface.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         
         <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
@@ -1503,7 +1505,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <div class="issue-desc">Complex <span class="kw">Dynamic Content</span> editor preview does not match actual sent emails when evaluating <span class="kw">Yes/No field</span> values.</div>
         </td>
         <td data-label="Product"><span class="product-pill prod-keap">Keap</span></td>
-        <td><span class="pri-badge pri-p3">P3</span></td>
+        <td><span class="pri-badge pri-p3" title="Low Impact — ~28 days">P3</span></td>
         <td data-label="Tickets"><span style="font-size:11px;color:var(--thryv-steel)">new</span></td>
         
         <td><span class="region-tag" data-region-val="ALL">ALL</span></td>
@@ -1672,7 +1674,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
   <div style="margin:24px 0 10px;padding:12px 20px;background:var(--thryv-white);border:1px solid var(--thryv-cloud);border-radius:var(--radius-lg);">
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
       <span style="font-size:12px;font-weight:700;color:var(--thryv-midnight);text-transform:uppercase;letter-spacing:0.5px;">Priority Guide</span>
-      <span style="font-size:11px;color:var(--thryv-steel);font-style:italic;">Expected SLA times — not guaranteed.</span>
+      <span style="font-size:11px;color:var(--thryv-steel);font-style:italic;">Expected SLO times — not guaranteed.</span>
     </div>
     <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p0" style="font-size:11px;">P0</span><span style="font-size:12px;color:var(--thryv-night);">Critical</span><span style="font-size:11px;color:var(--thryv-steel);">~4 hours</span></div>
@@ -1712,7 +1714,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <td class="resolved-text">Released</td>
           <td class="resolved-text" style="color:var(--sev-low);font-weight:600;">Released</td>
           <td class="date-text">Apr 27, 2026</td>
-          <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~2 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P3 SLA</span></td>
+          <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~2 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P3 SLO</span></td>
         </tr>
         <tr class="resolved-row" id="row-resolved-social">
           <td><span class="ki-id">#0024</span></td>
@@ -1724,7 +1726,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <td class="resolved-text">5 total</td>
           <td class="resolved-text" style="color:var(--sev-low);font-weight:600;">Released</td>
           <td class="date-text">Apr 27, 2026</td>
-          <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~5 days</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P3 SLA</span></td>
+          <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~5 days</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P3 SLO</span></td>
         </tr>
         <tr class="resolved-row" id="row-resolved-leads">
           <td><span class="ki-id">#0022</span></td>
@@ -1736,7 +1738,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <td class="resolved-text">Released</td>
           <td class="resolved-text" style="color:var(--sev-low);font-weight:600;">Released</td>
           <td class="date-text">Apr 21, 2026 · 9:34 AM CT</td>
-          <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~2 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P3 SLA</span></td>
+          <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~2 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P3 SLO</span></td>
         </tr>
         <tr class="resolved-row">
           <td><span class="ki-id">#0021</span></td>
@@ -1748,7 +1750,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
           <td class="resolved-text">Released</td>
           <td class="resolved-text" style="color:var(--sev-low);font-weight:600;">Released</td>
           <td class="date-text">Apr 20, 2026 · 10:12 AM CT</td>
-          <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~3 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLA</span></td>
+          <td><span style="font-size:13px;font-weight:600;color:var(--sev-low);">~3 weeks</span><br><span style="font-size:11px;color:var(--thryv-steel)">within P2 SLO</span></td>
         </tr>
       </tbody>
     </table>
