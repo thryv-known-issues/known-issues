@@ -786,11 +786,12 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
 <!-- ═══ MAIN PAGE ═══ -->
 <div class="topbar">
   <div class="topbar-logo">thryv<span class="arrow">&#9656;</span><span class="compass">Compass</span></div>
-  <div style="display:flex;align-items:center;gap:24px;">
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
     <div class="topbar-nav">
       <a class="active" href="index.html">System Status</a>
       <a href="history.html" style="color:var(--thryv-orange);">Historical</a>
-  </div>
+    </div>
+    <button id="exportBtn" type="button" onclick="openExportModal()" style="margin-top:2px;padding:6px 14px;border:1.5px solid rgba(255,255,255,0.25);background:transparent;color:#fff;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 0.15s ease;white-space:nowrap;letter-spacing:0.3px;" onmouseover="this.style.borderColor='var(--thryv-orange)';this.style.color='var(--thryv-orange)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.25)';this.style.color='#fff';" title="Export visible rows to CSV"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1v10M3 6l5 5 5-5M2 14h12"/></svg> Export</button>
   </div>
 </div>
 
@@ -2881,6 +2882,204 @@ function jumpTo(product) {
     window.scrollTo({top: top, behavior: 'smooth'});
   }
 }
+
+
+// ===== CSV Export =====
+function openExportModal(){
+  document.getElementById('exportModal').style.display = 'flex';
+}
+function closeExportModal(){
+  document.getElementById('exportModal').style.display = 'none';
+}
+function toggleAllExportCols(state){
+  document.querySelectorAll('.export-col').forEach(function(cb){ cb.checked = state; });
+}
+
+function csvEscape(val){
+  if(val === null || val === undefined) return '';
+  var s = String(val);
+  // Replace any embedded newlines/tabs with single spaces, collapse extra whitespace
+  s = s.replace(/[\r\n\t]+/g, ' ').replace(/\s+/g, ' ').trim();
+  // Quote if contains comma, quote, or newline; escape inner quotes
+  if(/[",]/.test(s)){
+    s = '"' + s.replace(/"/g, '""') + '"';
+  }
+  return s;
+}
+
+function downloadCsvExport(){
+  // Read which columns are selected
+  var cols = [];
+  document.querySelectorAll('.export-col:checked').forEach(function(cb){
+    cols.push(cb.getAttribute('data-col'));
+  });
+  if(cols.length === 0){
+    alert('Pick at least one column to export.');
+    return;
+  }
+
+  // Header row mapping
+  var headerMap = {
+    ki: 'KI #',
+    title: 'Issue Title',
+    desc: 'Issue Description',
+    product: 'Product Area',
+    priority: 'Priority',
+    reports: 'Reports',
+    region: 'Reported Region',
+    date: 'First Reported'
+  };
+  var headers = cols.map(function(c){ return csvEscape(headerMap[c]); });
+
+  // Pull rows from the active issues table that are currently visible (respecting filters/search)
+  var activeRows = document.querySelectorAll('.issue-table tbody tr[data-product]');
+  var lines = [headers.join(',')];
+  var exportedCount = 0;
+
+  activeRows.forEach(function(row){
+    // Skip hidden (filtered out) rows
+    if(row.offsetParent === null && getComputedStyle(row).display === 'none') return;
+    if(row.style.display === 'none') return;
+    if(row.hasAttribute('data-hidden')) return;
+    // Skip resolved-section rows
+    if(row.classList.contains('resolved-row')) return;
+
+    var values = cols.map(function(col){
+      var cell = '';
+      if(col === 'ki'){
+        var ki = row.querySelector('.ki-id');
+        cell = ki ? ki.textContent.trim() : '';
+      } else if(col === 'title'){
+        var t = row.querySelector('.issue-title');
+        if(t){
+          // Clone to strip the Lyrics button text
+          var clone = t.cloneNode(true);
+          var btn = clone.querySelector('.lyrics-btn');
+          if(btn) btn.remove();
+          cell = clone.textContent.trim();
+        }
+      } else if(col === 'desc'){
+        var d = row.querySelector('.issue-desc');
+        cell = d ? d.textContent.trim() : '';
+      } else if(col === 'product'){
+        var p = row.querySelector('.product-pill');
+        var q = row.querySelector('.queue-tag');
+        var pTxt = p ? p.textContent.trim() : '';
+        var qTxt = q ? q.textContent.trim() : '';
+        // If product-pill is "Other" and a queue-tag exists, use just the queue-tag (e.g. "Service Portal")
+        // Otherwise use the product-pill (more specific name like "Marketing Center")
+        if(pTxt.toLowerCase() === 'other' && qTxt){
+          cell = qTxt;
+        } else {
+          cell = pTxt || qTxt;
+        }
+      } else if(col === 'priority'){
+        var pr = row.querySelector('.pri-badge');
+        cell = pr ? pr.textContent.trim() : '';
+      } else if(col === 'reports'){
+        // Use the .ticket-count text — strip duplicate adv/simp variants and pick a number
+        var tc = row.querySelector('.ticket-count');
+        if(tc){
+          var txt = tc.textContent.trim();
+          // Extract first number found
+          var nm = txt.match(/\d+/);
+          cell = nm ? nm[0] : txt;
+        }
+      } else if(col === 'region'){
+        var regions = [];
+        row.querySelectorAll('.region-tag').forEach(function(r){
+          regions.push(r.textContent.trim());
+        });
+        cell = regions.join(' ');
+      } else if(col === 'date'){
+        var dt = row.querySelector('.date-text');
+        cell = dt ? dt.textContent.trim().replace(/\s+/g, ' ') : '';
+      }
+      return csvEscape(cell);
+    });
+    lines.push(values.join(','));
+    exportedCount++;
+  });
+
+  if(exportedCount === 0){
+    alert('No rows visible to export. Adjust your filters or search and try again.');
+    return;
+  }
+
+  // Build CSV blob
+  var csv = lines.join('\n');
+  // Add UTF-8 BOM so Excel opens it with proper encoding
+  var blob = new Blob(['\ufeff' + csv], {type: 'text/csv;charset=utf-8;'});
+  var url = URL.createObjectURL(blob);
+
+  // Build filename with today's date
+  var d = new Date();
+  var pad = function(n){ return String(n).padStart(2, '0'); };
+  var stamp = d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate());
+  var filename = 'compass_known_issues_' + stamp + '.csv';
+
+  // Trigger download
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 100);
+
+  closeExportModal();
+}
 </script>
+
+
+<!-- Export Modal -->
+<div id="exportModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(41,53,93,0.45);z-index:1000;align-items:center;justify-content:center;" onclick="if(event.target===this)closeExportModal();">
+  <div style="background:var(--thryv-white);border-radius:var(--radius-lg);padding:24px 28px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.25);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+      <div style="font-size:18px;font-weight:700;color:var(--thryv-midnight);">Export to CSV</div>
+      <button type="button" onclick="closeExportModal()" style="background:none;border:none;font-size:22px;color:var(--thryv-steel);cursor:pointer;padding:0;line-height:1;" title="Close">&times;</button>
+    </div>
+    <div style="font-size:12px;color:var(--thryv-steel);margin-bottom:16px;line-height:1.5;">Pick which columns to include. Export reflects current filters and search applied to the table.</div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--thryv-night);cursor:pointer;padding:6px 10px;border:1px solid var(--thryv-cloud);border-radius:6px;background:var(--thryv-mist);">
+        <input type="checkbox" class="export-col" data-col="ki" checked style="cursor:pointer;"> KI #
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--thryv-night);cursor:pointer;padding:6px 10px;border:1px solid var(--thryv-cloud);border-radius:6px;background:var(--thryv-mist);">
+        <input type="checkbox" class="export-col" data-col="title" checked style="cursor:pointer;"> Issue Title
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--thryv-night);cursor:pointer;padding:6px 10px;border:1px solid var(--thryv-cloud);border-radius:6px;background:var(--thryv-mist);">
+        <input type="checkbox" class="export-col" data-col="desc" checked style="cursor:pointer;"> Issue Description
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--thryv-night);cursor:pointer;padding:6px 10px;border:1px solid var(--thryv-cloud);border-radius:6px;background:var(--thryv-mist);">
+        <input type="checkbox" class="export-col" data-col="product" checked style="cursor:pointer;"> Product Area
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--thryv-night);cursor:pointer;padding:6px 10px;border:1px solid var(--thryv-cloud);border-radius:6px;background:var(--thryv-mist);">
+        <input type="checkbox" class="export-col" data-col="priority" checked style="cursor:pointer;"> Priority
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--thryv-night);cursor:pointer;padding:6px 10px;border:1px solid var(--thryv-cloud);border-radius:6px;background:var(--thryv-mist);">
+        <input type="checkbox" class="export-col" data-col="reports" checked style="cursor:pointer;"> Reports
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--thryv-night);cursor:pointer;padding:6px 10px;border:1px solid var(--thryv-cloud);border-radius:6px;background:var(--thryv-mist);">
+        <input type="checkbox" class="export-col" data-col="region" checked style="cursor:pointer;"> Reported Region
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--thryv-night);cursor:pointer;padding:6px 10px;border:1px solid var(--thryv-cloud);border-radius:6px;background:var(--thryv-mist);">
+        <input type="checkbox" class="export-col" data-col="date" checked style="cursor:pointer;"> First Reported
+      </label>
+    </div>
+
+    <div style="display:flex;gap:8px;justify-content:space-between;align-items:center;">
+      <div style="display:flex;gap:8px;">
+        <button type="button" onclick="toggleAllExportCols(true)" style="background:none;border:1px solid var(--thryv-cloud);color:var(--thryv-steel);font-size:11px;font-weight:600;padding:5px 10px;border-radius:4px;cursor:pointer;">Select all</button>
+        <button type="button" onclick="toggleAllExportCols(false)" style="background:none;border:1px solid var(--thryv-cloud);color:var(--thryv-steel);font-size:11px;font-weight:600;padding:5px 10px;border-radius:4px;cursor:pointer;">Clear all</button>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button type="button" onclick="closeExportModal()" style="background:var(--thryv-white);border:1.5px solid var(--thryv-cloud);color:var(--thryv-night);font-size:13px;font-weight:600;padding:8px 16px;border-radius:6px;cursor:pointer;">Cancel</button>
+        <button type="button" onclick="downloadCsvExport()" style="background:var(--thryv-orange);border:1.5px solid var(--thryv-orange);color:#fff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:6px;cursor:pointer;">Download CSV</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
