@@ -261,7 +261,7 @@ tr.jump-pulse {
 
   <!-- April 2026 -->
   <div style="margin-bottom:32px;">
-    <div class="month-header" id="april-2026">April 2026 <span class="month-count">9 resolved</span></div>
+    <div class="month-header" id="april-2026">April 2026 <span class="month-count">13 resolved</span></div>
     <table class="issue-table">
       <thead>
         <tr>
@@ -413,6 +413,70 @@ tr.jump-pulse {
           <td style="font-size:12px;font-weight:600;">~15 weeks</td>
           <td><span class="res-badge res-released">Resolved</span></td>
           <td style="font-size:12px;">Sync failures resolved. 38 total tickets. 1 still open (residual). Publisher data updating correctly.</td>
+        </tr>
+        <!-- 10. Visitor tagging V7 -->
+        <tr data-product="mc" id="row-mcb-265">
+          <td><span class="ki-id">#0042</span></td>
+          <td>
+            <strong>Website Analytics / Visitor Tagging (V7) — Resolved</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Website analytics and heatmap data not appearing in MC. CORS errors on third-party sites. Database misconfigurations on Thryv-managed sites.</div>
+            <div style="margin-top:4px;"><span class="jira-ref">MCB-265</span> <span class="jira-ref">MCB-306 (V8) continues</span> <span class="jira-ref">MCB-335 (V9) continues</span></div>
+          </td>
+          <td><span class="product-pill prod-mc">Marketing Center</span></td>
+          <td><span class="pri-badge pri-p3">P3</span></td>
+          <td style="font-size:12px;">Apr 14, 2026<br><span style="color:var(--thryv-steel);">8:19 AM CT</span></td>
+          <td style="font-size:12px;">Apr 27, 2026<br><span style="color:var(--sev-low);font-weight:600;">10:56 AM CT</span></td>
+          <td style="font-size:12px;font-weight:600;">~2 weeks</td>
+          <td><span class="res-badge res-released">Released</span></td>
+          <td style="font-size:12px;">CORS fixes deployed across affected accounts. GA4 properties added. DB corrections applied for mismarked managed sites. V8/V9 continue tracking remaining cases.</td>
+        </tr>
+        <!-- 11. Duplicate WOs on social content submission -->
+        <tr data-product="bc" id="row-bc-1116">
+          <td><span class="ki-id">#0043</span></td>
+          <td>
+            <strong>Duplicate Work Orders on Social Content Submission — Resolved</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Service Portal social content submissions creating two work orders and duplicate Cloud Campaign workspaces instead of one. Manual closure of duplicate work orders did not update status correctly.</div>
+            <div style="margin-top:4px;"><span class="jira-ref">BC-1116</span></div>
+          </td>
+          <td><span class="product-pill prod-bc">Business Center</span></td>
+          <td><span class="pri-badge pri-p3">P3</span></td>
+          <td style="font-size:12px;">Apr 22, 2026<br><span style="color:var(--thryv-steel);">10:33 AM CT</span></td>
+          <td style="font-size:12px;">Apr 27, 2026<br><span style="color:var(--sev-low);font-weight:600;">3:06 PM CT</span></td>
+          <td style="font-size:12px;font-weight:600;">~5 days</td>
+          <td><span class="res-badge res-released">Released</span></td>
+          <td style="font-size:12px;">Duplicate work order creation fixed at the submission event. Cloud Campaign workspace provisioning now exactly one per submission. Work order closure status now updates correctly in SP.</td>
+        </tr>
+        <!-- 12. Service Portal LOC ID search -->
+        <tr data-product="other" id="row-igt-367">
+          <td><span class="ki-id">#0044</span></td>
+          <td>
+            <strong>Service Portal — Search and Impersonate Failures — Resolved</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">Service Portal queries returning no results for known accounts when searching by LOC ID, blocking CSM and TSS impersonation flows. Affected both saved-search and recent-search paths.</div>
+            <div style="margin-top:4px;"><span class="jira-ref">IGT-367</span></div>
+          </td>
+          <td><span class="product-pill prod-other">Service Portal</span></td>
+          <td><span class="pri-badge pri-p1">P1</span></td>
+          <td style="font-size:12px;">Apr 28, 2026<br><span style="color:var(--thryv-steel);">12:00 PM CT</span></td>
+          <td style="font-size:12px;">Apr 29, 2026<br><span style="color:var(--sev-low);font-weight:600;">4:15 PM CT</span></td>
+          <td style="font-size:12px;font-weight:600;">~1 day</td>
+          <td><span class="res-badge res-released">Released</span></td>
+          <td style="font-size:12px;">Data source pointing fix deployed. All 5 affected tickets resolved. Search and impersonate flows operational.</td>
+        </tr>
+        <!-- 13. MCSTARTER YP CTN provisioning -->
+        <tr data-product="olm" id="row-mcb-271">
+          <td><span class="ki-id">#0045</span></td>
+          <td>
+            <strong>MCSTARTER — YP CTN Not Provisioning to Live Listing — Resolved</strong>
+            <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">After the MCSTARTER tier correction (Silver/Platinum), accounts showed YP CTN as Enabled in the MC UI but the live YP listing displayed the business BTN instead. CTN absent from Ginger distributions.</div>
+            <div style="margin-top:4px;"><span class="jira-ref">MCB-161</span> <span class="jira-ref">MCB-271</span></div>
+          </td>
+          <td><span class="product-pill prod-olm">Online Listings</span></td>
+          <td><span class="pri-badge pri-p2">P2</span></td>
+          <td style="font-size:12px;">Mar 19, 2026<br><span style="color:var(--thryv-steel);">12:48 PM CT</span></td>
+          <td style="font-size:12px;">Apr 30, 2026<br><span style="color:var(--sev-low);font-weight:600;">11:50 AM CT</span></td>
+          <td style="font-size:12px;font-weight:600;">~6 weeks</td>
+          <td><span class="res-badge res-released">Deployed</span></td>
+          <td style="font-size:12px;">Tier correction redeployed CTNs to Ginger. Live listings now reflect the assigned CTN instead of business BTN. Affected accounts cleared.</td>
         </tr>
       </tbody>
     </table>
