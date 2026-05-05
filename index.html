@@ -56,6 +56,11 @@ body {
 .stat-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0 0; }
 @media (max-width: 700px) { .stat-bar { grid-template-columns: repeat(2, 1fr); } }
 .stat-card { padding: 14px 16px; border-radius: var(--radius-lg); background: var(--thryv-white); border: 1px solid var(--thryv-cloud); }
+.status-card[data-pillar-filter] { cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.status-card[data-pillar-filter]:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(41, 53, 93, 0.12); }
+.status-card[data-pillar-filter]::after { content: "Click to filter"; position: absolute; bottom: 6px; right: 10px; font-size: 9px; color: var(--thryv-steel); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.15s ease; }
+.status-card[data-pillar-filter] { position: relative; }
+.status-card[data-pillar-filter]:hover::after { opacity: 1; }
 .stat-card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--thryv-steel); margin-bottom: 4px; font-weight: 600; }
 .stat-card-row { display: flex; align-items: baseline; justify-content: space-between; }
 .stat-card-value { font-size: 28px; font-weight: 700; color: var(--thryv-midnight); }
@@ -870,7 +875,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
     <button id="statsToggle" onclick="var el=document.getElementById('statsPanel');if(el.style.display==='none'){el.style.display='flex';el.style.gap='16px';this.textContent='▾ Hide Status Overview';}else{el.style.display='none';this.textContent='▸ Show Status Overview';}" style="background:none;border:1px solid var(--thryv-cloud);border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;color:var(--thryv-night);cursor:pointer;font-family:inherit;">▸ Show Status Overview</button>
     <div id="statsPanel" style="display:none;margin-top:12px;">
 <div class="status-strip">
-    <div class="status-card" style="border-top:3px solid #121212;padding-bottom:14px;">
+    <div class="status-card" data-pillar-filter="bc" style="border-top:3px solid #121212;padding-bottom:14px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;">
         <div class="status-card-label" style="margin-bottom:0;line-height:1.3;">Business<br>Center</div>
         <span style="font-size:10px;font-weight:600;color:#27500A;background:#EAF3DE;padding:3px 8px;border-radius:10px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;"><span style="width:8px;height:8px;border-radius:50%;background:#1D9E75;flex-shrink:0;display:inline-block;"></span>Improving</span>
@@ -895,7 +900,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">2 known issues active · 715 reported YTD</div>
     </div>
 
-    <div class="status-card" style="border-top:3px solid #0E7C6B;padding-bottom:14px;">
+    <div class="status-card" data-pillar-filter="olm" style="border-top:3px solid #0E7C6B;padding-bottom:14px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;">
         <div class="status-card-label" style="margin-bottom:0;line-height:1.3;">Online<br>Listings</div>
         <span style="font-size:10px;font-weight:600;color:#633806;background:#FAEEDA;padding:3px 8px;border-radius:10px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;"><span style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0;display:inline-block;"></span>Monitoring</span>
@@ -920,7 +925,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">7 known issues active · 1,429 reported YTD</div>
     </div>
 
-    <div class="status-card" style="border-top:3px solid #3C3489;padding-bottom:14px;">
+    <div class="status-card" data-pillar-filter="mc" style="border-top:3px solid #3C3489;padding-bottom:14px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;">
         <div class="status-card-label" style="margin-bottom:0;line-height:1.3;">Marketing<br>Center</div>
         <span style="font-size:10px;font-weight:600;color:#633806;background:#FAEEDA;padding:3px 8px;border-radius:10px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;"><span style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0;display:inline-block;"></span>Needs attention</span>
@@ -945,7 +950,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">6 known issues active · 1,179 reported YTD</div>
     </div>
 
-    <div class="status-card" style="border-top:3px solid #FF5000;padding-bottom:14px;">
+    <div class="status-card" data-pillar-filter="myaccount" style="border-top:3px solid #FF5000;padding-bottom:14px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;">
         <div class="status-card-label" style="margin-bottom:0;line-height:1.3;">My Account</div>
         <span style="font-size:10px;font-weight:600;color:#633806;background:#FAEEDA;padding:3px 8px;border-radius:10px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;"><span style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0;display:inline-block;"></span>Monitoring</span>
@@ -2038,6 +2043,20 @@ document.querySelectorAll('#issueFilters .filter-btn').forEach(function(btn){
     document.getElementById('issueSearch').value = '';
     hideLookup();
     applyFilters();
+  });
+});
+
+// Click a Status Overview tile to filter the table by that pillar
+document.querySelectorAll('.status-card[data-pillar-filter]').forEach(function(card){
+  card.addEventListener('click', function(){
+    var pillar = card.getAttribute('data-pillar-filter');
+    var matchingPill = document.querySelector('#issueFilters .filter-btn[data-filter="' + pillar + '"]');
+    if(matchingPill){
+      matchingPill.click();
+      // Smoothly scroll the table into view so the user sees the filtered result immediately
+      var table = document.querySelector('.issue-table');
+      if(table){ table.scrollIntoView({behavior:'smooth', block:'start'}); }
+    }
   });
 });
 
