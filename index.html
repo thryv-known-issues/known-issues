@@ -56,6 +56,82 @@ body {
 .stat-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0 0; }
 @media (max-width: 700px) { .stat-bar { grid-template-columns: repeat(2, 1fr); } }
 .stat-card { padding: 14px 16px; border-radius: var(--radius-lg); background: var(--thryv-white); border: 1px solid var(--thryv-cloud); }
+
+/* Scheduled Maintenance scrolling banner */
+.maintenance-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(90deg, #FFF1E8 0%, #FFE6D3 50%, #FFF1E8 100%);
+  border: 1px solid #FFC79A;
+  border-left: 4px solid var(--thryv-orange);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  margin: 12px 0 16px;
+  font-size: 13px;
+  color: var(--thryv-night);
+  position: relative;
+  overflow: hidden;
+}
+.mb-icon {
+  flex-shrink: 0;
+  color: var(--thryv-orange);
+  display: flex;
+  align-items: center;
+}
+.mb-marquee-wrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+}
+.mb-marquee {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: mb-scroll 38s linear infinite;
+  will-change: transform;
+}
+.mb-marquee:hover { animation-play-state: paused; }
+.mb-content {
+  padding-right: 64px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.mb-content strong { color: var(--thryv-orange); font-weight: 700; }
+.mb-link {
+  color: var(--thryv-orange);
+  text-decoration: underline;
+  font-weight: 600;
+  margin-left: 6px;
+}
+.mb-link:hover { color: var(--thryv-midnight); }
+.mb-close {
+  flex-shrink: 0;
+  background: transparent;
+  border: 0;
+  color: var(--thryv-steel);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s, color 0.15s;
+}
+.mb-close:hover { background: rgba(255,80,0,0.12); color: var(--thryv-orange); }
+@keyframes mb-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mb-marquee { animation: none; white-space: normal; display: block; }
+  .mb-content { white-space: normal; padding-right: 0; }
+  .mb-marquee-wrap { mask-image: none; -webkit-mask-image: none; }
+  .mb-content + .mb-content { display: none; }
+}
+@media (max-width: 700px) {
+  .maintenance-banner { font-size: 12px; padding: 7px 10px; }
+}
 .status-card[data-pillar-filter] { cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
 .status-card[data-pillar-filter]:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(41, 53, 93, 0.12); }
 .status-card[data-pillar-filter]::after { content: "Click to filter"; position: absolute; bottom: 6px; right: 10px; font-size: 9px; color: var(--thryv-steel); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.15s ease; }
@@ -812,6 +888,32 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
 </div>
 
 <div class="page-wrapper">
+<!-- Scheduled Maintenance Banner -->
+<div id="maintenanceBanner" class="maintenance-banner" role="status" aria-live="polite">
+  <div class="mb-icon" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+  </div>
+  <div class="mb-marquee-wrap">
+    <div class="mb-marquee">
+      <span class="mb-content">
+        <strong>Scheduled Maintenance — Business Center:</strong>
+        Sat, May 9th, 2026 at 11:00 PM CT → Sun, May 10th, 2026 at 1:00 AM CT.
+        Business Center will be temporarily unavailable during this window (Inbox, Calendar, CRM, Sales, Documents, Marketing, Reports, Client Portal, OLM, App Market, Dashboard, Social Platform, Mobile App, Settings).
+        <a href="https://status.thryv.com/incidents/gh7yc2y5jk0d#subscribe-modal-gh7yc2y5jk0d" target="_blank" rel="noopener" class="mb-link">Subscribe to updates →</a>
+      </span>
+      <span class="mb-content" aria-hidden="true">
+        <strong>Scheduled Maintenance — Business Center:</strong>
+        Sat, May 9th, 2026 at 11:00 PM CT → Sun, May 10th, 2026 at 1:00 AM CT.
+        Business Center will be temporarily unavailable during this window (Inbox, Calendar, CRM, Sales, Documents, Marketing, Reports, Client Portal, OLM, App Market, Dashboard, Social Platform, Mobile App, Settings).
+        <a href="https://status.thryv.com/incidents/gh7yc2y5jk0d#subscribe-modal-gh7yc2y5jk0d" target="_blank" rel="noopener" class="mb-link">Subscribe to updates →</a>
+      </span>
+    </div>
+  </div>
+  <button type="button" class="mb-close" onclick="document.getElementById('maintenanceBanner').style.display='none';" aria-label="Dismiss notice" title="Dismiss for this session">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg>
+  </button>
+</div>
+
 <!-- Shared Publisher slide-down panel (works in both views) -->
   <div class="pub-slidedown" id="pubSlidedown">
     <div class="pub-slidedown-inner" id="pubSlidedownInner"></div>
