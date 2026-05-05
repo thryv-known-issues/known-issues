@@ -783,6 +783,47 @@ div[style*="Priority Guide"] {
   transition: box-shadow 0.2s ease;
 }
 
+/* Feedback button — prominent CTA in the Known Issues header. Solid orange,
+   pulsing shadow, hard to miss. Links to feedback tracker spreadsheet. */
+.feedback-btn-prominent {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: var(--thryv-orange);
+  border: 2px solid var(--thryv-orange);
+  padding: 7px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+  margin-left: 12px;
+  vertical-align: middle;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(255,80,0,0.35);
+  animation: feedback-pulse 2.6s ease-in-out infinite;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.15s ease;
+}
+.feedback-btn-prominent:hover {
+  background: #E64500;
+  border-color: #E64500;
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 4px 16px rgba(255,80,0,0.55);
+  animation: none;
+}
+.feedback-btn-prominent:active {
+  transform: translateY(0) scale(1);
+}
+@keyframes feedback-pulse {
+  0%, 100% { box-shadow: 0 2px 10px rgba(255,80,0,0.35); }
+  50%      { box-shadow: 0 4px 18px rgba(255,80,0,0.65), 0 0 0 6px rgba(255,80,0,0.10); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .feedback-btn-prominent { animation: none; }
+}
+
 /* Clickable priority filter pills in the legend */
 .pri-filter-btn {
   display: inline-flex;
@@ -1067,7 +1108,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
 
   <!-- Shared Search Bar (works in both views) -->
 <div class="section-header">
-    <div class="section-title">Known Issues <span class="count-badge">12</span><span class="high-priority-badge" id="highPriorityBadge" title="Click to view high-priority active issues"><span id="highPriorityCount">0</span> high-priority active</span></div>
+    <div class="section-title">Known Issues <span class="count-badge">12</span><span class="high-priority-badge" id="highPriorityBadge" title="Click to view high-priority active issues"><span id="highPriorityCount">0</span> high-priority active</span><a href="https://docs.google.com/spreadsheets/d/1DVn5mFfQ664efaTZrJ9jmDXsR9p9wlGD3yDYs0KWvaM/edit?gid=0#gid=0" target="_blank" rel="noopener" class="feedback-btn-prominent" title="Share feedback, report a bug, or request a feature"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:-3px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Share Feedback</a></div>
     <div class="search-box">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="var(--thryv-steel)" stroke-width="1.5"/><path d="M10.5 10.5L14.5 14.5" stroke="var(--thryv-steel)" stroke-width="1.5" stroke-linecap="round"/></svg>
       <input type="text" id="issueSearch" placeholder="Search by ticket #, Thryv ID, or keyword..." />
