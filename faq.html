@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<!-- rebuild: 2026-05-05T15:30:00 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Known System Issues | Thryv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --thryv-orange: #FF5000;
+  --thryv-midnight: #29355D;
+  --thryv-sapphire: #5378FC;
+  --thryv-mist: #F4F6FB;
+  --thryv-cloud: #ECEEF1;
+  --thryv-steel: #808080;
+  --thryv-night: #4D4D4D;
+  --thryv-black: #121212;
+  --thryv-white: #FFFFFF;
+  --sev-critical: #E24B4A;
+  --sev-high: #EF9F27;
+  --sev-medium: #5378FC;
+  --sev-low: #1D9E75;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--thryv-mist); color: var(--thryv-black); }
+
+.topbar { background: var(--thryv-midnight); padding: 12px 32px; display: flex; align-items: center; justify-content: space-between; }
+.topbar-logo { display: flex; align-items: center; gap: 8px; }
+.topbar-nav { display: flex; gap: 24px; }
+.topbar-nav a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; font-weight: 500; }
+.topbar-nav a:hover { color: white; }
+.topbar-nav a.active { color: white; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: var(--thryv-orange); }
+
+.page-wrapper { max-width: 880px; margin: 0 auto; padding: 0 24px 40px; }
+
+.page-banner {
+  background: var(--thryv-orange);
+  color: white;
+  padding: 6px 20px;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-top: 0;
+}
+
+.faq-intro {
+  background: var(--thryv-white);
+  border: 1px solid var(--thryv-cloud);
+  border-left: 4px solid var(--thryv-orange);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin: 24px 0 28px;
+}
+.faq-intro h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--thryv-midnight);
+  margin-bottom: 6px;
+}
+.faq-intro p {
+  font-size: 13px;
+  color: var(--thryv-night);
+  line-height: 1.55;
+}
+
+.faq-search-wrap {
+  margin: 0 0 24px;
+  position: relative;
+}
+.faq-search-wrap input {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--thryv-night);
+  background: var(--thryv-white);
+  border: 1px solid var(--thryv-cloud);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.faq-search-wrap input:focus {
+  border-color: var(--thryv-orange);
+  box-shadow: 0 0 0 3px rgba(255,80,0,0.12);
+}
+.faq-search-wrap::before {
+  content: "🔍";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.faq-list {
+  background: var(--thryv-white);
+  border: 1px solid var(--thryv-cloud);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--thryv-cloud);
+  transition: background 0.15s ease;
+}
+.faq-item:last-child { border-bottom: none; }
+.faq-item.hidden { display: none; }
+
+.faq-question {
+  width: 100%;
+  padding: 16px 22px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--thryv-midnight);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  line-height: 1.4;
+}
+.faq-question:hover {
+  background: var(--thryv-mist);
+}
+.faq-question .chev {
+  flex-shrink: 0;
+  color: var(--thryv-orange);
+  transition: transform 0.2s ease;
+  font-size: 13px;
+  font-weight: 700;
+}
+.faq-item.open .faq-question .chev {
+  transform: rotate(90deg);
+}
+
+.faq-answer {
+  display: none;
+  padding: 0 22px 18px;
+  font-size: 13px;
+  color: var(--thryv-night);
+  line-height: 1.6;
+}
+.faq-item.open .faq-answer { display: block; }
+
+.faq-answer a {
+  color: var(--thryv-orange);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.faq-controls {
+  display: flex;
+  gap: 12px;
+  margin: 18px 0;
+  flex-wrap: wrap;
+}
+.faq-controls button {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--thryv-midnight);
+  background: var(--thryv-white);
+  border: 1px solid var(--thryv-cloud);
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.faq-controls button:hover {
+  border-color: var(--thryv-orange);
+  color: var(--thryv-orange);
+}
+
+.no-results {
+  padding: 32px 22px;
+  text-align: center;
+  color: var(--thryv-steel);
+  font-size: 13px;
+  font-style: italic;
+  display: none;
+}
+.no-results.show { display: block; }
+
+.feedback-cta {
+  margin-top: 24px;
+  padding: 18px 22px;
+  background: #FFF3EC;
+  border: 1px solid #FFC79A;
+  border-left: 4px solid var(--thryv-orange);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  color: var(--thryv-night);
+  line-height: 1.55;
+}
+.feedback-cta strong {
+  color: var(--thryv-orange);
+}
+.feedback-cta a {
+  color: var(--thryv-orange);
+  font-weight: 600;
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+<div style="background:#29355D;color:rgba(255,255,255,0.85);text-align:center;padding:6px 16px;font-size:11px;font-weight:600;letter-spacing:0.5px;">
+  INTERNAL USE ONLY — This page contains confidential information. Do not share externally.
+</div>
+
+<div class="topbar">
+  <div class="topbar-logo">
+    <span style="font-size:18px;font-weight:700;color:#FF5000;">thryv</span><span style="font-size:14px;color:#FF5000;margin:0 6px;">&#9656;</span><span style="font-size:14px;font-weight:600;color:white;letter-spacing:1px;">COMPASS</span>
+  </div>
+  <div class="topbar-nav">
+    <a href="index.html">System Status</a>
+    <a href="history.html">Historical</a>
+    <a class="active" href="faq.html">FAQ</a>
+  </div>
+</div>
+
+<div class="page-wrapper">
+  <div class="page-banner">FAQ — Known System Issues</div>
+
+  <div class="faq-intro">
+    <h1>Frequently Asked Questions</h1>
+    <p>A quick reference for everyone using the Known System Issues page. Bookmark this if you find yourself answering "is this a known issue?" multiple times a day.</p>
+  </div>
+
+  <div class="faq-search-wrap">
+    <input type="text" id="faqSearch" placeholder="Search the FAQ..." oninput="filterFAQ()" autocomplete="off">
+  </div>
+
+  <div class="faq-controls">
+    <button type="button" onclick="expandAll()">Expand all</button>
+    <button type="button" onclick="collapseAll()">Collapse all</button>
+  </div>
+
+  <div class="faq-list" id="faqList">
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What is the Known System Issues page?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">It's a central reference for client-impacting system issues we're actively tracking. It answers the question reps ask all day: "Is what this client is reporting already a known issue, and what should I tell them?" The page lives inside Compass.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>Who is the page for?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">CSMs, ATS (Advanced Technical Support), technical support, and anyone client-facing who needs to triage tickets quickly. It's also useful for leadership wanting a real-time read on what's affecting clients. The page is internal-only — don't share it directly with clients.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>How often is the page updated?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Every weekday morning, by 9:00 AM CT. The footer shows the exact last-refresh timestamp. The page is not updated on weekends.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What sources feed the page?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Daily inputs include the latest Zendesk ticket data, Jira status verification on every active row, and Slack channel scrapes from key support channels. Mondays add weekly migrations of resolved issues, vCita cross-reference, and Yext publisher status updates.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What do the Status Overview tiles at the top show?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">The big number is the total active Zendesk tickets currently open in that pillar's queue. The subtitle shows how many of those tickets tie to known issues currently surfaced on the page, plus total YTD reports. The tile number reflects the full queue volume; the rows below are only the subset that meet our threshold for being a "known issue."</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What happens when I click a Status Overview tile?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">The matching pillar pill activates and the table filters to only that pillar. Click "All Products" to clear the filter.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What do the Reports column numbers mean?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Each row shows three values: reported (total tickets opened about this issue), resolved (how many are now closed/solved), and pending (how many remain active). For some rows you'll see "Handled externally" — the issue is being tracked through a non-Zendesk path and ticket-level reconciliation isn't possible.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What does "Awaiting release" mean on a row?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">It means all known affected accounts have been handled individually, but the underlying fix is still in QA pending deploy. The row stays on the page because new accounts could surface until the fix officially ships. Hover the badge for the full context.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What does the Priority Guide show?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Four priority levels with expected SLO times: P0 Critical (~4 hours), P1 High Impact (~24 hours), P2 Medium Impact (~14 days), P3 Low Impact (~28 days). These are expected targets, not guarantees — actual resolution depends on dependencies and dev capacity.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>Can I filter the table by priority?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Yes. Click any P0/P1/P2/P3 pill in the Priority Guide and the table filters to that priority. Click again or hit the "Clear filter" button to reset.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>Why are some issues hidden from the page?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">The page applies a threshold rule. P0 and P1 issues are always shown regardless of volume. P2 and P3 issues need at least 3 pending reports to appear. If only one or two clients have hit a P3, it's being handled case-by-case and doesn't need a dedicated row yet. If volume climbs to 3+ pending, it auto-promotes onto the page.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>How does the search bar work?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">You can search by Zendesk ticket number, Thryv account ID, Jira reference, or plain English keywords like "growth package" or "social tab." The search returns the matching active row if the issue is currently surfaced, or routes you to the historical archive if the issue has been resolved.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What's the search window?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">The search bar covers tickets opened in the last 60 days. For older closed tickets, search Zendesk directly.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What is the "Client Facing AI-Suggested Content" section?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">It's a rotating reference of suggested client-facing language for each active known issue. Reps can use this as a starting point for ticket replies, CSM check-ins, or proactive outreach. Every card includes a "Seek leadership approval before sharing" badge — these are AI-generated drafts, not pre-approved scripts.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What are the three tones on each card?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Standard is empathetic and balanced (the default for most clients). Direct is concise and factual (strip down to essentials when the client wants quick info). VIP is deferential and reassuring (for high-value clients or escalated situations where extra acknowledgment matters). Click any tone to switch instantly.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>How do I navigate between cards in the carousel?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Use the arrow buttons at the top of the section. The counter shows your position out of 12 active issues. There's no auto-rotate — you control the pace. You can also click "View in table ↓" on any card to scroll back to that issue's row.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What does the "AI Suggested Phrasing" pill on each row do?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Click it to jump from the table down to that issue's carousel card. It's a two-way navigation — card to table, or table to card — so you can use whichever direction is more natural for your flow.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What's the scrolling banner at the top?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">When there's a Scheduled Maintenance window or other major notice, it appears as a scrolling banner at the top of the page. Click "Subscribe to updates" to follow real-time status from Thryv's status page. The X button dismisses it for your current session. When there's no active notice, the banner won't appear.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>Why don't I see Keap issues on the page?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Keap data is currently paused. The team is closing all new Keap-related Zendesk tickets while Keap addresses underlying issues upstream. When Keap data resumes flowing into the page, you'll see a notification. For Keap-specific issues in the meantime, refer to <a href="https://knownissues.keap.com" target="_blank" rel="noopener">knownissues.keap.com</a>.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>How do I report a bug or suggest a feature for the page?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Open the team feedback tracker linked from the daily Slack update post. Drop a note, screenshot if helpful, or just a quick line about what you'd like to see. Small refinements typically ship within 1–2 days.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>Where do the ticket numbers come from?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Counts merge from rolling Zendesk CSV exports, filtered to "Valid Ticket = Yes" to exclude system-generated alerts. Active vs. resolved is based on Zendesk status (new/open/pending/hold = active; closed/solved = resolved). Issue surfacing decisions combine Jira status, Zendesk volume, and editorial review by Advanced Technical Support.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>Why might a ticket count look off?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">The page filters out system-generated tickets, but the underlying mapping isn't perfect. If you spot a count that looks wildly off in either direction, flag it via the feedback tracker. The methodology improves with each piece of feedback.</div>
+    </div>
+
+    <div class="faq-item">
+      <button type="button" class="faq-question" onclick="toggleFAQ(this)">
+        <span>What happens to issues after they're resolved?</span>
+        <span class="chev">&#9656;</span>
+      </button>
+      <div class="faq-answer">Resolved issues stay in the "Recently Resolved" section for the current week, then migrate to the historical archive on the following Monday. The archive keeps a permanent record of resolution timing, severity, and how long each issue was active. You can search the historical archive for any closed Jira reference.</div>
+    </div>
+
+  </div>
+
+  <div class="no-results" id="noResults">No questions match your search. Try a different term.</div>
+
+  <div class="feedback-cta">
+    <strong>Didn't find what you were looking for?</strong><br>
+    Drop a question in the team feedback tracker linked in the daily Slack updates, or ping the Advanced Technical Support Team in Slack. The FAQ updates regularly based on what reps actually ask.
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center;padding:24px 0 12px;margin-top:32px;border-top:1px solid var(--thryv-cloud);">
+    <span style="font-size:12px;color:var(--thryv-steel);">Compass — Known System Issues FAQ · Maintained by Advanced Technical Support Team</span>
+    <div style="margin-top:8px;font-size:10px;color:var(--thryv-steel);font-style:italic;">Confidential — Internal Use Only. Do not distribute outside Thryv.</div>
+  </div>
+
+</div>
+
+<script>
+function toggleFAQ(btn){
+  var item = btn.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+function expandAll(){
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.classList.add('open');
+  });
+}
+
+function collapseAll(){
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.classList.remove('open');
+  });
+}
+
+function filterFAQ(){
+  var q = document.getElementById('faqSearch').value.toLowerCase().trim();
+  var items = document.querySelectorAll('.faq-item');
+  var visible = 0;
+  items.forEach(function(item){
+    if(!q){
+      item.classList.remove('hidden');
+      visible++;
+      return;
+    }
+    var text = item.textContent.toLowerCase();
+    if(text.indexOf(q) !== -1){
+      item.classList.remove('hidden');
+      item.classList.add('open'); // expand matches so the matching answer is visible
+      visible++;
+    } else {
+      item.classList.add('hidden');
+    }
+  });
+  var noResults = document.getElementById('noResults');
+  noResults.classList.toggle('show', visible === 0);
+}
+</script>
+
+</body>
+</html>
