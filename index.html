@@ -298,7 +298,78 @@ body {
 .date-text { font-size: 13px; color: var(--thryv-steel); }
 
 /* ── Talking points ── */
-.talking-points { margin-top: 24px; padding: 20px 24px; background: var(--thryv-white); border-radius: var(--radius-lg); border: 1px solid var(--thryv-cloud); border-left: 4px solid var(--thryv-sapphire); }
+.talking-points { margin-top: 24px; padding: 20px 24px; background: var(--thryv-white); border-radius: var(--radius-lg); border: 1px solid var(--thryv-cloud); border-left: 4px solid var(--thryv-sapphire); transition: border-color 0.2s ease; position: relative; }
+
+/* Priority-tinted card variants */
+.talking-points[data-pri="p1"] { border-left-color: #E24B4A; background: linear-gradient(180deg, #FDF2F2 0%, #FFFFFF 60px); }
+.talking-points[data-pri="p2"] { border-left-color: #EF9F27; background: linear-gradient(180deg, #FEF8EE 0%, #FFFFFF 60px); }
+.talking-points[data-pri="p3"] { border-left-color: var(--thryv-sapphire); background: linear-gradient(180deg, #F1F4FF 0%, #FFFFFF 60px); }
+.talking-points[data-pri="p1"] .talking-points-icon { color: #E24B4A; }
+.talking-points[data-pri="p2"] .talking-points-icon { color: #EF9F27; }
+.talking-points[data-pri="p3"] .talking-points-icon { color: var(--thryv-sapphire); }
+.talking-points[data-pri="p1"] .ki-pri-chip { background: #FDE8E8; color: #B91F1E; border-color: #F4C5C4; }
+.talking-points[data-pri="p2"] .ki-pri-chip { background: #FCE5C4; color: #8A4A00; border-color: #F4D49E; }
+.talking-points[data-pri="p3"] .ki-pri-chip { background: #E6EBFC; color: #2A3B8E; border-color: #C9D2F2; }
+.ki-pri-chip { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 5px; border: 1px solid; letter-spacing: 0.3px; white-space: nowrap; margin-left: auto; transition: transform 0.1s ease, box-shadow 0.15s ease, filter 0.15s ease; font-family: inherit; }
+button.ki-pri-chip { background: inherit; cursor: pointer; }
+button.ki-pri-chip:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.12); filter: brightness(0.96); }
+button.ki-pri-chip:active { transform: translateY(0); }
+button.ki-pri-chip::after { content: " ↓"; font-size: 9px; opacity: 0.65; margin-left: 2px; }
+
+/* "View in table" link on each carousel card */
+.view-in-table-link {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--thryv-orange);
+  text-decoration: none;
+  margin-left: 8px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.view-in-table-link:hover {
+  background: #FFF3EC;
+  border-color: #FFC79A;
+  color: #B83A00;
+}
+
+/* Brand wordmark badge — sits at top of each carousel card */
+.brand-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 8px;
+  border-radius: 6px;
+  background: var(--brand-color, #6B7280);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  margin-bottom: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.brand-wordmark .bw-thryv {
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  font-size: 12px;
+}
+.brand-wordmark .bw-arrow {
+  font-size: 10px;
+  opacity: 0.85;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 900;
+}
+.brand-wordmark .bw-product {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
 .talking-points-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
 .talking-points-icon { width: 22px; height: 22px; background: var(--thryv-sapphire); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 700; }
 .talking-points-title { font-size: 14px; font-weight: 600; color: var(--thryv-midnight); }
@@ -323,13 +394,41 @@ body {
   margin-right: 5px;
   font-size: 11px;
 }
-.cfm-cycle-btn { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:600; color:#fff; background:var(--thryv-orange); border:none; padding:3px 9px 3px 8px; border-radius:12px; cursor:pointer; letter-spacing:0.2px; transition:background 0.15s ease, transform 0.1s ease; line-height:1.4; }
-.cfm-cycle-btn:hover { background:#E64500; }
-.cfm-cycle-btn:active { transform:scale(0.96); }
-.cfm-cycle-btn::before { content:"↻"; font-size:11px; line-height:1; }
-.cfm-persona-pill { display:inline-flex; align-items:center; font-size:10px; font-weight:600; color:#5C6470; background:#EEF0F4; border:1px solid #D6DAE0; padding:2px 8px; border-radius:10px; letter-spacing:0.3px; line-height:1.4; }
+/* Tone toggle group — Standard / Direct / VIP */
+.tone-toggle-group { display: inline-flex; align-items: center; gap: 4px; background: #F4F6FB; border: 1px solid #D6DAE0; border-radius: 999px; padding: 3px; }
+.tone-toggle { font-size: 10.5px; font-weight: 600; color: #5C6470; background: transparent; border: none; padding: 3px 10px; border-radius: 999px; cursor: pointer; letter-spacing: 0.2px; line-height: 1.4; transition: all 0.15s ease; font-family: inherit; display: inline-flex; align-items: center; gap: 4px; }
+.tone-toggle:hover { color: var(--thryv-midnight); }
+.tone-toggle.active[data-tone="standard"] { background: #E0E5EE; color: #29355D; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+.tone-toggle.active[data-tone="direct"] { background: var(--thryv-sapphire); color: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+.tone-toggle.active[data-tone="vip"] { background: #6B4DA8; color: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+.tone-toggle .tone-icon { font-size: 11px; line-height: 1; }
+
+/* Legacy cycle btn / pill kept for backwards compat but hidden */
+.cfm-cycle-btn { display:none; }
+.cfm-persona-pill { display:none; }
 .lyrics-btn { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:700; color:#5C6470; background:#F1F0E9; border:1px solid #D6DAE0; padding:2px 8px 2px 7px; border-radius:10px; cursor:pointer; letter-spacing:0.4px; text-transform:uppercase; line-height:1.4; margin-left:8px; vertical-align:middle; transition:background 0.15s ease, color 0.15s ease; position:relative; top:-1px; }
 .lyrics-btn:hover { background:var(--thryv-orange); color:#fff; border-color:var(--thryv-orange); }
+.ai-phrasing-btn {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 9px;
+  margin-left: 6px;
+  border: 1px solid #FCE5C4;
+  background: #FFF8EE;
+  color: #B26800;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  vertical-align: middle;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.ai-phrasing-btn:hover {
+  background: var(--thryv-orange);
+  color: white;
+  border-color: var(--thryv-orange);
+}
+
 .lyrics-btn::before { content:"♪"; font-size:11px; line-height:1; }
 .lyrics-panel { display:none; margin-top:8px; padding:10px 14px; background:var(--thryv-mist); border-radius:var(--radius-md); border-left:3px solid var(--thryv-orange); }
 .lyrics-panel.open { display:block; }
@@ -965,6 +1064,251 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
     <span class="adv-only"><strong>Active alert:</strong> Service Portal search/impersonate (IGT-367) Released — closed in 1 day. MCSTARTER YP CTN (MCB-161/271) Deployed — closed. Website Analytics V7 (MCB-265) Released; V8 (MCB-306) Released; V9 (MCB-335) remains active. Top active volume: BC-1068 (Social tab errors) at QA In Progress, MCB-294 (GP missing V7) Dev In Progress. Daily refresh applied May 4.</span><span class="simp-only"><strong>This week:</strong> three big resolutions shipped — <a href="javascript:void(0);" onclick="jumpToResolved('row-resolved-sp-search');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">Service Portal search and impersonate</a> is fixed, the <a href="javascript:void(0);" onclick="jumpToResolved('row-resolved-yp-ctn');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">Yellow Pages CTN issue</a> is closed, and the latest round of <a href="javascript:void(0);" onclick="jumpToResolved('row-resolved-analytics-v8');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">website analytics</a> work is done. The biggest active issue remains <a href="javascript:void(0);" onclick="jumpToRow('row-missing-gp');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">Growth Package add-ons</a> not appearing after purchase. Full list below.</span>
   </div>
 
+  <!-- Client Facing AI-Suggested Verbiage Carousel -->
+  <div id="incidentCarousel" style="margin-top:16px;position:relative;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+      <div>
+        <div style="font-size:15px;font-weight:700;color:var(--thryv-midnight);">Client Facing AI-Suggested Verbiage</div>
+        <div style="font-size:11px;color:var(--thryv-steel);font-style:italic;margin-top:2px;">Seek leadership approval before sharing with clients.</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button onclick="prevCard()" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--thryv-cloud);background:var(--thryv-white);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;" aria-label="Previous">&#8249;</button>
+        <span id="cardIndicator" style="font-size:12px;color:var(--thryv-steel);min-width:48px;text-align:center;font-weight:600;">1 / 12</span>
+        <button onclick="nextCard()" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--thryv-cloud);background:var(--thryv-white);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;" aria-label="Next">&#8250;</button>
+      </div>
+    </div>
+    <div id="incidentDeck" style="position:relative;overflow:hidden;">
+      <!-- Card 1: #0012 -->
+      <div class="incident-card" data-card-num="1" data-ki="0012" data-card-target="row-social-tab" style="display:block;">
+        <div class="talking-points" data-pri="p1">
+          <div class="brand-wordmark" style="--brand-color: #29355D;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Business Center</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Cloud Campaign user ID mismatch — Social tab errors</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-social-tab')" title="Click to view this issue in the table">#0012 · P1</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-social-tab');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">A Cloud Campaign user ID mismatch is causing some users to see errors when clicking the Social tab in Business Center. A fix is in QA. 14 of 21 reported accounts are already resolved; 7 still pending.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-1"><button type="button" class="tone-toggle active" data-tone="standard" data-card="1" onclick="setTone(1,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="1" onclick="setTone(1,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="1" onclick="setTone(1,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-1" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We're aware that some users are seeing errors when clicking the Social tab in Business Center. A fix has been deployed and most affected accounts are working again. If you're still seeing the issue, please log out and log back in. If it continues, let us know and we'll get it sorted right away.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2: #0045 -->
+      <div class="incident-card" data-card-num="2" data-ki="0045" data-card-target="row-multi-loc-impersonation" style="display:none;">
+        <div class="talking-points" data-pri="p1">
+          <div class="brand-wordmark" style="--brand-color: #6B7280;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Service Portal</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Multi-location impersonation showing wrong child account</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-multi-loc-impersonation')" title="Click to view this issue in the table">#0045 · P1</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-multi-loc-impersonation');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">When agents impersonate a multi-location account, the wrong child account is showing up. All 5 reported accounts handled. Fix in QA Complete and waiting on release.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-2"><button type="button" class="tone-toggle active" data-tone="standard" data-card="2" onclick="setTone(2,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="2" onclick="setTone(2,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="2" onclick="setTone(2,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-2" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We're aware that some multi-location accounts have been showing the wrong child account during agent impersonation. All known affected accounts have been handled, and a fix has passed testing and is awaiting release. If you experience any issue with your child accounts displaying incorrectly, please reach out and we'll address it directly.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3: #0047 -->
+      <div class="incident-card" data-card-num="3" data-ki="0047" data-card-target="row-distro-attrs-deleted" style="display:none;">
+        <div class="talking-points" data-pri="p2">
+          <div class="brand-wordmark" style="--brand-color: #0E7C6B;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Online Listings</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Listings distribution attributes being deleted</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-distro-attrs-deleted')" title="Click to view this issue in the table">#0047 · P2</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-distro-attrs-deleted');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">For some accounts, key listings data (Yelp, Yahoo) is being deleted from our system unexpectedly. This affects how listings show up to publishers. Engineering is investigating. 1 of 7 reported accounts resolved; 6 pending.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-3"><button type="button" class="tone-toggle active" data-tone="standard" data-card="3" onclick="setTone(3,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="3" onclick="setTone(3,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="3" onclick="setTone(3,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-3" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We're aware that some listings data — particularly for Yelp and Yahoo — has been getting unexpectedly deleted from our system, which may be affecting how your listings display. Our engineering team is actively investigating. If you've noticed any of your listings information disappearing, please reach out and we'll work to restore it.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 4: #0050 -->
+      <div class="incident-card" data-card-num="4" data-ki="0050" data-card-target="row-duplicate-gump-ids" style="display:none;">
+        <div class="talking-points" data-pri="p2">
+          <div class="brand-wordmark" style="--brand-color: #0E7C6B;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Online Listings</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Duplicate listing IDs generating across publishers</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-duplicate-gump-ids')" title="Click to view this issue in the table">#0050 · P2</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-duplicate-gump-ids');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">For some Marketing Center accounts, duplicate listing IDs are being created across publishers. This causes the RAQ banner not to show and creates listing duplication. Affects US, AU, and NZ. 2 of 6 resolved; 4 pending.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-4"><button type="button" class="tone-toggle active" data-tone="standard" data-card="4" onclick="setTone(4,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="4" onclick="setTone(4,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="4" onclick="setTone(4,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-4" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We're aware that some Marketing Center accounts are seeing duplicate listings appear across publishers, which can affect the Request a Quote banner display. Our team is working through these on a per-account basis. If you've noticed duplicates of your listings or your Request a Quote banner missing, please reach out so we can clean it up.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 5: #0001 -->
+      <div class="incident-card" data-card-num="5" data-ki="0001" data-card-target="row-listings-delays" style="display:none;">
+        <div class="talking-points" data-pri="p3">
+          <div class="brand-wordmark" style="--brand-color: #0E7C6B;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Online Listings</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Listing updates delayed across publishers</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-listings-delays')" title="Click to view this issue in the table">#0001 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-listings-delays');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Some listing updates are delayed because of issues on the publisher side (Google, Facebook, Bing, and others). Listing data is saved and will sync once the publisher resolves the issue. See Publisher Panel for affected publishers.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-5"><button type="button" class="tone-toggle active" data-tone="standard" data-card="5" onclick="setTone(5,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="5" onclick="setTone(5,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="5" onclick="setTone(5,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-5" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">Some of our listing publishers — like Google, Facebook, and Bing — are experiencing delays on their end, which means some listing updates are taking longer than usual to go live. Your information is saved on our system and will publish as soon as the publisher resolves things on their side. We're keeping an eye on it and will let you know once everything is caught up.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 6: #0010 -->
+      <div class="incident-card" data-card-num="6" data-ki="0010" data-card-target="row-missing-gp" style="display:none;">
+        <div class="talking-points" data-pri="p3">
+          <div class="brand-wordmark" style="--brand-color: #3C3489;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Marketing Center</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Growth Package missing from Marketing Center after purchase</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-missing-gp')" title="Click to view this issue in the table">#0010 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-missing-gp');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Some clients have purchased a Growth Package but don't see it in their Marketing Center listings. Billing is correct. 32 of 55 reported resolved; 23 pending.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-6"><button type="button" class="tone-toggle active" data-tone="standard" data-card="6" onclick="setTone(6,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="6" onclick="setTone(6,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="6" onclick="setTone(6,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-6" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We're aware that some clients are not seeing their Growth Package appear in Marketing Center after purchase. Your billing is correct and your subscription is active — we're working on a backend fix so the package shows up properly. We've already resolved 32 of the affected accounts and are working through the remainder.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 7: #0003 -->
+      <div class="incident-card" data-card-num="7" data-ki="0003" data-card-target="row-keap-login" style="display:none;">
+        <div class="talking-points" data-pri="p3">
+          <div class="brand-wordmark" style="--brand-color: #29355D;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Business Center</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Login issues during Keap-to-Thryv migration</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-keap-login')" title="Click to view this issue in the table">#0003 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-keap-login');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Some clients are seeing login problems during Keap-to-Thryv account migration. Mix of password resets and locked accounts. Most resolve on first contact.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-7"><button type="button" class="tone-toggle active" data-tone="standard" data-card="7" onclick="setTone(7,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="7" onclick="setTone(7,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="7" onclick="setTone(7,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-7" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">Some clients are seeing login problems while we move accounts from Keap to Thryv. This includes password resets and locked accounts. Most issues are resolved on first contact — try clearing your browser cache or using an incognito window first, then reach out to support if it keeps happening.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 8: #0002 -->
+      <div class="incident-card" data-card-num="8" data-ki="0002" data-card-target="row-cc-volume" style="display:none;">
+        <div class="talking-points" data-pri="p3">
+          <div class="brand-wordmark" style="--brand-color: #6B7280;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Service Portal</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Cloud Campaign — high ticket volume</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-cc-volume')" title="Click to view this issue in the table">#0002 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-cc-volume');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">More Cloud Campaign tickets than usual are coming in through the Service Portal. We're working through them one by one.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-8"><button type="button" class="tone-toggle active" data-tone="standard" data-card="8" onclick="setTone(8,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="8" onclick="setTone(8,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="8" onclick="setTone(8,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-8" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We're seeing higher than usual ticket volume on Cloud Campaign right now and are working through each one as quickly as we can. If you've submitted a ticket and haven't heard back yet, we appreciate your patience — every ticket is being reviewed individually.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 9: #0016 -->
+      <div class="incident-card" data-card-num="9" data-ki="0016" data-card-target="row-website-analytics" style="display:none;">
+        <div class="talking-points" data-pri="p3">
+          <div class="brand-wordmark" style="--brand-color: #3C3489;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Marketing Center</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Website + Heatmap analytics not tracking visitors</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-website-analytics')" title="Click to view this issue in the table">#0016 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-website-analytics');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Website visitor data and heatmaps aren't loading correctly for some Marketing Center accounts. Affects sites not hosted by Thryv. 10 of 10 still pending; multiple earlier batches resolved.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-9"><button type="button" class="tone-toggle active" data-tone="standard" data-card="9" onclick="setTone(9,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="9" onclick="setTone(9,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="9" onclick="setTone(9,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-9" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We're aware that website visitor data and heatmaps aren't loading correctly for some Marketing Center accounts. This affects sites not hosted by Thryv. Several earlier batches of accounts have already been resolved, and we're working through the latest batch now.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 10: #0013 -->
+      <div class="incident-card" data-card-num="10" data-ki="0013" data-card-target="row-mya-mix" style="display:none;">
+        <div class="talking-points" data-pri="p3">
+          <div class="brand-wordmark" style="--brand-color: #FF5000;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">My Account</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Account, settings, and website builder — mixed reports</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-mya-mix')" title="Click to view this issue in the table">#0013 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-mya-mix');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Small number of one-off reports across account access, settings, and website builder. Each handled case-by-case.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-10"><button type="button" class="tone-toggle active" data-tone="standard" data-card="10" onclick="setTone(10,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="10" onclick="setTone(10,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="10" onclick="setTone(10,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-10" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">A small number of clients have reported isolated issues with account access, settings, or the website builder. These are one-off cases — if you're experiencing any of these, contact support and we'll work through it with you directly.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 11: #0008 -->
+      <div class="incident-card" data-card-num="11" data-ki="0008" data-card-target="row-ep-gp" style="display:none;">
+        <div class="talking-points" data-pri="p3">
+          <div class="brand-wordmark" style="--brand-color: #3C3489;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Marketing Center</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Growth Package features not activating after purchase</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-ep-gp')" title="Click to view this issue in the table">#0008 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-ep-gp');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Some Growth Package and Enhanced Profile features aren't turning on after purchase. The V3 batch is fixed; we're working on V4 accounts where features are still missing. 0 of 8 resolved; 8 pending.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-11"><button type="button" class="tone-toggle active" data-tone="standard" data-card="11" onclick="setTone(11,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="11" onclick="setTone(11,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="11" onclick="setTone(11,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-11" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We're aware that some Growth Package and Enhanced Profile features aren't turning on automatically after purchase for a subset of accounts. Your subscription and data are both fine — this is a backend installation issue on our end. The earlier batch is fixed, and we're working on the remaining accounts where features are still missing.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 12: #0044 -->
+      <div class="incident-card" data-card-num="12" data-ki="0044" data-card-target="row-thryv-leads" style="display:none;">
+        <div class="talking-points" data-pri="p3">
+          <div class="brand-wordmark" style="--brand-color: #3C3489;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Marketing Center</span></div>
+          <div class="talking-points-header">
+            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-title">Thryv Leads add-on missing from Marketing Center</div>
+            <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-thryv-leads')" title="Click to view this issue in the table">#0044 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-thryv-leads');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label">Impact Summary</div>
+            <div class="tp-text">Some clients have an active Thryv Leads subscription but the product isn't showing in Marketing Center. Subscription is fine — product just isn't appearing where it should. 0 of 3 resolved; 3 pending.</div>
+          </div>
+          <div class="tp-section">
+            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-12"><button type="button" class="tone-toggle active" data-tone="standard" data-card="12" onclick="setTone(12,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="12" onclick="setTone(12,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="12" onclick="setTone(12,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
+            <div class="tp-text" id="cfm-12" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We're aware that some clients with an active Thryv Leads subscription aren't seeing the product appear in Marketing Center. Your subscription is fully active and your billing is correct — the product just isn't displaying where it should. We're working on a fix to get it showing up properly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Weekly Summary (always visible) -->
   <div class="weekly-summary-cards" id="weeklySummaryCards" style="display:flex;gap:12px;margin:16px 0 0;flex-wrap:wrap;width:100%;">
     <div style="flex:1;min-width:200px;padding:12px 16px;background:#EAF5EE;border-radius:var(--radius-lg);border:2px solid #C7E5D2;border-left:3px solid var(--sev-low);">
@@ -1118,7 +1462,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <tr id="row-ep-gp" data-product="mc" data-wa="yes" data-wa-text="First, confirm the purchase went through on the billing/order screen. If confirmed and the features still aren't activating, open a ticket to support with the Thryv ID, the Growth Package tier, and a screenshot of what's missing. Reassure the client that their subscription is active and we're working on it — no action needed on their end." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
           <td><span class="ki-id">#0008</span></td>
         <td>
-          <div class="issue-title">Growth Package features not activating after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Growth Package features not activating after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-ep-gp')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">YPO installation</span> issue preventing <span class="kw">Enhanced Profile</span> activation. Wrong <span class="kw">YPO tier</span> sometimes installed. <span class="adv-only">MCB-168</span> <span style="color:#1D9E75;font-weight:600;">— V3 Deployed</span>. <span class="adv-only">MCB-302</span> <span class="kw">V4 variant</span> in Dev Backlog and being worked. Verifying remaining accounts via <span class="adv-only">Gump/Pace</span>.</span><span class="simp-only">Some <span class="kw">Growth Package</span> and <span class="kw">Enhanced Profile</span> features aren't turning on automatically after purchase. Subscriptions and data are fine — this is an issue on our end, not the account. The <span class="kw">Yellow Pages Online</span> piece for the V3 batch is fixed; we're working on the V4 accounts where features are still missing.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We're aware that some Growth Package features aren't turning on automatically after purchase. Your subscription is active and your data is safe — we're working on getting the features installed correctly and will reach out once it's resolved.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-168</span> <span class="jira-tag"><span class="adv-only">MCB-302</span></div></span>
@@ -1133,7 +1477,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <tr id="row-missing-gp" data-product="mc" data-wa="yes" data-wa-text="First, confirm the purchase went through on the billing/order screen, and confirm the client is looking in Marketing Center (not another product). If the Growth Package is still missing, open a ticket to support with the Thryv ID, GP tier, date of purchase, and a screenshot of MC showing the missing package. Tell the client this is a known issue being worked case by case." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
           <td><span class="ki-id">#0010</span></td>
         <td>
-          <div class="issue-title">Growth Package missing from Marketing Center after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Growth Package missing from Marketing Center after purchase<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-missing-gp')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Growth Packages</span> purchased but not visible in <span class="kw">Marketing Center</span> listings. <span class="adv-only">MCB-294 (V7)</span> In Review. Clients paying for service without it reflected.</span><span class="simp-only">Some clients have purchased a <span class="kw">Growth Package</span> but don't see it in their <span class="kw">Marketing Center</span> listings. Billing is correct — we're working on a fix to make the package show up properly.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We can see that the Growth Package add-on you purchased isn't showing up in your Marketing Center yet. The purchase did go through and we're getting it activated — we'll let you know as soon as it appears.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-212</span> <span class="jira-tag"><span class="adv-only">MCB-294</span></div></span>
@@ -1148,7 +1492,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <tr id="row-website-analytics" data-product="mc" data-wa="yes" data-wa-text="First, check whether the site is Thryv-hosted or third-party. If Thryv-hosted, open a ticket immediately. If third-party, confirm the visitor tracking script has been added to the site — if so, open a ticket for further review. Include the Thryv ID, site URL, and whether the site is Thryv-hosted or external. Tell the client this is a known issue under review." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,AU,NZ">
           <td><span class="ki-id">#0016</span></td>
         <td>
-          <div class="issue-title">Website + Heatmap analytics not tracking visitors<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Website + Heatmap analytics not tracking visitors<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-website-analytics')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Website analytics</span> and <span class="kw">heatmap</span> not loading in MC. Non-Thryv sites with <span class="kw">visitor tagging</span> code not syncing. <span class="kw">CORS</span> errors. <span class="adv-only">MCB-220 (V6)</span>, <span class="adv-only">MCB-265 (V7)</span>, <span class="adv-only">MCB-306 (V8)</span> all Released. <span class="adv-only">MCB-335 (V9)</span> in Dev Backlog — heatmap not installing on remaining accounts.</span><span class="simp-only"><span class="kw">Website visitor data</span> and <span class="kw">heatmaps</span> aren't loading correctly for some Marketing Center accounts. Affects sites <span class="kw">not hosted by Thryv</span>. Multiple earlier batches resolved; working through the latest batch now.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">Some Marketing Center accounts aren't tracking website visitors or heatmap data right now. No data has been lost; tracking will resume once we ship the fix and we'll backfill where we can. We'll keep you posted.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-335</span></div></span>
@@ -1176,10 +1520,10 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <td data-label="Date Reported" class="date-text" title="Jira created: Apr 15, 2026 12:17 PM CT">Apr 15, 2026 · 12:17 PM CT</td>
       </tr>
       
-      <tr data-product="olm" data-wa="yes" data-wa-text="Open a ticket to support. Include the business name, address, phone number, the listing URL, and specific issues with the listing." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
+      <tr id="row-listings-delays" data-product="olm" data-wa="yes" data-wa-text="Open a ticket to support. Include the business name, address, phone number, the listing URL, and specific issues with the listing." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
           <td><span class="ki-id">#0001</span></td>
         <td>
-          <div class="issue-title">Listing updates delayed across publishers<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Listing updates delayed across publishers<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-listings-delays')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only">Active <span class="kw">Yext</span>-routed listing issues across multiple <span class="kw">publishers</span>. Includes <span class="kw">stuck processing</span>, <span class="kw">update failures</span>, and enhanced profile sync errors.</span><span class="simp-only">Some <span class="kw">listing updates</span> are delayed because of issues on the <span class="kw">publisher side</span> (<span class="kw">Google</span>, <span class="kw">Facebook</span>, <span class="kw">Bing</span>, and others). Listing data is saved and will sync once the publisher resolves the issue. See the <a href="javascript:void(0);" onclick="openPublisherPanel();return false;" style="font-weight:700;color:var(--thryv-orange);text-decoration:underline;cursor:pointer;">Publisher Panel</a> for which publishers are affected.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">A few of the listing publishers are having issues on their end, so some of your listing updates are taking longer than usual to go live. Your information is saved and will publish as soon as the publisher fixes things on their side.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="pub-tag">Bing</span> <span class="pub-tag">Google</span> <span class="pub-tag">Facebook</span> <span class="pub-tag">Apple</span> <span class="pub-tag">YP</span> <span class="yext-tag">Yext #2419893</span></div></span>
@@ -1193,10 +1537,10 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       </tr>
 
       <!-- Business Center Issues -->
-      <tr data-product="other" data-wa="no" data-wa-text="No fix available yet. Open a ticket so we can log it and add the client to the tracker." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN,AU,NZ">
+      <tr id="row-cc-volume" data-product="other" data-wa="no" data-wa-text="No fix available yet. Open a ticket so we can log it and add the client to the tracker." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN,AU,NZ">
           <td><span class="ki-id">#0002</span></td>
         <td>
-          <div class="issue-title">Cloud Campaign — high ticket volume<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Cloud Campaign — high ticket volume<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-cc-volume')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Cloud Campaign</span> tickets through <span class="kw">Service Portal</span>.  volume.</span><span class="simp-only">More <span class="kw">Cloud Campaign</span> tickets than usual are coming in through the <span class="kw">Service Portal</span>. We're working through them <span class="kw">one by one</span>.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text"><em>No client-facing message needed for this row.</em> This is a roll-up volume tracker — Cloud Campaign ticket volume is elevated overall, but each ticket reflects a different individual issue rather than one shared bug. There's no single root cause to communicate to clients here. Each case is handled on its own merits.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="cc-tag">CC #13353</span></div></span>
@@ -1211,7 +1555,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <tr id="row-social-tab" data-product="other" data-wa="yes" data-wa-text="Try clearing cache or logging out and back in. If the issue persists, open a ticket to support with the Thryv ID and affected user email. The ticket will be added to the ongoing investigation." data-tkt="open" data-aud="Support,CSMs" data-priority="p1" data-region="US">
           <td><span class="ki-id">#0012</span></td>
         <td>
-          <div class="issue-title">Cloud Campaign user ID mismatch — Social tab errors in Business Center<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Cloud Campaign user ID mismatch — Social tab errors in Business Center<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-social-tab')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Cloud Campaign user ID mismatch</span> blocking client logins and <span class="kw">syncs</span>. Surfaces as <span class="kw">misconfiguration</span> error on <span class="kw">Social tab</span> with connection failures and <span class="kw">404</span>s. External ID mismatch between Thryv and Cloud Campaign affecting all product lines and regions. <span class="adv-only">BC-1068</span> <span class="kw">QA in progress</span> — push to ship.</span><span class="simp-only">A <span class="kw">Cloud Campaign user ID mismatch</span> is causing some users to see errors when clicking the <span class="kw">Social tab</span> in Business Center, and is blocking some client logins and syncs. A fix is in <span class="kw">QA in progress</span>. If errors continue, <span class="kw">log out and log back in</span>. If the issue still happens, contact support.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We're working on a fix for the Cloud Campaign user ID mismatch that's causing Social tab errors in Business Center. The fix is in QA right now. If you're seeing the issue, log out and log back in as a temporary workaround. If it keeps happening, let us know and we'll take a closer look.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">BC-1068</span> <span class="v-tag">V #344232</span></div></span>
@@ -1240,7 +1584,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <tr id="row-thryv-leads" data-product="mc" data-wa="yes" data-wa-text="First, verify the account has an active Thryv Leads subscription in Recurly. If active and Thryv Leads still isn't visible in Manage My Listings or Analytics, open a ticket to support with the Thryv ID, MC plan, country, and confirmation that the subscription shows active. Tell the client this is a known issue being worked case by case." data-tkt="open" data-aud="Support,CSMs" data-priority="p3" data-region="US,CAN,AU,NZ">
           <td><span class="ki-id">#0044</span></td>
         <td>
-          <div class="issue-title">Thryv Leads add-on missing from Marketing Center<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Thryv Leads add-on missing from Marketing Center<span class="recurring-badge" title="This issue has been resolved before for other groups of accounts and has resurfaced for a new group.">recurring</span><button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-thryv-leads')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only">Active <span class="kw">Thryv Leads</span> subscription in <span class="kw">Recurly</span> but reporting linkout doesn't appear in <span class="kw">Manage My Listings</span> or <span class="kw">Analytics</span>. <span class="adv-only">MCB-326 (V5)</span>. Prior versions resolved.</span><span class="simp-only">Some clients have an active <span class="kw">Thryv Leads</span> subscription, but the product isn't showing up in their <span class="kw">Marketing Center</span>. Subscription is fine — the product just isn't appearing where it should.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We can see your Thryv Leads subscription is active, but the product isn't showing up in your Marketing Center yet. This is a known issue we're actively working on. Your billing and subscription are fine — we'll reach out as soon as it's resolved.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-326</span></div></span>
@@ -1255,7 +1599,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <tr id="row-multi-loc-impersonation" data-product="other" data-wa="yes" data-wa-text="Fix is in QA testing now and expected to deploy soon. While in QA: do NOT push affected accounts through cohort migration. If a CSM reports impersonation showing the wrong child account, open a ticket and capture the parent + child IDs. Once deployment confirms, blocked clients can be released through migration." data-tkt="open" data-aud="Support,CSMs" data-priority="p1" data-region="US,CAN,AU,NZ">
           <td><span class="ki-id">#0045</span></td>
         <td>
-          <div class="issue-title">Multi-location impersonation showing wrong child account<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Multi-location impersonation showing wrong child account<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-multi-loc-impersonation')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only">Multi-loc <span class="kw">impersonation</span> brings up wrong child account. Blocks <span class="kw">cohort migration</span> activation. <span class="adv-only">SPIS-80</span> currently QA Complete, fix in testing.</span><span class="simp-only">When agents try to <span class="kw">impersonate a multi-location account</span>, the wrong child account shows up. This is currently blocking some <span class="kw">migrations</span> for multi-location clients. A fix is in testing now and expected to ship soon.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">This is an internal tool issue affecting multi-location accounts during migration. Clients aren't directly affected, but if your migration timeline is impacted, we can give you a status update. A fix is in testing and we expect to deploy soon.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">SPIS-80</span></div></span>
@@ -1270,7 +1614,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <tr id="row-distro-attrs-deleted" data-product="olm" data-wa="yes" data-wa-text="If a client reports their Yelp/Yahoo listing data went missing or RAQ banner not displaying, capture the Thryv ID and open a ticket. The dev team can re-populate the missing attributes from Partner Distro. Don't apply manual cleanup — the attrs may regenerate on the next sync." data-tkt="open" data-aud="Support,CSMs" data-priority="p2" data-region="US,CAN,AU,NZ">
           <td><span class="ki-id">#0047</span></td>
         <td>
-          <div class="issue-title">Listings distribution attributes being deleted<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Listings distribution attributes being deleted<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-distro-attrs-deleted')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Yelp</span> and <span class="kw">Yahoo Business ID</span> attrs being deleted in <span class="kw">Distro DB</span> when they should remain active. Suspected broader than initial LOC-prefix theory; sample list confirmed but more impacted. <span class="adv-only">LDM-170</span> Open.</span><span class="simp-only">For some accounts, key <span class="kw">listings data</span> (<span class="kw">Yelp and Yahoo</span>) is being deleted from our system when it shouldn't be. This affects how listings show up to <span class="kw">publishers</span>. Engineering is investigating.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We've identified an issue where some Yelp and Yahoo listing data is being unexpectedly removed. Your subscription is fine. We're investigating and we'll restore the missing data once the root cause is fixed.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">LDM-170</span></div></span>
@@ -1300,7 +1644,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <tr id="row-duplicate-gump-ids" data-product="olm" data-wa="yes" data-wa-text="If a client reports the RAQ banner missing despite an active subscription, or duplicate listings showing on Yellow Pages, capture the Thryv ID and open a ticket. Don't manually clean up duplicate IDs — they regenerate. The dev team is working on a permanent fix in the backend." data-tkt="open" data-aud="Support" data-priority="p2" data-region="US,AU,NZ">
           <td><span class="ki-id">#0050</span></td>
         <td>
-          <div class="issue-title">Duplicate listing IDs generating across publishers<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Duplicate listing IDs generating across publishers<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-duplicate-gump-ids')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only">Multiple <span class="kw">Gump CIDs</span> and <span class="kw">SRCIDs</span> generating for MC Listings accounts across AUS, NZL, USA. Duplicates reappear after manual cleanup. <span class="kw">RAQ banner</span> not showing due to duplication. <span class="adv-only">MCB-110</span> Dev Backlog.</span><span class="simp-only">For some Marketing Center accounts, <span class="kw">duplicate listing IDs</span> are being created across publishers. This causes the <span class="kw">RAQ banner</span> not to show and creates listing duplication. Affects US, AU, and NZ.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We've identified that some accounts are generating duplicate listing IDs across publishers, which is affecting how some features show up. Your data is intact — we're working on a permanent fix to clean this up at the source.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
           <span class="adv-only"><div class="issue-meta"><span class="jira-tag"><span class="adv-only">MCB-110</span></div></span>
@@ -1388,10 +1732,10 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <td data-label="Date Reported" class="date-text">Apr 24, 2026 · 12:00 PM CT</td>
       </tr>
       <tr id="section-bc" style="height:0;border:none;padding:0;"></tr>
-      <tr data-product="bc" data-wa="yes" data-wa-text="Try clearing browser cache or using an incognito window. If the issue persists, open a ticket to support with the Thryv ID. The ticket will be added to the ongoing issue." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN,AU,NZ">
+      <tr id="row-keap-login" data-product="bc" data-wa="yes" data-wa-text="Try clearing browser cache or using an incognito window. If the issue persists, open a ticket to support with the Thryv ID. The ticket will be added to the ongoing issue." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN,AU,NZ">
           <td><span class="ki-id">#0003</span></td>
         <td>
-          <div class="issue-title">Login issues during Keap-to-Thryv migration<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Login issues during Keap-to-Thryv migration<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-keap-login')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only"><span class="kw">Login</span> queue elevated due to ongoing <span class="kw">Keap-to-Thryv</span> auth migrations. Mix of general login issues, <span class="kw">password resets</span>, <span class="kw">locked accounts</span>.</span><span class="simp-only">Some clients are seeing <span class="kw">login problems</span> while we move accounts from <span class="kw">Keap to Thryv</span>. This includes <span class="kw">password resets</span> and <span class="kw">locked accounts</span>. Most are resolved on first contact — clear browser cache or try an incognito window first, then contact support if it persists.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">If you're having trouble logging in during your Keap-to-Thryv migration, this is a known issue we're actively resolving. Try resetting your password through the login page first; if that doesn't work, contact support and we'll get you in.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
         </td>
@@ -1421,10 +1765,10 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       
       
       <tr id="section-myaccount" style="height:0;border:none;padding:0;"></tr>
-      <tr data-product="myaccount" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a description of the specific account or settings issue." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN">
+      <tr id="row-mya-mix" data-product="myaccount" data-wa="yes" data-wa-text="Open a ticket to support with the Thryv ID and a description of the specific account or settings issue." data-tkt="open" data-aud="Support" data-priority="p3" data-region="US,CAN">
           <td><span class="ki-id">#0013</span></td>
         <td>
-          <div class="issue-title">Account, settings, and website builder — small mix of reports<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button></div>
+          <div class="issue-title">Account, settings, and website builder — small mix of reports<button type="button" class="lyrics-btn" onclick="toggleLyrics(this)" title="View suggested client message">Lyrics</button><button type="button" class="ai-phrasing-btn" onclick="jumpToCard('row-mya-mix')" title="View AI-suggested client phrasing in carousel">&#9999;&#65039; AI Suggested Phrasing</button></div>
           <div class="issue-desc"><span class="adv-only">Assorted <span class="kw">account access</span>, <span class="kw">settings</span>, and <span class="kw">website builder</span> issues reported by agents. Low volume, individual cases.</span><span class="simp-only">A small number of clients have reported issues with <span class="kw">account access</span>, <span class="kw">settings</span>, or the <span class="kw">website builder</span>. These are <span class="kw">one-off cases</span> — contact support and we'll work through each one.</span></div>
           <div class="lyrics-panel"><div class="lyrics-panel-label">♪ Suggested Client Message <span class="ai-disclaimer-badge" title="AI-generated draft. Review and adapt before sharing with a client.">AI-generated · review before sharing</span></div><div class="lyrics-panel-text">We're aware of a small number of unrelated issues across account settings and the website builder. These are being handled individually as they come in, so please reach out to support if you're experiencing one and we'll address it directly.</div><button type="button" class="lyrics-copy-btn" onclick="copyLyrics(this)">📋 Copy</button></div>
         </td>
@@ -1576,160 +1920,6 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       
     </tbody>
   </table>
-
-  <!-- Incident Communications - Carousel -->
-  <div style="margin-top:24px;position:relative;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-      <div style="font-size:15px;font-weight:700;color:var(--thryv-midnight);">Incident Communications</div>
-      <div style="display:flex;align-items:center;gap:8px;">
-        <button onclick="prevCard()" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--thryv-cloud);background:var(--thryv-white);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">&#8249;</button>
-        <span id="cardIndicator" style="font-size:12px;color:var(--thryv-steel);min-width:40px;text-align:center;">1 / 6</span>
-        <button onclick="nextCard()" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--thryv-cloud);background:var(--thryv-white);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">&#8250;</button>
-      </div>
-    </div>
-    <div id="incidentDeck" style="position:relative;overflow:hidden;">
-
-      <!-- Card 1: MC (EP/GP) -->
-      <div class="incident-card" data-queue="mc" style="display:block;">
-        <div class="talking-points">
-          <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
-            <div class="talking-points-title">Marketing Center — EP / Growth Package Issues</div>
-          </div>
-          <span class="adv-only"><div class="tp-meta-grid" style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">
-            <span style="font-weight:600;">Priority:</span><span>P3 Low</span>
-            <span style="font-weight:600;">Severity:</span><span>High — Major function not working for a subset of users</span>
-            <span style="font-weight:600;">Status:</span><span style="color:var(--sev-low);font-weight:600;">Dev In Progress — many accounts resolved, verifying remaining</span>
-            <span style="font-weight:600;">Update cadence:</span><span>Per SOP cadence during active work</span>
-            <span style="font-weight:600;">What to do:</span><span style="color:var(--sev-low);">Yes — submit a support ticket for manual activation. Include the Thryv ID and Growth Package tier.</span>
-          </div></span>
-          <div class="tp-section">
-            <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">Some Growth Package and Enhanced Profile features aren't turning on automatically after purchase. The cause is a backend installation issue, not anything wrong with the client's account. Most accounts have already been resolved — we're verifying the rest. Subscriptions are active and no data has been lost.</div>
-          </div>
-          <div class="tp-section">
-            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client. Reporting and resolving issues is our scope; client messaging is not.">AI-generated · Get leadership approval before sharing</span> <span class="cfm-persona-pill" id="cfm-1-pill">1 of 3 · Standard</span> <button type="button" class="cfm-cycle-btn" onclick="cycleClientMessage(1)" title="Try another version">Try another version</button> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" id="cfm-1" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We're aware that some Growth Package features aren't showing up correctly in your Marketing Center. Your subscription and data are both fine — this is a display issue on our end. We're actively working on a fix and will reach out as soon as it's resolved.</div>
-          </div>
-          <span class="adv-only"><div class="tp-section">
-            <div class="tp-label">Internal Notes</div>
-            <div class="tp-text"><span class="adv-only">MCB-168</span> now Dev In Progress. <span class="adv-only">MCB-302 (V4)</span> in Dev Backlog. Engineering confirms many accounts resolved — verify via Gump/Pace that correct YP product is installed (found 2 showing "Activate" instead of "Platinum"). Submit a support ticket with the Thryv ID and package tier for manual resolution.</div>
-          </div></span>
-        </div>
-      </div>
-
-      <!-- Card 2: BC -->
-      <div class="incident-card" data-queue="bc" style="display:none;">
-        <div class="talking-points">
-          <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
-            <div class="talking-points-title">Business Center — Social Tab / CRM Issues</div>
-          </div>
-          <span class="adv-only"><div class="tp-meta-grid" style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">
-            <span style="font-weight:600;">Priority:</span><span>P1 High</span>
-            <span style="font-weight:600;">Severity:</span><span>High — Major function down for subset of users</span>
-            <span style="font-weight:600;">Status:</span><span style="color:var(--sev-low);font-weight:600;">Fix deployed — pending confirmation</span>
-            <span style="font-weight:600;">What to do:</span><span style="color:var(--sev-low);">Log out and log back in. If issue persists, submit a support ticket.</span>
-          </div></span>
-          <div class="tp-section">
-            <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">Some Business Center users were seeing errors on the Social tab — misconfiguration messages or 404s. A fix has been deployed and most accounts are working again. We're monitoring the remaining 22 active reports. CRM platform issues are being handled separately through vendor escalation.</div>
-          </div>
-          <div class="tp-section">
-            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client. Reporting and resolving issues is our scope; client messaging is not.">AI-generated · Get leadership approval before sharing</span> <span class="cfm-persona-pill" id="cfm-2-pill">1 of 3 · Standard</span> <button type="button" class="cfm-cycle-btn" onclick="cycleClientMessage(2)" title="Try another version">Try another version</button> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" id="cfm-2" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">We've shipped a fix for the Social tab errors in Business Center. If you're still seeing the issue, log out and log back in. If it keeps happening after that, let us know and we'll get it sorted right away.</div>
-          </div>
-          <span class="adv-only"><div class="tp-section">
-            <div class="tp-label">Internal Notes</div>
-            <div class="tp-text"><span class="adv-only">BC-1068</span> fix deployed. Kept active pending resolution confirmation. 22 tickets still active — monitoring.</div>
-          </div></span>
-        </div>
-      </div>
-
-      <!-- Card 3: OLM -->
-      <div class="incident-card" data-queue="olm" style="display:none;">
-        <div class="talking-points">
-          <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
-            <div class="talking-points-title">Online Listings — Publisher Sync Issues</div>
-          </div>
-          <span class="adv-only"><div class="tp-meta-grid" style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:12px;color:var(--thryv-steel);">
-            <span style="font-weight:600;">Priority:</span><span>P3 Low</span>
-            <span style="font-weight:600;">Severity:</span><span>Medium — Publisher-side, limited options on our end</span>
-            <span style="font-weight:600;">Status:</span><span style="color:var(--sev-high);font-weight:600;">With third-party partners — awaiting resolution</span>
-            <span style="font-weight:600;">What to do:</span><span>Check the publisher panel — each publisher has its own status and steps.</span>
-          </div></span>
-          <div class="tp-section">
-            <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">Listing updates are slow or stuck for some clients because of issues on the publisher side — Bing, Google, Facebook, and Apple. This includes stuck processing, failed updates, and Enhanced Profile sync errors. Listing data is saved on our end. See the Publisher Panel for which publishers are affected and what to do for each.</div>
-          </div>
-          <div class="tp-section">
-            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client. Reporting and resolving issues is our scope; client messaging is not.">AI-generated · Get leadership approval before sharing</span> <span class="cfm-persona-pill" id="cfm-3-pill">1 of 3 · Standard</span> <button type="button" class="cfm-cycle-btn" onclick="cycleClientMessage(3)" title="Try another version">Try another version</button> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" id="cfm-3" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--thryv-orange);font-style:italic;">A few of the listing publishers are having issues on their end, so some of your listing updates are taking longer than usual to go live. Your information is saved and will publish as soon as the publisher fixes things on their side. We're keeping an eye on it and will let you know once it's caught up.</div>
-          </div>
-          <span class="adv-only"><div class="tp-section">
-            <div class="tp-label">Internal Notes</div>
-            <div class="tp-text">Yext #2419893 is the earliest escalation. Bing has 6 active issues, Apple has 2 (including an outage since Apr 12). Check publisher panel for full breakdown. Route client inquiries to OLM queue.</div>
-          </div></span>
-        </div>
-      </div>
-
-      <!-- Card 4: My Account -->
-      <div class="incident-card" data-queue="myaccount" style="display:none;">
-        <div class="talking-points">
-          <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;color:var(--sev-low);">&#10003;</div>
-            <div class="talking-points-title">My Account — Monitoring</div>
-          </div>
-          <div class="tp-section">
-            <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">Login and account access are running normally. No active client-facing issues right now. The remaining ticket volume is system-generated alerts being filtered automatically.</div>
-          </div>
-          <div class="tp-section">
-            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client. Reporting and resolving issues is our scope; client messaging is not.">AI-generated · Get leadership approval before sharing</span> <span class="cfm-persona-pill" id="cfm-4-pill">1 of 3 · Standard</span> <button type="button" class="cfm-cycle-btn" onclick="cycleClientMessage(4)" title="Try another version">Try another version</button> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" id="cfm-4" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">No known issues with account access right now. If you're having trouble logging in, try clearing your browser cache or using an incognito window. If that doesn't work, let us know and we'll help.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 5: ThryvPay -->
-      <div class="incident-card" data-queue="thryvpay" style="display:none;">
-        <div class="talking-points">
-          <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;color:var(--sev-low);">&#10003;</div>
-            <div class="talking-points-title">ThryvPay — No Active Issues</div>
-          </div>
-          <div class="tp-section">
-            <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">Stripe queue is fully cleared. No active payment processing issues. Remaining volume is system-generated alerts.</div>
-          </div>
-          <div class="tp-section">
-            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client. Reporting and resolving issues is our scope; client messaging is not.">AI-generated · Get leadership approval before sharing</span> <span class="cfm-persona-pill" id="cfm-5-pill">1 of 3 · Standard</span> <button type="button" class="cfm-cycle-btn" onclick="cycleClientMessage(5)" title="Try another version">Try another version</button> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" id="cfm-5" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">No known payment processing issues right now. If a payment doesn't go through or you see something unexpected, let us know and we'll look into it right away.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 6: Keap -->
-      <div class="incident-card" data-queue="keap" style="display:none;">
-        <div class="talking-points">
-          <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;color:var(--sev-low);">&#10003;</div>
-            <div class="talking-points-title">Keap — Monitoring</div>
-          </div>
-          <div class="tp-section">
-            <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">10 active Keap issues are being tracked through the Keap portal. Volume is steady — no spikes. Keap-specific issues are still being managed through Keap's own support infrastructure for now.</div>
-          </div>
-          <div class="tp-section">
-            <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client. Reporting and resolving issues is our scope; client messaging is not.">AI-generated · Get leadership approval before sharing</span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
-            <div class="tp-text" style="background:var(--thryv-mist);padding:10px 14px;border-radius:var(--radius-md);border-left:3px solid var(--sev-low);font-style:italic;">Keap is running normally. For Keap-specific issues, you can reach Keap support directly, or contact us if it involves a Thryv integration and we'll route it for you.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
 
   <!-- Priority Reference (compact) -->
   <div style="margin:24px 0 10px;padding:12px 20px;background:var(--thryv-white);border:1px solid var(--thryv-cloud);border-radius:var(--radius-lg);">
@@ -2047,37 +2237,89 @@ window.addEventListener('scroll', function(){
 // Per session only — no persistence — page reload returns to Standard.
 var cfmVariants = {
   1: [
-    { label: "Standard", text: "We're aware that some Growth Package features aren't showing up correctly in your Marketing Center. Your subscription and data are both fine — this is a display issue on our end. We're actively working on a fix and will reach out as soon as it's resolved." },
-    { label: "Direct", text: "Some Growth Package features aren't activating after purchase. Subscription is active, data is intact. Backend fix in progress. We'll confirm when resolved." },
-    { label: "VIP", text: "Thank you for your patience while we resolve a backend installation issue affecting some Growth Package features. We want you to know that your subscription is active, all your data is secure, and most accounts have already been restored. Our engineering team is prioritizing the remaining accounts and we'll personally follow up the moment yours is fully resolved. Please don't hesitate to reach out in the meantime." }
+    { label: "Standard", text: "We're aware that some users are seeing errors when clicking the Social tab in Business Center. A fix has been deployed and most affected accounts are working again. If you're still seeing the issue, please log out and log back in. If it continues, let us know and we'll get it sorted right away." },
+    { label: "Direct",   text: "Social tab errors in Business Center caused by Cloud Campaign ID mismatch. Fix in QA. Log out and back in. If issue persists, contact support." },
+    { label: "VIP",      text: "Thank you for your patience while we resolved a Cloud Campaign ID mismatch that was causing Social tab errors in Business Center for some clients. We sincerely apologize for any disruption to your workflow. Most affected accounts have already been restored. Please log out and back in to apply the fix. If you continue to experience any issue, please reach out to your account team and we'll address it personally and immediately." }
   ],
   2: [
-    { label: "Standard", text: "We've shipped a fix for the Social tab errors in Business Center. If you're still seeing the issue, log out and log back in. If it keeps happening after that, let us know and we'll get it sorted right away." },
-    { label: "Direct", text: "Fix is live for Social tab errors. Log out and back in. If it still occurs, contact support." },
-    { label: "VIP", text: "We've deployed a fix for the Social tab access errors that some clients have been experiencing. We sincerely apologize for any disruption. Please log out and back in to apply the fix. If you continue to experience any issues, please reach out to your account team and we'll address it immediately." }
+    { label: "Standard", text: "We're aware that some multi-location accounts have been showing the wrong child account during agent impersonation. All known affected accounts have been handled, and a fix has passed testing and is awaiting release. If you experience any issue with your child accounts displaying incorrectly, please reach out and we'll address it directly." },
+    { label: "Direct",   text: "Multi-location impersonation issue caused wrong child accounts to display. All affected accounts handled. Fix passed QA, waiting on release." },
+    { label: "VIP",      text: "We want to inform you that a recent issue affecting multi-location impersonation \u2014 where the wrong child account could appear \u2014 has been fully resolved for all known affected accounts. A permanent fix has passed our quality assurance testing and is now awaiting release. We sincerely apologize for any disruption this may have caused to your operations. If you experience anything similar going forward, please reach out to your dedicated account team and we'll address it immediately." }
   ],
   3: [
-    { label: "Standard", text: "A few of the listing publishers are having issues on their end, so some of your listing updates are taking longer than usual to go live. Your information is saved and will publish as soon as the publisher fixes things on their side. We're keeping an eye on it and will let you know once it's caught up." },
-    { label: "Direct", text: "Some listing publishers are experiencing delays. Your updates are saved and will publish once the publisher resolves on their end. We're monitoring." },
-    { label: "VIP", text: "We want to keep you informed that several of our listing partners are currently experiencing delays on their end, which is affecting how quickly your listing updates appear publicly. Please be assured your information is saved on our system and will publish as soon as the publisher resolves their issue. We're tracking this closely and will personally update you the moment your listings are fully synced." }
+    { label: "Standard", text: "We're aware that some listings data \u2014 particularly for Yelp and Yahoo \u2014 has been getting unexpectedly deleted from our system, which may be affecting how your listings display. Our engineering team is actively investigating. If you've noticed any of your listings information disappearing, please reach out and we'll work to restore it." },
+    { label: "Direct",   text: "Listings attributes (Yelp, Yahoo) being unexpectedly deleted. Engineering investigating. Report missing listing data to support." },
+    { label: "VIP",      text: "We're addressing an issue where some clients' listings information \u2014 particularly Yelp and Yahoo data \u2014 has been getting unexpectedly deleted from our system. Our engineering team is treating this as a priority and actively investigating root cause. We sincerely apologize for any concern this may cause regarding your online presence. Please reach out to your account team if you've noticed missing listings data, and we'll personally restore it and ensure you're updated on the fix." }
   ],
   4: [
-    { label: "Standard", text: "No known issues with account access right now. If you're having trouble logging in, try clearing your browser cache or using an incognito window. If that doesn't work, let us know and we'll help." },
-    { label: "Direct", text: "Account access is operating normally. For login issues, clear cache or try incognito. Contact support if unresolved." },
-    { label: "VIP", text: "Account access is fully operational at this time. If you ever experience any login difficulties, our first recommendation is to clear your browser cache or try an incognito window. Should that not resolve it, please reach out and we'll personally walk you through it." }
+    { label: "Standard", text: "We're aware that some Marketing Center accounts are seeing duplicate listings appear across publishers, which can affect the Request a Quote banner display. Our team is working through these on a per-account basis. If you've noticed duplicates of your listings or your Request a Quote banner missing, please reach out so we can clean it up." },
+    { label: "Direct",   text: "Duplicate listing IDs generating across publishers in MC accounts. Affects RAQ banner. US/AU/NZ. Report duplicates to support." },
+    { label: "VIP",      text: "We want to make you aware of an issue where some Marketing Center accounts are experiencing duplicate listing IDs being generated across our publisher network. This can result in your Request a Quote banner not displaying correctly. Our team is treating this as a priority and working through the affected accounts case by case. If you notice anything unusual with your listings or RAQ display, please reach out to your account team and we'll personally investigate and clean it up for you." }
   ],
   5: [
-    { label: "Standard", text: "No known payment processing issues right now. If a payment doesn't go through or you see something unexpected, let us know and we'll look into it right away." },
-    { label: "Direct", text: "Payment processing is operating normally. Report any failed transactions or anomalies to support." },
-    { label: "VIP", text: "Payment processing is running smoothly across the platform. If you ever notice a transaction that doesn't go through as expected or anything that seems unusual, please contact us right away and we'll personally investigate it on your behalf." }
+    { label: "Standard", text: "Some of our listing publishers \u2014 like Google, Facebook, and Bing \u2014 are experiencing delays on their end, which means some listing updates are taking longer than usual to go live. Your information is saved on our system and will publish as soon as the publisher resolves things on their side. We're keeping an eye on it and will let you know once everything is caught up." },
+    { label: "Direct",   text: "Publisher-side delays affecting listing updates. Data saved, will sync when publishers resolve. Check Publisher Panel for status." },
+    { label: "VIP",      text: "We want to keep you informed that several of our listing partners \u2014 including Google, Facebook, and Bing \u2014 are currently experiencing delays on their end. This is affecting how quickly your listing updates appear publicly. Please be assured your information is saved on our system and will publish automatically as soon as the publisher resolves their issue. We're tracking this closely with each publisher and will personally update you the moment your listings are fully synced." }
+  ],
+  6: [
+    { label: "Standard", text: "We're aware that some clients are not seeing their Growth Package appear in Marketing Center after purchase. Your billing is correct and your subscription is active \u2014 we're working on a backend fix so the package shows up properly. We've already resolved 32 of the affected accounts and are working through the remainder." },
+    { label: "Direct",   text: "Growth Package not displaying in MC after purchase. Billing correct. 32/55 resolved. Backend fix in progress." },
+    { label: "VIP",      text: "Thank you for your patience while we resolve an issue where some clients' Growth Package isn't appearing in Marketing Center after purchase. Your billing is correct and your subscription is fully active \u2014 this is a display issue on our end. We've already restored 32 of the 55 affected accounts and our team is working diligently through the remaining ones. We'll personally follow up the moment yours is fully resolved." }
+  ],
+  7: [
+    { label: "Standard", text: "Some clients are seeing login problems while we move accounts from Keap to Thryv. This includes password resets and locked accounts. Most issues are resolved on first contact \u2014 try clearing your browser cache or using an incognito window first, then reach out to support if it keeps happening." },
+    { label: "Direct",   text: "Login issues during Keap migration. Try cache clear or incognito. Contact support if unresolved." },
+    { label: "VIP",      text: "We're aware that some clients have experienced login difficulties during our Keap-to-Thryv account migration. We sincerely apologize for any inconvenience this may have caused. Most issues are resolved quickly \u2014 we'd recommend first trying to clear your browser cache or use an incognito window. If you continue to experience any difficulty, please reach out and we'll personally walk you through getting back in." }
+  ],
+  8: [
+    { label: "Standard", text: "We're seeing higher than usual ticket volume on Cloud Campaign right now and are working through each one as quickly as we can. If you've submitted a ticket and haven't heard back yet, we appreciate your patience \u2014 every ticket is being reviewed individually." },
+    { label: "Direct",   text: "High Cloud Campaign ticket volume in Service Portal. Working tickets one by one." },
+    { label: "VIP",      text: "We want to let you know that we're currently experiencing higher than usual ticket volume on Cloud Campaign and are working through each request individually. We sincerely apologize for any delay you may experience in hearing back. Please be assured every ticket is being personally reviewed, and we will follow up with you as soon as we've addressed yours." }
+  ],
+  9: [
+    { label: "Standard", text: "We're aware that website visitor data and heatmaps aren't loading correctly for some Marketing Center accounts. This affects sites not hosted by Thryv. Several earlier batches of accounts have already been resolved, and we're working through the latest batch now." },
+    { label: "Direct",   text: "Website analytics + heatmap not tracking for some MC accounts (non-Thryv-hosted sites). Working through latest batch." },
+    { label: "VIP",      text: "We want to inform you that some Marketing Center accounts \u2014 specifically those with sites not hosted by Thryv \u2014 are experiencing issues with visitor analytics and heatmap data not loading correctly. Several earlier batches of affected accounts have already been fully restored, and our engineering team is actively working through the most recent batch. Please be assured your account is being addressed and we'll personally confirm with you once your analytics are tracking correctly again." }
+  ],
+  10: [
+    { label: "Standard", text: "A small number of clients have reported isolated issues with account access, settings, or the website builder. These are one-off cases \u2014 if you're experiencing any of these, contact support and we'll work through it with you directly." },
+    { label: "Direct",   text: "Mixed one-off reports on account access, settings, website builder. Handled case-by-case." },
+    { label: "VIP",      text: "We've received a small number of isolated reports across account access, settings, and website builder areas. These are being handled individually on a case-by-case basis. If you experience any difficulty in these areas, please reach out to your account team and we'll personally investigate and resolve it for you." }
+  ],
+  11: [
+    { label: "Standard", text: "We're aware that some Growth Package and Enhanced Profile features aren't turning on automatically after purchase for a subset of accounts. Your subscription and data are both fine \u2014 this is a backend installation issue on our end. The earlier batch is fixed, and we're working on the remaining accounts where features are still missing." },
+    { label: "Direct",   text: "GP/EP features not activating after purchase. Backend issue. V3 fixed, V4 in progress." },
+    { label: "VIP",      text: "Thank you for your patience while we resolve a backend installation issue affecting some Growth Package and Enhanced Profile features. We want you to know that your subscription is fully active, all your data is secure, and many accounts have already been fully restored. Our engineering team is prioritizing the remaining accounts and we'll personally follow up the moment yours is resolved. Please don't hesitate to reach out in the meantime." }
+  ],
+  12: [
+    { label: "Standard", text: "We're aware that some clients with an active Thryv Leads subscription aren't seeing the product appear in Marketing Center. Your subscription is fully active and your billing is correct \u2014 the product just isn't displaying where it should. We're working on a fix to get it showing up properly." },
+    { label: "Direct",   text: "Thryv Leads not displaying in MC despite active subscription. Display issue. Fix in progress." },
+    { label: "VIP",      text: "We're addressing a display issue where some clients' active Thryv Leads subscription isn't appearing in Marketing Center as it should. Please be assured your subscription is fully active and your billing is correct \u2014 this is purely a display issue on our end that doesn't affect your service. Our team is working on a permanent fix and we'll personally confirm with you once Thryv Leads is appearing properly in your Marketing Center." }
   ]
 };
-var cfmIndex = { 1:0, 2:0, 3:0, 4:0, 5:0 };
+var cfmIndex = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0 };
 
 function cycleClientMessage(cardId){
   if(!cfmVariants[cardId]) return;
   cfmIndex[cardId] = (cfmIndex[cardId] + 1) % 3; // 0 → 1 → 2 → 0 …
   renderClientMessage(cardId);
+}
+
+// Set a specific tone for a card (called by the tone toggle buttons)
+function setTone(cardId, tone){
+  if(!cfmVariants[cardId]) return;
+  var toneIdx = { 'standard': 0, 'direct': 1, 'vip': 2 }[tone];
+  if(typeof toneIdx !== 'number') return;
+  cfmIndex[cardId] = toneIdx;
+  renderClientMessage(cardId);
+  // Update toggle visual state
+  var group = document.getElementById('tone-group-' + cardId);
+  if(group){
+    var toggles = group.querySelectorAll('.tone-toggle');
+    toggles.forEach(function(t){
+      t.classList.toggle('active', t.getAttribute('data-tone') === tone);
+    });
+  }
 }
 
 function renderClientMessage(cardId){
@@ -3100,6 +3342,69 @@ function downloadCsvExport(){
 
   closeExportModal();
 }
+
+// Jump to a specific carousel card by row ID — fired by the AI Suggested Phrasing pill on each row
+function jumpToCard(rowId){
+  var deck = document.getElementById('incidentDeck');
+  if(!deck) return;
+  var carousel = document.getElementById('incidentCarousel');
+  var targetCard = deck.querySelector('.incident-card[data-card-target="' + rowId + '"]');
+  if(!targetCard) return;
+  var cards = deck.querySelectorAll('.incident-card');
+  var targetIdx = -1;
+  for(var i = 0; i < cards.length; i++){
+    if(cards[i] === targetCard){ targetIdx = i; break; }
+  }
+  if(targetIdx < 0) return;
+  // Hide all, show target
+  cards.forEach(function(c){ c.style.display = 'none'; });
+  targetCard.style.display = 'block';
+  // Update existing carousel state variable
+  if(typeof currentCard !== 'undefined'){
+    currentCard = targetIdx;
+  }
+  // Update indicator
+  var indicator = document.getElementById('cardIndicator');
+  if(indicator) indicator.textContent = (targetIdx + 1) + ' / ' + cards.length;
+  // Scroll to carousel
+  if(carousel){
+    carousel.scrollIntoView({behavior: 'smooth', block: 'start'});
+    // Brief flash to draw attention
+    targetCard.style.transition = 'background-color 0.3s';
+    var tp = targetCard.querySelector('.talking-points');
+    if(tp){
+      var origBg = tp.style.background || '';
+      tp.style.background = '#FFF3EC';
+      setTimeout(function(){ tp.style.background = origBg; }, 1200);
+    }
+  }
+}
+
+
+// Jump to carousel card by card number (for rows without explicit row IDs)
+function jumpToCardByNum(cardNum){
+  var deck = document.getElementById('incidentDeck');
+  if(!deck) return;
+  var carousel = document.getElementById('incidentCarousel');
+  var cards = deck.querySelectorAll('.incident-card');
+  var targetIdx = cardNum - 1;
+  if(targetIdx < 0 || targetIdx >= cards.length) return;
+  cards.forEach(function(c){ c.style.display = 'none'; });
+  cards[targetIdx].style.display = 'block';
+  if(typeof currentCard !== 'undefined'){ currentCard = targetIdx; }
+  var indicator = document.getElementById('cardIndicator');
+  if(indicator) indicator.textContent = (targetIdx + 1) + ' / ' + cards.length;
+  if(carousel){
+    carousel.scrollIntoView({behavior:'smooth', block:'start'});
+    var tp = cards[targetIdx].querySelector('.talking-points');
+    if(tp){
+      var origBg = tp.style.background || '';
+      tp.style.background = '#FFF3EC';
+      setTimeout(function(){ tp.style.background = origBg; }, 1200);
+    }
+  }
+}
+
 </script>
 
 
