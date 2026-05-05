@@ -262,6 +262,20 @@ body {
 .report-stats .rs-pending  .rs-dot { background: #EF9F27; }
 .report-stats .rs-num { font-weight: 700; }
 .report-stats .rs-label { color: var(--thryv-steel); font-weight: 500; }
+.report-stats .rs-note {
+  margin-top: 5px;
+  padding: 3px 6px;
+  background: #E8F0FE;
+  color: #1F4490;
+  border-left: 2px solid #4A78D9;
+  border-radius: 3px;
+  font-size: 9.5px;
+  font-style: italic;
+  font-weight: 600;
+  cursor: help;
+  line-height: 1.3;
+  white-space: nowrap;
+}
 
 /* ── Badges ── */
 .sev-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; white-space: nowrap; }
@@ -304,9 +318,6 @@ body {
 .talking-points[data-pri="p1"] { border-left-color: #E24B4A; background: linear-gradient(180deg, #FDF2F2 0%, #FFFFFF 60px); }
 .talking-points[data-pri="p2"] { border-left-color: #EF9F27; background: linear-gradient(180deg, #FEF8EE 0%, #FFFFFF 60px); }
 .talking-points[data-pri="p3"] { border-left-color: var(--thryv-sapphire); background: linear-gradient(180deg, #F1F4FF 0%, #FFFFFF 60px); }
-.talking-points[data-pri="p1"] .talking-points-icon { color: #E24B4A; }
-.talking-points[data-pri="p2"] .talking-points-icon { color: #EF9F27; }
-.talking-points[data-pri="p3"] .talking-points-icon { color: var(--thryv-sapphire); }
 .talking-points[data-pri="p1"] .ki-pri-chip { background: #FDE8E8; color: #B91F1E; border-color: #F4C5C4; }
 .talking-points[data-pri="p2"] .ki-pri-chip { background: #FCE5C4; color: #8A4A00; border-color: #F4D49E; }
 .talking-points[data-pri="p3"] .ki-pri-chip { background: #E6EBFC; color: #2A3B8E; border-color: #C9D2F2; }
@@ -371,7 +382,8 @@ button.ki-pri-chip::after { content: " ↓"; font-size: 9px; opacity: 0.65; marg
   letter-spacing: 0.2px;
 }
 .talking-points-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-.talking-points-icon { width: 22px; height: 22px; background: var(--thryv-sapphire); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 700; }
+.talking-points-icon { width: 28px; height: 28px; background: var(--icon-bg, var(--thryv-sapphire)); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 700; flex-shrink: 0; padding: 4px; box-sizing: border-box; }
+.talking-points-icon svg { width: 100%; height: 100%; display: block; }
 .talking-points-title { font-size: 14px; font-weight: 600; color: var(--thryv-midnight); }
 .talking-points .tp-section { margin: 10px 0; }
 .talking-points .tp-label { font-size: 12px; font-weight: 600; color: var(--thryv-midnight); margin-bottom: 2px; }
@@ -770,6 +782,38 @@ div[style*="Priority Guide"] {
   transition: box-shadow 0.2s ease;
 }
 
+/* Clickable priority filter pills in the legend */
+.pri-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  padding: 4px 10px 4px 6px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+.pri-filter-btn:hover {
+  background: var(--thryv-mist);
+  border-color: var(--thryv-cloud);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.pri-filter-btn.active {
+  background: #FFF3EC;
+  border-color: var(--thryv-orange);
+  box-shadow: 0 2px 6px rgba(255,80,0,0.18);
+}
+.pri-filter-btn.active::after {
+  content: " ✓";
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--thryv-orange);
+  margin-left: 2px;
+}
+
 /* Compact badge spacing improvements */
 .wa-badge, .tkt-badge, .aud-tag {
   transition: all 0.15s ease;
@@ -1021,7 +1065,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
 
   <!-- Shared Search Bar (works in both views) -->
 <div class="section-header">
-    <div class="section-title">Known Issues <span class="count-badge">21</span><span class="high-priority-badge" id="highPriorityBadge" title="Click to view high-priority active issues"><span id="highPriorityCount">0</span> high-priority active</span></div>
+    <div class="section-title">Known Issues <span class="count-badge">12</span><span class="high-priority-badge" id="highPriorityBadge" title="Click to view high-priority active issues"><span id="highPriorityCount">0</span> high-priority active</span></div>
     <div class="search-box">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="var(--thryv-steel)" stroke-width="1.5"/><path d="M10.5 10.5L14.5 14.5" stroke="var(--thryv-steel)" stroke-width="1.5" stroke-linecap="round"/></svg>
       <input type="text" id="issueSearch" placeholder="Search by ticket #, Thryv ID, or keyword..." />
@@ -1083,13 +1127,13 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p1">
           <div class="brand-wordmark" style="--brand-color: #29355D;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Business Center</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #7B5BCC;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.5 14a3.5 3.5 0 0 1 .5-6.97A5.5 5.5 0 0 1 18 8.5a3 3 0 0 1-.5 5.95" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="17.5" r="1.7" fill="white"/><circle cx="15" cy="17.5" r="1.7" fill="white"/><circle cx="12" cy="13.5" r="1.7" fill="white"/><line x1="10.4" y1="16.5" x2="11.4" y2="14.5" stroke="white" stroke-width="1.2" stroke-linecap="round"/><line x1="13.6" y1="16.5" x2="12.6" y2="14.5" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg></div>
             <div class="talking-points-title">Cloud Campaign user ID mismatch — Social tab errors</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-social-tab')" title="Click to view this issue in the table">#0012 · P1</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-social-tab');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
           <div class="tp-section">
             <div class="tp-label">Impact Summary</div>
-            <div class="tp-text">A Cloud Campaign user ID mismatch is causing some users to see errors when clicking the Social tab in Business Center. A fix is in QA. 14 of 21 reported accounts are already resolved; 7 still pending.</div>
+            <div class="tp-text">A Cloud Campaign user ID mismatch is causing some users to see errors when clicking the Social tab in Business Center. A fix is in QA. 14 of 24 reported accounts are already resolved; 10 still pending.</div>
           </div>
           <div class="tp-section">
             <div class="tp-label" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Client-Facing Message <span class="ai-disclaimer-badge" title="This message was generated by AI based on the issue data above. No human at Thryv authored, edited, or signed off on this draft. It is not an approved client communication. Agents and CSMs must review and adapt before sharing with a client.">AI-generated · Get leadership approval before sharing</span> <span class="tone-toggle-group" role="tablist" id="tone-group-1"><button type="button" class="tone-toggle active" data-tone="standard" data-card="1" onclick="setTone(1,'standard')"><span class="tone-icon">💬</span>Standard</button><button type="button" class="tone-toggle" data-tone="direct" data-card="1" onclick="setTone(1,'direct')"><span class="tone-icon">⚡</span>Direct</button><button type="button" class="tone-toggle" data-tone="vip" data-card="1" onclick="setTone(1,'vip')"><span class="tone-icon">⭐</span>VIP</button></span> <span style="font-size:10px;font-weight:400;color:var(--thryv-steel);font-style:italic;">(suggested — adapt as needed)</span></div>
@@ -1102,7 +1146,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p1">
           <div class="brand-wordmark" style="--brand-color: #6B7280;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Service Portal</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #374151;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="7.5" stroke="white" stroke-width="1.6"/><path d="M12 4.5 v15" stroke="white" stroke-width="1.4" stroke-linecap="round"/><path d="M4.5 12 h15" stroke="white" stroke-width="1.4" stroke-linecap="round"/><ellipse cx="12" cy="12" rx="3.5" ry="7.5" stroke="white" stroke-width="1.4"/><path d="M5 6.5 Q12 9.5 19 17" stroke="#FF5000" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div>
             <div class="talking-points-title">Multi-location impersonation showing wrong child account</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-multi-loc-impersonation')" title="Click to view this issue in the table">#0045 · P1</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-multi-loc-impersonation');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
@@ -1121,7 +1165,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p2">
           <div class="brand-wordmark" style="--brand-color: #0E7C6B;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Online Listings</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #0E7C6B;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg></div>
             <div class="talking-points-title">Listings distribution attributes being deleted</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-distro-attrs-deleted')" title="Click to view this issue in the table">#0047 · P2</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-distro-attrs-deleted');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
@@ -1140,7 +1184,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p2">
           <div class="brand-wordmark" style="--brand-color: #0E7C6B;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Online Listings</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #0E7C6B;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg></div>
             <div class="talking-points-title">Duplicate listing IDs generating across publishers</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-duplicate-gump-ids')" title="Click to view this issue in the table">#0050 · P2</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-duplicate-gump-ids');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
@@ -1159,7 +1203,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p3">
           <div class="brand-wordmark" style="--brand-color: #0E7C6B;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Online Listings</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #0E7C6B;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg></div>
             <div class="talking-points-title">Listing updates delayed across publishers</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-listings-delays')" title="Click to view this issue in the table">#0001 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-listings-delays');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
@@ -1178,7 +1222,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p3">
           <div class="brand-wordmark" style="--brand-color: #3C3489;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Marketing Center</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #3C3489;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 9 h12 m0 0 -3 -2.5 m3 2.5 -3 2.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 6 v12 a2 2 0 0 0 2 2 h1.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="talking-points-title">Growth Package missing from Marketing Center after purchase</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-missing-gp')" title="Click to view this issue in the table">#0010 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-missing-gp');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
@@ -1197,7 +1241,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p3">
           <div class="brand-wordmark" style="--brand-color: #29355D;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Business Center</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #29355D;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 9 h12 m0 0 -3 -2.5 m3 2.5 -3 2.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 6 v12 a2 2 0 0 0 2 2 h1.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="talking-points-title">Login issues during Keap-to-Thryv migration</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-keap-login')" title="Click to view this issue in the table">#0003 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-keap-login');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
@@ -1216,7 +1260,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p3">
           <div class="brand-wordmark" style="--brand-color: #6B7280;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Service Portal</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #7B5BCC;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.5 14a3.5 3.5 0 0 1 .5-6.97A5.5 5.5 0 0 1 18 8.5a3 3 0 0 1-.5 5.95" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="17.5" r="1.7" fill="white"/><circle cx="15" cy="17.5" r="1.7" fill="white"/><circle cx="12" cy="13.5" r="1.7" fill="white"/><line x1="10.4" y1="16.5" x2="11.4" y2="14.5" stroke="white" stroke-width="1.2" stroke-linecap="round"/><line x1="13.6" y1="16.5" x2="12.6" y2="14.5" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg></div>
             <div class="talking-points-title">Cloud Campaign — high ticket volume</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-cc-volume')" title="Click to view this issue in the table">#0002 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-cc-volume');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
@@ -1235,7 +1279,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p3">
           <div class="brand-wordmark" style="--brand-color: #3C3489;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Marketing Center</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #3C3489;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 9 h12 m0 0 -3 -2.5 m3 2.5 -3 2.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 6 v12 a2 2 0 0 0 2 2 h1.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="talking-points-title">Website + Heatmap analytics not tracking visitors</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-website-analytics')" title="Click to view this issue in the table">#0016 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-website-analytics');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
@@ -1254,7 +1298,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p3">
           <div class="brand-wordmark" style="--brand-color: #FF5000;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">My Account</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #FF5000;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 9 h12 m0 0 -3 -2.5 m3 2.5 -3 2.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 6 v12 a2 2 0 0 0 2 2 h1.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="talking-points-title">Account, settings, and website builder — mixed reports</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-mya-mix')" title="Click to view this issue in the table">#0013 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-mya-mix');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
@@ -1273,7 +1317,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p3">
           <div class="brand-wordmark" style="--brand-color: #3C3489;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Marketing Center</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #3C3489;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 9 h12 m0 0 -3 -2.5 m3 2.5 -3 2.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 6 v12 a2 2 0 0 0 2 2 h1.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="talking-points-title">Growth Package features not activating after purchase</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-ep-gp')" title="Click to view this issue in the table">#0008 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-ep-gp');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
@@ -1292,7 +1336,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         <div class="talking-points" data-pri="p3">
           <div class="brand-wordmark" style="--brand-color: #3C3489;"><span class="bw-thryv">thryv</span><span class="bw-arrow">▸</span><span class="bw-product">Marketing Center</span></div>
           <div class="talking-points-header">
-            <div class="talking-points-icon" style="font-size:14px;">&#9888;</div>
+            <div class="talking-points-icon" style="--icon-bg: #3C3489;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 9 h12 m0 0 -3 -2.5 m3 2.5 -3 2.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 6 v12 a2 2 0 0 0 2 2 h1.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="talking-points-title">Thryv Leads add-on missing from Marketing Center</div>
             <button type="button" class="ki-pri-chip" onclick="jumpToRow('row-thryv-leads')" title="Click to view this issue in the table">#0044 · P3</button><a href="javascript:void(0);" class="view-in-table-link" onclick="jumpToRow('row-thryv-leads');return false;" title="Scroll to this issue's row in the table">View in table&nbsp;↓</a>
           </div>
@@ -1317,7 +1361,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
     </div>
     <div style="flex:1;min-width:200px;padding:12px 16px;background:#FFF0E5;border-radius:var(--radius-lg);border:2px solid #FFD9BD;border-left:3px solid var(--thryv-orange);">
       <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--thryv-orange);font-weight:600;margin-bottom:4px;">In progress</div>
-      <div style="font-size:13px;color:var(--thryv-night);line-height:1.55;"><a href="javascript:void(0);" onclick="jumpToRow('row-missing-gp');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">Growth Package issues</a> remain a top focus — 23 still pending out of 55 reported. <a href="javascript:void(0);" onclick="jumpToRow('row-social-tab');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">Social tab errors</a> are now in QA — 14 of 21 already resolved, 7 pending, close to deploy. The latest round of <a href="javascript:void(0);" onclick="jumpToRow('row-website-analytics');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">website analytics</a> work continues for the V9 batch. <a href="javascript:void(0);" onclick="jumpToRow('row-multi-loc-impersonation');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">Multi-location impersonation</a> — all 5 reported accounts handled, fix is in QA Complete and waiting on release.</div>
+      <div style="font-size:13px;color:var(--thryv-night);line-height:1.55;"><a href="javascript:void(0);" onclick="jumpToRow('row-missing-gp');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">Growth Package issues</a> remain a top focus — 23 still pending out of 55 reported. <a href="javascript:void(0);" onclick="jumpToRow('row-social-tab');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">Social tab errors</a> are now in QA — 14 of 24 already resolved, 10 pending, close to deploy. The latest round of <a href="javascript:void(0);" onclick="jumpToRow('row-website-analytics');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">website analytics</a> work continues for the V9 batch. <a href="javascript:void(0);" onclick="jumpToRow('row-multi-loc-impersonation');return false;" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;cursor:pointer;">Multi-location impersonation</a> — all 5 reported accounts handled, fix is in QA Complete and waiting on release.</div>
     </div>
     <div style="flex:1;min-width:200px;padding:12px 16px;background:#FCEDED;border-radius:var(--radius-lg);border:2px solid #F4CCCC;border-left:3px solid var(--sev-critical);">
       <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;color:var(--sev-critical);font-weight:600;margin-bottom:4px;">Watch items</div>
@@ -1353,7 +1397,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--thryv-steel);margin-top:2px;">
         <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Now</span>
       </div>
-      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">1 known issue active · 715 reported YTD</div>
+      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">1 known issue active · 719 reported YTD</div>
     </div>
 
     <div class="status-card" data-pillar-filter="olm" style="border-top:3px solid #0E7C6B;padding-bottom:14px;">
@@ -1364,7 +1408,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <div style="font-size:11px;color:var(--thryv-steel);font-weight:600;margin-bottom:4px;">Tickets tracked under known issues</div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#0E7C6B;">67</span>
+          <span style="font-size:22px;font-weight:700;color:#0E7C6B;">68</span>
           <span style="font-size:12px;color:var(--thryv-steel);"><span class="adv-only">active tickets</span><span class="simp-only">active cases</span></span>
         </div>
         <span style="font-size:11px;font-weight:600;color:var(--sev-low);">↓ -50% from Jan</span>
@@ -1378,7 +1422,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--thryv-steel);margin-top:2px;">
         <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Now</span>
       </div>
-      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">2 known issues active · 1,429 reported YTD</div>
+      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">2 known issues active · 1,434 reported YTD</div>
     </div>
 
     <div class="status-card" data-pillar-filter="mc" style="border-top:3px solid #3C3489;padding-bottom:14px;">
@@ -1389,7 +1433,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <div style="font-size:11px;color:var(--thryv-steel);font-weight:600;margin-bottom:4px;">Tickets tracked under known issues</div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <span style="font-size:22px;font-weight:700;color:#3C3489;">94</span>
+          <span style="font-size:22px;font-weight:700;color:#3C3489;">97</span>
           <span style="font-size:12px;color:var(--thryv-steel);"><span class="adv-only">active tickets</span><span class="simp-only">active cases</span></span>
         </div>
         <span style="font-size:11px;font-weight:600;color:var(--sev-low);">↓ trending down</span>
@@ -1403,7 +1447,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--thryv-steel);margin-top:2px;">
         <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Now</span>
       </div>
-      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">4 known issues active · 1,179 reported YTD</div>
+      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">4 known issues active · 1,183 reported YTD</div>
     </div>
 
     <div class="status-card" data-pillar-filter="myaccount" style="border-top:3px solid #FF5000;padding-bottom:14px;">
@@ -1428,7 +1472,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
       <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--thryv-steel);margin-top:2px;">
         <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Now</span>
       </div>
-      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">0 known issues active · 126 reported YTD</div>
+      <div style="font-size:11px;color:var(--thryv-steel);margin-top:4px;">0 known issues active · 128 reported YTD</div>
     </div>
   </div>
     </div>
@@ -1562,7 +1606,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Other</span><span class="queue-tag">Social</span></td>
         <td><span class="pri-badge pri-p1" title="High Impact — ~24 hours">P1</span></td>
-        <td data-label="Tickets"><div class="report-stats"><div class="rs-line"><span class="rs-num rs-total">21</span><span class="rs-label">reported</span></div><div class="rs-line rs-resolved"><span class="rs-dot"></span><span class="rs-num">14</span><span>resolved</span></div><div class="rs-line rs-pending"><span class="rs-dot"></span><span class="rs-num">7</span><span>pending</span></div></div></td>
+        <td data-label="Tickets"><div class="report-stats"><div class="rs-line"><span class="rs-num rs-total">24</span><span class="rs-label">reported</span></div><div class="rs-line rs-resolved"><span class="rs-dot"></span><span class="rs-num">14</span><span>resolved</span></div><div class="rs-line rs-pending"><span class="rs-dot"></span><span class="rs-num">10</span><span>pending</span></div></div></td>
         
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span></td>
         <td data-label="Date Reported" class="date-text">Apr 6, 2026 · 12:00 AM CT</td>
@@ -1606,7 +1650,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
         </td>
         <td data-label="Product"><span class="product-pill prod-other">Service Portal</span></td>
         <td><span class="pri-badge pri-p1" title="High Impact — ~24 hours">P1</span></td>
-        <td data-label="Tickets"><div class="report-stats"><div class="rs-line"><span class="rs-num rs-total">5</span><span class="rs-label">reported</span></div><div class="rs-line rs-resolved"><span class="rs-dot"></span><span class="rs-num">5</span><span>resolved</span></div><div class="rs-line rs-pending"><span class="rs-dot"></span><span class="rs-num">0</span><span>pending</span></div></div></td>
+        <td data-label="Tickets"><div class="report-stats"><div class="rs-line"><span class="rs-num rs-total">5</span><span class="rs-label">reported</span></div><div class="rs-line rs-resolved"><span class="rs-dot"></span><span class="rs-num">5</span><span>resolved</span></div><div class="rs-line rs-pending"><span class="rs-dot"></span><span class="rs-num">0</span><span>pending</span></div><div class="rs-note" title="All known affected accounts have been handled individually. The fix has passed testing and is awaiting release. Until it deploys, new accounts could surface — that's why this stays on the page.">ℹ️ Awaiting release</div></div></td>
 
                 <td style="white-space:nowrap;"><span class="region-tag" data-region-val="US">US</span> <span class="region-tag" data-region-val="CAN">CAN</span> <span class="region-tag" data-region-val="AU">AU</span> <span class="region-tag" data-region-val="NZ">NZ</span></td>
         <td data-label="Date Reported" class="date-text">Apr 17, 2026 · 12:00 PM CT</td>
@@ -1925,13 +1969,14 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
   <div style="margin:24px 0 10px;padding:12px 20px;background:var(--thryv-white);border:1px solid var(--thryv-cloud);border-radius:var(--radius-lg);">
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
       <span style="font-size:12px;font-weight:700;color:var(--thryv-midnight);text-transform:uppercase;letter-spacing:0.5px;">Priority Guide</span>
-      <span style="font-size:11px;color:var(--thryv-steel);font-style:italic;">Expected SLO times — not guaranteed.</span>
+      <span style="font-size:11px;color:var(--thryv-steel);font-style:italic;">Expected SLO times — not guaranteed. <span style="font-weight:600;color:var(--thryv-orange);">Click a priority to filter the table.</span></span>
     </div>
-    <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
-      <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p0" style="font-size:11px;">P0</span><span style="font-size:12px;color:var(--thryv-night);">Critical</span><span style="font-size:11px;color:var(--thryv-steel);">~4 hours</span></div>
-      <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p1" style="font-size:11px;">P1</span><span style="font-size:12px;color:var(--thryv-night);">High Impact</span><span style="font-size:11px;color:var(--thryv-steel);">~24 hours</span></div>
-      <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p2" style="font-size:11px;">P2</span><span style="font-size:12px;color:var(--thryv-night);">Medium Impact</span><span style="font-size:11px;color:var(--thryv-steel);">~14 days</span></div>
-      <div style="display:flex;align-items:center;gap:6px;"><span class="pri-badge pri-p3" style="font-size:11px;">P3</span><span style="font-size:12px;color:var(--thryv-night);">Low Impact</span><span style="font-size:11px;color:var(--thryv-steel);">~28 days</span></div>
+    <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;align-items:center;">
+      <button type="button" class="pri-filter-btn" data-pri-filter="p0" onclick="setPriorityFilter('p0')" title="Click to show only P0 issues"><span class="pri-badge pri-p0" style="font-size:11px;">P0</span><span style="font-size:12px;color:var(--thryv-night);">Critical</span><span style="font-size:11px;color:var(--thryv-steel);">~4 hours</span></button>
+      <button type="button" class="pri-filter-btn" data-pri-filter="p1" onclick="setPriorityFilter('p1')" title="Click to show only P1 issues"><span class="pri-badge pri-p1" style="font-size:11px;">P1</span><span style="font-size:12px;color:var(--thryv-night);">High Impact</span><span style="font-size:11px;color:var(--thryv-steel);">~24 hours</span></button>
+      <button type="button" class="pri-filter-btn" data-pri-filter="p2" onclick="setPriorityFilter('p2')" title="Click to show only P2 issues"><span class="pri-badge pri-p2" style="font-size:11px;">P2</span><span style="font-size:12px;color:var(--thryv-night);">Medium Impact</span><span style="font-size:11px;color:var(--thryv-steel);">~14 days</span></button>
+      <button type="button" class="pri-filter-btn" data-pri-filter="p3" onclick="setPriorityFilter('p3')" title="Click to show only P3 issues"><span class="pri-badge pri-p3" style="font-size:11px;">P3</span><span style="font-size:12px;color:var(--thryv-night);">Low Impact</span><span style="font-size:11px;color:var(--thryv-steel);">~28 days</span></button>
+      <button type="button" id="clearPriFilter" onclick="setPriorityFilter(null)" style="display:none;font-size:11px;font-weight:600;color:var(--thryv-orange);background:transparent;border:1px solid var(--thryv-orange);padding:4px 10px;border-radius:999px;cursor:pointer;font-family:inherit;">✕ Clear filter</button>
     </div>
   </div>
 
@@ -2001,7 +2046,7 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
 
   <!-- Footer -->
   <div class="page-footer">
-    <span>Updated daily · Last refreshed: May 4, 2026</span>
+    <span>Updated daily · Last refreshed: May 5, 2026 · 9:00 AM CT</span>
     <span>Maintained by Advanced Technical Support Team</span>
   </div>
   <div style="max-width:1280px;margin:0 auto;padding:0 24px 24px;font-size:11px;color:var(--thryv-steel);line-height:1.5;">
@@ -2137,7 +2182,7 @@ var historyJiraRefs = {
   "MCB-271": { title: "MCSTARTER — YP CTN Not Provisioning to Live Listing — Resolved", date: "Apr 30, 2026", anchor: "row-mcb-271" }
 };
 
-var ticketLookup = {"4497401":["SW-130","A"],"65y2v24heswxjfjr":["SW-130","A"],"4497395":["SW-130","A"],"63jc004z4a30zpyw":["SW-130","A"],"4500304":["MCB-326","A"],"4500281":["MCB-248","R"],"4500263":["MCB-326","A"],"4500260":["MCB-248","R"],"4500231":["MCB-248","R"],"4499872":["MCB-248","R"],"4499754":["MCB-306","R"],"LOC146B57683":["MCB-306","R"],"loc146b57683":["MCB-306","R"],"4499395":["MCB-294","A"],"5be78r7ur3mjihrj":["MCB-294","A"],"4499270":["MCB-302","A"],"3gnno1l8l94ptxop":["MCB-302","A"],"4499251":["MCB-294","A"],"p7gzbv2mblm821g6":["MCB-294","A"],"4499040":["MCB-306","R"],"LOCDCA3193":["MCB-306","R"],"locdca3193":["MCB-306","R"],"4499025":["MCB-306","R"],"LOCA1D44F8B":["MCB-306","R"],"loca1d44f8b":["MCB-306","R"],"4499024":["MCB-306","R"],"LOC85BADC1B":["MCB-306","R"],"loc85badc1b":["MCB-306","R"],"4498915":["MCB-306","R"],"LOC3A47F2EB":["MCB-306","R"],"loc3a47f2eb":["MCB-306","R"],"4462278":["MCB-197","R"],"9vvt93wpn9iglmki":["MCB-197","R"],"4459259":["MCB-168","A"],"sicbu6seqkng4k1j":["MCB-168","A"],"4457860":["MC-5362","A"],"LOC6D3C17B3":["MC-5362","A"],"loc6d3c17b3":["MC-5362","A"],"4456310":["MCB-168","A"],"LOCD514DED3":["MCB-168","A"],"locd514ded3":["MCB-168","A"],"4456149":["MCB-168","A"],"LOC1B208013":["MCB-168","A"],"loc1b208013":["MCB-168","A"],"4453778":["MCB-232","R"],"LOC804BAF7B":["MCB-232","R"],"loc804baf7b":["MCB-232","R"],"4442963":["MCB-232","R"],"LOC134C1E547":["MCB-232","R"],"loc134c1e547":["MCB-232","R"],"4415152":["MCB-232","R"],"LOC6285C0A3":["MCB-232","R"],"loc6285c0a3":["MCB-232","R"],"4411842":["MCB-168","A"],"2npth6bkrqt40lvc":["MCB-168","A"],"4484845":["MCB-220","R"],"0arf2h64fov03pof":["MCB-220","R"],"4484787":["MCB-212","A"],"93icdpkhueefgd38":["MCB-212","A"],"4484019":["MCB-168","A"],"LOC12D483B3B":["MCB-168","A"],"loc12d483b3b":["MCB-168","A"],"4483889":["MCB-168","A"],"zutslv8oczjhoo4w":["MCB-168","A"],"4483815":["MCB-212","A"],"7vlj5pguvcxqiyl2":["MCB-212","A"],"4483736":["MCB-212","A"],"76sk4onjn4ctpwlu":["MCB-212","A"],"4483706":["MCB-168","A"],"3bdhnu05yukp1tr6":["MCB-168","A"],"4483694":["MCB-168","A"],"LOCB07931FF":["MCB-168","A"],"locb07931ff":["MCB-168","A"],"4483029":["MCB-212","A"],"pd4om27nh47ilewx":["MCB-212","A"],"4482997":["MCB-168","A"],"LOC7A910A8B":["MCB-168","A"],"loc7a910a8b":["MCB-168","A"],"4482989":["MCB-168","A"],"LOC36BB518B":["MCB-168","A"],"loc36bb518b":["MCB-168","A"],"4482942":["MCB-232","R"],"13prhrtwyilw7x44":["MCB-232","R"],"4482910":["MCB-232","R"],"gcoj1vi6222e5tl2":["MCB-232","R"],"4482849":["MCB-220","R"],"LOC2028E433":["MCB-220","R"],"loc2028e433":["MCB-220","R"],"4482834":["MCB-168","A"],"rdduyyywb5pua8c9":["MCB-168","A"],"4482831":["MCB-212","A"],"bp3j5oc5crynb21q":["MCB-212","A"],"4482628":["MCB-220","R"],"91xrujhlynqep7xf":["MCB-220","R"],"4482189":["MCB-232","R"],"qqu9zmqhxc1c2tpw":["MCB-232","R"],"4481542":["MCB-212","A"],"76ij6lmon8wh5vwk":["MCB-212","A"],"4481414":["MCB-168","A"],"LOC2B4ADA0B":["MCB-168","A"],"loc2b4ada0b":["MCB-168","A"],"4481334":["MCB-212","A"],"jsbfekfh7udt8vf2":["MCB-212","A"],"4481311":["MCB-168","A"],"vwrmxj8e0bwc36qr":["MCB-168","A"],"4481159":["MCB-212","A"],"nezlmqeoxwvfke6x":["MCB-212","A"],"4481086":["MCB-212","A"],"1et8d7jv3xffg4ls":["MCB-212","A"],"4481055":["MCB-212","A"],"cecbf8gf3wugamym":["MCB-212","A"],"4480997":["MCB-212","A"],"at8yzy2t09rzkixo":["MCB-212","A"],"4480809":["MCB-220","R"],"LOC23133F71B":["MCB-220","R"],"loc23133f71b":["MCB-220","R"],"4480648":["MCB-212","A"],"LOC4C091D6B":["MCB-212","A"],"loc4c091d6b":["MCB-212","A"],"4480229":["MCB-168","A"],"ddov2w45cgxfr448":["MCB-168","A"],"4480189":["MCB-168","A"],"wirzfxjfgj6pels4":["MCB-168","A"],"4480108":["MCB-212","A"],"LOCFB12FD8B":["MCB-212","A"],"locfb12fd8b":["MCB-212","A"],"4480041":["MCB-302","A"],"LOC1F8741A4B":["MCB-302","A"],"loc1f8741a4b":["MCB-302","A"],"4480038":["MCB-168","A"],"LOC12DC2E97B":["MCB-168","A"],"loc12dc2e97b":["MCB-168","A"],"4479883":["MCB-220","R"],"b8swrjdejptk4ipr":["MCB-220","R"],"4479752":["MCB-220","R"],"LOC1722C9D4B":["MCB-220","R"],"loc1722c9d4b":["MCB-220","R"],"4479519":["MCB-168","A"],"3w6646ehc98e9m5a":["MCB-168","A"],"4479470":["MCB-212","A"],"wf1ugyliu1yhiur2":["MCB-212","A"],"4479464":["MCB-168","A"],"LOC1EA7C9A2B":["MCB-168","A"],"loc1ea7c9a2b":["MCB-168","A"],"4479456":["MCB-168","A"],"raux1eqj5qm6zbs7":["MCB-168","A"],"4479447":["MCB-168","A"],"f9tjljigsdi9tfr8":["MCB-168","A"],"4479438":["MCB-168","A"],"0yj5obngy0k540w2":["MCB-168","A"],"4479430":["MCB-168","A"],"lwvv04okf1odc3bn":["MCB-168","A"],"4478433":["MCB-212","A"],"LOC11CFD3DCB":["MCB-212","A"],"loc11cfd3dcb":["MCB-212","A"],"4478411":["MCB-212","A"],"eanbj0a3714m15jm":["MCB-212","A"],"4474227":["MCB-212","A"],"LOC67AAB543":["MCB-212","A"],"loc67aab543":["MCB-212","A"],"4474163":["MCB-168","A"],"j94zj6btyr6f67pj":["MCB-168","A"],"4473314":["MCB-168","A"],"LOC7530D9DB":["MCB-168","A"],"loc7530d9db":["MCB-168","A"],"4472902":["MCB-168","A"],"LOC12A3F680B":["MCB-168","A"],"loc12a3f680b":["MCB-168","A"],"4472545":["MCB-220","R"],"6zi5tapzrgcgxfdr":["MCB-220","R"],"4472486":["MCB-168","A"],"LOC23F357DA3":["MCB-168","A"],"loc23f357da3":["MCB-168","A"],"4471598":["MCB-168","A"],"LOC24BC6843B":["MCB-168","A"],"loc24bc6843b":["MCB-168","A"],"4468380":["MCB-212","A"],"LOC206A3B1CB":["MCB-212","A"],"loc206a3b1cb":["MCB-212","A"],"4468256":["MCB-212","A"],"LOC1B6B5A88B":["MCB-212","A"],"loc1b6b5a88b":["MCB-212","A"],"4467192":["MCB-212","A"],"26jtxgunvtxdlkbw":["MCB-212","A"],"4466252":["MCB-168","A"],"no6461l7xfahk84x":["MCB-168","A"],"4466142":["MCB-168","A"],"LOC9240BB3B":["MCB-168","A"],"loc9240bb3b":["MCB-168","A"],"4464582":["MCB-168","A"],"LOC24D3ADB":["MCB-168","A"],"loc24d3adb":["MCB-168","A"],"4498837":["MCB-306","R"],"LOC2538F9AB3":["MCB-306","R"],"loc2538f9ab3":["MCB-306","R"],"4498729":["MCB-306","R"],"LOC3B31CDB7":["MCB-306","R"],"loc3b31cdb7":["MCB-306","R"],"4498663":["MCB-294","A"],"vbwqv913qoteh7u3":["MCB-294","A"],"4498652":["MCB-306","R"],"1efd1wog4a20xid7":["MCB-306","R"],"4498644":["MCB-294","A"],"8wu8kyn8p6rn7ai2":["MCB-294","A"],"4498617":["MCB-306","R"],"LOC17B8EB667":["MCB-306","R"],"loc17b8eb667":["MCB-306","R"],"4498537":["MCB-294","A"],"LOCAD028DEB":["MCB-294","A"],"locad028deb":["MCB-294","A"],"4498434":["MCB-294","A"],"4u85o37brt2idb6t":["MCB-294","A"],"4498365":["MCB-248","R"],"4498349":["MCB-248","R"],"pgz265, aob033":["MCB-248","R"],"4498091":["MCB-294","A"],"LOC813CCE0B":["MCB-294","A"],"loc813cce0b":["MCB-294","A"],"4497916":["MCB-294","A"],"LOC10F1CFECB":["MCB-294","A"],"loc10f1cfecb":["MCB-294","A"],"4497911":["MCB-294","A"],"LOC1D92C4A4B":["MCB-294","A"],"loc1d92c4a4b":["MCB-294","A"],"4497907":["MCB-294","A"],"a5mq8ffxf5u2f3vm":["MCB-294","A"],"4497906":["MCB-302","A"],"23f2gs2tcfknwfwp":["MCB-302","A"],"4497865":["SPIS-80","A"],"4497851":["SW-130","A"],"LOC1D3515387":["SW-130","A"],"loc1d3515387":["SW-130","A"],"4497850":["SPIS-80","A"],"4497849":["SW-130","A"],"LOC8ADCDA87":["SW-130","A"],"loc8adcda87":["SW-130","A"],"4497822":["MCB-306","R"],"LOCB859C87B":["MCB-306","R"],"locb859c87b":["MCB-306","R"],"4497809":["MCB-294","A"],"213unbvehrlz9cg9":["MCB-294","A"],"4497789":["MCB-294","A"],"LOC55BE294B":["MCB-294","A"],"loc55be294b":["MCB-294","A"],"4497781":["MCB-294","A"],"26xx2kdnm6o5jijp":["MCB-294","A"],"4497756":["SPIS-80","A"],"lsk490, wdu277":["SPIS-80","A"],"4497755":["MCB-302","A"],"LOC16EB65CB":["MCB-302","A"],"loc16eb65cb":["MCB-302","A"],"4497563":["MCB-294","A"],"vsoqv6e3vl815ovo":["MCB-294","A"],"4497523":["MCB-294","A"],"LOC972E94B":["MCB-294","A"],"loc972e94b":["MCB-294","A"],"4497484":["MCB-294","A"],"cykemrmzle2jap64":["MCB-294","A"],"4497460":["MCB-294","A"],"9r66qwfbz62lgiod":["MCB-294","A"],"4497453":["MCB-294","A"],"68cg9aeby1n79ml4":["MCB-294","A"],"4497425":["SW-130","A"],"LOC1DC63FD7B":["SW-130","A"],"loc1dc63fd7b":["SW-130","A"],"4497423":["SW-130","A"],"63q8oaf4r8529qij":["SW-130","A"],"4497390":["SW-130","A"],"4de7l3d0wng5k70v":["SW-130","A"],"4497289":["MCB-294","A"],"7aoww97g0mbri3yc":["MCB-294","A"],"4497246":["MCB-294","A"],"91zgg0kxjvd0hk5x":["MCB-294","A"],"4497223":["MCB-294","A"],"vwf9kog1u8z3xa2b":["MCB-294","A"],"4497204":["MCB-294","A"],"6rh5051fh8swqlrf":["MCB-294","A"],"4497158":["MCB-294","A"],"z0qitygfkgt864y1":["MCB-294","A"],"4496975":["MCB-265","R"],"LOC1C0A2375B":["MCB-265","R"],"loc1c0a2375b":["MCB-265","R"],"4496862":["MCB-265","R"],"LOC238A56B33":["MCB-265","R"],"loc238a56b33":["MCB-265","R"],"4496847":["MCB-302","A"],"LOC3232951B":["MCB-302","A"],"loc3232951b":["MCB-302","A"],"4495845":["MCB-294","A"],"aknu18n2ovcmscf9":["MCB-294","A"],"4495495":["MCB-168","A"],"LOCA2A4BEEB":["MCB-168","A"],"loca2a4beeb":["MCB-168","A"],"4494722":["MCB-232","R"],"LOC16233424B":["MCB-232","R"],"loc16233424b":["MCB-232","R"],"4494573":["MCB-265","R"],"p22aty6ek26d63zz":["MCB-265","R"],"4494438":["MCB-232","R"],"LOC151D97BB3":["MCB-232","R"],"loc151d97bb3":["MCB-232","R"],"4494229":["MCB-265","R"],"LOCF1E1D1B":["MCB-265","R"],"locf1e1d1b":["MCB-265","R"],"4494085":["MCB-265","R"],"LOC1B27D2343":["MCB-265","R"],"loc1b27d2343":["MCB-265","R"],"4493947":["MCB-212","A"],"178smy7w18lbw5pf":["MCB-168","A"],"4493640":["MCB-212","A"],"361xj5i73x62oaq1":["MCB-212","A"],"4493437":["MCB-265","R"],"LOC11C92B7DF":["MCB-265","R"],"loc11c92b7df":["MCB-265","R"],"4493414":["MCB-265","R"],"LOC249FD264B":["MCB-265","R"],"loc249fd264b":["MCB-265","R"],"4493387":["MCB-168","A"],"h5lia2ah86uemn4c":["MCB-168","A"],"4493099":["MCB-168","A"],"LOC9267CB3B":["MCB-168","A"],"loc9267cb3b":["MCB-168","A"],"4492949":["MCB-265","R"],"LOC908F07E3":["MCB-265","R"],"loc908f07e3":["MCB-265","R"],"4492773":["MCB-168","A"],"t4md7wv3a1gezg55":["MCB-168","A"],"4492765":["MCB-265","R"],"LOCE76F99D3":["MCB-265","R"],"loce76f99d3":["MCB-265","R"],"4492114":["MCB-212","A"],"ijffegh1xjk8g6cs":["MCB-212","A"],"4491861":["MCB-168","A"],"mv28kw50bfzctm5v":["MCB-168","A"],"4491855":["MCB-212","A"],"LOC428CD4CB":["MCB-212","A"],"loc428cd4cb":["MCB-212","A"],"4491852":["MCB-212","A"],"d1r41ln0630a6iks":["MCB-212","A"],"4491808":["MCB-212","A"],"yxdk5eiqle94afhv":["MCB-212","A"],"4490528":["MCB-168","A"],"r1xirchnbkiw7cmn":["MCB-168","A"],"4489918":["MCB-265","R"],"LOC88C1D6A3":["MCB-265","R"],"loc88c1d6a3":["MCB-265","R"],"4489756":["MCB-265","R"],"LOC1EC79F4B3":["MCB-265","R"],"loc1ec79f4b3":["MCB-265","R"],"4489579":["MCB-168","A"],"3ed6g5xn5m1yb90t":["MCB-168","A"],"4489535":["MCB-212","A"],"qwz4th4f9x41zhpg":["MCB-212","A"],"4489516":["MCB-168","A"],"bg5pmc9ukh85fcy0":["MCB-168","A"],"4488560":["MCB-168","A"],"gnlc2tr874ham5iq":["MCB-168","A"],"4488465":["MCB-212","A"],"p6tn4yp79kjz06qn":["MCB-212","A"],"4488345":["MCB-212","A"],"a7upqa7bjkjv55rm":["MCB-212","A"],"4488259":["MCB-265","R"],"LOC3A068103":["MCB-265","R"],"loc3a068103":["MCB-265","R"],"4488227":["MCB-265","R"],"LOCDDBA81D7":["MCB-265","R"],"locddba81d7":["MCB-265","R"],"4488175":["MCB-212","A"],"m0kzz4mjla4eike1":["MCB-212","A"],"4488163":["MCB-168","A"],"d2g7n768lr8qt7tw":["MCB-168","A"],"4488003":["MCB-212","A"],"d6b8qwssjb78viyj":["MCB-212","A"],"4487943":["MCB-168","A"],"4487854":["MCB-168","A"],"LOC1A57041A3":["MCB-168","A"],"loc1a57041a3":["MCB-168","A"],"4486659":["MCB-220","R"],"gdk3790ln6zyiqfr":["MCB-220","R"],"4486426":["MCB-248","R"],"LOC8D0BFBA3":["MCB-248","R"],"loc8d0bfba3":["MCB-248","R"],"4486235":["MCB-220","R"],"LOC1F08C2193":["MCB-220","R"],"loc1f08c2193":["MCB-220","R"],"4486048":["MCB-220","R"],"mx6p8ahlp41gybg7":["MCB-220","R"],"4486024":["MCB-220","R"],"LOCB189D293":["MCB-220","R"],"locb189d293":["MCB-220","R"],"4485572":["MCB-212","A"],"6tgqlo0uoh95u07n":["MCB-212","A"],"4485511":["MCB-265","R"],"LOCAB61FD4B":["MCB-265","R"],"locab61fd4b":["MCB-265","R"],"4485319":["MCB-220","R"],"LOCAE9EAD6F":["MCB-220","R"],"locae9ead6f":["MCB-220","R"],"4485281":["MCB-212","A"],"dqfttorgik7jcxm6":["MCB-212","A"],"4485150":["MCB-248","R"],"LOC11566EB07":["MCB-248","R"],"loc11566eb07":["MCB-248","R"],"4485031":["MCB-168","A"],"gu9lamunth46ebyh":["MCB-168","A"],"4485024":["MCB-212","A"],"10ytl4f5u21doi09":["MCB-212","A"],"4485017":["MCB-212","A"],"4np690q02y4d6wwr":["MCB-212","A"],"4498480":["MCB-110","A"],"v3h0swml3p8y0i9g":["MCB-110","A"],"4497869":["MCB-305","A"],"multiple":["MCB-305","A"],"4497866":["MCB-305","A"],"4497864":["MCB-305","A"],"4497375":["SPIS-80","A"],"4493654":["MCB-197","R"],"mv6ng14zet4lpym9":["MCB-197","R"],"4490306":["MCB-197","R"],"LOC1F59D921B":["BC-1068","A"],"loc1f59d921b":["BC-1068","A"],"4489637":["MCB-212","A"],"us1jmgsvouqm8oqn":["MCB-212","A"],"4488308":["MCB-197","R"],"dmryfnipzlo2nw9n":["MCB-197","R"],"4488290":["LDM-170","A"],"LOC146C94CA3":["LDM-170","A"],"loc146c94ca3":["LDM-170","A"],"4487955":["MCB-197","R"],"LOC24A62CD57":["MCB-197","R"],"loc24a62cd57":["MCB-197","R"],"4459603":["MCB-110","A"],"LOC21DF6E6B3":["MCB-110","A"],"loc21df6e6b3":["MCB-110","A"],"4459509":["MCB-110","A"],"LOC92308AB3":["MCB-110","A"],"loc92308ab3":["MCB-110","A"],"4457531":["MCB-110","A"],"jmlerdmil617qa41":["MCB-110","A"],"4446506":["MCB-110","A"],"s03n2wa61cpapnkf":["MCB-110","A"],"4484181":["MCB-197","R"],"oo9oyhgtkkozznwf":["MCB-197","R"],"4483418":["MCB-197","R"],"h9ekw4p4rq4h0uqe":["MCB-197","R"],"4479428":["MCB-168","A"],"4477819":["MCB-197","R"],"ti2zyyzlfmtcwvcl":["MCB-197","R"],"4464261":["LDM-170","A"],"LOCF616FD4B":["LDM-170","A"],"locf616fd4b":["LDM-170","A"],"4411605":["MCB-110","A"],"LOCBB2DEAFF":["MCB-110","A"],"locbb2deaff":["MCB-110","A"],"4479247":["SPIS-80","A"],"4499999":["BC-1068","A"],"LOC23353B26B":["BC-1068","A"],"loc23353b26b":["BC-1068","A"],"4499908":["BC-1068","A"],"hfsnjz9k5b9yfp3e":["BC-1068","A"],"4499746":["BC-1068","A"],"LOC1E086C843":["BC-1068","A"],"loc1e086c843":["BC-1068","A"],"4499661":["BC-1068","A"],"munqpdcr6q5mbcb6":["BC-1068","A"],"4498673":["BC-1068","A"],"k1fawlehtkm1pj0l":["BC-1068","A"],"4497917":["BC-1068","A"],"LOC21B0AA7EB":["BC-1068","A"],"loc21b0aa7eb":["BC-1068","A"],"4497826":["BC-1068","A"],"c9qmwojdty26lmyu":["BC-1068","A"],"4497088":["BC-1068","A"],"LOC1C08E49CB":["BC-1068","A"],"loc1c08e49cb":["BC-1068","A"],"4495975":["BC-1068","A"],"LOC1CE7FC2F3":["BC-1068","A"],"loc1ce7fc2f3":["BC-1068","A"],"4495918":["BC-1068","A"],"d5lwq1maehk1pb5g":["BC-1068","A"],"4495895":["BC-1068","A"],"LOC16025D8B":["BC-1068","A"],"loc16025d8b":["BC-1068","A"],"4495597":["BC-1068","A"],"gp4ym9hp9peuf9nj":["BC-1068","A"],"4494953":["BC-1068","A"],"LOC33C35677":["BC-1068","A"],"loc33c35677":["BC-1068","A"],"4494547":["BC-1068","A"],"LOC6B9A2783":["BC-1068","A"],"loc6b9a2783":["BC-1068","A"],"4494466":["BC-1068","A"],"LOC4C0AF613":["BC-1068","A"],"loc4c0af613":["BC-1068","A"],"4493204":["BC-1068","A"],"yb46qy89r70zkmpk":["BC-1068","A"],"4492828":["BC-1068","A"],"LOC11C35D303":["BC-1068","A"],"loc11c35d303":["BC-1068","A"],"4490175":["BC-1068","A"],"4488997":["BC-1068","A"],"LOCAB58394B":["BC-1068","A"],"locab58394b":["BC-1068","A"],"4488870":["BC-1068","A"],"LOC1796D9803":["BC-1068","A"],"loc1796d9803":["BC-1068","A"],"4487730":["BC-1068","A"],"b58dwlbshnivcjxg":["BC-1068","A"],"4485291":["BC-1068","A"],"7pxbtf2sj9bv96s0":["BC-1068","A"],"4484660":["BC-1068","A"],"eof7tyk4jnuzv70a":["BC-1068","A"],"4483513":["BC-1068","A"],"x30lwxyhq2xhofec":["BC-1068","A"],"4481480":["BC-1068","A"],"mvko0kxpnvaxfjbo":["BC-1068","A"],"4464648":["BC-1068","A"],"4482901":["MCB-168","A"],"s9gqvo56diuuh74k":["MCB-168","A"],"4503758":["MCB-335","A"],"LOC3032A66B":["MCB-335","A"],"loc3032a66b":["MCB-335","A"],"4503608":["MCB-335","A"],"c3p1cj3i6ge8mzy9":["MCB-335","A"],"4503573":["MCB-335","A"],"LOCDF11EC4B":["MCB-335","A"],"locdf11ec4b":["MCB-335","A"],"4503568":["MCB-335","A"],"LOC211AF92E7":["MCB-335","A"],"loc211af92e7":["MCB-335","A"],"4503527":["MCB-335","A"],"88nn4kvdljmgn6mh":["MCB-335","A"],"4503489":["MCB-335","A"],"LOC64C44AAB":["MCB-335","A"],"loc64c44aab":["MCB-335","A"],"4503369":["MCB-335","A"],"dkf1vdxgqsm36a2e":["MCB-335","A"],"4502910":["MCB-335","A"],"LOC205412813":["MCB-335","A"],"loc205412813":["MCB-335","A"],"4502690":["MCB-335","A"],"LOC328197AB":["MCB-335","A"],"loc328197ab":["MCB-335","A"],"4502180":["MCB-302","A"],"gme2mc4tgrj7o7s6":["MCB-302","A"],"4502045":["MCB-335","A"],"LOC226B7D27B":["MCB-335","A"],"loc226b7d27b":["MCB-335","A"],"4501981":["MCB-335","A"],"LOC15FB06BE3":["MCB-335","A"],"loc15fb06be3":["MCB-335","A"],"4501960":["MCB-335","A"],"LOC10A2724C3":["MCB-335","A"],"loc10a2724c3":["MCB-335","A"],"4501832":["MCB-335","A"],"3r22sb4hec0g1vvp":["MCB-335","A"],"4501767":["MCB-326","A"],"LOC11377D53B":["MCB-326","A"],"loc11377d53b":["MCB-326","A"],"4501498":["MCB-294","A"],"s48x3vbosmcglkc9":["MCB-294","A"],"4501243":["MCB-302","A"],"u9hptveya5s43sy9":["MCB-302","A"],"4501239":["MCB-294","A"],"i8ghensklxm2zbyr":["MCB-294","A"],"4501227":["MCB-326","A"],"4501185":["MCB-326","A"],"LOCF8ED5A83":["MCB-326","A"],"locf8ed5a83":["MCB-326","A"],"4501051":["MCB-232","R"],"4500978":["MCB-248","R"],"4500965":["MCB-333","A"],"4503908":["MCB-302","A"],"b1986gm6ohfhzxe8":["MCB-302","A"],"4502956":["IGT-367","R"],"LOC1AC8D4D23":["IGT-367","R"],"loc1ac8d4d23":["IGT-367","R"],"4502691":["IGT-367","R"],"LOC10AC08A4B":["IGT-367","R"],"loc10ac08a4b":["IGT-367","R"],"4502487":["IGT-367","R"],"LOC109FB176B":["IGT-367","R"],"loc109fb176b":["IGT-367","R"],"4502447":["IGT-367","R"],"LOCF06A163":["IGT-367","R"],"locf06a163":["IGT-367","R"],"4502443":["IGT-367","R"],"4501689":["BC-1068","A"],"LOC104D56F1B":["BC-1068","A"],"loc104d56f1b":["BC-1068","A"]};
+var ticketLookup = {"4497401":["SW-130","A"],"65y2v24heswxjfjr":["SW-130","A"],"4497395":["SW-130","A"],"63jc004z4a30zpyw":["SW-130","A"],"4500304":["MCB-326","A"],"4500281":["MCB-248","R"],"4500263":["MCB-326","A"],"4500260":["MCB-248","R"],"4500231":["MCB-248","R"],"4499872":["MCB-248","R"],"4499754":["MCB-306","R"],"LOC146B57683":["MCB-306","R"],"loc146b57683":["MCB-306","R"],"4499395":["MCB-294","A"],"5be78r7ur3mjihrj":["MCB-294","A"],"4499270":["MCB-302","A"],"3gnno1l8l94ptxop":["MCB-302","A"],"4499251":["MCB-294","A"],"p7gzbv2mblm821g6":["MCB-294","A"],"4499040":["MCB-306","R"],"LOCDCA3193":["MCB-306","R"],"locdca3193":["MCB-306","R"],"4499025":["MCB-306","R"],"LOCA1D44F8B":["MCB-306","R"],"loca1d44f8b":["MCB-306","R"],"4499024":["MCB-306","R"],"LOC85BADC1B":["MCB-306","R"],"loc85badc1b":["MCB-306","R"],"4498915":["MCB-306","R"],"LOC3A47F2EB":["MCB-306","R"],"loc3a47f2eb":["MCB-306","R"],"4462278":["MCB-197","R"],"9vvt93wpn9iglmki":["MCB-197","R"],"4459259":["MCB-168","A"],"sicbu6seqkng4k1j":["MCB-168","A"],"4457860":["MC-5362","A"],"LOC6D3C17B3":["MC-5362","A"],"loc6d3c17b3":["MC-5362","A"],"4456310":["MCB-168","A"],"LOCD514DED3":["MCB-168","A"],"locd514ded3":["MCB-168","A"],"4456149":["MCB-168","A"],"LOC1B208013":["MCB-168","A"],"loc1b208013":["MCB-168","A"],"4453778":["MCB-232","R"],"LOC804BAF7B":["MCB-232","R"],"loc804baf7b":["MCB-232","R"],"4442963":["MCB-232","R"],"LOC134C1E547":["MCB-232","R"],"loc134c1e547":["MCB-232","R"],"4415152":["MCB-232","R"],"LOC6285C0A3":["MCB-232","R"],"loc6285c0a3":["MCB-232","R"],"4411842":["MCB-168","A"],"2npth6bkrqt40lvc":["MCB-168","A"],"4484845":["MCB-220","R"],"0arf2h64fov03pof":["MCB-220","R"],"4484787":["MCB-212","A"],"93icdpkhueefgd38":["MCB-212","A"],"4484019":["MCB-168","A"],"LOC12D483B3B":["MCB-168","A"],"loc12d483b3b":["MCB-168","A"],"4483889":["MCB-168","A"],"zutslv8oczjhoo4w":["MCB-168","A"],"4483815":["MCB-212","A"],"7vlj5pguvcxqiyl2":["MCB-212","A"],"4483736":["MCB-212","A"],"76sk4onjn4ctpwlu":["MCB-212","A"],"4483706":["MCB-168","A"],"3bdhnu05yukp1tr6":["MCB-168","A"],"4483694":["MCB-168","A"],"LOCB07931FF":["MCB-168","A"],"locb07931ff":["MCB-168","A"],"4483029":["MCB-212","A"],"pd4om27nh47ilewx":["MCB-212","A"],"4482997":["MCB-168","A"],"LOC7A910A8B":["MCB-168","A"],"loc7a910a8b":["MCB-168","A"],"4482989":["MCB-168","A"],"LOC36BB518B":["MCB-168","A"],"loc36bb518b":["MCB-168","A"],"4482942":["MCB-232","R"],"13prhrtwyilw7x44":["MCB-232","R"],"4482910":["MCB-232","R"],"gcoj1vi6222e5tl2":["MCB-232","R"],"4482849":["MCB-220","R"],"LOC2028E433":["MCB-220","R"],"loc2028e433":["MCB-220","R"],"4482834":["MCB-168","A"],"rdduyyywb5pua8c9":["MCB-168","A"],"4482831":["MCB-212","A"],"bp3j5oc5crynb21q":["MCB-212","A"],"4482628":["MCB-220","R"],"91xrujhlynqep7xf":["MCB-220","R"],"4482189":["MCB-232","R"],"qqu9zmqhxc1c2tpw":["MCB-232","R"],"4481542":["MCB-212","A"],"76ij6lmon8wh5vwk":["MCB-212","A"],"4481414":["MCB-168","A"],"LOC2B4ADA0B":["MCB-168","A"],"loc2b4ada0b":["MCB-168","A"],"4481334":["MCB-212","A"],"jsbfekfh7udt8vf2":["MCB-212","A"],"4481311":["MCB-168","A"],"vwrmxj8e0bwc36qr":["MCB-168","A"],"4481159":["MCB-212","A"],"nezlmqeoxwvfke6x":["MCB-212","A"],"4481086":["MCB-212","A"],"1et8d7jv3xffg4ls":["MCB-212","A"],"4481055":["MCB-212","A"],"cecbf8gf3wugamym":["MCB-212","A"],"4480997":["MCB-212","A"],"at8yzy2t09rzkixo":["MCB-212","A"],"4480809":["MCB-220","R"],"LOC23133F71B":["MCB-220","R"],"loc23133f71b":["MCB-220","R"],"4480648":["MCB-212","A"],"LOC4C091D6B":["MCB-212","A"],"loc4c091d6b":["MCB-212","A"],"4480229":["MCB-168","A"],"ddov2w45cgxfr448":["MCB-168","A"],"4480189":["MCB-168","A"],"wirzfxjfgj6pels4":["MCB-168","A"],"4480108":["MCB-212","A"],"LOCFB12FD8B":["MCB-212","A"],"locfb12fd8b":["MCB-212","A"],"4480041":["MCB-302","A"],"LOC1F8741A4B":["MCB-302","A"],"loc1f8741a4b":["MCB-302","A"],"4480038":["MCB-168","A"],"LOC12DC2E97B":["MCB-168","A"],"loc12dc2e97b":["MCB-168","A"],"4479883":["MCB-220","R"],"b8swrjdejptk4ipr":["MCB-220","R"],"4479752":["MCB-220","R"],"LOC1722C9D4B":["MCB-220","R"],"loc1722c9d4b":["MCB-220","R"],"4479519":["MCB-168","A"],"3w6646ehc98e9m5a":["MCB-168","A"],"4479470":["MCB-212","A"],"wf1ugyliu1yhiur2":["MCB-212","A"],"4479464":["MCB-168","A"],"LOC1EA7C9A2B":["MCB-168","A"],"loc1ea7c9a2b":["MCB-168","A"],"4479456":["MCB-168","A"],"raux1eqj5qm6zbs7":["MCB-168","A"],"4479447":["MCB-168","A"],"f9tjljigsdi9tfr8":["MCB-168","A"],"4479438":["MCB-168","A"],"0yj5obngy0k540w2":["MCB-168","A"],"4479430":["MCB-168","A"],"lwvv04okf1odc3bn":["MCB-168","A"],"4478433":["MCB-212","A"],"LOC11CFD3DCB":["MCB-212","A"],"loc11cfd3dcb":["MCB-212","A"],"4478411":["MCB-212","A"],"eanbj0a3714m15jm":["MCB-212","A"],"4474227":["MCB-212","A"],"LOC67AAB543":["MCB-212","A"],"loc67aab543":["MCB-212","A"],"4474163":["MCB-168","A"],"j94zj6btyr6f67pj":["MCB-168","A"],"4473314":["MCB-168","A"],"LOC7530D9DB":["MCB-168","A"],"loc7530d9db":["MCB-168","A"],"4472902":["MCB-168","A"],"LOC12A3F680B":["MCB-168","A"],"loc12a3f680b":["MCB-168","A"],"4472545":["MCB-220","R"],"6zi5tapzrgcgxfdr":["MCB-220","R"],"4472486":["MCB-168","A"],"LOC23F357DA3":["MCB-168","A"],"loc23f357da3":["MCB-168","A"],"4471598":["MCB-168","A"],"LOC24BC6843B":["MCB-168","A"],"loc24bc6843b":["MCB-168","A"],"4468380":["MCB-212","A"],"LOC206A3B1CB":["MCB-212","A"],"loc206a3b1cb":["MCB-212","A"],"4468256":["MCB-212","A"],"LOC1B6B5A88B":["MCB-212","A"],"loc1b6b5a88b":["MCB-212","A"],"4467192":["MCB-212","A"],"26jtxgunvtxdlkbw":["MCB-212","A"],"4466252":["MCB-168","A"],"no6461l7xfahk84x":["MCB-168","A"],"4466142":["MCB-168","A"],"LOC9240BB3B":["MCB-168","A"],"loc9240bb3b":["MCB-168","A"],"4464582":["MCB-168","A"],"LOC24D3ADB":["MCB-168","A"],"loc24d3adb":["MCB-168","A"],"4498837":["MCB-306","R"],"LOC2538F9AB3":["MCB-306","R"],"loc2538f9ab3":["MCB-306","R"],"4498729":["MCB-306","R"],"LOC3B31CDB7":["MCB-306","R"],"loc3b31cdb7":["MCB-306","R"],"4498663":["MCB-294","A"],"vbwqv913qoteh7u3":["MCB-294","A"],"4498652":["MCB-306","R"],"1efd1wog4a20xid7":["MCB-306","R"],"4498644":["MCB-294","A"],"8wu8kyn8p6rn7ai2":["MCB-294","A"],"4498617":["MCB-306","R"],"LOC17B8EB667":["MCB-306","R"],"loc17b8eb667":["MCB-306","R"],"4498537":["MCB-294","A"],"LOCAD028DEB":["MCB-294","A"],"locad028deb":["MCB-294","A"],"4498434":["MCB-294","A"],"4u85o37brt2idb6t":["MCB-294","A"],"4498365":["MCB-248","R"],"4498349":["MCB-248","R"],"pgz265, aob033":["MCB-248","R"],"4498091":["MCB-294","A"],"LOC813CCE0B":["MCB-294","A"],"loc813cce0b":["MCB-294","A"],"4497916":["MCB-294","A"],"LOC10F1CFECB":["MCB-294","A"],"loc10f1cfecb":["MCB-294","A"],"4497911":["MCB-294","A"],"LOC1D92C4A4B":["MCB-294","A"],"loc1d92c4a4b":["MCB-294","A"],"4497907":["MCB-294","A"],"a5mq8ffxf5u2f3vm":["MCB-294","A"],"4497906":["MCB-302","A"],"23f2gs2tcfknwfwp":["MCB-302","A"],"4497865":["SPIS-80","A"],"4497851":["SW-130","A"],"LOC1D3515387":["SW-130","A"],"loc1d3515387":["SW-130","A"],"4497850":["SPIS-80","A"],"4497849":["SW-130","A"],"LOC8ADCDA87":["SW-130","A"],"loc8adcda87":["SW-130","A"],"4497822":["MCB-306","R"],"LOCB859C87B":["MCB-306","R"],"locb859c87b":["MCB-306","R"],"4497809":["MCB-294","A"],"213unbvehrlz9cg9":["MCB-294","A"],"4497789":["MCB-294","A"],"LOC55BE294B":["MCB-294","A"],"loc55be294b":["MCB-294","A"],"4497781":["MCB-294","A"],"26xx2kdnm6o5jijp":["MCB-294","A"],"4497756":["SPIS-80","A"],"lsk490, wdu277":["SPIS-80","A"],"4497755":["MCB-302","A"],"LOC16EB65CB":["MCB-302","A"],"loc16eb65cb":["MCB-302","A"],"4497563":["MCB-294","A"],"vsoqv6e3vl815ovo":["MCB-294","A"],"4497523":["MCB-294","A"],"LOC972E94B":["MCB-294","A"],"loc972e94b":["MCB-294","A"],"4497484":["MCB-294","A"],"cykemrmzle2jap64":["MCB-294","A"],"4497460":["MCB-294","A"],"9r66qwfbz62lgiod":["MCB-294","A"],"4497453":["MCB-294","A"],"68cg9aeby1n79ml4":["MCB-294","A"],"4497425":["SW-130","A"],"LOC1DC63FD7B":["SW-130","A"],"loc1dc63fd7b":["SW-130","A"],"4497423":["SW-130","A"],"63q8oaf4r8529qij":["SW-130","A"],"4497390":["SW-130","A"],"4de7l3d0wng5k70v":["SW-130","A"],"4497289":["MCB-294","A"],"7aoww97g0mbri3yc":["MCB-294","A"],"4497246":["MCB-294","A"],"91zgg0kxjvd0hk5x":["MCB-294","A"],"4497223":["MCB-294","A"],"vwf9kog1u8z3xa2b":["MCB-294","A"],"4497204":["MCB-294","A"],"6rh5051fh8swqlrf":["MCB-294","A"],"4497158":["MCB-294","A"],"z0qitygfkgt864y1":["MCB-294","A"],"4496975":["MCB-265","R"],"LOC1C0A2375B":["MCB-265","R"],"loc1c0a2375b":["MCB-265","R"],"4496862":["MCB-265","R"],"LOC238A56B33":["MCB-265","R"],"loc238a56b33":["MCB-265","R"],"4496847":["MCB-302","A"],"LOC3232951B":["MCB-302","A"],"loc3232951b":["MCB-302","A"],"4495845":["MCB-294","A"],"aknu18n2ovcmscf9":["MCB-294","A"],"4495495":["MCB-168","A"],"LOCA2A4BEEB":["MCB-168","A"],"loca2a4beeb":["MCB-168","A"],"4494722":["MCB-232","R"],"LOC16233424B":["MCB-232","R"],"loc16233424b":["MCB-232","R"],"4494573":["MCB-265","R"],"p22aty6ek26d63zz":["MCB-265","R"],"4494438":["MCB-232","R"],"LOC151D97BB3":["MCB-232","R"],"loc151d97bb3":["MCB-232","R"],"4494229":["MCB-265","R"],"LOCF1E1D1B":["MCB-265","R"],"locf1e1d1b":["MCB-265","R"],"4494085":["MCB-265","R"],"LOC1B27D2343":["MCB-265","R"],"loc1b27d2343":["MCB-265","R"],"4493947":["MCB-212","A"],"178smy7w18lbw5pf":["MCB-168","A"],"4493640":["MCB-212","A"],"361xj5i73x62oaq1":["MCB-212","A"],"4493437":["MCB-265","R"],"LOC11C92B7DF":["MCB-265","R"],"loc11c92b7df":["MCB-265","R"],"4493414":["MCB-265","R"],"LOC249FD264B":["MCB-265","R"],"loc249fd264b":["MCB-265","R"],"4493387":["MCB-168","A"],"h5lia2ah86uemn4c":["MCB-168","A"],"4493099":["MCB-168","A"],"LOC9267CB3B":["MCB-168","A"],"loc9267cb3b":["MCB-168","A"],"4492949":["MCB-265","R"],"LOC908F07E3":["MCB-265","R"],"loc908f07e3":["MCB-265","R"],"4492773":["MCB-168","A"],"t4md7wv3a1gezg55":["MCB-168","A"],"4492765":["MCB-265","R"],"LOCE76F99D3":["MCB-265","R"],"loce76f99d3":["MCB-265","R"],"4492114":["MCB-212","A"],"ijffegh1xjk8g6cs":["MCB-212","A"],"4491861":["MCB-168","A"],"mv28kw50bfzctm5v":["MCB-168","A"],"4491855":["MCB-212","A"],"LOC428CD4CB":["MCB-212","A"],"loc428cd4cb":["MCB-212","A"],"4491852":["MCB-212","A"],"d1r41ln0630a6iks":["MCB-212","A"],"4491808":["MCB-212","A"],"yxdk5eiqle94afhv":["MCB-212","A"],"4490528":["MCB-168","A"],"r1xirchnbkiw7cmn":["MCB-168","A"],"4489918":["MCB-265","R"],"LOC88C1D6A3":["MCB-265","R"],"loc88c1d6a3":["MCB-265","R"],"4489756":["MCB-265","R"],"LOC1EC79F4B3":["MCB-265","R"],"loc1ec79f4b3":["MCB-265","R"],"4489579":["MCB-168","A"],"3ed6g5xn5m1yb90t":["MCB-168","A"],"4489535":["MCB-212","A"],"qwz4th4f9x41zhpg":["MCB-212","A"],"4489516":["MCB-168","A"],"bg5pmc9ukh85fcy0":["MCB-168","A"],"4488560":["MCB-168","A"],"gnlc2tr874ham5iq":["MCB-168","A"],"4488465":["MCB-212","A"],"p6tn4yp79kjz06qn":["MCB-212","A"],"4488345":["MCB-212","A"],"a7upqa7bjkjv55rm":["MCB-212","A"],"4488259":["MCB-265","R"],"LOC3A068103":["MCB-265","R"],"loc3a068103":["MCB-265","R"],"4488227":["MCB-265","R"],"LOCDDBA81D7":["MCB-265","R"],"locddba81d7":["MCB-265","R"],"4488175":["MCB-212","A"],"m0kzz4mjla4eike1":["MCB-212","A"],"4488163":["MCB-168","A"],"d2g7n768lr8qt7tw":["MCB-168","A"],"4488003":["MCB-212","A"],"d6b8qwssjb78viyj":["MCB-212","A"],"4487943":["MCB-168","A"],"4487854":["MCB-168","A"],"LOC1A57041A3":["MCB-168","A"],"loc1a57041a3":["MCB-168","A"],"4486659":["MCB-220","R"],"gdk3790ln6zyiqfr":["MCB-220","R"],"4486426":["MCB-248","R"],"LOC8D0BFBA3":["MCB-248","R"],"loc8d0bfba3":["MCB-248","R"],"4486235":["MCB-220","R"],"LOC1F08C2193":["MCB-220","R"],"loc1f08c2193":["MCB-220","R"],"4486048":["MCB-220","R"],"mx6p8ahlp41gybg7":["MCB-220","R"],"4486024":["MCB-220","R"],"LOCB189D293":["MCB-220","R"],"locb189d293":["MCB-220","R"],"4485572":["MCB-212","A"],"6tgqlo0uoh95u07n":["MCB-212","A"],"4485511":["MCB-265","R"],"LOCAB61FD4B":["MCB-265","R"],"locab61fd4b":["MCB-265","R"],"4485319":["MCB-220","R"],"LOCAE9EAD6F":["MCB-220","R"],"locae9ead6f":["MCB-220","R"],"4485281":["MCB-212","A"],"dqfttorgik7jcxm6":["MCB-212","A"],"4485150":["MCB-248","R"],"LOC11566EB07":["MCB-248","R"],"loc11566eb07":["MCB-248","R"],"4485031":["MCB-168","A"],"gu9lamunth46ebyh":["MCB-168","A"],"4485024":["MCB-212","A"],"10ytl4f5u21doi09":["MCB-212","A"],"4485017":["MCB-212","A"],"4np690q02y4d6wwr":["MCB-212","A"],"4498480":["MCB-110","A"],"v3h0swml3p8y0i9g":["MCB-110","A"],"4497869":["MCB-305","A"],"multiple":["MCB-305","A"],"4497866":["MCB-305","A"],"4497864":["MCB-305","A"],"4497375":["SPIS-80","A"],"4493654":["MCB-197","R"],"mv6ng14zet4lpym9":["MCB-197","R"],"4490306":["MCB-197","R"],"LOC1F59D921B":["BC-1068","A"],"loc1f59d921b":["BC-1068","A"],"4489637":["MCB-212","A"],"us1jmgsvouqm8oqn":["MCB-212","A"],"4488308":["MCB-197","R"],"dmryfnipzlo2nw9n":["MCB-197","R"],"4488290":["LDM-170","A"],"LOC146C94CA3":["LDM-170","A"],"loc146c94ca3":["LDM-170","A"],"4487955":["MCB-197","R"],"LOC24A62CD57":["MCB-197","R"],"loc24a62cd57":["MCB-197","R"],"4459603":["MCB-110","A"],"LOC21DF6E6B3":["MCB-110","A"],"loc21df6e6b3":["MCB-110","A"],"4459509":["MCB-110","A"],"LOC92308AB3":["MCB-110","A"],"loc92308ab3":["MCB-110","A"],"4457531":["MCB-110","A"],"jmlerdmil617qa41":["MCB-110","A"],"4446506":["MCB-110","A"],"s03n2wa61cpapnkf":["MCB-110","A"],"4484181":["MCB-197","R"],"oo9oyhgtkkozznwf":["MCB-197","R"],"4483418":["MCB-197","R"],"h9ekw4p4rq4h0uqe":["MCB-197","R"],"4479428":["MCB-168","A"],"4477819":["MCB-197","R"],"ti2zyyzlfmtcwvcl":["MCB-197","R"],"4464261":["LDM-170","A"],"LOCF616FD4B":["LDM-170","A"],"locf616fd4b":["LDM-170","A"],"4411605":["MCB-110","A"],"LOCBB2DEAFF":["MCB-110","A"],"locbb2deaff":["MCB-110","A"],"4479247":["SPIS-80","A"],"4499999":["BC-1068","A"],"LOC23353B26B":["BC-1068","A"],"loc23353b26b":["BC-1068","A"],"4499908":["BC-1068","A"],"hfsnjz9k5b9yfp3e":["BC-1068","A"],"4499746":["BC-1068","A"],"LOC1E086C843":["BC-1068","A"],"loc1e086c843":["BC-1068","A"],"4499661":["BC-1068","A"],"munqpdcr6q5mbcb6":["BC-1068","A"],"4498673":["BC-1068","A"],"k1fawlehtkm1pj0l":["BC-1068","A"],"4497917":["BC-1068","A"],"LOC21B0AA7EB":["BC-1068","A"],"loc21b0aa7eb":["BC-1068","A"],"4497826":["BC-1068","A"],"c9qmwojdty26lmyu":["BC-1068","A"],"4497088":["BC-1068","A"],"LOC1C08E49CB":["BC-1068","A"],"loc1c08e49cb":["BC-1068","A"],"4495975":["BC-1068","A"],"LOC1CE7FC2F3":["BC-1068","A"],"loc1ce7fc2f3":["BC-1068","A"],"4495918":["BC-1068","A"],"d5lwq1maehk1pb5g":["BC-1068","A"],"4495895":["BC-1068","A"],"LOC16025D8B":["BC-1068","A"],"loc16025d8b":["BC-1068","A"],"4495597":["BC-1068","A"],"gp4ym9hp9peuf9nj":["BC-1068","A"],"4494953":["BC-1068","A"],"LOC33C35677":["BC-1068","A"],"loc33c35677":["BC-1068","A"],"4494547":["BC-1068","A"],"LOC6B9A2783":["BC-1068","A"],"loc6b9a2783":["BC-1068","A"],"4494466":["BC-1068","A"],"LOC4C0AF613":["BC-1068","A"],"loc4c0af613":["BC-1068","A"],"4493204":["BC-1068","A"],"yb46qy89r70zkmpk":["BC-1068","A"],"4492828":["BC-1068","A"],"LOC11C35D303":["BC-1068","A"],"loc11c35d303":["BC-1068","A"],"4490175":["BC-1068","A"],"4488997":["BC-1068","A"],"LOCAB58394B":["BC-1068","A"],"locab58394b":["BC-1068","A"],"4488870":["BC-1068","A"],"LOC1796D9803":["BC-1068","A"],"loc1796d9803":["BC-1068","A"],"4487730":["BC-1068","A"],"b58dwlbshnivcjxg":["BC-1068","A"],"4485291":["BC-1068","A"],"7pxbtf2sj9bv96s0":["BC-1068","A"],"4484660":["BC-1068","A"],"eof7tyk4jnuzv70a":["BC-1068","A"],"4483513":["BC-1068","A"],"x30lwxyhq2xhofec":["BC-1068","A"],"4481480":["BC-1068","A"],"mvko0kxpnvaxfjbo":["BC-1068","A"],"4464648":["BC-1068","A"],"4482901":["MCB-168","A"],"s9gqvo56diuuh74k":["MCB-168","A"],"4503758":["MCB-335","A"],"LOC3032A66B":["MCB-335","A"],"loc3032a66b":["MCB-335","A"],"4503608":["MCB-335","A"],"c3p1cj3i6ge8mzy9":["MCB-335","A"],"4503573":["MCB-335","A"],"LOCDF11EC4B":["MCB-335","A"],"locdf11ec4b":["MCB-335","A"],"4503568":["MCB-335","A"],"LOC211AF92E7":["MCB-335","A"],"loc211af92e7":["MCB-335","A"],"4503527":["MCB-335","A"],"88nn4kvdljmgn6mh":["MCB-335","A"],"4503489":["MCB-335","A"],"LOC64C44AAB":["MCB-335","A"],"loc64c44aab":["MCB-335","A"],"4503369":["MCB-335","A"],"dkf1vdxgqsm36a2e":["MCB-335","A"],"4502910":["MCB-335","A"],"LOC205412813":["MCB-335","A"],"loc205412813":["MCB-335","A"],"4502690":["MCB-335","A"],"LOC328197AB":["MCB-335","A"],"loc328197ab":["MCB-335","A"],"4502180":["MCB-302","A"],"gme2mc4tgrj7o7s6":["MCB-302","A"],"4502045":["MCB-335","A"],"LOC226B7D27B":["MCB-335","A"],"loc226b7d27b":["MCB-335","A"],"4501981":["MCB-335","A"],"LOC15FB06BE3":["MCB-335","A"],"loc15fb06be3":["MCB-335","A"],"4501960":["MCB-335","A"],"LOC10A2724C3":["MCB-335","A"],"loc10a2724c3":["MCB-335","A"],"4501832":["MCB-335","A"],"3r22sb4hec0g1vvp":["MCB-335","A"],"4501767":["MCB-326","A"],"LOC11377D53B":["MCB-326","A"],"loc11377d53b":["MCB-326","A"],"4501498":["MCB-294","A"],"s48x3vbosmcglkc9":["MCB-294","A"],"4501243":["MCB-302","A"],"u9hptveya5s43sy9":["MCB-302","A"],"4501239":["MCB-294","A"],"i8ghensklxm2zbyr":["MCB-294","A"],"4501227":["MCB-326","A"],"4501185":["MCB-326","A"],"LOCF8ED5A83":["MCB-326","A"],"locf8ed5a83":["MCB-326","A"],"4501051":["MCB-232","R"],"4500978":["MCB-248","R"],"4500965":["MCB-333","A"],"4503908":["MCB-302","A"],"b1986gm6ohfhzxe8":["MCB-302","A"],"4502956":["IGT-367","R"],"LOC1AC8D4D23":["IGT-367","R"],"loc1ac8d4d23":["IGT-367","R"],"4502691":["IGT-367","R"],"LOC10AC08A4B":["IGT-367","R"],"loc10ac08a4b":["IGT-367","R"],"4502487":["IGT-367","R"],"LOC109FB176B":["IGT-367","R"],"loc109fb176b":["IGT-367","R"],"4502447":["IGT-367","R"],"LOCF06A163":["IGT-367","R"],"locf06a163":["IGT-367","R"],"4502443":["IGT-367","R"],"4501689":["BC-1068","A"],"LOC104D56F1B":["BC-1068","A"],"loc104d56f1b":["BC-1068","A"],"4507229":["BC-1068","A"],"LOCBD4E8173":["BC-1068","A"],"4507228":["BC-1068","A"],"LOC22A258DB3":["BC-1068","A"],"4506979":["BC-1068","A"],"LOC9A9E0B03":["BC-1068","A"]};
 var activeKiMap = {"MCB-302":{"rowId":"row-ep-gp","kiId":"0008","title":"Growth Package features not activating after purchase"},"MCB-294":{"rowId":"row-missing-gp","kiId":"0010","title":"Growth Package missing from Marketing Center after purchase"},"MCB-212":{"rowId":"row-missing-gp","kiId":"0010","title":"Growth Package missing from Marketing Center after purchase"},"MCB-335":{"rowId":"row-website-analytics","kiId":"0016","title":"Website + Heatmap analytics not tracking visitors"},"BC-1068":{"rowId":"row-social-tab","kiId":"0012","title":"Cloud Campaign user ID mismatch \u2014 Social tab errors in Business Center"},"MCB-326":{"rowId":"row-thryv-leads","kiId":"0044","title":"Thryv Leads add-on missing from Marketing Center"},"SPIS-80":{"rowId":"row-multi-loc-impersonation","kiId":"0045","title":"Multi-location impersonation showing wrong child account"},"LDM-170":{"rowId":"row-distro-attrs-deleted","kiId":"0047","title":"Listings distribution attributes being deleted"},"MCB-110":{"rowId":"row-duplicate-gump-ids","kiId":"0050","title":"Duplicate listing IDs generating across publishers"}};
 // Publisher slide-down panel
 var pubLoaded = false;
@@ -2385,6 +2430,25 @@ document.querySelectorAll('#issueFilters .filter-btn').forEach(function(btn){
   });
 });
 
+// Priority filter — set by clicking pills in the Priority Guide legend
+function setPriorityFilter(pri){
+  // pri is 'p0'/'p1'/'p2'/'p3' or null to clear
+  // Toggle: clicking the same priority again clears the filter
+  if(currentPriorityFilter === pri){
+    pri = null;
+  }
+  currentPriorityFilter = pri;
+  // Update visual state on legend pills
+  document.querySelectorAll('.pri-filter-btn').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-pri-filter') === pri);
+  });
+  // Show/hide the clear button
+  var clearBtn = document.getElementById('clearPriFilter');
+  if(clearBtn) clearBtn.style.display = pri ? 'inline-flex' : 'none';
+  // Re-run table filters
+  applyFilters();
+}
+
 // Click a Status Overview tile to filter the table by that pillar
 document.querySelectorAll('.status-card[data-pillar-filter]').forEach(function(card){
   card.addEventListener('click', function(){
@@ -2403,6 +2467,8 @@ document.querySelectorAll('.status-card[data-pillar-filter]').forEach(function(c
 var searchInput = document.getElementById('issueSearch');
 var searchTimeout;
 var lookupMatches = [];
+// Priority filter set by clicking pills in the Priority Guide legend (null = no filter)
+var currentPriorityFilter = null;
 searchInput.addEventListener('input', function(){
   clearTimeout(searchTimeout);
   searchTimeout = setTimeout(function(){
@@ -2726,8 +2792,14 @@ function applyFilters(){
         }
       }
 
-      // Show only if ALL three conditions pass
-      if(matchesProduct && matchesSearch && matchesRegion){
+      // Condition D: priority filter (set by clicking pills in the Priority Guide legend)
+      var matchesPriority = true;
+      if(currentPriorityFilter){
+        matchesPriority = (row.getAttribute('data-priority') === currentPriorityFilter);
+      }
+
+      // Show only if ALL conditions pass
+      if(matchesProduct && matchesSearch && matchesRegion && matchesPriority){
         row.style.display = '';
         visible++;
       } else {
@@ -3403,6 +3475,12 @@ function jumpToCardByNum(cardNum){
       setTimeout(function(){ tp.style.background = origBg; }, 1200);
     }
   }
+}
+
+// Run filters once on page load so the count badge reflects only visible rows
+// (without this, the hardcoded badge could drift if rows are added/hidden between refreshes)
+if(typeof applyFilters === 'function'){
+  try { applyFilters(); } catch(e){ /* ignore — DOM may not be fully ready in edge cases */ }
 }
 
 </script>
