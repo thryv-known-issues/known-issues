@@ -4187,10 +4187,18 @@ function jumpToCardByNum(cardNum){
   }
 }
 
-// Run filters once on page load so the count badge reflects only visible rows
-// (without this, the hardcoded badge could drift if rows are added/hidden between refreshes)
-if(typeof applyFilters === 'function'){
-  try { applyFilters(); } catch(e){ /* ignore — DOM may not be fully ready in edge cases */ }
+// Run filters once on page load so the count badge reflects only visible rows.
+// Deferred via setTimeout so it runs AFTER all init scripts finish (component filter,
+// region filter, etc.) — without this, count badge can show 0 because state vars
+// referenced inside applyFilters() may not yet be populated.
+function _initialApplyFilters(){
+  if(typeof applyFilters !== 'function') return;
+  try { applyFilters(); } catch(e){ console.warn('Initial applyFilters failed:', e); }
+}
+if(document.readyState === 'complete' || document.readyState === 'interactive'){
+  setTimeout(_initialApplyFilters, 0);
+} else {
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(_initialApplyFilters, 0); });
 }
 
 
