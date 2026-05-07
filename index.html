@@ -1139,6 +1139,246 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
 }
 
 /* (removed) the wa-badge hide rule on P2 rows — What to do should be visible on all rows */
+/* ==========================================================================
+   POLISH PASS — May 6, 2026
+   Visual refinements only. No functional changes.
+   ========================================================================== */
+
+/* ---- #1 Vertical Rhythm — standardize spacing -------------------------- */
+.section-header { margin: 32px 0 16px; }
+.alert-banner { margin: 20px 0 24px; }
+
+/* ---- #3 Soften Table Headers ------------------------------------------- */
+.issue-table thead th {
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  font-weight: 700;
+  color: var(--thryv-night);
+  text-transform: uppercase;
+  position: relative;
+  transition: color 0.15s ease;
+}
+.issue-table thead th[onclick]:hover { color: var(--thryv-orange); }
+.issue-table thead th .sort-arrow.active {
+  color: var(--thryv-orange);
+  font-weight: 700;
+}
+/* Faint orange underline on the active sort column */
+.issue-table thead th.sort-active::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--thryv-orange) 30%, var(--thryv-orange) 70%, transparent 100%);
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+/* ---- #4 Empty State Polish --------------------------------------------- */
+.table-empty-state {
+  display: none;
+  padding: 48px 24px;
+  text-align: center;
+  background: var(--thryv-white);
+  border: 1px solid var(--thryv-cloud);
+  border-radius: var(--radius-md);
+  margin-top: 12px;
+}
+.table-empty-state.visible { display: block; }
+.table-empty-state .es-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+.table-empty-state .es-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--thryv-midnight);
+  margin-bottom: 6px;
+}
+.table-empty-state .es-subtitle {
+  font-size: 13px;
+  color: var(--thryv-night);
+  line-height: 1.55;
+  max-width: 480px;
+  margin: 0 auto 18px;
+}
+.table-empty-state .es-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.table-empty-state .es-action {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border: 1px solid var(--thryv-cloud);
+  border-radius: 999px;
+  background: var(--thryv-white);
+  color: var(--thryv-midnight);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.table-empty-state .es-action:hover {
+  border-color: var(--thryv-orange);
+  color: var(--thryv-orange);
+}
+.table-empty-state .es-action.primary {
+  background: var(--thryv-orange);
+  color: white;
+  border-color: var(--thryv-orange);
+}
+.table-empty-state .es-action.primary:hover {
+  background: #E64500;
+  border-color: #E64500;
+  color: white;
+}
+
+/* ---- #6 Row Micro-Animations ------------------------------------------- */
+.issue-table tbody tr {
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease, border-left-width 0.18s ease;
+}
+.issue-table tbody tr:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(41, 53, 93, 0.06);
+  z-index: 1;
+  position: relative;
+}
+.issue-table tbody tr[data-priority="p0"]:hover { box-shadow: 0 4px 14px rgba(226, 75, 74, 0.18); }
+.issue-table tbody tr[data-priority="p1"]:hover { box-shadow: 0 4px 14px rgba(226, 75, 74, 0.14); }
+.issue-table tbody tr[data-priority="p2"]:hover { box-shadow: 0 4px 14px rgba(239, 159, 39, 0.14); }
+.issue-table tbody tr[data-priority="p3"]:hover { box-shadow: 0 4px 14px rgba(83, 120, 252, 0.14); }
+
+/* Pulse for recently resolved rows */
+@keyframes resolved-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(29, 158, 117, 0); }
+  50% { box-shadow: 0 0 0 4px rgba(29, 158, 117, 0.15); }
+}
+.resolved-row.just-changed {
+  animation: resolved-pulse 2.5s ease-in-out 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .issue-table tbody tr { transition: background-color 0.15s ease; }
+  .issue-table tbody tr:hover { transform: none; box-shadow: 0 0 0 1px var(--thryv-cloud); }
+  .resolved-row.just-changed { animation: none; }
+}
+
+/* ---- #7 Typography Hierarchy (NO muting on description) ---------------- */
+.issue-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--thryv-black);
+  line-height: 1.4;
+  letter-spacing: -0.1px;
+  margin-bottom: 4px;
+}
+.issue-desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--thryv-night); /* unchanged — this is the value prop content */
+  line-height: 1.55;
+}
+.issue-desc .kw {
+  font-weight: 600;
+  color: var(--thryv-midnight); /* slightly stronger so keywords pop */
+}
+
+/* ---- #8 Carousel Card Polish ------------------------------------------- */
+.lyrics-panel {
+  box-shadow: inset 0 2px 6px rgba(41, 53, 93, 0.05);
+  border-radius: var(--radius-md);
+  background: var(--thryv-mist);
+}
+.incident-card .ki-pri-chip,
+.incident-card .ki-id-chip,
+.incident-card .ki-queue-chip {
+  border-radius: 999px;
+}
+.incident-card .talking-points-divider,
+.incident-card hr {
+  border: none;
+  border-top: 1px solid rgba(41, 53, 93, 0.08);
+  margin: 14px 0;
+}
+
+/* ---- #12 Keyboard Navigation Focus Rings ------------------------------- */
+*:focus-visible {
+  outline: 2px solid var(--thryv-orange);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+button:focus-visible,
+.filter-btn:focus-visible,
+.jump-pill:focus-visible {
+  outline: 2px solid var(--thryv-orange);
+  outline-offset: 2px;
+}
+.feedback-btn-topbar:focus-visible {
+  outline: 2px solid var(--thryv-white);
+  outline-offset: 2px;
+}
+
+/* ---- #2 Filter Pill Row Split (client-facing vs internal) -------------- */
+.filter-group-label {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: var(--thryv-steel);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin: 0 4px 4px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.filter-group-label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--thryv-cloud);
+}
+.filter-group-client::before { background: #1D9E75; }
+.filter-group-internal::before { background: var(--thryv-sapphire); }
+
+.filter-row-grouped {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  align-items: flex-start;
+  padding: 10px 0;
+}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.filter-group-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.filter-group-divider {
+  width: 1px;
+  align-self: stretch;
+  background: linear-gradient(180deg, transparent 0%, var(--thryv-cloud) 30%, var(--thryv-cloud) 70%, transparent 100%);
+  margin: 4px 0;
+}
+@media (max-width: 760px) {
+  .filter-group-divider { display: none; }
+  .filter-row-grouped { gap: 14px; }
+}
+
+.filter-btn.active {
+  box-shadow: 0 2px 8px rgba(41, 53, 93, 0.15);
+}
+
 </style>
 </head>
 <body class="simplified">
@@ -1320,17 +1560,34 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
     </div>
   </div>
 
-  <div class="filters" id="issueFilters">
+  <div class="filters filter-row-grouped" id="issueFilters">
     <button class="filter-btn active" data-filter="all">All Products</button>
-    <button class="filter-btn" data-filter="bc">Business Center</button>
-    <button class="filter-btn" data-filter="mc">Marketing Center</button>
-    <button class="filter-btn" data-filter="olm">Online Listings</button>
-    <button class="filter-btn" data-filter="myaccount">My Account</button>
-    <button class="filter-btn" data-filter="thryvpay">ThryvPay</button>
-    <button class="filter-btn" data-filter="keap" title="Keap content coming soon to this page. For now, see knownissues.keap.com."><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px;vertical-align:-1px;flex-shrink:0;"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Keap<span style="margin-left:6px;font-size:10px;font-weight:600;letter-spacing:0.4px;text-transform:uppercase;opacity:0.7;">Paused</span></button>
-    <button class="filter-btn" data-filter="ooe">OOE</button>
-    <button class="filter-btn" data-filter="serviceportal">Service Portal</button>
-    <button class="filter-btn" data-filter="other">Other</button>
+
+    <div class="filter-group-divider"></div>
+
+    <div class="filter-group">
+      <span class="filter-group-label filter-group-client" title="Issues clients are likely to notice and report">Client-Facing</span>
+      <div class="filter-group-pills">
+        <button class="filter-btn" data-filter="bc">Business Center</button>
+        <button class="filter-btn" data-filter="mc">Marketing Center</button>
+        <button class="filter-btn" data-filter="olm">Online Listings</button>
+        <button class="filter-btn" data-filter="myaccount">My Account</button>
+        <button class="filter-btn" data-filter="thryvpay">ThryvPay</button>
+        <button class="filter-btn" data-filter="keap" title="Keap content coming soon to this page. For now, see knownissues.keap.com."><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px;vertical-align:-1px;flex-shrink:0;"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Keap<span style="margin-left:6px;font-size:10px;font-weight:600;letter-spacing:0.4px;text-transform:uppercase;opacity:0.7;">Paused</span></button>
+      </div>
+    </div>
+
+    <div class="filter-group-divider"></div>
+
+    <div class="filter-group">
+      <span class="filter-group-label filter-group-internal" title="Issues affecting internal workflows or backend systems">Internal</span>
+      <div class="filter-group-pills">
+        <button class="filter-btn" data-filter="ooe">OOE</button>
+        <button class="filter-btn" data-filter="serviceportal">Service Portal</button>
+        <button class="filter-btn" data-filter="other">Other</button>
+      </div>
+    </div>
+
     <span style="flex:1"></span>
     <button class="publisher-btn" onclick="togglePublisherPanel()">
       <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="1" y="3" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M1 7h16" stroke="currentColor" stroke-width="1.4"/><path d="M6 7v8" stroke="currentColor" stroke-width="1.4"/></svg>
@@ -2235,6 +2492,17 @@ tr[data-priority="p1"] .pri-badge.pri-p1 {
     </tbody>
   </table>
 
+  <!-- Empty state — shown when filters return no results -->
+  <div id="tableEmptyState" class="table-empty-state">
+    <div class="es-icon">🔍</div>
+    <div class="es-title">No issues match these filters</div>
+    <div class="es-subtitle">If this looks incorrect, please <a href="https://docs.google.com/spreadsheets/d/1DVn5mFfQ664efaTZrJ9jmDXsR9p9wlGD3yDYs0KWvaM/edit?gid=0#gid=0" target="_blank" rel="noopener" style="color:var(--thryv-orange);font-weight:600;text-decoration:underline;">share feedback</a> so we can take a look. Otherwise, try clearing or broadening your filters.</div>
+    <div class="es-actions">
+      <button type="button" class="es-action primary" onclick="clearAllFilters()">Clear all filters</button>
+      <a href="https://docs.google.com/spreadsheets/d/1DVn5mFfQ664efaTZrJ9jmDXsR9p9wlGD3yDYs0KWvaM/edit?gid=0#gid=0" target="_blank" rel="noopener" class="es-action">Share feedback</a>
+    </div>
+  </div>
+
   <!-- Priority Reference (compact) -->
   <div style="margin:24px 0 10px;padding:12px 20px;background:var(--thryv-white);border:1px solid var(--thryv-cloud);border-radius:var(--radius-lg);">
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
@@ -3133,6 +3401,19 @@ function applyFilters(){
 
     var badge = document.querySelector('.count-badge');
     if(badge) badge.textContent = visible;
+
+    // Empty state — show when filters return zero visible rows AND keap filter is not active
+    var emptyState = document.getElementById('tableEmptyState');
+    var activeTbl = document.querySelector('.active-issues');
+    if(emptyState && filter !== 'keap'){
+      if(visible === 0 && activeTbl && activeTbl.style.display !== 'none'){
+        emptyState.classList.add('visible');
+      } else {
+        emptyState.classList.remove('visible');
+      }
+    } else if(emptyState){
+      emptyState.classList.remove('visible');
+    }
   });
 
   // Keap pause: when Keap filter is selected, show "coming soon" banner + hide table.
@@ -3149,6 +3430,32 @@ function applyFilters(){
     }
   }
 }
+// Clear all filters (called from empty-state action button)
+function clearAllFilters(){
+  // 1) Pillar filter → All Products
+  var allBtn = document.querySelector('#issueFilters .filter-btn[data-filter="all"]');
+  if(allBtn){
+    document.querySelectorAll('#issueFilters .filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    allBtn.classList.add('active');
+  }
+  // 2) Search box
+  var search = document.getElementById('issueSearch');
+  if(search){ search.value = ''; }
+  // 3) Region multi-select
+  document.querySelectorAll('[data-region-filter]').forEach(function(cb){ cb.checked = false; });
+  if(typeof selectedRegions !== 'undefined'){ selectedRegions.clear(); }
+  if(typeof updateRegionCount === 'function') updateRegionCount();
+  // 4) Component multi-select
+  document.querySelectorAll('[data-comp-filter]').forEach(function(cb){ cb.checked = false; });
+  if(typeof selectedComponents !== 'undefined'){ selectedComponents.clear(); }
+  if(typeof updateComponentCount === 'function') updateComponentCount();
+  // 5) Priority filter
+  if(typeof currentPriorityFilter !== 'undefined'){ currentPriorityFilter = ''; }
+  document.querySelectorAll('.pri-pill-filter').forEach(function(p){ p.classList.remove('active'); });
+  // 6) Re-apply
+  applyFilters();
+}
+
 // View toggle - default to simplified
 // Toggle Recently Resolved section
 function toggleResolved(){
@@ -3902,6 +4209,87 @@ document.addEventListener('click', function(e){
 if(document.getElementById('componentDropdownList')){
   initComponentDropdown();
 }
+
+// Handle incoming #component=... from Component Tracking page
+function applyComponentFromHash(){
+  var hash = window.location.hash || '';
+  var m = hash.match(/^#component=(.+)$/);
+  if(!m) return;
+  var compName = decodeURIComponent(m[1]);
+  // Wait until the dropdown list is populated
+  var attempts = 0;
+  function tryApply(){
+    var checkboxes = document.querySelectorAll('[data-comp-filter]');
+    if(checkboxes.length === 0 && attempts < 20){
+      attempts++;
+      setTimeout(tryApply, 50);
+      return;
+    }
+    var found = false;
+    checkboxes.forEach(function(cb){
+      if(cb.getAttribute('data-comp-filter') === compName){
+        cb.checked = true;
+        selectedComponents.add(compName);
+        found = true;
+      }
+    });
+    if(found){
+      updateComponentCount();
+      applyFilters();
+      // Scroll table into view
+      var tbl = document.querySelector('.issue-table');
+      if(tbl) tbl.scrollIntoView({behavior:'smooth', block:'start'});
+      // Show a small toast/banner so user knows the filter was applied
+      showComponentFilterToast(compName);
+    } else {
+      // Component wasn't in our dropdown list — show a notice
+      showComponentFilterToast(compName, true);
+    }
+  }
+  tryApply();
+}
+
+function showComponentFilterToast(compName, notFound){
+  var existing = document.getElementById('componentToast');
+  if(existing) existing.remove();
+  var toast = document.createElement('div');
+  toast.id = 'componentToast';
+  toast.style.cssText = 'position:fixed;top:80px;right:24px;background:'+(notFound?'#FDE8E8':'#FFF3EC')+';border:1px solid '+(notFound?'#F4C5C4':'#FFC79A')+';border-left:4px solid '+(notFound?'#B91F1E':'var(--thryv-orange)')+';padding:12px 16px;border-radius:var(--radius-md);font-size:13px;color:var(--thryv-night);max-width:340px;z-index:10000;box-shadow:0 4px 16px rgba(0,0,0,0.12);';
+  if(notFound){
+    toast.innerHTML = '<strong>Component not surfaced</strong><br><span style="font-size:11px;">&quot;' + compName + '&quot; doesn&apos;t currently match a tracked known issue. <a href="components.html" style="color:var(--thryv-orange);font-weight:600;">Back to Component Tracking</a></span>';
+  } else {
+    toast.innerHTML = '<strong>Filtered to: ' + compName + '</strong><br><span style="font-size:11px;">From Component Tracking &middot; <a href="javascript:void(0);" onclick="clearComponentFilters();document.getElementById(&quot;componentToast&quot;).remove();" style="color:var(--thryv-orange);font-weight:600;">Clear filter</a></span>';
+  }
+  document.body.appendChild(toast);
+  setTimeout(function(){ if(toast.parentNode) toast.style.opacity = '0'; toast.style.transition='opacity 0.5s ease'; setTimeout(function(){if(toast.parentNode)toast.remove();}, 500); }, 6000);
+}
+
+// Apply component from hash on load
+if(window.location.hash.indexOf('#component=') === 0){
+  setTimeout(applyComponentFromHash, 100);
+}
+
+// ── Sort column highlight (visual only — actual sort logic unchanged) ──
+function updateSortHeaderHighlight(){
+  document.querySelectorAll('.issue-table thead th').forEach(function(th){
+    th.classList.remove('sort-active');
+  });
+  // Whichever sort arrow has 'active' class — highlight its TH
+  var activeArrow = document.querySelector('.sort-arrow.active');
+  if(activeArrow){
+    var th = activeArrow.closest('th');
+    if(th) th.classList.add('sort-active');
+  }
+}
+// Hook into existing sortTable function if available
+if(typeof window.sortTable === 'function'){
+  var _origSort = window.sortTable;
+  window.sortTable = function(col){
+    _origSort.apply(this, arguments);
+    updateSortHeaderHighlight();
+  };
+}
+document.addEventListener('DOMContentLoaded', updateSortHeaderHighlight);
 
 </script>
 
